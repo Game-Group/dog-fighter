@@ -12,6 +12,6 @@ public class Controls2 : MonoBehaviour {
 	void Update () {
 		float rotationx = (Input.mousePosition.x - Screen.width/2)/4;
 		float rotationy = (Input.mousePosition.y - Screen.height/2)/4;
-		transform.localRotation = Quaternion.AngleAxis (rotationx, Vector3.up) *  Quaternion.AngleAxis (rotationy + 90, Vector3.left);  
+		transform.localRotation = Quaternion.AngleAxis (rotationx, Vector3.up) *  Quaternion.AngleAxis (rotationy, Vector3.left);  
 	}
 }
