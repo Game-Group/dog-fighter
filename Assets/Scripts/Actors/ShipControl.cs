@@ -31,7 +31,7 @@ public class ShipControl : MonoBehaviour {
 		{
 			forward = true;
 		}
-		if(Input.GetKeyUp (KeyCode.S))
+		if(Input.GetKeyUp (KeyCode.W))
 		{
 			forward = false;
 		}
