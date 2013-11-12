@@ -22,6 +22,10 @@ public class Controls : MonoBehaviour {
 	
 
 	void Update () {
+		
+		if (Network.isClient)
+			return;
+		
 		rotate();
 		if(Input.GetKeyDown(KeyCode.W))
 		{
