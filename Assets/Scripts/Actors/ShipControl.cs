@@ -7,7 +7,7 @@ using System.Collections;
 // 		Create control key file.
 //		Remove all bools and create array instead.
 //		Change velocity instead of translating when moving forward
-public class Controls : MonoBehaviour {
+public class ShipControl : MonoBehaviour {
 	
 	bool forward;
 	bool roll_left;

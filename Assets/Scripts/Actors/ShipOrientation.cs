@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Controls2 : MonoBehaviour {
+public class ShipOrientation : MonoBehaviour {
 	
 	private Quaternion initialRotation;
 	
