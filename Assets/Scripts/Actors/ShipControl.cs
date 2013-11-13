@@ -12,12 +12,20 @@ public class ShipControl : MonoBehaviour {
 	bool forward;
 	bool roll_left;
 	bool roll_right;
-	
+
+	// Radius from circel around center point in which the 
+	// ship will not change position
+	float radius;
+
+
 	void Start () {
 	
 		forward = false;
 		roll_left = false;
 		roll_right = false;
+
+		// TODO: Make radius a ratio of screensize?
+		radius = 10;
 	}
 	
 
@@ -43,7 +51,7 @@ public class ShipControl : MonoBehaviour {
 		{
 			roll_left = false;
 		}
-				if(Input.GetKeyDown(KeyCode.D))
+		if(Input.GetKeyDown(KeyCode.D))
 		{
 			roll_right = true;
 		}
@@ -57,10 +65,26 @@ public class ShipControl : MonoBehaviour {
 	// Rotates the spacecraft depending on the position of the mouse
 	void rotate()
 	{
-		float rotationx = (Input.mousePosition.x - Screen.width/2)/80;
-		float rotationy = (Input.mousePosition.y - Screen.height/2)/80;
-		transform.Rotate(0, rotationx, 0, Space.Self);
-		transform.Rotate (-rotationy, 0, 0, Space.Self);
+		float mousex = Input.mousePosition.x;
+		float mousey = Input.mousePosition.y;
+
+		float rotationx = (mousex - Screen.width/2)/80;
+		float rotationy = (mousey - Screen.height/2)/80;
+
+		// Calculate the Euclidian distance between mid of screen to mouse position
+		float dx = mousex - (Screen.width/2);
+		float dy = mousey - (Screen.height/2);
+		float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
+		
+		Debug.Log(rotationy);
+
+		// Only change the position 
+		if(length > radius)
+		{
+			transform.Rotate(0, rotationx, 0, Space.Self);
+			transform.Rotate (-rotationy, 0, 0, Space.Self);
+		}
+
 	}
 	void handle_input()
 	{
