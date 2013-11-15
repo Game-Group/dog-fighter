@@ -1,33 +1,56 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class NetworkInit : MonoBehaviour 
 {
-	public int Port = 6500;
-	public string IP = "127.0.0.1";
+	public const int Port = 6500;
+	public const string IP = "127.0.0.1";
+
+	public GameObject PlayerPrefab;
 	
 	// Use this for initialization
-	void Start () {
-	
+	public void Start () 
+	{
+		//this.playerPrefab = Resources.Load("Prefabs/Actors/PlayerSpaceShip 1");
+		//Debug.Log(this.playerPrefab);
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public void Update () 
 	{
 		if (!GameObject.Find("Global").GetComponent<GlobalSettings>().HasFocus)
 			return;			
 		
 		if (Input.GetKeyDown(KeyCode.F1))
 		{
-			Network.InitializeServer(1, this.Port, false);
-			Debug.Log("Initialized as server.");
+			Debug.Log ("Initializing as server.");
+			Network.InitializeServer(1, Port, false);
 		}
 		else if (Input.GetKeyDown(KeyCode.F2))
 		{
 			Debug.Log("Connecting");
-			Network.Connect(this.IP, this.Port);
-			Debug.Log("Connected!");
+			Network.Connect(IP, Port);
 		}		
 	}
-	
+
+	private void OnServerInitialized()
+	{
+		this.createPlayer();
+	}
+
+	private void OnConnectedToServer()
+	{
+		this.createPlayer();
+	}
+
+	private void OnPlayerConnected()
+	{
+		Debug.Log("New player connected.");
+	}
+
+	private void createPlayer()
+	{
+		Network.Instantiate(this.PlayerPrefab, new Vector3(0, 10, 0), Quaternion.identity, 0);
+	}	
+
 }

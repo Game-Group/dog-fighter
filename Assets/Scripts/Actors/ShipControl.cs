@@ -27,12 +27,19 @@ public class ShipControl : MonoBehaviour {
 		// TODO: Make radius a ratio of screensize?
 		radius = 10;
 	}
-	
 
 	void Update () {
-		
-		if (Network.isClient)
+
+		if (!this.networkView.isMine)
 			return;
+		
+		GameObject obj = GameObject.Find("Global");
+
+		if (obj != null)
+		{
+			if (!obj.GetComponent<GlobalSettings>().HasFocus)
+				return;		
+		}
 		
 		rotate();
 		if(Input.GetKeyDown(KeyCode.W))
@@ -76,7 +83,7 @@ public class ShipControl : MonoBehaviour {
 		float dy = mousey - (Screen.height/2);
 		float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
 		
-		Debug.Log(rotationy);
+//		Debug.Log(rotationy);
 
 		// Only change the position 
 		if(length > radius)

@@ -11,9 +11,9 @@ public class ShipOrientation : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-		if (Network.isClient)
+	void Update () 
+	{
+		if (!this.transform.parent.GetComponent<NetworkView>().isMine)
 			this.transform.localRotation = this.initialRotation;
 		else
 		{		
