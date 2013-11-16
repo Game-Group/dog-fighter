@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 //TODO:	Add max rotation value
 //		Lose the magic number 80. Try to think of a more intuitive rotation computation
 //		Use roll rotation
@@ -17,13 +16,13 @@ public class ShipControl : MonoBehaviour {
     // variables to keep track of the
     // pressed keys
 	bool forward;
-	bool rollLeft;
-	bool rollRight;
+	public bool rollLeft;
+	public bool rollRight;
 
 	// Radius from circel around center point in which the 
 	// ship will not change position
 	float minRadius;
-    float maxRadius;
+    public float maxRadius;
 
 	void Start () {
 
@@ -40,7 +39,7 @@ public class ShipControl : MonoBehaviour {
         // Init radii
 		// TODO: Make radius a ratio of screensize?
 		minRadius = 10;
-        maxRadius = 300;
+        maxRadius = 400;
 	}
 
 	void Update () {
@@ -64,36 +63,50 @@ public class ShipControl : MonoBehaviour {
 	// Rotates the spacecraft depending on the position of the mouse.
 	void HandleMouse()
 	{
-		float mousex = Input.mousePosition.x;
+
+        float[] p = CalculateMousePosition();
+        
+        float rotationx = p[0] * mouseFollowSpeed * Time.deltaTime;
+        float rotationy = p[1] * mouseFollowSpeed * Time.deltaTime;
+
+        transform.Rotate(0, rotationx, 0, Space.Self);
+        transform.Rotate (-rotationy, 0, 0, Space.Self);
+	}
+
+    // Returns the position of the mouse, bounded my minRadius and maxRadius
+    public float[] CalculateMousePosition()
+    {
+        float mousex = Input.mousePosition.x;
 		float mousey = Input.mousePosition.y;
         
-        // Determine angle to be rotated byt the plane
-		float rotationx = (mousex - Screen.width/2) * mouseFollowSpeed * Time.deltaTime;
-		float rotationy = (mousey - Screen.height/2) * mouseFollowSpeed * Time.deltaTime;
-
 		// Calculate the Euclidian distance between mid of screen to mouse position
 		float dx = mousex - (Screen.width/2);
 		float dy = mousey - (Screen.height/2);
 		float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
-		
-		// Only change the position  in case mouse is far away from center
+
+        float[] p = new float[2];
+        
+        // In case the mouse position falls into min and max rad,
+        // keep the position with respects to screen center
 		if(length > minRadius && length < maxRadius)
 		{
-			transform.Rotate(0, rotationx, 0, Space.Self);
-			transform.Rotate (-rotationy, 0, 0, Space.Self);
+            p[0] = dx;
+            p[1] = dy;
 		}
-
+        
+        // In case the mouse position falls beyond
+        // max radius, find the closes point on the circle with
+        // maxradius
         if (length > maxRadius)
         {
-           float px = maxRadius * (dx / length);
-           float py = maxRadius * (dy / length);
-           rotationx = px * mouseFollowSpeed * Time.deltaTime;
-           rotationy = py * mouseFollowSpeed * Time.deltaTime;
-	       transform.Rotate(0, rotationx, 0, Space.Self);
-		   transform.Rotate (-rotationy, 0, 0, Space.Self);
-
+           p[0] = maxRadius * (dx / length);
+           p[1] = maxRadius * (dy / length);
         }
-	}
+
+        return p;
+
+    }
+    
 
     // Checks which keys have been pressed and set
     // the appropriate boolean value

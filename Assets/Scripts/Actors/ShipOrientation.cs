@@ -6,25 +6,40 @@ public class ShipOrientation : MonoBehaviour {
 	private Quaternion initialRotation;
 
     float mouseFollowSpeed;
-	
+    float maxRadius = 300;
+    float rollSpeed = 200;
+    ShipControl script;
+
 	void Start () {
         mouseFollowSpeed = 0.1f;
-
+        script = transform.parent.GetComponent<ShipControl>();
 		this.initialRotation = this.transform.localRotation;
 	}
 	
 	void Update () 
 	{
         
-	/*	if (!this.transform.parent.GetComponent<NetworkView>().isMine)
+		if (!this.transform.parent.GetComponent<NetworkView>().isMine)
 			this.transform.localRotation = this.initialRotation;
 		else
-		{*/		
-            // Quaternion plane rotation
-        float rotationx = (Input.mousePosition.x - Screen.width / 2) * mouseFollowSpeed;
-        float rotationy = (Input.mousePosition.y - Screen.height / 2) * mouseFollowSpeed;
-			transform.localRotation = 
-				Quaternion.AngleAxis (rotationx, Vector3.up) *  Quaternion.AngleAxis (rotationy, Vector3.left);  	
-		//}
+		{
+            // Call ShipControls mouse position calculator
+            float[] p = script.CalculateMousePosition();
+            
+            // Rotate the rotation
+            float rotationx = p[0] * mouseFollowSpeed;
+            float rotationy = p[1] * mouseFollowSpeed;
+            transform.localRotation =
+                Quaternion.AngleAxis(rotationx, Vector3.up) * Quaternion.AngleAxis(rotationy, Vector3.left);
+
+            bool rollLeft = transform.parent.GetComponent<ShipControl>().rollLeft;
+            bool rollRight = transform.parent.GetComponent<ShipControl>().rollLeft;
+
+            if (rollLeft)
+            {
+
+            }
+            
+        }
 	}
 }
