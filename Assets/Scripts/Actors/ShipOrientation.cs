@@ -18,12 +18,15 @@ public class ShipOrientation : MonoBehaviour {
 	}
 	
 	void Update () 
-	{
-        
-		/*if (!this.transform.parent.GetComponent<NetworkView>().isMine)
+
+	{        
+		if (!this.transform.parent.GetComponent<NetworkView>().isMine
+		    && Network.peerType != NetworkPeerType.Disconnected)
+		{
 			this.transform.localRotation = this.initialRotation;
+		}
 		else
-		{*/
+		{
             // Call ShipControls mouse position calculator
             float[] p = script.CalculateMousePosition();
             
@@ -41,6 +44,6 @@ public class ShipOrientation : MonoBehaviour {
 
             }
             
-        //}
+		}
 	}
 }
