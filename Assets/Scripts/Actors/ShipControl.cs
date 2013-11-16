@@ -24,7 +24,8 @@ public class ShipControl : MonoBehaviour {
 	float minRadius;
     public float maxRadius;
 
-	void Start () {
+	void Start () 
+    {
 
         // Init speeds
         speed = 100;
@@ -42,7 +43,8 @@ public class ShipControl : MonoBehaviour {
         maxRadius = 400;
 	}
 
-	void Update () {
+	void Update () 
+    {
 
 		//if (!this.networkView.isMine)
 		//	return;
@@ -107,7 +109,6 @@ public class ShipControl : MonoBehaviour {
 
     }
     
-
     // Checks which keys have been pressed and set
     // the appropriate boolean value
     void HandleKeypress()

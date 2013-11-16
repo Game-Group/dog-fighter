@@ -10,7 +10,8 @@ public class ShipOrientation : MonoBehaviour {
     float rollSpeed = 200;
     ShipControl script;
 
-	void Start () {
+	void Start () 
+    {
         mouseFollowSpeed = 0.1f;
         script = transform.parent.GetComponent<ShipControl>();
 		this.initialRotation = this.transform.localRotation;
@@ -19,10 +20,10 @@ public class ShipOrientation : MonoBehaviour {
 	void Update () 
 	{
         
-		if (!this.transform.parent.GetComponent<NetworkView>().isMine)
+		/*if (!this.transform.parent.GetComponent<NetworkView>().isMine)
 			this.transform.localRotation = this.initialRotation;
 		else
-		{
+		{*/
             // Call ShipControls mouse position calculator
             float[] p = script.CalculateMousePosition();
             
@@ -40,6 +41,6 @@ public class ShipOrientation : MonoBehaviour {
 
             }
             
-        }
+        //}
 	}
 }
