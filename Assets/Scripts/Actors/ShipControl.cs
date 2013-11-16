@@ -9,23 +9,36 @@ using System.Collections;
 //		Change velocity instead of translating when moving forward
 public class ShipControl : MonoBehaviour {
 	
+    // Flying speed
+    float speed;
+
+    // Speed of roll rotation
+    float rollSpeed;
+    
+    // variables to keep track of the
+    // pressed keys
 	bool forward;
-	bool roll_left;
-	bool roll_right;
+	bool rollLeft;
+	bool rollRight;
 
 	// Radius from circel around center point in which the 
 	// ship will not change position
-	float radius;
-
+	float minRadius;
 
 	void Start () {
-	
-		forward = false;
-		roll_left = false;
-		roll_right = false;
 
+        // Init speeds
+        speed = 30;
+        rollSpeed = 10;
+
+        // Init key press variables
+		forward = false;
+		rollLeft = false;
+		rollRight = false;
+
+        // Init radii
 		// TODO: Make radius a ratio of screensize?
-		radius = 10;
+		minRadius = 10;
 	}
 
 	void Update () {
@@ -40,8 +53,40 @@ public class ShipControl : MonoBehaviour {
 			if (!obj.GetComponent<GlobalSettings>().HasFocus)
 				return;		
 		}
+
+		HandleMouse();
+        HandleKeypress();
+		HandleMotion();
+	}
+	
+	// Rotates the spacecraft depending on the position of the mouse.
+	void HandleMouse()
+	{
+		float mousex = Input.mousePosition.x;
+		float mousey = Input.mousePosition.y;
+        
+        // Determine angle to be rotated byt the plane
+		float rotationx = (mousex - Screen.width/2)/80;
+		float rotationy = (mousey - Screen.height/2)/80;
+
+		// Calculate the Euclidian distance between mid of screen to mouse position
+		float dx = mousex - (Screen.width/2);
+		float dy = mousey - (Screen.height/2);
+		float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
 		
-		rotate();
+		// Only change the position  in case mouse is far away from center
+		if(length > minRadius)
+		{
+			transform.Rotate(0, rotationx, 0, Space.Self);
+			transform.Rotate (-rotationy, 0, 0, Space.Self);
+		}
+
+	}
+
+    // Checks which keys have been pressed and set
+    // the appropriate boolean value
+    void HandleKeypress()
+    {
 		if(Input.GetKeyDown(KeyCode.W))
 		{
 			forward = true;
@@ -52,62 +97,38 @@ public class ShipControl : MonoBehaviour {
 		}
 		if(Input.GetKeyDown(KeyCode.A))
 		{
-			roll_left = true;
+			rollLeft = true;
 		}
 		if(Input.GetKeyUp (KeyCode.A))
 		{
-			roll_left = false;
+			rollLeft = false;
 		}
 		if(Input.GetKeyDown(KeyCode.D))
 		{
-			roll_right = true;
+			rollRight = true;
 		}
 		if(Input.GetKeyUp (KeyCode.D))
 		{
-			roll_right = false;
+			rollRight = false;
 		}
-		handle_input();
-	}
-	
-	// Rotates the spacecraft depending on the position of the mouse
-	void rotate()
+    }
+
+    // Handle motions
+	void HandleMotion()
 	{
-		float mousex = Input.mousePosition.x;
-		float mousey = Input.mousePosition.y;
-
-		float rotationx = (mousex - Screen.width/2)/80;
-		float rotationy = (mousey - Screen.height/2)/80;
-
-		// Calculate the Euclidian distance between mid of screen to mouse position
-		float dx = mousex - (Screen.width/2);
-		float dy = mousey - (Screen.height/2);
-		float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
-		
-//		Debug.Log(rotationy);
-
-		// Only change the position 
-		if(length > radius)
-		{
-			transform.Rotate(0, rotationx, 0, Space.Self);
-			transform.Rotate (-rotationy, 0, 0, Space.Self);
-		}
-
-	}
-	void handle_input()
-	{
+        // Make the spaceship move forward
 		if(forward)
 		{
-			transform.Translate(Vector3.forward);
+			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 		}
-		if(roll_left)
+		if(rollLeft)
 		{
-			transform.Rotate (0,0, 1, Space.Self);
+			transform.Rotate (0,0, rollSpeed * Time.deltaTime, Space.Self);
 		}
-		if(roll_right)
+		if(rollRight)
 		{
-			transform.Rotate (0,0, -1, Space.Self);
+			transform.Rotate (0,0, -rollSpeed * Time.deltaTime, Space.Self);
 		}
 	
-		
 	}
 }
