@@ -30,8 +30,8 @@ public class ShipControl : MonoBehaviour {
 
 	void Update () {
 
-		if (!this.networkView.isMine)
-			return;
+		//if (!this.networkView.isMine)
+		//	return;
 		
 		GameObject obj = GameObject.Find("Global");
 
