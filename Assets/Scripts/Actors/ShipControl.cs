@@ -23,6 +23,7 @@ public class ShipControl : MonoBehaviour {
 	// Radius from circel around center point in which the 
 	// ship will not change position
 	float minRadius;
+    float maxRadius;
 
 	void Start () {
 
@@ -39,6 +40,7 @@ public class ShipControl : MonoBehaviour {
         // Init radii
 		// TODO: Make radius a ratio of screensize?
 		minRadius = 10;
+        maxRadius = 300;
 	}
 
 	void Update () {
@@ -75,12 +77,22 @@ public class ShipControl : MonoBehaviour {
 		float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
 		
 		// Only change the position  in case mouse is far away from center
-		if(length > minRadius)
+		if(length > minRadius && length < maxRadius)
 		{
 			transform.Rotate(0, rotationx, 0, Space.Self);
 			transform.Rotate (-rotationy, 0, 0, Space.Self);
 		}
 
+        if (length > maxRadius)
+        {
+           float px = maxRadius * (dx / length);
+           float py = maxRadius * (dy / length);
+           rotationx = px * mouseFollowSpeed * Time.deltaTime;
+           rotationy = py * mouseFollowSpeed * Time.deltaTime;
+	       transform.Rotate(0, rotationx, 0, Space.Self);
+		   transform.Rotate (-rotationy, 0, 0, Space.Self);
+
+        }
 	}
 
     // Checks which keys have been pressed and set

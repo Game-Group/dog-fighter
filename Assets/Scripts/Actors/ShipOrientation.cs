@@ -8,7 +8,7 @@ public class ShipOrientation : MonoBehaviour {
     float mouseFollowSpeed;
 	
 	void Start () {
-        mouseFollowSpeed = 10;
+        mouseFollowSpeed = 0.1f;
 
 		this.initialRotation = this.transform.localRotation;
 	}
@@ -21,8 +21,8 @@ public class ShipOrientation : MonoBehaviour {
 		else
 		{*/		
             // Quaternion plane rotation
-			float rotationx = (Input.mousePosition.x - Screen.width/2) * mouseFollowSpeed * Time.deltaTime;
-			float rotationy = (Input.mousePosition.y - Screen.height/2) * mouseFollowSpeed * Time.deltaTime;
+        float rotationx = (Input.mousePosition.x - Screen.width / 2) * mouseFollowSpeed;
+        float rotationy = (Input.mousePosition.y - Screen.height / 2) * mouseFollowSpeed;
 			transform.localRotation = 
 				Quaternion.AngleAxis (rotationx, Vector3.up) *  Quaternion.AngleAxis (rotationy, Vector3.left);  	
 		//}
