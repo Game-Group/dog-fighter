@@ -4,23 +4,27 @@ using System.Collections;
 public class ShipOrientation : MonoBehaviour {
 	
 	private Quaternion initialRotation;
+
+    float mouseFollowSpeed;
 	
 	void Start () {
+        mouseFollowSpeed = 10;
+
 		this.initialRotation = this.transform.localRotation;
 	}
 	
 	void Update () 
 	{
         
-		if (!this.transform.parent.GetComponent<NetworkView>().isMine)
+	/*	if (!this.transform.parent.GetComponent<NetworkView>().isMine)
 			this.transform.localRotation = this.initialRotation;
 		else
-		{		
+		{*/		
             // Quaternion plane rotation
-			float rotationx = (Input.mousePosition.x - Screen.width/2)/4;
-			float rotationy = (Input.mousePosition.y - Screen.height/2)/4;
+			float rotationx = (Input.mousePosition.x - Screen.width/2) * mouseFollowSpeed * Time.deltaTime;
+			float rotationy = (Input.mousePosition.y - Screen.height/2) * mouseFollowSpeed * Time.deltaTime;
 			transform.localRotation = 
 				Quaternion.AngleAxis (rotationx, Vector3.up) *  Quaternion.AngleAxis (rotationy, Vector3.left);  	
-		}
+		//}
 	}
 }

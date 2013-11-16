@@ -9,11 +9,10 @@ using System.Collections;
 //		Change velocity instead of translating when moving forward
 public class ShipControl : MonoBehaviour {
 	
-    // Flying speed
+    // speeds
     float speed;
-
-    // Speed of roll rotation
     float rollSpeed;
+    float mouseFollowSpeed;
     
     // variables to keep track of the
     // pressed keys
@@ -28,8 +27,9 @@ public class ShipControl : MonoBehaviour {
 	void Start () {
 
         // Init speeds
-        speed = 30;
-        rollSpeed = 10;
+        speed = 100;
+        rollSpeed = 50;
+        mouseFollowSpeed = 0.5f;
 
         // Init key press variables
 		forward = false;
@@ -66,8 +66,8 @@ public class ShipControl : MonoBehaviour {
 		float mousey = Input.mousePosition.y;
         
         // Determine angle to be rotated byt the plane
-		float rotationx = (mousex - Screen.width/2)/80;
-		float rotationy = (mousey - Screen.height/2)/80;
+		float rotationx = (mousex - Screen.width/2) * mouseFollowSpeed * Time.deltaTime;
+		float rotationy = (mousey - Screen.height/2) * mouseFollowSpeed * Time.deltaTime;
 
 		// Calculate the Euclidian distance between mid of screen to mouse position
 		float dx = mousex - (Screen.width/2);
