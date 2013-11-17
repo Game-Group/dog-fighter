@@ -6,8 +6,6 @@ public class ShipOrientation : MonoBehaviour {
 	private Quaternion initialRotation;
 
     float mouseFollowSpeed;
-    float maxRadius = 300;
-    float rollSpeed = 200;
     ShipControl script;
 
 	void Start () 
@@ -37,7 +35,7 @@ public class ShipOrientation : MonoBehaviour {
                 Quaternion.AngleAxis(rotationx, Vector3.up) * Quaternion.AngleAxis(rotationy, Vector3.left);
 
             bool rollLeft = transform.parent.GetComponent<ShipControl>().rollLeft;
-            bool rollRight = transform.parent.GetComponent<ShipControl>().rollLeft;
+
 
             if (rollLeft)
             {
