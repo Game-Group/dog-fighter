@@ -8,7 +8,7 @@ public class ShipCollision : MonoBehaviour {
 	public AudioClip explosionSound;
 
 	void OnCollisionEnter( Collision collision ){
-		if( collision.gameObject.tag != "PlayerProjectile" ){
+		if( collision.gameObject.tag != "PlayerProjectile" && destroyObject != null ){
 			GameObject explinst = Instantiate( explosion, destroyObject.transform.position, Quaternion.identity ) as GameObject;
 			AudioSource.PlayClipAtPoint( explosionSound, destroyObject.transform.position );
 			Destroy(destroyObject);
