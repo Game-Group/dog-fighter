@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Provides functionality to move a transform around with specified keyboard keys.
+/// </summary>
 public class InputMovement : MonoBehaviour 
 {
 	public Transform MovingObject;
