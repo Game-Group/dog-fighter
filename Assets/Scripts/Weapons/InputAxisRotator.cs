@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Allows for rotation around a certain local axis, controlled by the Input.GetAxis values.
+/// </summary>
 public class InputAxisRotator : MonoBehaviour 
 {
 	public Transform RotatingObject;
