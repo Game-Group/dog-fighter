@@ -10,6 +10,9 @@ public class ShipControl : MonoBehaviour {
 	
     // speeds
     float speed;
+    float currentSpeed;
+    float incrSpeed;
+
     float rollSpeed;
     float mouseFollowSpeed;
     
@@ -29,6 +32,8 @@ public class ShipControl : MonoBehaviour {
 
         // Init speeds
         speed = 100;
+        currentSpeed = 0;
+        incrSpeed = 0.005f;
         rollSpeed = 50;
         mouseFollowSpeed = 0.5f;
 
@@ -143,10 +148,36 @@ public class ShipControl : MonoBehaviour {
 	void HandleMotion()
 	{
         // Make the spaceship move forward
-		if(forward)
-		{
-			transform.Translate(Vector3.forward * speed * Time.deltaTime);
-		}
+        if (forward)
+        {
+            if (currentSpeed < speed)
+            {
+                currentSpeed += (speed * incrSpeed);
+            }
+
+            //this.gameObject.rigidbody.velocity = this.gameObject.transform.forward * currentSpeed;
+            // this.gameObject.rigidbody.AddForce(this.gameObject.transform.forward * speed);
+            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+        }
+        else
+        {
+
+            Debug.Log(currentSpeed);
+            if (currentSpeed > 0)
+            {
+
+                currentSpeed -= (speed * incrSpeed);
+                transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+            }
+            else
+            {
+
+                transform.Translate(Vector3.forward * 0 * Time.deltaTime);
+            }
+
+            //this.gameObject.rigidbody.velocity = this.gameObject.transform.forward * currentSpeed;
+
+        }
 		if(rollLeft)
 		{
 			transform.Rotate (0,0, rollSpeed * Time.deltaTime, Space.Self);
