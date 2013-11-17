@@ -34,7 +34,7 @@ public class Shooter : MonoBehaviour
 		shot.transform.position = shotPosition.position;
 
 		// Fire it away by giving it a velocity.
-		shot.velocity = shotPosition.forward * ShotVelocity;
+		shot.GetComponent<FlyStraight>().Velocity = shotPosition.forward * ShotVelocity;
 
 		// Ignore collisions with given objects (usually the player and his guns, if they have collision models)
 		for (int i = 0; i < IgnoredCollisions.Length; i++)
