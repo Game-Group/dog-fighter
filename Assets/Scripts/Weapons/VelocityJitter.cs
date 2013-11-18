@@ -7,6 +7,7 @@ using System.Collections;
 public class VelocityJitter : MonoBehaviour 
 {
 	public Rigidbody JitteringObject;
+	public FlyStraight FlyControl;
 	public float Magnitude;
 	public float ChangesPerSecond;
 
@@ -46,8 +47,8 @@ public class VelocityJitter : MonoBehaviour
 		// This is done so we can the rotate the entire object, and then use the objects rotation on the velocity again
 		// to obtain the new direction.
 		// Hey, it works, dont question it :P
-		JitteringObject.velocity = Quaternion.Inverse(JitteringObject.transform.rotation) * JitteringObject.velocity;
+		FlyControl.VelocityDirection = Quaternion.Inverse(JitteringObject.transform.rotation) * FlyControl.VelocityDirection;
 		JitteringObject.transform.Rotate(angle1, angle2, angle3, Space.Self);
-		JitteringObject.velocity = JitteringObject.transform.rotation * JitteringObject.velocity;
+		FlyControl.VelocityDirection = JitteringObject.transform.rotation * FlyControl.VelocityDirection;
 	}
 }
