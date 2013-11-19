@@ -30,7 +30,6 @@ public class ThirdPersonCrosshair : MonoBehaviour
 	{
 		if (_camera == null)
 		{
-			Debug.Log("oeps");
 			_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
 			return;
 		}
@@ -54,7 +53,5 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
 		// Move the 2D texture.
 		crosshair.transform.position = screenPosition;
-		Debug.Log(screenPosition);
-
 	}
 }
