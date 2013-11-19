@@ -7,7 +7,7 @@ using System.Collections;
 public class VelocityJitter : MonoBehaviour 
 {
 	public Rigidbody JitteringObject;
-	public FlyStraight FlyControl;
+	public FlyControl FlyControl;
 	public float Magnitude;
 	public float ChangesPerSecond;
 

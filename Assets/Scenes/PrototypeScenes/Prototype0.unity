@@ -775,7 +775,7 @@ GameObject:
   - 114: {fileID: 184371964}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -951,7 +951,7 @@ GameObject:
   - 114: {fileID: 199814082}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1087,7 +1087,7 @@ GameObject:
   - 114: {fileID: 200647111}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2228,7 +2228,7 @@ GameObject:
   - 114: {fileID: 418700634}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2454,7 +2454,7 @@ GameObject:
   - 114: {fileID: 464747817}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2990,7 +2990,7 @@ GameObject:
   - 114: {fileID: 575908922}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3587,7 +3587,7 @@ GameObject:
   - 114: {fileID: 702166925}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4266,7 +4266,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1880600627}
   - {fileID: 1880192783}
   m_Father: {fileID: 0}
 --- !u!114 &850211493
@@ -4824,7 +4823,6 @@ MonoBehaviour:
   ShotPositions:
   - {fileID: 504703867}
   IgnoredCollisions: []
-  ShotVelocity: 300
 --- !u!1 &1039699563
 GameObject:
   m_ObjectHideFlags: 0
@@ -4842,7 +4840,7 @@ GameObject:
   - 114: {fileID: 1039699565}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5267,7 +5265,6 @@ MonoBehaviour:
   ShotPositions:
   - {fileID: 2029058853}
   IgnoredCollisions: []
-  ShotVelocity: 300
 --- !u!1 &1118258089
 GameObject:
   m_ObjectHideFlags: 0
@@ -5857,7 +5854,7 @@ GameObject:
   - 114: {fileID: 1297671856}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7838,69 +7835,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 2137840107}
   m_GameObject: {fileID: 1880192782}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1880600625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 954f7a1a7f5749f43a46ae089371b159, type: 2}
-  m_PrefabInternal: {fileID: 2137840107}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1880600627}
-  - 108: {fileID: 1880600626}
-  m_Layer: 0
-  m_Name: Point light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &1880600626
-Light:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 10800000, guid: 954f7a1a7f5749f43a46ae089371b159,
-    type: 2}
-  m_PrefabInternal: {fileID: 2137840107}
-  m_GameObject: {fileID: 1880600625}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.24000001
-  m_Range: 700
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_Strength: 1
-    m_Bias: .0500000007
-    m_Softness: 4
-    m_SoftnessFade: 1
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 1
-  m_ShadowSamples: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_IndirectIntensity: 1
-  m_AreaSize: {x: 1, y: 1}
---- !u!4 &1880600627
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400002, guid: 954f7a1a7f5749f43a46ae089371b159, type: 2}
-  m_PrefabInternal: {fileID: 2137840107}
-  m_GameObject: {fileID: 1880600625}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 850211492}
 --- !u!1001 &1922541945
 Prefab:
   m_ObjectHideFlags: 0
@@ -8324,7 +8258,7 @@ GameObject:
   - 114: {fileID: 2011770015}
   m_Layer: 10
   m_Name: FloorbotEnemy
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

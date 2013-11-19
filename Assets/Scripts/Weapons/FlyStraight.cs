@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FlyStraight : MonoBehaviour 
+public class FlyStraight : FlyControl
 {
 	public Transform Transform;
-	public Vector3 VelocityDirection;
 	public float TimeBeforeFullSpeed = 0;
 	public float DesiredSpeed;
 	public float InitialSpeed = 0;
@@ -24,7 +23,7 @@ public class FlyStraight : MonoBehaviour
 		VelocityDirection.Normalize();
 	}
 
-	void LateUpdate () 
+	void LateUpdate() 
 	{
 		if (currentSpeed != DesiredSpeed)
 		{
