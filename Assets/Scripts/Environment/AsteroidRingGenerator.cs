@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/* Generates a certain amount of astroids within a bounded area.
+/* Generates a certain amount of asteroids within a bounded area.
  * The position, rotation and size of each astroid is randomized.
  * The area is donut shaped.
  */
-public class AstroidRingGenerator : AstroidFieldGenerator {
+public class AsteroidRingGenerator : AsteroidFieldGenerator {
 	//The inherited maxOffset variable determines the fatness of the donut ring
 	//The outerRadius variable determines the size of the entire donut
 	public float outerRadius = 100;
