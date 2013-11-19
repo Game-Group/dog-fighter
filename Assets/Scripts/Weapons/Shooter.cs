@@ -31,6 +31,7 @@ public class Shooter : MonoBehaviour
 		// Transform the new projectile to align it properly.
 		shot.transform.Rotate(shotPosition.eulerAngles, Space.World);
 		shot.transform.position = shotPosition.position;
+		shot.gameObject.layer = gameObject.layer;
 
 		// Fire it away by giving it a velocity.
 		ProjectileController pController = shot.GetComponent<ProjectileController>();
