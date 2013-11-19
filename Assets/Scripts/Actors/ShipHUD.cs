@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class test_script : MonoBehaviour {
+public class ShipHUD : MonoBehaviour {
 
+    
 	// Use this for initialization
 	void Start () {
 	
@@ -11,5 +12,10 @@ public class test_script : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+
 	}
+    void onGUI()
+    {
+        
+    }
 }
