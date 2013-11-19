@@ -127,6 +127,7 @@ MonoBehaviour:
   ShotPositions:
   - {fileID: 400002}
   IgnoredCollisions: []
+  ReloadDelay: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RayTransform: {fileID: 400002}
-  MaxDistance: 200
+  MaxDistance: 201
   CrosshairPrefab: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
 --- !u!1001 &100100000
 Prefab:

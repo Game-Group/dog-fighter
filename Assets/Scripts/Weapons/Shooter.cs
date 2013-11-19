@@ -9,16 +9,32 @@ public class Shooter : MonoBehaviour
 	public Rigidbody Projectile;
 	public Transform[] ShotPositions;
 	public Collider[] IgnoredCollisions;
+	public float ReloadDelay;
+
+	private float reloadTimer;
+
+	void Start()
+	{
+		reloadTimer = 0;
+	}
 
 	void Update () 
 	{		
+		if (reloadTimer > 0)
+			reloadTimer -= Time.deltaTime;
+
 		// Fire projectiles
-		if (Input.GetButtonDown("Fire1"))
+		if (reloadTimer <= 0)
 		{
-			// Spawn a new projectile at each position.
-			foreach (Transform t in ShotPositions)
+			if (Input.GetButton("Fire1"))
 			{
-				SpawnProjectile(t);
+				// Spawn a new projectile at each position.
+				foreach (Transform t in ShotPositions)
+				{
+					SpawnProjectile(t);
+				}
+
+				reloadTimer = ReloadDelay;
 			}
 		}
 	}
