@@ -161,8 +161,7 @@ public class ShipControl : MonoBehaviour {
         }
         else
         {
-
-            Debug.Log(currentSpeed);
+            //Debug.Log(currentSpeed);
             if (currentSpeed > 0)
             {
 

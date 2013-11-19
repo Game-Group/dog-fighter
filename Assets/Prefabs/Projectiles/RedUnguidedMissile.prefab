@@ -20,7 +20,7 @@ GameObject:
   - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: RedUnguidedMissile
-  m_TagString: PlayerProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   VelocityDirection: {x: 0, y: 0, z: 0}
   TimeBeforeFullSpeed: 3
   DesiredSpeed: 0
-  InitialSpeed: 100
+  InitialSpeed: 120
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

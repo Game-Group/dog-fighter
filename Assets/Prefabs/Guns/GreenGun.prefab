@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GreenGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MuzzlePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,15 +134,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932725a5f17fbda49af516a0b6c1e2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RayTransform: {fileID: 400000}
+  RayTransform: {fileID: 400002}
   MaxDistance: 200
-  Camera: {fileID: 0}
-  Crosshair: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
+  CrosshairPrefab: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

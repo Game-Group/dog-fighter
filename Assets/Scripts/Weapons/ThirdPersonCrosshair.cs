@@ -8,14 +8,33 @@ public class ThirdPersonCrosshair : MonoBehaviour
 {
 	public Transform RayTransform;
 	public float MaxDistance; 
-	
-	public Camera Camera;
-	public GUITexture Crosshair;
+
+	public GUITexture CrosshairPrefab;
 	
 	private int layerMask = ~(1 << 11);
+	private Camera _camera;
+	private GUITexture crosshair;
+
+	void Start()
+	{
+		_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
+		crosshair = (GUITexture)Instantiate(CrosshairPrefab);
+	}
+
+	void OnDestroy()
+	{
+		Destroy(crosshair);
+	}
 	
 	void Update () 
 	{
+		if (_camera == null)
+		{
+			Debug.Log("oeps");
+			_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
+			return;
+		}
+
 		RaycastHit hitInfo;
 		Vector3 newCrosshairPosition;
 
@@ -26,7 +45,7 @@ public class ThirdPersonCrosshair : MonoBehaviour
 		else newCrosshairPosition = RayTransform.position + RayTransform.forward.normalized * MaxDistance;
 
 		// Obtain the position of the 3D crosshair in 2D.
-		Vector3 screenPosition = Camera.WorldToScreenPoint(newCrosshairPosition);
+		Vector3 screenPosition = _camera.WorldToScreenPoint(newCrosshairPosition);
 
 		// Clamp the position so the crosshair is always on-screen.
 		screenPosition.x = Mathf.Clamp(screenPosition.x / Screen.width, 0, 1);
@@ -34,6 +53,8 @@ public class ThirdPersonCrosshair : MonoBehaviour
 		screenPosition.z = 0;		
 
 		// Move the 2D texture.
-		Crosshair.transform.position = screenPosition;
+		crosshair.transform.position = screenPosition;
+		Debug.Log(screenPosition);
+
 	}
 }

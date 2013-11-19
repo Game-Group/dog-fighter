@@ -3,8 +3,11 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Obstacle
+  - Projectile
+  - Npc
+  - Mothership
   - 
+  - Obstacle
   - PlayerProjectile
   - 
   Builtin Layer 0: Default
@@ -15,11 +18,11 @@ TagManager:
   Builtin Layer 5: 
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
-  User Layer 9: 
-  User Layer 10: 
-  User Layer 11: 
-  User Layer 12: 
+  User Layer 8: Team1
+  User Layer 9: Team2
+  User Layer 10: Team0
+  User Layer 11: Obstacles
+  User Layer 12: Scenery
   User Layer 13: 
   User Layer 14: 
   User Layer 15: 

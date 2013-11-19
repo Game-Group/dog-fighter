@@ -86,9 +86,9 @@ GameObject:
   - 136: {fileID: 36423671}
   - 23: {fileID: 36423670}
   - 54: {fileID: 36423669}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,9 +260,9 @@ GameObject:
   - 65: {fileID: 47854740}
   - 23: {fileID: 47854739}
   - 54: {fileID: 47854738}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,6 +337,65 @@ Transform:
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 626075195}
+--- !u!1 &50954013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100004, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 50954014}
+  - 33: {fileID: 50954016}
+  - 23: {fileID: 50954015}
+  m_Layer: 0
+  m_Name: GunModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &50954014
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400004, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 50954013}
+  m_LocalRotation: {x: 0, y: 0, z: .70710665, w: .707106948}
+  m_LocalPosition: {x: .567245662, y: .264022827, z: -.161867216}
+  m_LocalScale: {x: .0500000007, y: .200000003, z: .0500000007}
+  m_Children:
+  - {fileID: 688119252}
+  m_Father: {fileID: 1672330789}
+--- !u!23 &50954015
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: feaecf961f4f7194c8e3a057313f1d2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 50954013}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 375c06d870efe2f4089ac6f8f1311d3c, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!33 &50954016
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: feaecf961f4f7194c8e3a057313f1d2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 50954013}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &58474760
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,9 +408,9 @@ GameObject:
   - 65: {fileID: 58474763}
   - 23: {fileID: 58474762}
   - 54: {fileID: 58474761}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,9 +497,9 @@ GameObject:
   - 65: {fileID: 83905023}
   - 23: {fileID: 83905022}
   - 54: {fileID: 83905021}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,7 +578,7 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 88749715}
@@ -536,7 +595,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 88749714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -548,7 +607,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 88749714}
   m_Enabled: 1
   m_CastShadows: 1
@@ -573,7 +632,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 88749714}
   m_Mesh: {fileID: 4300000, guid: 68bb3f1042f43f34a98f05399b361b17, type: 3}
 --- !u!1001 &131500438
@@ -715,7 +774,7 @@ GameObject:
   - 54: {fileID: 184371966}
   - 114: {fileID: 184371965}
   - 114: {fileID: 184371964}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +899,7 @@ MeshFilter:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 188843326}
@@ -857,7 +916,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 188843325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -869,7 +928,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300002, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 188843325}
   m_Enabled: 1
   m_CastShadows: 1
@@ -891,7 +950,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300002, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 188843325}
   m_Mesh: {fileID: 4300002, guid: 68bb3f1042f43f34a98f05399b361b17, type: 3}
 --- !u!1001 &194548064
@@ -938,7 +997,7 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100004, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 199388296}
@@ -957,7 +1016,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400004, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199388295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .00166702271, y: .912033081, z: -2.44145966}
@@ -969,7 +1028,7 @@ AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8100000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199388295}
   m_Enabled: 1
 --- !u!124 &199388298
@@ -977,7 +1036,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 12400000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199388295}
   m_Enabled: 1
 --- !u!92 &199388299
@@ -985,7 +1044,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 9200000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199388295}
   m_Enabled: 1
 --- !u!20 &199388300
@@ -993,7 +1052,7 @@ Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2000000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199388295}
   m_Enabled: 1
   serializedVersion: 2
@@ -1033,7 +1092,7 @@ GameObject:
   - 54: {fileID: 199814084}
   - 114: {fileID: 199814083}
   - 114: {fileID: 199814082}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,7 +1228,7 @@ GameObject:
   - 54: {fileID: 200647113}
   - 114: {fileID: 200647112}
   - 114: {fileID: 200647111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1380,7 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100006, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 263206577}
@@ -1338,7 +1397,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400006, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 263206576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1350,7 +1409,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300004, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 263206576}
   m_Enabled: 1
   m_CastShadows: 1
@@ -1372,72 +1431,9 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300004, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 263206576}
   m_Mesh: {fileID: 4300004, guid: 68bb3f1042f43f34a98f05399b361b17, type: 3}
---- !u!1 &287672613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 287672614}
-  - 114: {fileID: 287672616}
-  - 114: {fileID: 287672615}
-  m_Layer: 8
-  m_Name: GreenGun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &287672614
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 287672613}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -.00125542516, y: -.000955991738, z: .00364860054}
-  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
-  m_Children:
-  - {fileID: 1951052005}
-  m_Father: {fileID: 2092925850}
---- !u!114 &287672615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 08e994716c7d1254dbf5c2da88448f1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 287672613}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932725a5f17fbda49af516a0b6c1e2f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RayTransform: {fileID: 287672614}
-  MaxDistance: 200
-  Camera: {fileID: 0}
-  Crosshair: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
---- !u!114 &287672616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 08e994716c7d1254dbf5c2da88448f1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 287672613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de8907637b93e054aa0d916a769c8ad3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 5400000, guid: c485645123f25e046b360f82f9fe0e7b, type: 2}
-  ShotPositions:
-  - {fileID: 303489442}
-  IgnoredCollisions:
-  - {fileID: 309727533}
-  ShotVelocity: 300
 --- !u!1 &302802691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,9 +1446,9 @@ GameObject:
   - 65: {fileID: 302802694}
   - 23: {fileID: 302802693}
   - 54: {fileID: 302802692}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1571,37 +1567,11 @@ Prefab:
   m_RootGameObject: {fileID: 184371962}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &303489441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 303489442}
-  m_Layer: 8
-  m_Name: MuzzlePosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &303489442
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 303489441}
-  m_LocalRotation: {x: -.499999881, y: -.500000119, z: -.499999881, w: .500000119}
-  m_LocalPosition: {x: -.0184407309, y: 1.00598288, z: -.0337436795}
-  m_LocalScale: {x: 20, y: 20, z: 5}
-  m_Children: []
-  m_Father: {fileID: 1951052005}
 --- !u!1 &309727529
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 309727536}
@@ -1624,7 +1594,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400004, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1636,7 +1606,7 @@ NetworkView:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 14800000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_Enabled: 1
   m_StateSynchronization: 1
@@ -1649,7 +1619,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400006, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1664,7 +1634,7 @@ BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 6500000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1675,22 +1645,20 @@ BoxCollider:
 --- !u!114 &309727534
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400010, guid: 08e994716c7d1254dbf5c2da88448f1b,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2174f87daf9c814428c405705945e3f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 114c10fe8a244ab4d93fe8d74b75589e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyObject: {fileID: 2092925849}
-  explosion: {fileID: 100000, guid: f600b4a5a289d0548842df7f27d883ea, type: 2}
-  explosionSound: {fileID: 8300000, guid: 1792989a5a33779428d2dbe9a9430605, type: 3}
 --- !u!4 &309727536
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.320609093, y: 2.53130674, z: .318527699}
@@ -1704,7 +1672,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400008, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1715,8 +1683,8 @@ MonoBehaviour:
   - {fileID: 100000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
   - {fileID: 100002, guid: f62d629978aa20e449ef5a92105e27a4, type: 2}
   CurrentGuns:
-  - {fileID: 1632604800}
-  - {fileID: 287672613}
+  - {fileID: 1672330788}
+  - {fileID: 877904129}
   NextGun: 275
   PreviousGun: 276
 --- !u!54 &309727539
@@ -1724,13 +1692,13 @@ Rigidbody:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 5400000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309727529}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
@@ -1841,7 +1809,7 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100014, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 343728136}
@@ -1856,71 +1824,13 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400014, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 343728135}
   m_LocalRotation: {x: .169075772, y: -.755880296, z: .272171319, w: .570947587}
   m_LocalPosition: {x: -.0407624505, y: .239834309, z: -.010054539}
   m_LocalScale: {x: .99999994, y: 1, z: .999999881}
   m_Children: []
   m_Father: {fileID: 2092925850}
---- !u!1001 &368023371
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -.320609093
-      objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.53130674
-      objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: .318527699
-      objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_Name
-      value: PlayerSpaceShip 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_ViewID.m_ID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_ViewID.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400000, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
-    - {fileID: 11400010, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_RootGameObject: {fileID: 309727529}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &372072364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,7 +1845,7 @@ GameObject:
   - 54: {fileID: 372072365}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2102,9 +2012,9 @@ GameObject:
   - 136: {fileID: 387946635}
   - 23: {fileID: 387946634}
   - 54: {fileID: 387946633}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2192,9 +2102,9 @@ GameObject:
   - 136: {fileID: 388804163}
   - 23: {fileID: 388804162}
   - 54: {fileID: 388804161}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2284,7 +2194,7 @@ GameObject:
   - 54: {fileID: 389545402}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2443,6 +2353,65 @@ Prefab:
   m_RootGameObject: {fileID: 475942327}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &416217656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100004, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 416217657}
+  - 33: {fileID: 416217659}
+  - 23: {fileID: 416217658}
+  m_Layer: 0
+  m_Name: GunModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &416217657
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400004, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 416217656}
+  m_LocalRotation: {x: 0, y: 0, z: .70710665, w: .707106948}
+  m_LocalPosition: {x: .567245662, y: .264022827, z: -.161867216}
+  m_LocalScale: {x: .0500000007, y: .200000003, z: .0500000007}
+  m_Children:
+  - {fileID: 1045737758}
+  m_Father: {fileID: 877904130}
+--- !u!23 &416217658
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: feaecf961f4f7194c8e3a057313f1d2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 416217656}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 375c06d870efe2f4089ac6f8f1311d3c, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!33 &416217659
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: feaecf961f4f7194c8e3a057313f1d2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 416217656}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &418700632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,7 +2427,7 @@ GameObject:
   - 54: {fileID: 418700636}
   - 114: {fileID: 418700635}
   - 114: {fileID: 418700634}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2591,9 +2560,9 @@ GameObject:
   - 136: {fileID: 445939266}
   - 23: {fileID: 445939265}
   - 54: {fileID: 445939264}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2684,7 +2653,7 @@ GameObject:
   - 54: {fileID: 464747819}
   - 114: {fileID: 464747818}
   - 114: {fileID: 464747817}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2819,7 +2788,7 @@ GameObject:
   - 54: {fileID: 475942328}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2965,7 +2934,7 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100016, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 525657047}
@@ -2980,7 +2949,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400016, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 525657046}
   m_LocalRotation: {x: -.707106888, y: 0, z: -0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -3043,9 +3012,9 @@ GameObject:
   - 65: {fileID: 532098988}
   - 23: {fileID: 532098987}
   - 54: {fileID: 532098986}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3174,7 +3143,7 @@ GameObject:
   - 54: {fileID: 548086583}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3264,7 +3233,7 @@ GameObject:
   - 54: {fileID: 575908924}
   - 114: {fileID: 575908923}
   - 114: {fileID: 575908922}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3424,9 +3393,9 @@ GameObject:
   - 65: {fileID: 598949005}
   - 23: {fileID: 598949004}
   - 54: {fileID: 598949003}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3566,45 +3535,45 @@ Transform:
   m_LocalPosition: {x: -.199835241, y: 1.8476615, z: -2.46514654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 47854742}
-  - {fileID: 1120371338}
-  - {fileID: 1494714068}
-  - {fileID: 302802696}
-  - {fileID: 835338750}
-  - {fileID: 1374105954}
   - {fileID: 1677829063}
-  - {fileID: 746368655}
+  - {fileID: 1374105954}
+  - {fileID: 1120371338}
+  - {fileID: 302802696}
   - {fileID: 1727791832}
+  - {fileID: 1494714068}
+  - {fileID: 746368655}
+  - {fileID: 47854742}
+  - {fileID: 835338750}
   - {fileID: 703545633}
-  - {fileID: 1771817372}
-  - {fileID: 83905025}
-  - {fileID: 1122829910}
-  - {fileID: 532098990}
   - {fileID: 2102081308}
   - {fileID: 1973890112}
-  - {fileID: 598949007}
   - {fileID: 770877141}
+  - {fileID: 532098990}
+  - {fileID: 598949007}
+  - {fileID: 1122829910}
+  - {fileID: 83905025}
+  - {fileID: 1771817372}
   - {fileID: 58474765}
-  - {fileID: 1454362082}
-  - {fileID: 1822497906}
-  - {fileID: 388804165}
-  - {fileID: 445939268}
-  - {fileID: 1944243255}
-  - {fileID: 36423673}
   - {fileID: 387946637}
-  - {fileID: 1714979587}
+  - {fileID: 1944243255}
+  - {fileID: 445939268}
+  - {fileID: 1822497906}
+  - {fileID: 36423673}
+  - {fileID: 1279374853}
+  - {fileID: 388804165}
   - {fileID: 1598447992}
   - {fileID: 1118258094}
-  - {fileID: 1279374853}
-  - {fileID: 1149333133}
-  - {fileID: 475942332}
-  - {fileID: 372072369}
-  - {fileID: 708977486}
-  - {fileID: 1939829155}
-  - {fileID: 1713016334}
+  - {fileID: 1714979587}
+  - {fileID: 1454362082}
   - {fileID: 389545406}
-  - {fileID: 548086587}
   - {fileID: 780591864}
+  - {fileID: 1713016334}
+  - {fileID: 475942332}
+  - {fileID: 548086587}
+  - {fileID: 1939829155}
+  - {fileID: 708977486}
+  - {fileID: 1149333133}
+  - {fileID: 372072369}
   m_Father: {fileID: 0}
 --- !u!1001 &654577665
 Prefab:
@@ -3806,6 +3775,32 @@ Prefab:
   m_RootGameObject: {fileID: 1939829150}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &688119251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100002, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 688119252}
+  m_Layer: 0
+  m_Name: MuzzlePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &688119252
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400002, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 688119251}
+  m_LocalRotation: {x: -.499999881, y: -.500000119, z: -.499999881, w: .500000119}
+  m_LocalPosition: {x: -.0184407309, y: 1.00598288, z: -.0337436795}
+  m_LocalScale: {x: 20, y: 20, z: 5}
+  m_Children: []
+  m_Father: {fileID: 50954014}
 --- !u!1001 &700941197
 Prefab:
   m_ObjectHideFlags: 0
@@ -3861,7 +3856,7 @@ GameObject:
   - 54: {fileID: 702166927}
   - 114: {fileID: 702166926}
   - 114: {fileID: 702166925}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3994,9 +3989,9 @@ GameObject:
   - 65: {fileID: 703545631}
   - 23: {fileID: 703545630}
   - 54: {fileID: 703545629}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4085,7 +4080,7 @@ GameObject:
   - 54: {fileID: 708977482}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4172,9 +4167,9 @@ GameObject:
   - 65: {fileID: 746368653}
   - 23: {fileID: 746368652}
   - 54: {fileID: 746368651}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4253,7 +4248,7 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100018, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 762152302}
@@ -4270,7 +4265,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400018, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762152301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -4282,7 +4277,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300008, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762152301}
   m_Enabled: 1
   m_CastShadows: 1
@@ -4305,7 +4300,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300008, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762152301}
   m_Mesh: {fileID: 4300006, guid: 68bb3f1042f43f34a98f05399b361b17, type: 3}
 --- !u!1 &770877136
@@ -4320,9 +4315,9 @@ GameObject:
   - 65: {fileID: 770877139}
   - 23: {fileID: 770877138}
   - 54: {fileID: 770877137}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4411,7 +4406,7 @@ GameObject:
   - 54: {fileID: 780591860}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4498,9 +4493,9 @@ GameObject:
   - 65: {fileID: 835338748}
   - 23: {fileID: 835338747}
   - 54: {fileID: 835338746}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4662,6 +4657,67 @@ Prefab:
   m_RootGameObject: {fileID: 2102081303}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &877904129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 877904130}
+  - 114: {fileID: 877904132}
+  - 114: {fileID: 877904131}
+  m_Layer: 0
+  m_Name: GreenGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &877904130
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 877904129}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: -.00125542504, y: -.00095599168, z: .00364860101}
+  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
+  m_Children:
+  - {fileID: 416217657}
+  m_Father: {fileID: 2092925850}
+--- !u!114 &877904131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: feaecf961f4f7194c8e3a057313f1d2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 877904129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932725a5f17fbda49af516a0b6c1e2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RayTransform: {fileID: 1045737758}
+  MaxDistance: 200
+  CrosshairPrefab: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
+--- !u!114 &877904132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: feaecf961f4f7194c8e3a057313f1d2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 877904129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8907637b93e054aa0d916a769c8ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 5400000, guid: c485645123f25e046b360f82f9fe0e7b, type: 2}
+  ShotPositions:
+  - {fileID: 1045737758}
+  IgnoredCollisions: []
+  ShotVelocity: 300
 --- !u!1001 &889154465
 Prefab:
   m_ObjectHideFlags: 0
@@ -4935,7 +4991,7 @@ GameObject:
   - 54: {fileID: 1039699567}
   - 114: {fileID: 1039699566}
   - 114: {fileID: 1039699565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5096,6 +5152,32 @@ Prefab:
   m_RootGameObject: {fileID: 1944243250}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &1045737757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100002, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1045737758}
+  m_Layer: 0
+  m_Name: MuzzlePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1045737758
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400002, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1803994191}
+  m_GameObject: {fileID: 1045737757}
+  m_LocalRotation: {x: -.499999881, y: -.500000119, z: -.499999881, w: .500000119}
+  m_LocalPosition: {x: -.0184407309, y: 1.00598288, z: -.0337436795}
+  m_LocalScale: {x: 20, y: 20, z: 5}
+  m_Children: []
+  m_Father: {fileID: 416217657}
 --- !u!1001 &1051010228
 Prefab:
   m_ObjectHideFlags: 0
@@ -5134,6 +5216,58 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36431e0581431944486fdbce8929a5cb, type: 2}
   m_RootGameObject: {fileID: 1677829058}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+--- !u!1001 &1065163418
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2092925850}
+    m_Modifications:
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .00450797705
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.00103598356
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .00372314453
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .00999999978
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_RootGameObject: {fileID: 1672330788}
   m_IsPrefabParent: 0
   m_IsExploded: 1
 --- !u!1 &1103043773
@@ -5254,9 +5388,9 @@ GameObject:
   - 136: {fileID: 1118258092}
   - 23: {fileID: 1118258091}
   - 54: {fileID: 1118258090}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5344,9 +5478,9 @@ GameObject:
   - 65: {fileID: 1120371336}
   - 23: {fileID: 1120371335}
   - 54: {fileID: 1120371334}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5433,9 +5567,9 @@ GameObject:
   - 65: {fileID: 1122829908}
   - 23: {fileID: 1122829907}
   - 54: {fileID: 1122829906}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5524,7 +5658,7 @@ GameObject:
   - 54: {fileID: 1149333129}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5603,7 +5737,7 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100020, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1154319756}
@@ -5618,98 +5752,13 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400020, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154319755}
   m_LocalRotation: {x: .210611343, y: .905240178, z: -.089281708, w: -.358066887}
   m_LocalPosition: {x: -.0118394168, y: .0072700344, z: .00928858109}
   m_LocalScale: {x: 1, y: .999999881, z: .99999994}
   m_Children: []
   m_Father: {fileID: 2092925850}
---- !u!1 &1178592337
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100022, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1178592338}
-  m_Layer: 8
-  m_Name: MuzzlePosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1178592338
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400022, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1178592337}
-  m_LocalRotation: {x: -.499999881, y: -.500000119, z: -.499999881, w: .500000119}
-  m_LocalPosition: {x: -.0184407309, y: 1.00598288, z: -.0337436795}
-  m_LocalScale: {x: 20, y: 20, z: 5}
-  m_Children: []
-  m_Father: {fileID: 1207752761}
---- !u!1 &1207752760
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100024, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1207752761}
-  - 33: {fileID: 1207752763}
-  - 23: {fileID: 1207752762}
-  m_Layer: 0
-  m_Name: GunModel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1207752761
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400024, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1207752760}
-  m_LocalRotation: {x: 0, y: 0, z: .70710665, w: .707106948}
-  m_LocalPosition: {x: .567245662, y: .264022827, z: -.161867216}
-  m_LocalScale: {x: .0500000007, y: .200000003, z: .0500000007}
-  m_Children:
-  - {fileID: 1178592338}
-  m_Father: {fileID: 1632604801}
---- !u!23 &1207752762
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2300010, guid: 08e994716c7d1254dbf5c2da88448f1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1207752760}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 375c06d870efe2f4089ac6f8f1311d3c, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
---- !u!33 &1207752763
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300010, guid: 08e994716c7d1254dbf5c2da88448f1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1207752760}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1241312068
 GameObject:
   m_ObjectHideFlags: 0
@@ -5785,9 +5834,9 @@ GameObject:
   - 136: {fileID: 1279374851}
   - 23: {fileID: 1279374850}
   - 54: {fileID: 1279374849}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5878,7 +5927,7 @@ GameObject:
   - 54: {fileID: 1297671858}
   - 114: {fileID: 1297671857}
   - 114: {fileID: 1297671856}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6118,9 +6167,9 @@ GameObject:
   - 65: {fileID: 1374105952}
   - 23: {fileID: 1374105951}
   - 54: {fileID: 1374105950}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6234,9 +6283,9 @@ GameObject:
   - 136: {fileID: 1454362080}
   - 23: {fileID: 1454362079}
   - 54: {fileID: 1454362078}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6370,9 +6419,9 @@ GameObject:
   - 65: {fileID: 1494714066}
   - 23: {fileID: 1494714065}
   - 54: {fileID: 1494714064}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6653,9 +6702,9 @@ GameObject:
   - 136: {fileID: 1598447990}
   - 23: {fileID: 1598447989}
   - 54: {fileID: 1598447988}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6775,58 +6824,57 @@ Prefab:
   m_RootGameObject: {fileID: 464747815}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &1632604800
+--- !u!1 &1672330788
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100026, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabParentObject: {fileID: 100000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1632604801}
-  - 114: {fileID: 1632604803}
-  - 114: {fileID: 1632604802}
-  m_Layer: 8
+  - 4: {fileID: 1672330789}
+  - 114: {fileID: 1672330791}
+  - 114: {fileID: 1672330790}
+  m_Layer: 0
   m_Name: GreenGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1632604801
+--- !u!4 &1672330789
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400026, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1632604800}
+  m_PrefabParentObject: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 1672330788}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: .00448246952, y: -.00103598356, z: .00372313964}
+  m_LocalPosition: {x: .00450797705, y: -.00103598356, z: .00372314453}
   m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Children:
-  - {fileID: 1207752761}
+  - {fileID: 50954014}
   m_Father: {fileID: 2092925850}
---- !u!114 &1632604802
+--- !u!114 &1672330790
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400012, guid: 08e994716c7d1254dbf5c2da88448f1b,
+  m_PrefabParentObject: {fileID: 11400002, guid: feaecf961f4f7194c8e3a057313f1d2f,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1632604800}
-  m_Enabled: 0
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 1672330788}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932725a5f17fbda49af516a0b6c1e2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RayTransform: {fileID: 1632604801}
+  RayTransform: {fileID: 688119252}
   MaxDistance: 200
-  Camera: {fileID: 0}
-  Crosshair: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
---- !u!114 &1632604803
+  CrosshairPrefab: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
+--- !u!114 &1672330791
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400014, guid: 08e994716c7d1254dbf5c2da88448f1b,
+  m_PrefabParentObject: {fileID: 11400000, guid: feaecf961f4f7194c8e3a057313f1d2f,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1632604800}
+  m_PrefabInternal: {fileID: 1065163418}
+  m_GameObject: {fileID: 1672330788}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de8907637b93e054aa0d916a769c8ad3, type: 3}
@@ -6834,9 +6882,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 5400000, guid: c485645123f25e046b360f82f9fe0e7b, type: 2}
   ShotPositions:
-  - {fileID: 1178592338}
-  IgnoredCollisions:
-  - {fileID: 309727533}
+  - {fileID: 688119252}
+  IgnoredCollisions: []
   ShotVelocity: 300
 --- !u!1 &1677829058
 GameObject:
@@ -6850,9 +6897,9 @@ GameObject:
   - 65: {fileID: 1677829061}
   - 23: {fileID: 1677829060}
   - 54: {fileID: 1677829059}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6941,7 +6988,7 @@ GameObject:
   - 54: {fileID: 1713016330}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7028,9 +7075,9 @@ GameObject:
   - 136: {fileID: 1714979585}
   - 23: {fileID: 1714979584}
   - 54: {fileID: 1714979583}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7118,9 +7165,9 @@ GameObject:
   - 65: {fileID: 1727791830}
   - 23: {fileID: 1727791829}
   - 54: {fileID: 1727791828}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_15x15x15
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7407,9 +7454,9 @@ GameObject:
   - 65: {fileID: 1771817370}
   - 23: {fileID: 1771817369}
   - 54: {fileID: 1771817368}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7551,6 +7598,58 @@ Transform:
   m_Children:
   - {fileID: 575908921}
   m_Father: {fileID: 1320048039}
+--- !u!1001 &1803994191
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2092925850}
+    m_Modifications:
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.00125542504
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.00095599168
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .00364860101
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .00999999978
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
+  m_RootGameObject: {fileID: 877904129}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1822497901
 GameObject:
   m_ObjectHideFlags: 0
@@ -7563,9 +7662,9 @@ GameObject:
   - 136: {fileID: 1822497904}
   - 23: {fileID: 1822497903}
   - 54: {fileID: 1822497902}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7692,9 +7791,9 @@ GameObject:
   - 33: {fileID: 1880192786}
   - 65: {fileID: 1880192785}
   - 23: {fileID: 1880192784}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TemplateAstroid
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7870,7 +7969,7 @@ GameObject:
   - 54: {fileID: 1939829151}
   m_Layer: 0
   m_Name: RedObstacleSphere_25
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7957,9 +8056,9 @@ GameObject:
   - 136: {fileID: 1944243253}
   - 23: {fileID: 1944243252}
   - 54: {fileID: 1944243251}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCyllinder_20x30
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8062,65 +8161,6 @@ Transform:
   m_Children:
   - {fileID: 2011770014}
   m_Father: {fileID: 1320048039}
---- !u!1 &1951052002
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100028, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1951052005}
-  - 33: {fileID: 1951052004}
-  - 23: {fileID: 1951052003}
-  m_Layer: 0
-  m_Name: GunModel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &1951052003
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2300012, guid: 08e994716c7d1254dbf5c2da88448f1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1951052002}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 375c06d870efe2f4089ac6f8f1311d3c, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
---- !u!33 &1951052004
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300012, guid: 08e994716c7d1254dbf5c2da88448f1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1951052002}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1951052005
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400028, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
-  m_GameObject: {fileID: 1951052002}
-  m_LocalRotation: {x: 0, y: 0, z: .70710665, w: .707106948}
-  m_LocalPosition: {x: .567245662, y: .264022827, z: -.161867216}
-  m_LocalScale: {x: .0500000007, y: .200000003, z: .0500000007}
-  m_Children:
-  - {fileID: 303489442}
-  m_Father: {fileID: 287672614}
 --- !u!1 &1962238283
 GameObject:
   m_ObjectHideFlags: 0
@@ -8132,9 +8172,9 @@ GameObject:
   - 33: {fileID: 1962238287}
   - 65: {fileID: 1962238286}
   - 23: {fileID: 1962238285}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TemplateAstroid
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8232,9 +8272,9 @@ GameObject:
   - 65: {fileID: 1973890110}
   - 23: {fileID: 1973890109}
   - 54: {fileID: 1973890108}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8368,7 +8408,7 @@ GameObject:
   - 54: {fileID: 2011770017}
   - 114: {fileID: 2011770016}
   - 114: {fileID: 2011770015}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorbotEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8573,7 +8613,7 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100030, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2092925850}
@@ -8590,7 +8630,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400030, guid: 08e994716c7d1254dbf5c2da88448f1b, type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092925849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -8598,16 +8638,16 @@ Transform:
   m_Children:
   - {fileID: 525657047}
   - {fileID: 1154319756}
+  - {fileID: 1672330789}
+  - {fileID: 877904130}
   - {fileID: 343728136}
-  - {fileID: 1632604801}
-  - {fileID: 287672614}
   m_Father: {fileID: 309727536}
 --- !u!114 &2092925851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400016, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092925849}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -8620,7 +8660,7 @@ Animator:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 9500000, guid: 08e994716c7d1254dbf5c2da88448f1b,
     type: 2}
-  m_PrefabInternal: {fileID: 368023371}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092925849}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 68bb3f1042f43f34a98f05399b361b17, type: 3}
@@ -8681,9 +8721,9 @@ GameObject:
   - 65: {fileID: 2102081306}
   - 23: {fileID: 2102081305}
   - 54: {fileID: 2102081304}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedObstacleCube_20x20x20
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
