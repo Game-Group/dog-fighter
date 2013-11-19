@@ -1,25 +1,41 @@
 using UnityEngine;
 using System.Collections;
 
-public class NetworkInit : MonoBehaviour 
+public class NetworkControl : MonoBehaviour 
 {
 	public const int Port = 6500;
 	public const string IP = "127.0.0.1";
+
+	public NetworkView UnreliableNetworkView { get; private set; }
+	public NetworkView RPCNetworkView { get; private set;}
 
 	public GameObject PlayerPrefab;
 	
 	// Use this for initialization
 	public void Start () 
 	{
-		//this.playerPrefab = Resources.Load("Prefabs/Actors/PlayerSpaceShip 1");
-		//Debug.Log(this.playerPrefab);
+		NetworkView unreliableNetworkView = this.gameObject.AddComponent<NetworkView();
+		unreliableNetworkView.stateSynchronization = NetworkStateSynchronization.Unreliable;
+		unreliableNetworkView.observed = this;
+		this.UnreliableNetworkView = unreliableNetworkView;
+
+		NetworkView rpcNetworkView = this.gameObject.AddComponent<NetworkView();
+		rpcNetworkView.stateSynchronization = NetworkStateSynchronization.Off;
+		rpcNetworkView.observed = this;
+		this.RPCNetworkView = rpcNetworkView;
+
+		this.gameObject.AddComponent("NetworkView", unreliableNetworkView);
+		this.gameObject.AddComponent("NetworkView", rpcNetworkView);
 	}
 	
 	// Update is called once per frame
 	public void Update () 
 	{
 		if (!GameObject.Find("Global").GetComponent<GlobalSettings>().HasFocus)
-			return;			
+		{
+			Debug.Log ("whut");
+			return;		
+		}
 		
 		if (Input.GetKeyDown(KeyCode.F1))
 		{
