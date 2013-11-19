@@ -48,6 +48,7 @@ public class GunSwitcher : MonoBehaviour
 
 		Transform parent = gunToReplace.transform.parent;
 		Transform t = gunToReplace.transform;
+		int tempLayer = gunToReplace.layer;
 		Collider[] ignoredCollisions = gunToReplace.GetComponent<Shooter>().IgnoredCollisions;
 		Destroy(gunToReplace);
 
@@ -55,6 +56,7 @@ public class GunSwitcher : MonoBehaviour
 		GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], t.position, t.rotation);
 		newGun.transform.parent = parent;
 		newGun.GetComponent<Shooter>().IgnoredCollisions = ignoredCollisions;
+		newGun.layer = tempLayer;
 
 		CurrentGuns[gunToReplaceIndex] = newGun;
 	}
