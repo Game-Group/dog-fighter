@@ -1283,6 +1283,8 @@ MonoBehaviour:
   top: {fileID: 1056853108}
   gunLeft: {fileID: 1482573196}
   gunRight: {fileID: 1593337755}
+  gunRight1: {fileID: 360346587}
+  gunLeft1: {fileID: 957871609}
 --- !u!135 &2110768063
 SphereCollider:
   m_ObjectHideFlags: 0

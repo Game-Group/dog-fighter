@@ -9,16 +9,37 @@ public class turretBehaviour : MonoBehaviour {
     public Transform top;
     public Transform gunLeft;
     public Transform gunRight;
+    public Transform gunRight1;
+    public Transform gunLeft1;
+    Shooter shootL;
+    Shooter shootR;
+
 	// Use this for initialization
 
 
 	void Start () {
         gunLPos = gunLeft.position;
         gunRPos = gunRight.position;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        foreach (Transform child in gunLeft1)
+        {
+            shootL = child.GetComponent<Shooter>();
+        }
+
+        foreach (Transform child in gunRight1)
+        {
+            shootR = child.GetComponent<Shooter>();
+        }
+        
+       shootL.Shoot();
+       shootR.Shoot();
+        
+
+        //gunRight1.GetComponent<Shooter>().Shoot();
 	}
 
     void OnTriggerStay(Collider Object)
@@ -86,6 +107,9 @@ public class turretBehaviour : MonoBehaviour {
             gunRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
             //gunLeft.Rotate(angle - prevAngle, 0, 0, Space.Self);
             //prevAngle = angle;
+            
+            Component shootL;
+            Component shootR;
 
         }
 
