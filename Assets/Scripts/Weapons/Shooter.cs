@@ -40,6 +40,7 @@ public class Shooter : MonoBehaviour
 
         if (HumanControlled)
         {
+            Debug.Log("Is human controlled");
             if (Input.GetButton("Fire1"))
                 Shoot();
         }
