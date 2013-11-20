@@ -9,6 +9,7 @@ public class GunSwitcher : MonoBehaviour
 	public GameObject[] Guns;
 	public Transform[] Hardpoints;
 
+	public bool HumanControlledGuns;
 	public bool ShowCrosshair;
 	public KeyCode NextGun;
 	public KeyCode PreviousGun;
@@ -60,6 +61,9 @@ public class GunSwitcher : MonoBehaviour
 
 		if (!ShowCrosshair)
 			newGun.GetComponent<ThirdPersonCrosshair>().enabled = false;
+
+		if (!HumanControlledGuns)
+			newGun.GetComponent<Shooter>().HumanControlled = false;
 
 		CurrentGuns[gunToReplaceIndex] = newGun;
 	}
