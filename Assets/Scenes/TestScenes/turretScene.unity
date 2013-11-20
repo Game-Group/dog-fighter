@@ -577,6 +577,10 @@ Prefab:
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0c2d768e90809334293b686012effee1, type: 2}
+      propertyPath: HumanControlledGuns
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c2d768e90809334293b686012effee1, type: 2}
   m_RootGameObject: {fileID: 1784512516}
@@ -1115,6 +1119,7 @@ MonoBehaviour:
   Hardpoints:
   - {fileID: 655269313}
   - {fileID: 1681166926}
+  HumanControlledGuns: 1
   ShowCrosshair: 1
   NextGun: 275
   PreviousGun: 276
@@ -1276,8 +1281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   top: {fileID: 1056853108}
-  gunLeft: {fileID: 1128084054}
-  gunRight: {fileID: 16185141}
+  gunLeft: {fileID: 1482573196}
+  gunRight: {fileID: 1593337755}
 --- !u!135 &2110768063
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1308,6 +1313,7 @@ MonoBehaviour:
   Hardpoints:
   - {fileID: 360346587}
   - {fileID: 957871609}
+  HumanControlledGuns: 0
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0

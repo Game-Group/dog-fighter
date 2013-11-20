@@ -9,7 +9,7 @@ public class Shooter : MonoBehaviour
 	public Rigidbody Projectile;
 	public Transform[] ShotPositions;
 	public float ReloadDelay;
-	public bool HumanControlled;
+	private bool HumanControlled;
 
 	private float reloadTimer;
 
@@ -38,9 +38,12 @@ public class Shooter : MonoBehaviour
 		if (reloadTimer > 0)
 			reloadTimer -= Time.deltaTime;
 
-		if (HumanControlled)
-			if (Input.GetButton("Fire1"))
-				Shoot();
+        if (HumanControlled)
+        {
+            Debug.Log("Is human controlled");
+            if (Input.GetButton("Fire1"))
+                Shoot();
+        }
 	}
 
 	private void SpawnProjectile(Transform shotPosition)

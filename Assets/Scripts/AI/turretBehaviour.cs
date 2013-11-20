@@ -9,14 +9,13 @@ public class turretBehaviour : MonoBehaviour {
     public Transform gunLeft;
     public Transform gunRight;
 	// Use this for initialization
-    float angle = 0f;
+
 	void Start () {
         turretPos = this.gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
     void OnTriggerStay(Collider Object)
