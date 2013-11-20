@@ -4,14 +4,17 @@ using System.Collections;
 public class turretBehaviour : MonoBehaviour {
 
 
-    Vector3 turretPos;
+    Vector3 gunLPos;
+    Vector3 gunRPos;
     public Transform top;
     public Transform gunLeft;
     public Transform gunRight;
 	// Use this for initialization
 
+
 	void Start () {
-        turretPos = this.gameObject.transform.position;
+        gunLPos = gunLeft.position;
+        gunRPos = gunRight.position;
 	}
 	
 	// Update is called once per frame
@@ -21,16 +24,70 @@ public class turretBehaviour : MonoBehaviour {
     void OnTriggerStay(Collider Object)
     {
 
-        // TODO check if object is spaceship
-        Vector3 objPos = Object.transform.position;
-        Vector3 diff = turretPos - objPos;
+        if (Object.tag == "Player")
+        {
+            Vector3 lookPos = Object.transform.position - top.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 5);
 
-        diff.Normalize();
+            Vector3 objPos = Object.transform.position;
+            Vector3 diff = gunLPos - objPos;
 
-        Vector3 lookPos = Object.transform.position - top.position;
-        lookPos.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
-        top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 5) ;
+            // The angle is arccos(hypothenuse/adjacent) 
+            float hypothenuse = diff.magnitude;
+
+            //Debug.Log("length from gun to ship");
+            //Debug.Log(hypothenuse);
+
+            Vector2 diffxy;
+
+            //Debug.Log("difference x and y");
+            //Debug.Log(diff.x);
+            //Debug.Log(diff.z);
+            diffxy.x = diff.x;
+            diffxy.y = diff.z;
+
+            float adjacent = diffxy.magnitude;
+
+            //Debug.Log("length from gun xy");
+            //Debug.Log(adjacent);
+
+            float angle = Mathf.Acos(adjacent / hypothenuse);
+            //Debug.Log(angle*Mathf.Rad2Deg);
+
+            gunLeft.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+            //gunLeft.Rotate(angle - prevAngle, 0, 0, Space.Self);
+            //prevAngle = angle;
+
+            // Now for right gun:
+            diff = gunRPos - objPos;
+
+            // The angle is arccos(hypothenuse/adjacent) 
+            hypothenuse = diff.magnitude;
+
+            //Debug.Log("length from gun to ship");
+            //Debug.Log(hypothenuse);
+
+            //Debug.Log("difference x and y");
+            //Debug.Log(diff.x);
+            //Debug.Log(diff.z);
+            diffxy.x = diff.x;
+            diffxy.y = diff.z;
+
+            adjacent = diffxy.magnitude;
+
+            //Debug.Log("length from gun xy");
+            //Debug.Log(adjacent);
+
+            angle = Mathf.Acos(adjacent / hypothenuse);
+            //Debug.Log(angle*Mathf.Rad2Deg);
+
+            gunRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+            //gunLeft.Rotate(angle - prevAngle, 0, 0, Space.Self);
+            //prevAngle = angle;
+
+        }
 
 
 
