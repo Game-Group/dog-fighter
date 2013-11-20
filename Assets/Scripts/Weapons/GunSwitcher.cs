@@ -7,21 +7,26 @@ using System.Collections;
 public class GunSwitcher : MonoBehaviour 
 {
 	public GameObject[] Guns;
-	public GameObject[] CurrentGuns;
+	public Transform[] Hardpoints;
+
+	public bool ShowCrosshair;
 	public KeyCode NextGun;
 	public KeyCode PreviousGun;
 
+	private GameObject[] CurrentGuns;
 	private int currentGunIndex;
 
 	void Start()
 	{
 		currentGunIndex = 0;
+		CurrentGuns = new GameObject[Hardpoints.Length];
+		assignNewGuns(currentGunIndex);
 	}
 
 	void Update () 
 	{
 		// Check for input and swap accordingly.
-				if(Input.GetKeyDown(NextGun))
+		if(Input.GetKeyDown(NextGun))
 		{
 			currentGunIndex = (currentGunIndex + 1) % Guns.Length;
 			assignNewGuns(currentGunIndex);
@@ -38,25 +43,23 @@ public class GunSwitcher : MonoBehaviour
 	{
 		// Assign all gun slots to the newly selected gun.
 		for (int i = 0; i < CurrentGuns.Length; i++)
-			assignNewGun(index, i);
+			assignNewGun(Hardpoints[i], index, i);
 	}
 
-	private void assignNewGun(int newGunIndex, int gunToReplaceIndex)
+	private void assignNewGun(Transform hardpoint, int newGunIndex, int gunToReplaceIndex)
 	{
 		// Store some properties of the current gun.
 		GameObject gunToReplace = CurrentGuns[gunToReplaceIndex];
 
-		Transform parent = gunToReplace.transform.parent;
-		Transform t = gunToReplace.transform;
-		int tempLayer = gunToReplace.layer;
-		Collider[] ignoredCollisions = gunToReplace.GetComponent<Shooter>().IgnoredCollisions;
 		Destroy(gunToReplace);
 
 		// Create the new gun, and assign the stored properties to it.
-		GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], t.position, t.rotation);
-		newGun.transform.parent = parent;
-		newGun.GetComponent<Shooter>().IgnoredCollisions = ignoredCollisions;
-		newGun.layer = tempLayer;
+		GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], hardpoint.position, hardpoint.rotation);
+		newGun.transform.parent = hardpoint;
+		newGun.layer = hardpoint.gameObject.layer;
+
+		if (!ShowCrosshair)
+			newGun.GetComponent<ThirdPersonCrosshair>().enabled = false;
 
 		CurrentGuns[gunToReplaceIndex] = newGun;
 	}

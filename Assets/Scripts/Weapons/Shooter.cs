@@ -8,7 +8,6 @@ public class Shooter : MonoBehaviour
 {
 	public Rigidbody Projectile;
 	public Transform[] ShotPositions;
-	public Collider[] IgnoredCollisions;
 	public float ReloadDelay;
 
 	private float reloadTimer;
@@ -52,9 +51,5 @@ public class Shooter : MonoBehaviour
 		// Fire it away by giving it a velocity.
 		ProjectileController pController = shot.GetComponent<ProjectileController>();
 		pController.SetVelocityDirection(shotPosition.forward);
-
-		// Ignore collisions with given objects (usually the player and his guns, if they have collision models)
-		for (int i = 0; i < IgnoredCollisions.Length; i++)
-			Physics.IgnoreCollision(IgnoredCollisions[i], shot.collider);
 	}
 }

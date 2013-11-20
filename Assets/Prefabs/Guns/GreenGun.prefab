@@ -55,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: .448246956, y: -.103598356, z: .372313976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -78,8 +78,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_LocalRotation: {x: 0, y: 0, z: .70710665, w: .707106948}
-  m_LocalPosition: {x: .567245662, y: .264022827, z: -.161867216}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .0500000007, y: .200000003, z: .0500000007}
   m_Children:
   - {fileID: 400002}
@@ -126,7 +126,6 @@ MonoBehaviour:
   Projectile: {fileID: 5400000, guid: c485645123f25e046b360f82f9fe0e7b, type: 2}
   ShotPositions:
   - {fileID: 400002}
-  IgnoredCollisions: []
   ReloadDelay: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
@@ -140,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RayTransform: {fileID: 400002}
-  MaxDistance: 201
+  MaxDistance: 200
   CrosshairPrefab: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
 --- !u!1001 &100100000
 Prefab:
