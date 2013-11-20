@@ -597,6 +597,7 @@ MonoBehaviour:
   Hardpoints:
   - {fileID: 400014}
   - {fileID: 400000}
+  HumanControlledGuns: 1
   ShowCrosshair: 1
   NextGun: 275
   PreviousGun: 276

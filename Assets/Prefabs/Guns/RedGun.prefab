@@ -127,6 +127,7 @@ MonoBehaviour:
   ShotPositions:
   - {fileID: 400004}
   ReloadDelay: .5
+  HumanControlled: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
