@@ -9,7 +9,7 @@ public class Shooter : MonoBehaviour
 	public Rigidbody Projectile;
 	public Transform[] ShotPositions;
 	public float ReloadDelay;
-	private bool HumanControlled;
+	public bool HumanControlled;
 
 	private float reloadTimer;
 
