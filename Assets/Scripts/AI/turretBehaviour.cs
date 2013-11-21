@@ -50,7 +50,7 @@ public class turretBehaviour : MonoBehaviour {
             Vector3 lookPos = Object.transform.position - top.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 5);
+            top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 100);
 
             Vector3 objPos = Object.transform.position;
             Vector3 diff = gunLPos - objPos;
@@ -108,8 +108,6 @@ public class turretBehaviour : MonoBehaviour {
             //gunLeft.Rotate(angle - prevAngle, 0, 0, Space.Self);
             //prevAngle = angle;
             
-            Component shootL;
-            Component shootR;
 
         }
 
