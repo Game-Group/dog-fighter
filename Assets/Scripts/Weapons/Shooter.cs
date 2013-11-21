@@ -8,19 +8,41 @@ public class Shooter : MonoBehaviour
 {
 	public Rigidbody Projectile;
 	public Transform[] ShotPositions;
-	public Collider[] IgnoredCollisions;
+	public float ReloadDelay;
+	public bool HumanControlled;
 
-	void Update () 
-	{		
+	private float reloadTimer;
+
+	void Start()
+	{
+		reloadTimer = 0;
+	}
+
+	public void Shoot()
+	{
 		// Fire projectiles
-		if (Input.GetButtonDown("Fire1"))
+		if (reloadTimer <= 0)
 		{
 			// Spawn a new projectile at each position.
 			foreach (Transform t in ShotPositions)
 			{
 				SpawnProjectile(t);
 			}
+				
+			reloadTimer = ReloadDelay;
 		}
+	}
+
+	void Update () 
+	{		
+		if (reloadTimer > 0)
+			reloadTimer -= Time.deltaTime;
+
+        if (HumanControlled)
+        {
+            if (Input.GetButton("Fire1"))
+                Shoot();
+        }
 	}
 
 	private void SpawnProjectile(Transform shotPosition)
@@ -36,9 +58,5 @@ public class Shooter : MonoBehaviour
 		// Fire it away by giving it a velocity.
 		ProjectileController pController = shot.GetComponent<ProjectileController>();
 		pController.SetVelocityDirection(shotPosition.forward);
-
-		// Ignore collisions with given objects (usually the player and his guns, if they have collision models)
-		for (int i = 0; i < IgnoredCollisions.Length; i++)
-			Physics.IgnoreCollision(IgnoredCollisions[i], shot.collider);
 	}
 }
