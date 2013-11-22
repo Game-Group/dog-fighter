@@ -4,8 +4,6 @@ using System.Collections;
 public class turretBehaviour : MonoBehaviour {
 
 
-    Vector3 gunLPos;
-    Vector3 gunRPos;
     public Transform top;
     public Transform gunLeft;
     public Transform gunRight;
@@ -13,13 +11,11 @@ public class turretBehaviour : MonoBehaviour {
     public Transform gunLeft1;
     Shooter shootL;
     Shooter shootR;
-
+    ShipControl shipData;
 	// Use this for initialization
 
 
 	void Start () {
-        gunLPos = gunLeft.position;
-        gunRPos = gunRight.position;
 
 	}
 	
@@ -42,76 +38,70 @@ public class turretBehaviour : MonoBehaviour {
         //gunRight1.GetComponent<Shooter>().Shoot();
 	}
 
+    void OnTriggerEnter(Collider Object)
+    {
+
+        // Get ShipControl script
+        shipData = Object.GetComponent<ShipControl>();
+       
+    }
+
     void OnTriggerStay(Collider Object)
     {
 
+        // TODO: only target current team
         if (Object.tag == "Player")
         {
+
+
+            // Check the predicted position given the current flying velocity 
+/*
+            Vector3 targetPosL = PredictPosition.Predict(Object.transform.position,
+                                    shipData.currentSpeed * Vector3.forward,
+                                    gunLeft.position,
+                                    shootL.ProjectileSpeed);
+
+            Vector3 targetPosR = PredictPosition.Predict(Object.transform.position,
+                                    shipData.currentSpeed * Vector3.forward,
+                                    gunRight.position,
+                                    shootR.ProjectileSpeed);
+            */
+
             Vector3 lookPos = Object.transform.position - top.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
             top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 100);
 
             Vector3 objPos = Object.transform.position;
-            Vector3 diff = gunLPos - objPos;
 
-            // The angle is arccos(hypothenuse/adjacent) 
-            float hypothenuse = diff.magnitude;
-
-            //Debug.Log("length from gun to ship");
-            //Debug.Log(hypothenuse);
-
-            Vector2 diffxy;
-
-            //Debug.Log("difference x and y");
-            //Debug.Log(diff.x);
-            //Debug.Log(diff.z);
-            diffxy.x = diff.x;
-            diffxy.y = diff.z;
-
-            float adjacent = diffxy.magnitude;
-
-            //Debug.Log("length from gun xy");
-            //Debug.Log(adjacent);
-
-            float angle = Mathf.Acos(adjacent / hypothenuse);
-            //Debug.Log(angle*Mathf.Rad2Deg);
+            float angle = getXrotation(gunLeft.position, objPos);
 
             gunLeft.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
-            //gunLeft.Rotate(angle - prevAngle, 0, 0, Space.Self);
-            //prevAngle = angle;
 
-            // Now for right gun:
-            diff = gunRPos - objPos;
-
-            // The angle is arccos(hypothenuse/adjacent) 
-            hypothenuse = diff.magnitude;
-
-            //Debug.Log("length from gun to ship");
-            //Debug.Log(hypothenuse);
-
-            //Debug.Log("difference x and y");
-            //Debug.Log(diff.x);
-            //Debug.Log(diff.z);
-            diffxy.x = diff.x;
-            diffxy.y = diff.z;
-
-            adjacent = diffxy.magnitude;
-
-            //Debug.Log("length from gun xy");
-            //Debug.Log(adjacent);
-
-            angle = Mathf.Acos(adjacent / hypothenuse);
-            //Debug.Log(angle*Mathf.Rad2Deg);
-
+            angle = getXrotation(gunRight.position, objPos);
+  
             gunRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
-            //gunLeft.Rotate(angle - prevAngle, 0, 0, Space.Self);
-            //prevAngle = angle;
-            
 
         }
+    }
+    float getXrotation(Vector3 startPos, Vector3 targetPos)
+    {
 
+        Vector3 diff = startPos - targetPos;
 
+        // The angle is arccos(hypothenuse/adjacent) 
+        float hypothenuse = diff.magnitude;
+
+        Vector2 diffxy;
+        diffxy.x = diff.x;
+        diffxy.y = diff.z;
+
+        float adjacent = diffxy.magnitude;
+
+        float angle = Mathf.Acos(adjacent / hypothenuse);
+
+        return angle;
 
     }
+
 }
