@@ -2,15 +2,14 @@
 using System.Collections;
 //TODO:	Add max rotation value
 //		Lose the magic number 80. Try to think of a more intuitive rotation computation
-//		Use roll rotation
 // 		Create control key file.
 //		Remove all bools and create array instead.
 //		Change velocity instead of translating when moving forward
 public class ShipControl : MonoBehaviour {
 	
     // speeds
-    float speed;
-    float currentSpeed;
+    public float speed;
+    public float currentSpeed;
     float incrSpeed;
 
     float rollSpeed;
