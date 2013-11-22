@@ -94,8 +94,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 114: {fileID: 11400002}
-  - 148: {fileID: 14800000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400006}
   - 54: {fileID: 5400000}
   - 65: {fileID: 6500000}
@@ -544,17 +542,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22059540c27ce6e4a953593c3bbdc400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -595,10 +582,10 @@ MonoBehaviour:
   - {fileID: 100000, guid: feaecf961f4f7194c8e3a057313f1d2f, type: 2}
   - {fileID: 100002, guid: f62d629978aa20e449ef5a92105e27a4, type: 2}
   Hardpoints:
-  - {fileID: 400014}
-  - {fileID: 400000}
+  - {fileID: 0}
+  - {fileID: 0}
   HumanControlledGuns: 1
-  ShowCrosshair: 1
+  ShowCrosshair: 0
   NextGun: 275
   PreviousGun: 276
 --- !u!114 &11400016
@@ -619,18 +606,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
---- !u!148 &14800000
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 400010}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -5,6 +5,7 @@ public class DebugGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 	
 	}
 	

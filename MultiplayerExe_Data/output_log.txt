@@ -11,21 +11,39 @@ Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\U
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.078 seconds
+Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.104 seconds
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Focus = True
+Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.dll (this message is harmless)
+Connecting
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Initializing as server.
+Connecting
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = False
+New player joined RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Create player ship RPC received!
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Yes!
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GunSwitcher.assignNewGun (UnityEngine.Transform hardpoint, Int32 newGunIndex, Int32 gunToReplaceIndex) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.assignNewGuns (Int32 index) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 Initialize engine version: 4.3.0f4 (e01000627d60)
 GfxDevice: creating device client; threaded=1
@@ -40,11 +58,14 @@ Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\U
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.079 seconds
+Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.106 seconds
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Focus = True
+Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.dll (this message is harmless)
+Connecting
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
@@ -52,39 +73,60 @@ Connecting
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-New player connected.
+New player joined RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = False
+Create player ship RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = True
+New player joined RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = False
+Create player ship RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = True
+NullReferenceException: Object reference not set to an instance of an object
+  at GunSwitcher.assignNewGun (UnityEngine.Transform hardpoint, Int32 newGunIndex, Int32 gunToReplaceIndex) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.assignNewGuns (Int32 index) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GunSwitcher.assignNewGun (UnityEngine.Transform hardpoint, Int32 newGunIndex, Int32 gunToReplaceIndex) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.assignNewGuns (Int32 index) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+New player joined RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = True
+Create player ship RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Focus = False
+Yes!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GunSwitcher.assignNewGun (UnityEngine.Transform hardpoint, Int32 newGunIndex, Int32 gunToReplaceIndex) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.assignNewGuns (Int32 index) [0x00000] in <filename unknown>:0 
+  at GunSwitcher.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 The server has disconnected from the client. Most likely the server has shut down.
  
 (Filename:  Line: 740)
 
-Focus = True
+The server has disconnected from the client. Most likely the server has shut down.
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 740)
 

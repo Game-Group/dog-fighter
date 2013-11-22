@@ -1,69 +1,96 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Net;
 
 public class NetworkControl : MonoBehaviour 
 {
-	public const int Port = 6500;
-	public const string IP = "127.0.0.1";
+	public int ServerPort = 6500;
+	public string ServerIP = "127.0.0.1";
 
-	public NetworkView UnreliableNetworkView { get; private set; }
-	public NetworkView RPCNetworkView { get; private set;}
+	public string LocalIP { get; set; }
+	public NetworkViewID LocalViewID { get; set; }
 
-	public GameObject PlayerPrefab;
+	public GameObject ServerControl;
+	public GameObject ClientControl;
+
+	public IDictionary<NetworkViewID, Player> Players { get; private set; }
+	public Player ThisPlayer
+	{
+		get
+		{
+			return this.Players[this.networkView.viewID];
+		}
+	}
 	
 	// Use this for initialization
 	public void Start () 
 	{
-		NetworkView unreliableNetworkView = this.gameObject.AddComponent<NetworkView>();
-		unreliableNetworkView.stateSynchronization = NetworkStateSynchronization.Unreliable;
-		unreliableNetworkView.observed = this;
-		this.UnreliableNetworkView = unreliableNetworkView;
+		// Find the local IP Address.
+		IPAddress localAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
+		byte[] bytes = localAddress.GetAddressBytes();
 
-		NetworkView rpcNetworkView = this.gameObject.AddComponent<NetworkView>();
-		rpcNetworkView.stateSynchronization = NetworkStateSynchronization.Off;
-		rpcNetworkView.observed = this;
-		this.RPCNetworkView = rpcNetworkView;
+		this.LocalIP = 
+			bytes[0].ToString() + "." + bytes[1].ToString() + "." + bytes[2].ToString() + "." + bytes[3].ToString();
+
+		this.Players = new Dictionary<NetworkViewID, Player>(10);
 	}
 	
 	// Update is called once per frame
 	public void Update () 
 	{
 		if (!GameObject.Find("Global").GetComponent<GlobalSettings>().HasFocus)
-		{
-			Debug.Log ("whut");
-			return;		
+			return;
+
+		if (Network.peerType == NetworkPeerType.Disconnected)
+		{		
+			if (Input.GetKeyDown(KeyCode.F1))
+			{
+				Debug.Log ("Initializing as server.");
+				GameObject.Instantiate(this.ServerControl);
+			}
+			else if (Input.GetKeyDown(KeyCode.F2))
+			{
+				Debug.Log("Connecting");
+				GameObject.Instantiate(this.ClientControl);
+			}
 		}
-		
-		if (Input.GetKeyDown(KeyCode.F1))
-		{
-			Debug.Log ("Initializing as server.");
-			Network.InitializeServer(1, Port, false);
-		}
-		else if (Input.GetKeyDown(KeyCode.F2))
-		{
-			Debug.Log("Connecting");
-			Network.Connect(IP, Port);
-		}		
 	}
 
-	private void OnServerInitialized()
-	{
-		this.createPlayer();
-	}
-
-	private void OnConnectedToServer()
-	{
-		this.createPlayer();
-	}
-
-	private void OnPlayerConnected()
-	{
-		Debug.Log("New player connected.");
-	}
-
-	private void createPlayer()
-	{
-		Network.Instantiate(this.PlayerPrefab, new Vector3(0, 10, 0), Quaternion.identity, 0);
-	}	
+//	private void OnServerInitialized()
+//	{
+//		this.createPlayer();
+//	}
+//
+//	private void OnConnectedToServer()
+//	{
+//		this.createPlayer();
+//	}
+//
+//	private void OnPlayerConnected(NetworkPlayer player)
+//	{
+//		//this.Players.Add(player);
+//		//Debug.Log("New player connected.");
+//	}
+//
+//	private void OnPlayerDisconnected(NetworkPlayer player)
+//	{
+//		//this.Players.Remove(player);
+//
+//		//Network.RemoveRPCs(player);
+//		//Network.DestroyPlayerObjects(player);
+//	}
+//
+//	private void OnDisconnectedFromServer(NetworkDisconnection info)
+//	{
+////		Network.RemoveRPCs(Network.player);
+////		Network.DestroyPlayerObjects(Network.player);
+////
+////		Application.LoadLevel(Application.loadedLevel);
+//	}
+//
+//	private void createPlayer()
+//	{
+//		//Network.Instantiate(this.PlayerPrefab, new Vector3(0, 10, 0), Quaternion.identity, 0);
+//	}	
 
 }

@@ -23,7 +23,7 @@ public class NetworkSync : MonoBehaviour {
 		}
 	}
 	
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	private void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 		if (stream.isWriting)
 		{
