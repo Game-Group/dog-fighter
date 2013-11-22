@@ -5,7 +5,6 @@ public class FlyStraight : FlyControl
 {
 	public Transform Transform;
 	public float TimeBeforeFullSpeed = 0;
-	public float DesiredSpeed;
 	public float InitialSpeed = 0;
 
 	private float currentSpeed;

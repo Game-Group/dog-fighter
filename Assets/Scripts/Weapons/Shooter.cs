@@ -11,11 +11,14 @@ public class Shooter : MonoBehaviour
 	public float ReloadDelay;
 	public bool HumanControlled;
 
+	public float ProjectileSpeed { get; private set; }
+
 	private float reloadTimer;
 
 	void Start()
 	{
 		reloadTimer = 0;
+		ProjectileSpeed = Projectile.GetComponent<ProjectileController>().FlyControl.DesiredSpeed;
 	}
 
 	public void Shoot()
