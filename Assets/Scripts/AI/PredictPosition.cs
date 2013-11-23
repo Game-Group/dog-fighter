@@ -38,7 +38,7 @@ public static class PredictPosition
 			throw new UnityException("Prediction error, no positive solution");
 
 		float finalTime = PickSmallestPositive(solution1, solution2);
-		Debug.Log(counter++ + ": "  +finalTime);
+
 		return targetPosition + finalTime * targetVelocity;
 	}
 
