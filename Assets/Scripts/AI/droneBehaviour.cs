@@ -40,10 +40,8 @@ public Transform target;
         Vector3 t = origin;
        
         temp.transform.position = t;
-        Debug.Log(transform.localEulerAngles);
         temp.transform.localEulerAngles = transform.localEulerAngles;
 
-       
 
         // Shoot 3 different rays
         // One from the center of the drone to the fron
@@ -84,6 +82,35 @@ public Transform target;
                 dir += hitInfo.normal * 20;
             }
         }
+
+
+          temp.transform.localEulerAngles = new Vector3(40 + transform.localEulerAngles.x, 0, 0);
+          if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
+                {
+                    if (hitInfo.transform != transform)
+                    {
+
+                        Debug.DrawLine(origin, hitInfo.point, Color.red);
+                        Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
+                        dir += hitInfo.normal * 20;
+                    }
+                }
+
+          temp.transform.localEulerAngles = new Vector3(-40 + transform.localEulerAngles.x, 0, 0);
+            if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
+            {
+
+                if (hitInfo.transform != transform)
+                {
+
+                    Debug.DrawLine(origin, hitInfo.point, Color.red);
+                    Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
+                    dir += hitInfo.normal * 20;
+                }
+            }
+
+
+
         return dir;
     }
 
