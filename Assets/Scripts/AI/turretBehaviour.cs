@@ -1,47 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// TODO: make number of guns adaptive?
+// TODO: set collision radius here?
+
 public class turretBehaviour : MonoBehaviour {
-
-
     public Transform top;
-    public Transform gunLeft;
+    public Transform muzzleLeft;
+    public Transform muzzleRight;
     public Transform gunRight;
-    public Transform gunRight1;
-    public Transform gunLeft1;
+    public Transform gunLeft;
+    // The radius
+    public float shootRadius;
+
     Shooter shootL;
     Shooter shootR;
     ShipControl shipData;
-	// Use this for initialization
-
 
 	void Start () {
+        // If shootradius is bigger than collision radius
+        // set it to the same size
+        SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
+        Debug.Log(collider.radius);
 
+        if (collider.radius < shootRadius)
+        {
+            shootRadius = collider.radius;
+        }
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        foreach (Transform child in gunLeft1)
+        // TODO: put this in Start
+        foreach (Transform child in gunLeft)
         {
             shootL = child.GetComponent<Shooter>();
         }
 
-        foreach (Transform child in gunRight1)
+        foreach (Transform child in gunRight)
         {
             shootR = child.GetComponent<Shooter>();
         }
         
-       shootL.Shoot();
-       shootR.Shoot();
-        
-
-        //gunRight1.GetComponent<Shooter>().Shoot();
 	}
 
     void OnTriggerEnter(Collider Object)
     {
 
-        // Get ShipControl script
        
     }
 
@@ -55,28 +59,20 @@ public class turretBehaviour : MonoBehaviour {
         {
 
             // Check the predicted position given the current flying velocity 
-            /*
             Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Vector3.forward * Time.deltaTime,
-                                    top.position, shootL.ProjectileSpeed);
-
-            Debug.Log(shipData.currentSpeed * Vector3.forward * Time.deltaTime);
-            */
-            Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Object.transform.forward * Time.deltaTime,
+                                    shipData.currentSpeed * Object.transform.forward,
                                     top.position,
                                     shootL.ProjectileSpeed);
 
             Vector3 targetPosL = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Object.transform.forward * Time.deltaTime,
-                                    gunLeft.position,
+                                    shipData.currentSpeed * Object.transform.forward,
+                                    muzzleLeft.position,
                                     shootL.ProjectileSpeed);
             
             Vector3 targetPosR = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Object.transform.forward * Time.deltaTime,
-                                    gunRight.position,
+                                    shipData.currentSpeed * Object.transform.forward,
+                                    muzzleRight.position,
                                     shootR.ProjectileSpeed);
-            
            
             Vector3 lookPos = targetPosM - top.position;
             lookPos.y = 0;
@@ -85,13 +81,22 @@ public class turretBehaviour : MonoBehaviour {
 
             Vector3 objPos = Object.transform.position;
 
-            float angle = getXrotation(gunLeft.position, targetPosL);
+            float angle = getXrotation(muzzleLeft.position, targetPosL);
 
-            gunLeft.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+            muzzleLeft.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
 
-            angle = getXrotation(gunRight.position, targetPosR);
+            angle = getXrotation(muzzleRight.position, targetPosR);
   
-            gunRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+            muzzleRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+
+            // Only shoot in case of in shoot radius
+            if((Object.transform.position - top.position).magnitude < shootRadius)
+            {
+                
+                   shootL.Shoot();
+                   shootR.Shoot();
+
+            }
 
         }
     }
