@@ -74,6 +74,11 @@ public class turretBehaviour : MonoBehaviour {
                                     shipData.currentSpeed * Object.transform.forward,
                                     muzzleRight.position,
                                     shootR.ProjectileSpeed);
+
+            // TODO: Only get random target sometimes
+            targetPosM = GetRandomTarget(targetPosM, 1);
+            //targetPosL = GetRandomTarget(targetPosL, 1);
+            //targetPosR = GetRandomTarget(targetPosR, 1);
            
             Vector3 lookPos = targetPosM - top.position;
             lookPos.y = 0;
@@ -119,5 +124,19 @@ public class turretBehaviour : MonoBehaviour {
         return angle;
 
     }
+    // TODO: make this own class? add to RandomMomvementInSphere
+    public Vector3 GetRandomTarget(Vector3 targetPos, float radius)
+    {
 
+        // Pick a random direction from the center of the sphere.
+        Vector3 directionFromCenter = Random.insideUnitSphere;
+
+        // Pick a random distance from the center of the sphere.
+        float randomRadius = Random.Range(0, radius);
+
+        // Create a new target.
+        return targetPos + randomRadius * directionFromCenter.normalized;
+
+    }
+    
 }
