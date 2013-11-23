@@ -30,7 +30,7 @@ public class ShipControl : MonoBehaviour {
     {
 
         // Init speeds
-        speed = 10;
+        speed = 100;
         currentSpeed = 0;
         incrSpeed = 0.005f;
         rollSpeed = 50;
