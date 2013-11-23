@@ -30,7 +30,7 @@ public class ShipControl : MonoBehaviour {
     {
 
         // Init speeds
-        speed = 100;
+        speed = 10;
         currentSpeed = 0;
         incrSpeed = 0.005f;
         rollSpeed = 50;
@@ -160,7 +160,6 @@ public class ShipControl : MonoBehaviour {
         }
         else
         {
-            //Debug.Log(currentSpeed);
             if (currentSpeed > 0)
             {
 
@@ -169,7 +168,8 @@ public class ShipControl : MonoBehaviour {
             }
             else
             {
-
+                // Make sure it is not lower than 0
+                currentSpeed = 0;
                 transform.Translate(Vector3.forward * 0 * Time.deltaTime);
             }
 

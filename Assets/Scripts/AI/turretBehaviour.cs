@@ -42,43 +42,54 @@ public class turretBehaviour : MonoBehaviour {
     {
 
         // Get ShipControl script
-        shipData = Object.GetComponent<ShipControl>();
        
     }
 
     void OnTriggerStay(Collider Object)
     {
 
+        shipData = Object.GetComponent<ShipControl>();
+
         // TODO: only target current team
         if (Object.tag == "Player")
         {
 
-
             // Check the predicted position given the current flying velocity 
-/*
-            Vector3 targetPosL = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Vector3.forward,
-                                    gunLeft.position,
+            /*
+            Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
+                                    shipData.currentSpeed * Vector3.forward * Time.deltaTime,
+                                    top.position, shootL.ProjectileSpeed);
+
+            Debug.Log(shipData.currentSpeed * Vector3.forward * Time.deltaTime);
+            */
+            Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
+                                    shipData.currentSpeed * Object.transform.forward * Time.deltaTime,
+                                    top.position,
                                     shootL.ProjectileSpeed);
 
+            Vector3 targetPosL = PredictPosition.Predict(Object.transform.position,
+                                    shipData.currentSpeed * Object.transform.forward * Time.deltaTime,
+                                    gunLeft.position,
+                                    shootL.ProjectileSpeed);
+            
             Vector3 targetPosR = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Vector3.forward,
+                                    shipData.currentSpeed * Object.transform.forward * Time.deltaTime,
                                     gunRight.position,
                                     shootR.ProjectileSpeed);
-            */
-
-            Vector3 lookPos = Object.transform.position - top.position;
+            
+           
+            Vector3 lookPos = targetPosM - top.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
             top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 100);
 
             Vector3 objPos = Object.transform.position;
 
-            float angle = getXrotation(gunLeft.position, objPos);
+            float angle = getXrotation(gunLeft.position, targetPosL);
 
             gunLeft.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
 
-            angle = getXrotation(gunRight.position, objPos);
+            angle = getXrotation(gunRight.position, targetPosR);
   
             gunRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
 
