@@ -91,7 +91,6 @@ public class turretBehaviour : MonoBehaviour {
             muzzleRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
             
             float diff = (Object.transform.position - top.position).magnitude;
-            Debug.Log(diff);
             // Only shoot in case of in shoot radius
             if(diff < shootRadius)
             {
