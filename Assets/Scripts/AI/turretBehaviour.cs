@@ -12,6 +12,7 @@ public class turretBehaviour : MonoBehaviour {
     public Transform gunLeft;
     // The radius
     public float shootRadius;
+    public float followRadius;
 
     Shooter shootL;
     Shooter shootR;
@@ -21,7 +22,7 @@ public class turretBehaviour : MonoBehaviour {
         // If shootradius is bigger than collision radius
         // set it to the same size
         SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
-        Debug.Log(collider.radius);
+        collider.radius = followRadius;
 
         if (collider.radius < shootRadius)
         {
@@ -88,16 +89,15 @@ public class turretBehaviour : MonoBehaviour {
             angle = getXrotation(muzzleRight.position, targetPosR);
   
             muzzleRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
-
+            
+            float diff = (Object.transform.position - top.position).magnitude;
             // Only shoot in case of in shoot radius
-            if((Object.transform.position - top.position).magnitude < shootRadius)
+            if(diff < shootRadius)
             {
-                
                    shootL.Shoot();
                    shootR.Shoot();
 
             }
-
         }
     }
     float getXrotation(Vector3 startPos, Vector3 targetPos)
