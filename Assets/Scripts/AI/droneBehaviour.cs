@@ -39,7 +39,6 @@ public Transform target;
         Vector3 rightR = origin;
         leftR.x -= 2;
         rightR.x += 2;
-        Debug.Log(leftR);
 
         // Shoot 3 different rays
         // One from the center of the drone to the fron
