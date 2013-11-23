@@ -8,7 +8,8 @@ for explanation by a smart person.
 
 public static class PredictPosition 
 {
-	public static Vector3 Predict(Vector3 targetPosition, Vector3 targetVelocity, Vector3 gunTransform, float projectileSpeed)
+	static int counter = 0;
+	public static Vector3 Predict(Vector3 targetPosition, Vector3 targetVelocity, Vector3 gunPosition, float projectileSpeed)
 	{
 		float a = (targetVelocity.x * targetVelocity.x) 
 				+ (targetVelocity.y * targetVelocity.y) 
@@ -16,19 +17,19 @@ public static class PredictPosition
 				- projectileSpeed * projectileSpeed;
 
 		float b = 2 
-				* (targetVelocity.x * (targetPosition.x - gunTransform.x))
-				* (targetVelocity.y * (targetPosition.y - gunTransform.y))
-				* (targetVelocity.z * (targetPosition.z - gunTransform.z));
+				* ((targetVelocity.x * (targetPosition.x - gunPosition.x))
+				+ (targetVelocity.y * (targetPosition.y - gunPosition.y))
+				+ (targetVelocity.z * (targetPosition.z - gunPosition.z)));
 
-		float c = (targetPosition.x - gunTransform.x) * (targetPosition.x - gunTransform.x)
-				+ (targetPosition.y - gunTransform.y) * (targetPosition.y - gunTransform.y)
-				+ (targetPosition.z - gunTransform.z) * (targetPosition.z - gunTransform.z);
+		float c = (targetPosition.x - gunPosition.x) * (targetPosition.x - gunPosition.x)
+				+ (targetPosition.y - gunPosition.y) * (targetPosition.y - gunPosition.y)
+				+ (targetPosition.z - gunPosition.z) * (targetPosition.z - gunPosition.z);
 
 		if (b*b < 4*a*c)
 			throw new UnityException("Prediction error, no real solution");
 
 		float p = -b / (2*a);
-		float q = Mathf.Sqrt(b*b - 4*a*c) / 2*a;
+		float q = Mathf.Sqrt(b*b - 4*a*c) / (2*a);
 
 		float solution1 = p - q;
 		float solution2 = p + q;
@@ -37,7 +38,7 @@ public static class PredictPosition
 			throw new UnityException("Prediction error, no positive solution");
 
 		float finalTime = PickSmallestPositive(solution1, solution2);
-
+		Debug.Log(counter++ + ": "  +finalTime);
 		return targetPosition + finalTime * targetVelocity;
 	}
 
