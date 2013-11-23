@@ -13,7 +13,7 @@ public class GlobalSettings : MonoBehaviour {
 	void OnApplicationFocus() 
 	{
     	this.HasFocus = !this.HasFocus;    
-		Debug.Log("Focus = " + this.HasFocus);
+		//Debug.Log("Focus = " + this.HasFocus);
 	}
 	
 	// Update is called once per frame

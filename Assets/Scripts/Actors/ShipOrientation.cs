@@ -18,8 +18,7 @@ public class ShipOrientation : MonoBehaviour {
 	void Update () 
 
 	{        
-		if (!this.transform.parent.GetComponent<NetworkView>().isMine
-		    && Network.peerType != NetworkPeerType.Disconnected)
+		if (Network.peerType != NetworkPeerType.Disconnected)
 		{
 			this.transform.localRotation = this.initialRotation;
 		}
