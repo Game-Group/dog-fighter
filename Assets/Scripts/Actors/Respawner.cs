@@ -18,7 +18,9 @@ public class Respawner : MonoBehaviour
 
 	public void DisableAndRespawn(GameObject obj, float timeBeforeRespawn)
 	{
-		obj.SetActive(false);
+		obj.transform.GetChild(0).gameObject.SetActive(false);
+		obj.GetComponent<ShipControl>().enabled = false;
+		obj.GetComponent<BoxCollider>().enabled = false;
 		WaitingForRespawn.Add(new GameObjectRespawnTimePair(obj, timeBeforeRespawn));
 	}
 
@@ -26,7 +28,9 @@ public class Respawner : MonoBehaviour
 	{
 		obj.transform.position = gameObject.transform.position;
 		obj.transform.rotation = gameObject.transform.rotation;
-		obj.SetActive(true);
+		obj.transform.GetChild(0).gameObject.SetActive(true);
+		obj.GetComponent<ShipControl>().enabled = true;
+		obj.GetComponent<BoxCollider>().enabled = true;
 	}
 
 	private void Spawn(GameObject prefab)
