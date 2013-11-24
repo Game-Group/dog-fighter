@@ -8,9 +8,12 @@ using System.Collections;
 public class ShipControl : MonoBehaviour {
 	
     // speeds
-    public float speed;
+    public float maxSpeed;
+    public float[] speedStages;
+    int currentSpeedStage;
     public float currentSpeed;
     float incrSpeed;
+    
 
     float rollSpeed;
     float mouseFollowSpeed;
@@ -18,6 +21,7 @@ public class ShipControl : MonoBehaviour {
     // variables to keep track of the
     // pressed keys
 	bool forward;
+	bool backward;
 	public bool rollLeft;
 	public bool rollRight;
 
@@ -29,15 +33,31 @@ public class ShipControl : MonoBehaviour {
 	void Start () 
     {
 
-        // Init speeds
-        speed = 100;
+        // Init speeds in case no manual initailisation
+        if (maxSpeed == 0)
+        {
+            maxSpeed = 100;
+        }
+        // just always override currentspeed to be 0
         currentSpeed = 0;
+        currentSpeed = 0;
+        
+        // initialise speed staged and fill with speeds
+        speedStages = new float[6];
+        for (int i = 0; i < speedStages.Length; i++)
+        {
+            speedStages[i] = (maxSpeed / 5) * i;
+        }
+
+        maxSpeed = 0;
+        // initialisation of private variables
         incrSpeed = 0.005f;
         rollSpeed = 50;
         mouseFollowSpeed = 0.5f;
 
         // Init key press variables
 		forward = false;
+		backward = false;
 		rollLeft = false;
 		rollRight = false;
 
@@ -121,9 +141,9 @@ public class ShipControl : MonoBehaviour {
 		{
 			forward = true;
 		}
-		if(Input.GetKeyUp (KeyCode.W))
+		if(Input.GetKeyDown(KeyCode.S))
 		{
-			forward = false;
+			backward = true;
 		}
 		if(Input.GetKeyDown(KeyCode.A))
 		{
@@ -146,36 +166,47 @@ public class ShipControl : MonoBehaviour {
     // Handle motions
 	void HandleMotion()
 	{
+
+        
+        if (currentSpeed < maxSpeed)
+        {
+            // Acceleration depends on the current speed of the ship
+            currentSpeed += ((maxSpeed - currentSpeed)* incrSpeed);
+        }
+        if (currentSpeed > maxSpeed)
+        {
+            currentSpeed -= ((currentSpeed - maxSpeed) * incrSpeed);
+            // Check if current speed does not get negative
+            if (currentSpeed < 0)
+            {
+                currentSpeed = 0;
+            }
+        }
+
+        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+
+
         // Make the spaceship move forward
         if (forward)
         {
-            if (currentSpeed < speed)
+            if (currentSpeedStage < speedStages.Length - 1)
             {
-                currentSpeed += (speed * incrSpeed);
+                currentSpeedStage++;
+                maxSpeed = speedStages[currentSpeedStage];
             }
-
-            //this.gameObject.rigidbody.velocity = this.gameObject.transform.forward * currentSpeed;
-            // this.gameObject.rigidbody.AddForce(this.gameObject.transform.forward * speed);
-            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+            forward = false;
         }
-        else
+        if(backward)
         {
-            if (currentSpeed > 0)
+
+            if (currentSpeedStage > 0)
             {
-
-                currentSpeed -= (speed * incrSpeed);
-                transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+                currentSpeedStage--;
+                maxSpeed = speedStages[currentSpeedStage];
             }
-            else
-            {
-                // Make sure it is not lower than 0
-                currentSpeed = 0;
-                transform.Translate(Vector3.forward * 0 * Time.deltaTime);
-            }
-
-            //this.gameObject.rigidbody.velocity = this.gameObject.transform.forward * currentSpeed;
-
+            backward = false;
         }
+
 		if(rollLeft)
 		{
 			transform.Rotate (0,0, rollSpeed * Time.deltaTime, Space.Self);
