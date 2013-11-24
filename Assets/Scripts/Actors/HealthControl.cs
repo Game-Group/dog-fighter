@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthAndRespawnControl : MonoBehaviour 
+public class HealthControl : MonoBehaviour 
 {
-	public GameObject RespawningObjectPrefab;
-	public Transform RespawnPoint;
+	public Respawner RespawnPoint;
 	public float RespawnDelay;
 
 	public float MaxHealth;
@@ -14,29 +13,23 @@ public class HealthAndRespawnControl : MonoBehaviour
 
 	private float health;
 	private float shieldStrength;
-	private GameObject CurrentObjectIntance;
-	private bool waitingForRespawn;
-	private float respawnTimer;
 
 	void Start()
 	{
-		Respawn();
+		health = MaxHealth;
+		shieldStrength = MaxShields;
+		RespawnPoint = FindObjectOfType<Respawner>();
+	}
+
+	public void OnEnable()
+	{
+		health = MaxHealth;
+		shieldStrength = MaxShields;
 	}
 
 	void Update()
 	{
-		if (waitingForRespawn)
-		{
-			respawnTimer -= Time.deltaTime;
-			if (respawnTimer <= 0)
-			{
-				Respawn();
-			}
-		}
-		else
-		{
-			Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
-		}
+		Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
 	}
 
 	/// <summary>
@@ -70,24 +63,12 @@ public class HealthAndRespawnControl : MonoBehaviour
 
 		health -= hullDamage;
 		if (health <= 0)
-			InitializeDeath();
+			Die();
 	}
 
-	public void InitializeDeath()
+	public void Die()
 	{
-		Destroy(CurrentObjectIntance);
-		waitingForRespawn = true;
-		respawnTimer = RespawnDelay;
-	}
-
-	private void Respawn()
-	{
-		CurrentObjectIntance = (GameObject)Instantiate(RespawningObjectPrefab, RespawnPoint.position, RespawnPoint.rotation);
-
-		health = MaxHealth;
-		shieldStrength = MaxShields;
-
-		waitingForRespawn = false;
+		RespawnPoint.DisableAndRespawn(gameObject, RespawnDelay);
 	}
 
 	public void Heal(float hullHealing, float shieldHealing)
