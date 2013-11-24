@@ -140,7 +140,7 @@ public class droneBehaviour : MonoBehaviour
         RaycastHit hitInfo;
 
         // TODO Finetune loength of ray
-        float distance = 10;
+        float distance = 15;
 
 
         // Construct a temporary vector for different orientation
@@ -166,7 +166,9 @@ public class droneBehaviour : MonoBehaviour
             }
         }
         // Shoot ray to the right
-        temp.transform.localEulerAngles = new Vector3(0, 40 + transform.localEulerAngles.y, 0);
+        temp.transform.localEulerAngles = new Vector3(0, 45 + transform.localEulerAngles.y, 0);
+
+        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
         if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
         {
             if (hitInfo.transform != transform)
@@ -179,7 +181,9 @@ public class droneBehaviour : MonoBehaviour
         }
 
         // Shoot ray to the left
-        temp.transform.localEulerAngles = new Vector3(0, -40 + transform.localEulerAngles.y, 0);
+        temp.transform.localEulerAngles = new Vector3(0, -45 + transform.localEulerAngles.y, 0);
+
+        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
         if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
         {
 
@@ -193,7 +197,9 @@ public class droneBehaviour : MonoBehaviour
         }
 
         // Shoot ray up
-        temp.transform.localEulerAngles = new Vector3(40 + transform.localEulerAngles.x, 0, 0);
+        temp.transform.localEulerAngles = new Vector3(40 + transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
+
+        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
         if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
         {
             if (hitInfo.transform != transform)
@@ -206,7 +212,9 @@ public class droneBehaviour : MonoBehaviour
         }
 
         // Shoot ray down
-        temp.transform.localEulerAngles = new Vector3(-40 + transform.localEulerAngles.x, 0, 0);
+        temp.transform.localEulerAngles = new Vector3(-40 + transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
+
+        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
         if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
         {
 
