@@ -312,17 +312,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 968938229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f16d2d3ccad2af45944281a61ae3d5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 73c72a5743f087a4cb4a740827c8eff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RespawningObjectPrefab: {fileID: 100010, guid: 0c2d768e90809334293b686012effee1,
-    type: 2}
-  RespawnPoint: {fileID: 968938231}
-  RespawnDelay: 3
-  MaxHealth: 100
-  MaxShields: 100
-  HealthPerSecond: 10
-  ShieldsPerSecond: 10
+  SpawnsAtStart:
+  - {fileID: 100010, guid: 0c2d768e90809334293b686012effee1, type: 2}
 --- !u!4 &968938231
 Transform:
   m_ObjectHideFlags: 0

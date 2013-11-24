@@ -133,7 +133,7 @@ MonoBehaviour:
   DesiredSpeed: 200
   Transform: {fileID: 400000}
   TimeBeforeFullSpeed: 3
-  InitialSpeed: 10
+  InitialSpeed: 120
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
