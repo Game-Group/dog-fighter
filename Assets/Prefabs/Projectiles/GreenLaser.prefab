@@ -12,7 +12,6 @@ GameObject:
   - 136: {fileID: 13600000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
   - 96: {fileID: 9600000}
   - 122: {fileID: 12200000}
@@ -122,17 +121,6 @@ TrailRenderer:
       rgba: 16777215
   m_MinVertexDistance: .100000001
   m_Autodestruct: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d6d8efcc00b32440a749630690f37b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,9 +145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VelocityDirection: {x: 0, y: 0, z: 0}
+  DesiredSpeed: 200
   Transform: {fileID: 400000}
   TimeBeforeFullSpeed: 0
-  DesiredSpeed: 200
   InitialSpeed: 0
 --- !u!114 &11400006
 MonoBehaviour:
@@ -172,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28dcf26d0c51184093f52545143ee89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 10
   FlyControl: {fileID: 11400004}
 --- !u!122 &12200000
 Halo:

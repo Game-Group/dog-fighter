@@ -6,6 +6,9 @@ public class HealthControl : MonoBehaviour
 	public Respawner RespawnPoint;
 	public float RespawnDelay;
 
+	public GameObject ExplosionGraphic;
+	public AudioClip ExplosionSound;
+
 	public float MaxHealth;
 	public float MaxShields;
 	public float HealthPerSecond;
@@ -52,9 +55,7 @@ public class HealthControl : MonoBehaviour
 
 	public void TakeDamage(float damage)
 	{
-		float shieldOverkill = damage - shieldStrength;
-
-		TakeDamage(Mathf.Min(0, shieldOverkill), damage);
+		TakeDamage(Mathf.Max(0, damage - shieldStrength), damage);
 	}
 	
 	public void TakeDamage(float hullDamage, float shieldDamage)
@@ -62,18 +63,29 @@ public class HealthControl : MonoBehaviour
 		shieldStrength = Mathf.Min(0, shieldDamage);
 
 		health -= hullDamage;
+
 		if (health <= 0)
 			Die();
 	}
 
 	public void Die()
 	{
+		GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
+		AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
+
 		RespawnPoint.DisableAndRespawn(gameObject, RespawnDelay);
 	}
 
 	public void Heal(float hullHealing, float shieldHealing)
 	{
-		health = Mathf.Max(health + hullHealing, MaxHealth);
-		shieldStrength = Mathf.Max(shieldStrength + shieldHealing, MaxShields);
+		health = Mathf.Min(health + hullHealing, MaxHealth);
+		shieldStrength = Mathf.Min(shieldStrength + shieldHealing, MaxShields);
+	}
+
+	public void OnGUI()
+	{
+		GUI.Label(new Rect(0, 0, 100, 100)
+		          , "Health: " + health + "/" + MaxHealth + "\n"
+		          + "Shields: " + shieldStrength + "/" + MaxShields);
 	}
 }
