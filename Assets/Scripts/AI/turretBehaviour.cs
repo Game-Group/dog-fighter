@@ -55,8 +55,8 @@ public class turretBehaviour : MonoBehaviour {
 
         shipData = Object.GetComponent<ShipControl>();
 
-        // TODO: only target current team
-        if (Object.gameObject.layer != this.gameObject.layer)
+        // Checking for the player tag is only for no crashing
+        if (Object.tag == "Player" && Object.gameObject.layer != this.gameObject.layer)
         {
 
             // Check the predicted position given the current flying velocity 
