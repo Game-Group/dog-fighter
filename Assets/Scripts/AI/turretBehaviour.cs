@@ -83,7 +83,12 @@ public class turretBehaviour : MonoBehaviour {
             Vector3 lookPos = targetPosM - top.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation, Time.deltaTime * 100);
+            //Quaternion b = Quaternion.Euler(0, this.transform.eulerAngles.y, 0);
+            Vector3 eul = rotation.eulerAngles;
+            eul.y -= this.transform.eulerAngles.y;
+            Quaternion rotation2 = Quaternion.Euler(eul.x, eul.y, eul.z);
+            
+            top.localRotation = Quaternion.Slerp(top.transform.rotation, rotation2, Time.deltaTime * 100);
 
             Vector3 objPos = Object.transform.position;
 
