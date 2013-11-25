@@ -1196,6 +1196,7 @@ GameObject:
   - 114: {fileID: 1784512521}
   - 54: {fileID: 1784512520}
   - 65: {fileID: 1784512519}
+  - 114: {fileID: 1784512522}
   - 114: {fileID: 1784512518}
   m_Layer: 8
   m_Name: PlayerSpaceShip
@@ -1226,9 +1227,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1784512516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 114c10fe8a244ab4d93fe8d74b75589e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bee7e3d02375db459c782ff3904d70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthControl: {fileID: 1784512522}
 --- !u!65 &1784512519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1280,6 +1282,26 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 275
   PreviousGun: 276
+--- !u!114 &1784512522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 0c2d768e90809334293b686012effee1,
+    type: 2}
+  m_PrefabInternal: {fileID: 987251529}
+  m_GameObject: {fileID: 1784512516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f16d2d3ccad2af45944281a61ae3d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RespawnPoint: {fileID: 0}
+  RespawnDelay: 3
+  ExplosionGraphic: {fileID: 100000, guid: b5aa57d4bf54d5d4cb8a2bcc8eec4389, type: 2}
+  ExplosionSound: {fileID: 8300000, guid: 33cd429e81395944088573e40e271f18, type: 3}
+  MaxHealth: 100
+  MaxShields: 100
+  HealthPerSecond: 10
+  ShieldsPerSecond: 10
 --- !u!114 &1784512524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,7 +1314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8073719a323a1488a734acf034519c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  maxSpeed: 0
+  speedStages: []
   currentSpeed: 0
   rollLeft: 0
   rollRight: 0

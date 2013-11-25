@@ -56,7 +56,7 @@ public class turretBehaviour : MonoBehaviour {
         shipData = Object.GetComponent<ShipControl>();
 
         // TODO: only target current team
-        if (Object.tag == "Player")
+        if (Object.collider.gameObject.layer != this.gameObject.layer)
         {
 
             // Check the predicted position given the current flying velocity 
