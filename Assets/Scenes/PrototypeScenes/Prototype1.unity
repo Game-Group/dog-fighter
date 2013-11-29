@@ -29105,7 +29105,7 @@ GameObject:
   - 33: {fileID: 1082232794}
   - 135: {fileID: 1082232793}
   - 23: {fileID: 1082232792}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29140,7 +29140,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1082232791}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5

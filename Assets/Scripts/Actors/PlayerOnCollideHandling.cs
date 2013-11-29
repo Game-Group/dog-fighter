@@ -13,10 +13,16 @@ public class PlayerOnCollideHandling : MonoBehaviour
 				HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage);
 				Destroy(info.collider);
 				break;
-			case "Obstacle":
+
+			case "Mothership":
 				HealthControl.TakeDamage(HealthControl.MaxHealth, HealthControl.MaxShields);
 				break;
-			case "Mothership":
+		}
+
+		Debug.Log("layer is " + LayerMask.LayerToName(info.collider.gameObject.layer));
+		switch(LayerMask.LayerToName(info.collider.gameObject.layer))
+		{
+			case "Obstacles": 
 				HealthControl.TakeDamage(HealthControl.MaxHealth, HealthControl.MaxShields);
 				break;
 		}

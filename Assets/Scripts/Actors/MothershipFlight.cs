@@ -15,9 +15,6 @@ public class MothershipFlight : MonoBehaviour {
 	void Start () {
 		float circumference = radius * Mathf.PI * 2;
 		angularVelocity = (speed / circumference) * 360;
-		Debug.Log("Circumference: " + circumference);
-		Debug.Log("Speed: " + speed);
-		Debug.Log("Angular velocity: " + angularVelocity);
 	}
 	
 	// Update is called once per frame
