@@ -26,7 +26,8 @@ public class DroneBehaviour : MonoBehaviour
     {
         // Radius in which drone follows the player for attacking
         SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
-        c.radius = 10;//followRadius;
+        //followRadius;
+        c.radius = 10;
         c.isTrigger = true;
 
 
@@ -37,9 +38,6 @@ public class DroneBehaviour : MonoBehaviour
         // Add the prevent collision code 
         pc = this.gameObject.AddComponent<PreventCollision>();
         pc.setActor(this.transform);
-
-
-        
     }
 
     void Update()
@@ -62,21 +60,48 @@ public class DroneBehaviour : MonoBehaviour
 
     }
 
-
+    Transform temp;
     // Does the actual moving of the drone
     void MoveDrone()
     {
-        // Recalculates the path to get to the target
-        Vector3 direction =  pc.RecalculatePath(target);
+
+
+
+        Quaternion rot;
+        Vector3 direction;
+
+ 
+
+        // In case we are in shooting range keep looking at the opponent
+
+        if (InShootingRange())
+        {
+            rot = Quaternion.LookRotation(target.position - transform.position);
+            // Apply rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 8);
+            
+            if ((target.position - transform.position).magnitude > 5) 
+            {
+                // Move the drone to the viewed direction
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
+        }
+        else
+        {
+
+            // Recalculates the path to get to the target
+            direction = pc.RecalculatePath(target);
+            // Rotation needed to look at direction
+            rot = Quaternion.LookRotation(direction);
+            // Apply rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime);
+
+            // Move the drone to the viewed direction
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+        }
+
         
-        // Rotation needed to look at direction
-        Quaternion rot = Quaternion.LookRotation(direction);
-
-        // Apply rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime);
-
-        // Move the drone to the viewed direction
-        transform.position += transform.forward * speed * Time.deltaTime;
 
     }
 
@@ -91,6 +116,7 @@ public class DroneBehaviour : MonoBehaviour
     void OnTriggerStay(Collider Object)
     {
 
+        // In case we are in shoot radius, shoot shoot shoot.
         if ((transform.position - Object.transform.position).magnitude < shootRadius)
         {
               if (first)
@@ -101,10 +127,9 @@ public class DroneBehaviour : MonoBehaviour
               foreach (Shooter s in gunScripts)
               {
                   // Do not yet shoot
-                  //s.Shoot();
+                 s.Shoot();
               }
         }
-        // In case in shooting range, shoot shoot shoot
         
     }
 
@@ -122,6 +147,15 @@ public class DroneBehaviour : MonoBehaviour
             prevTarget = target;
             target = Object.transform;
         }
+    }
+
+    bool InShootingRange()
+    {
+        if ((transform.position - target.transform.position).magnitude < shootRadius)
+        {
+            return true;
+        }
+        return false;
     }
 
     // Sets a new target
