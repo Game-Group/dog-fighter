@@ -24,12 +24,10 @@ public class ShipOrientation : MonoBehaviour {
 		}
 		else
 		{
-            // Call ShipControls mouse position calculator
-            float[] p = script.CalculateMousePosition();
+            //Rotate spaceship 
+            float rotationx = script.mousex * mouseFollowSpeed;
+            float rotationy = script.mousey * mouseFollowSpeed;
             
-            // Rotate the rotation
-            float rotationx = p[0] * mouseFollowSpeed;
-            float rotationy = p[1] * mouseFollowSpeed;
             transform.localRotation =
                 Quaternion.AngleAxis(rotationx, Vector3.up) * Quaternion.AngleAxis(rotationy, Vector3.left);
 

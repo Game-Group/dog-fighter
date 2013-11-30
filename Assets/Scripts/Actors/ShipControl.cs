@@ -11,8 +11,15 @@ public class ShipControl : MonoBehaviour {
     public float maxSpeed;
     public float[] speedStages;
     int currentSpeedStage;
+    [HideInInspector]
     public float currentSpeed;
     float incrSpeed;
+
+    // Rotation of space ship
+    [HideInInspector]
+    public float mousex;
+    [HideInInspector]
+    public float mousey;
     
 	public Vector2 MouseRotation { get; private set; }
 
@@ -43,7 +50,6 @@ public class ShipControl : MonoBehaviour {
         }
         // just always override currentspeed to be 0
         currentSpeed = 0;
-        currentSpeed = 0;
         
         // initialise speed staged and fill with speeds
         speedStages = new float[6];
@@ -68,6 +74,10 @@ public class ShipControl : MonoBehaviour {
 		// TODO: Make radius a ratio of screensize?
 		minRadius = 10;
         maxRadius = 400;
+
+
+        mousex = 0;
+        mousey = 0;
 	}
 
 	void Update () 
@@ -93,9 +103,11 @@ public class ShipControl : MonoBehaviour {
 	void HandleMouse()
 	{
         float[] p = CalculateMousePosition();
-        
-        float rotationx = p[0] * mouseFollowSpeed * Time.deltaTime;
-        float rotationy = p[1] * mouseFollowSpeed * Time.deltaTime;
+
+        mousex = p[0];
+        mousey = p[1];
+        float rotationx = mousex * mouseFollowSpeed * Time.deltaTime;
+        float rotationy = mousey * mouseFollowSpeed * Time.deltaTime;
 
 		this.MouseRotation = new Vector2(rotationx, rotationy);
 
@@ -103,6 +115,7 @@ public class ShipControl : MonoBehaviour {
         //transform.Rotate (-rotationy, 0, 0, Space.Self);
 
 		Vector3 currentRotation = this.objectTransform.Rotation;
+        
 		this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
 	}
 
