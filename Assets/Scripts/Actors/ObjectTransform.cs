@@ -42,7 +42,7 @@ public class ObjectTransform : MonoBehaviour {
 		get { return this.rotation; }
 		set 
 		{
-			this.Rotation = value;
+			this.rotation = value;
 		}
 	}
 
