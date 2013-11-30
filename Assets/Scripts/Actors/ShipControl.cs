@@ -102,7 +102,8 @@ public class ShipControl : MonoBehaviour {
         //transform.Rotate(0, rotationx, 0, Space.Self);
         //transform.Rotate (-rotationy, 0, 0, Space.Self);
 
-		this.objectTransform.Rotation = new Vector3(rotationx, rotationy);
+		Vector3 currentRotation = this.objectTransform.Rotation;
+		this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
 	}
 
     // Returns the position of the mouse, bounded my minRadius and maxRadius
