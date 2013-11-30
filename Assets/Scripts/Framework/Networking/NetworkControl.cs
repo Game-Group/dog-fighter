@@ -1,14 +1,35 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Net;
+using System;
 
 public class NetworkControl : MonoBehaviour 
 {
+	public const string RPCChannelObject = "RPCChannel";
+
 	public int ServerPort = 6500;
 	public string ServerIP = "127.0.0.1";
 
+	public int SyncRate
+	{
+		get { return this.syncRate; }
+		set
+		{
+			if (value <= 0)
+				throw new UnityException("Invalid value for sync rate. Must be larger than zero.");
+			else
+			{
+				this.syncRate = value;
+				this.timeForOneSync = 1 / this.syncRate;
+			}
+		}
+	}
+	public event Action SyncTimeEvent;
+
 	public string LocalIP { get; set; }
 	public NetworkViewID LocalViewID { get; set; }
+
+	//public IList<NetworkView> NetworkViews { get; private set; }
 
 	public GameObject ServerControl;
 	public GameObject ClientControl;
@@ -25,12 +46,19 @@ public class NetworkControl : MonoBehaviour
 	// Use this for initialization
 	public void Start () 
 	{
+		this.SyncRate = 1;
+
 		// Find the local IP Address.
 		IPAddress localAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
 		byte[] bytes = localAddress.GetAddressBytes();
 
 		this.LocalIP = 
 			bytes[0].ToString() + "." + bytes[1].ToString() + "." + bytes[2].ToString() + "." + bytes[3].ToString();
+
+//		this.NetworkViews = new List<NetworkView>(10);
+//
+//		this.AddNewNetworkView(Network.AllocateViewID());
+//		this.AddNewNetworkView(Network.AllocateViewID());
 
 		this.Players = new Dictionary<NetworkViewID, Player>(10);
 	}
@@ -56,41 +84,34 @@ public class NetworkControl : MonoBehaviour
 		}
 	}
 
-//	private void OnServerInitialized()
-//	{
-//		this.createPlayer();
-//	}
-//
-//	private void OnConnectedToServer()
-//	{
-//		this.createPlayer();
-//	}
-//
-//	private void OnPlayerConnected(NetworkPlayer player)
-//	{
-//		//this.Players.Add(player);
-//		//Debug.Log("New player connected.");
-//	}
-//
-//	private void OnPlayerDisconnected(NetworkPlayer player)
-//	{
-//		//this.Players.Remove(player);
-//
-//		//Network.RemoveRPCs(player);
-//		//Network.DestroyPlayerObjects(player);
-//	}
-//
-//	private void OnDisconnectedFromServer(NetworkDisconnection info)
-//	{
-////		Network.RemoveRPCs(Network.player);
-////		Network.DestroyPlayerObjects(Network.player);
-////
-////		Application.LoadLevel(Application.loadedLevel);
-//	}
-//
-//	private void createPlayer()
-//	{
-//		//Network.Instantiate(this.PlayerPrefab, new Vector3(0, 10, 0), Quaternion.identity, 0);
-//	}	
+	public void LateUpdate()
+	{
+		if (Network.peerType == NetworkPeerType.Disconnected)
+			return;
+
+//		Debug.Log("Late update!");
+
+		this.elapsedTime += Time.deltaTime;
+
+		if (this.elapsedTime > this.timeForOneSync)
+		{
+			if (this.SyncTimeEvent != null)
+				this.SyncTimeEvent.Invoke();
+
+			this.elapsedTime = 0;
+
+//			Debug.Log("Sync moment!");
+
+			// Make sure the elapsed time is lower than the timeForOneSync.
+//			while (this.elapsedTime > this.timeForOneSync)
+//				this.elapsedTime -= this.timeForOneSync;
+		}
+
+//		Debug.Log("Late update exit.");
+	}
+
+	private float elapsedTime;
+	private int syncRate;
+	private float timeForOneSync;
 
 }

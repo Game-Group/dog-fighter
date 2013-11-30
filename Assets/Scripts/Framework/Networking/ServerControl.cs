@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ServerControl : MonoBehaviour 
 {
+	public Object RPCChannelPrefab;
+	public GameObject RPCChannel;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -24,16 +27,20 @@ public class ServerControl : MonoBehaviour
 	private NetworkControl networkControl;
 	private PlayerObjectTable playerObjectTable;
 
+	private void OnServerInitialized()
+	{
+		this.RPCChannel =
+			(GameObject)Network.Instantiate(this.RPCChannelPrefab, Vector3.zero, Quaternion.identity, 0);
+	}
+
 	private void OnPlayerConnected(NetworkPlayer networkPlayer)
 	{
-		Debug.Log("Someone joined!");
+		Debug.Log("A new player has joined.");
 
 		// Generate a viewID for the new player.
 		NetworkViewID viewID = Network.AllocateViewID();
 
-		// Notice everyone that the new player has joined and create that player's ship.
-		// Buffer the RPC calls.
-		this.networkControl.networkView.RPC("NewPlayerJoined", RPCMode.AllBuffered, networkPlayer, viewID);
-		this.networkControl.networkView.RPC("CreatePlayerShip", RPCMode.AllBuffered, networkPlayer, viewID);
+		// Notice everyone that the new player has joined.
+		PlayerRPC.NewPlayerJoined(networkPlayer, viewID);
 	}
 }

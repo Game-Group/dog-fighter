@@ -21,6 +21,11 @@ public class ClientControl : MonoBehaviour {
 	private NetworkControl networkControl;
 	private PlayerObjectTable playerObjectTable;
 
+	private void OnConnectedToServer()
+	{
+		Debug.Log("Connected to server.");
+	}
+
 	private void OnFailedToConnect(NetworkConnectionError error) 
 	{
 		GameObject.Destroy(this);

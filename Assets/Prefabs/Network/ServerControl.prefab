@@ -38,6 +38,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b02059953d5f284095fe1ff28ca398e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RPCChannelPrefab: {fileID: 100000, guid: 6a3a1b1a116e6084ca6cb612310a4805, type: 2}
+  RPCChannel: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -265,9 +265,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1442909366}
   - 114: {fileID: 1442909368}
-  - 114: {fileID: 1442909370}
-  - 114: {fileID: 1442909369}
-  - 148: {fileID: 1442909367}
+  - 114: {fileID: 1442909367}
   m_Layer: 0
   m_Name: NetworkControl
   m_TagString: Untagged
@@ -286,18 +284,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!148 &1442909367
-NetworkView:
+--- !u!114 &1442909367
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1442909365}
   m_Enabled: 1
-  m_StateSynchronization: 0
-  m_Observed: {fileID: 0}
-  m_ViewID:
-    m_ID: 1
-    m_Type: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684fe3d59fd7d9a43ae02cb903bd1fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1442909368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,29 +310,6 @@ MonoBehaviour:
   ServerIP: 127.0.0.1
   ServerControl: {fileID: 100000, guid: 61b0b1b169fd2bd4a978e428a037c433, type: 2}
   ClientControl: {fileID: 100000, guid: c329e8da29a4c914d95f3f7760193511, type: 2}
---- !u!114 &1442909369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1442909365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29df02d8f5723446bc43e1c692b8fed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 100010, guid: 0c2d768e90809334293b686012effee1, type: 2}
---- !u!114 &1442909370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1442909365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e254db01f4c463747ba81c7bcf696b6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1777529192
 GameObject:
   m_ObjectHideFlags: 0

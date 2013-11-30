@@ -1,36 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerRPC : MonoBehaviour {
+public class PlayerRPC : RPCHolder {
 
-	// Use this for initialization
-	void Start () {
+	public static void NewPlayerJoined(NetworkPlayer networkPlayer, NetworkViewID id)
+	{
+		Debug.Log("Sending new player joined.");
 
-		this.table = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
-		this.networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
-	
+		channel.networkView.RPC("NewPlayerJoinedRPC", channel.RPCMode, networkPlayer, id);
 	}
 
 	[RPC]
-	public void NewPlayerJoined(NetworkPlayer networkPlayer, NetworkViewID id, NetworkMessageInfo info)
+	private void NewPlayerJoinedRPC(NetworkPlayer networkPlayer, NetworkViewID id, NetworkMessageInfo info)
 	{
 		Debug.Log("New player joined RPC received!");
+		
+		Player player = new Player(id, networkPlayer);
+		base.NetworkControl.Players.Add(id, player);
+		base.ObjectTables.AddPlayerTable(player);
 
-		if (Network.isClient)
+		if (Network.isServer)
 		{
-			if (networkPlayer.ipAddress == this.networkControl.LocalIP)
+			PlayerShipRPC.CreatePlayerShip(player, channel.GUIDGenerator.GenerateID()); 
+		}
+		else if (Network.isClient)
+		{
+			if (networkPlayer.ipAddress == base.NetworkControl.LocalIP)
 			{
+				Debug.Log ("It's me!");
 				// Set own ID assigned by server.
 //				this.networkControl.networkView.viewID = id;
-				this.networkControl.LocalViewID = id;
+				base.NetworkControl.LocalViewID = id;
 			}
 
-			Player player = new Player(id, networkPlayer);
-			this.networkControl.Players.Add(id, player);
 		}
 	}
 
-	private PlayerObjectTable table;
-	private NetworkControl networkControl;
+
+
+	private static PlayerRPC channel
+	{
+		get
+		{
+			if (channel_ == null)
+				channel_ = GameObject.Find(NetworkControl.RPCChannelObject).GetComponent<PlayerRPC>();
+			return channel_;
+		}
+	}
 	
+	private static PlayerRPC channel_;
 }

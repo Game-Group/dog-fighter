@@ -14,6 +14,9 @@ public class ShipControl : MonoBehaviour {
     public float currentSpeed;
     float incrSpeed;
     
+	public Vector2 MouseRotation { get; private set; }
+
+	private ObjectTransform objectTransform;
 
     float rollSpeed;
     float mouseFollowSpeed;
@@ -32,7 +35,7 @@ public class ShipControl : MonoBehaviour {
 
 	void Start () 
     {
-
+		this.objectTransform = this.GetComponent<ObjectTransform>();
         // Init speeds in case no manual initailisation
         if (maxSpeed == 0)
         {
@@ -89,14 +92,17 @@ public class ShipControl : MonoBehaviour {
 	// Rotates the spacecraft depending on the position of the mouse.
 	void HandleMouse()
 	{
-
         float[] p = CalculateMousePosition();
         
         float rotationx = p[0] * mouseFollowSpeed * Time.deltaTime;
         float rotationy = p[1] * mouseFollowSpeed * Time.deltaTime;
 
-        transform.Rotate(0, rotationx, 0, Space.Self);
-        transform.Rotate (-rotationy, 0, 0, Space.Self);
+		this.MouseRotation = new Vector2(rotationx, rotationy);
+
+        //transform.Rotate(0, rotationx, 0, Space.Self);
+        //transform.Rotate (-rotationy, 0, 0, Space.Self);
+
+		this.objectTransform.Rotation = new Vector3(rotationx, rotationy);
 	}
 
     // Returns the position of the mouse, bounded my minRadius and maxRadius
@@ -183,7 +189,9 @@ public class ShipControl : MonoBehaviour {
             }
         }
 
-        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+		this.objectTransform.TranslationDirection = Vector3.forward;
+		this.objectTransform.TranslationSpeed = this.currentSpeed;
+        //transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
 
         // Make the spaceship move forward
