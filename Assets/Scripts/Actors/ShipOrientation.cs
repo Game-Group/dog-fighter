@@ -31,14 +31,6 @@ public class ShipOrientation : MonoBehaviour {
             transform.localRotation =
                 Quaternion.AngleAxis(rotationx, Vector3.up) * Quaternion.AngleAxis(rotationy, Vector3.left);
 
-            bool rollLeft = transform.parent.GetComponent<ShipControl>().rollLeft;
-
-
-            if (rollLeft)
-            {
-
-            }
-            
 		}
 	}
 }
