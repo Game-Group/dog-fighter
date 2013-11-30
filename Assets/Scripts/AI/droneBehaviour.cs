@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class droneBehaviour : MonoBehaviour
+public class DroneBehaviour : MonoBehaviour
 {
     public Transform target;
     private Transform prevTarget;
@@ -17,6 +17,7 @@ public class droneBehaviour : MonoBehaviour
     Behaviours currentState;
     Behaviours prevState;
 
+    PreventCollision pc;
 
     // Ugly bool to see if we already have set the Shooter array
     bool first;
@@ -32,6 +33,12 @@ public class droneBehaviour : MonoBehaviour
         // initialize gunScripts array
         gunScripts = new Shooter[gun.Length];
         first = true;
+        
+        // Add the prevent collision code 
+        pc = this.gameObject.AddComponent<PreventCollision>();
+        pc.setActor(this.transform);
+
+
         
     }
 
@@ -60,7 +67,7 @@ public class droneBehaviour : MonoBehaviour
     void MoveDrone()
     {
         // Recalculates the path to get to the target
-        Vector3 direction = RecalculatePath();
+        Vector3 direction =  pc.RecalculatePath(target);
         
         // Rotation needed to look at direction
         Quaternion rot = Quaternion.LookRotation(direction);
@@ -124,111 +131,6 @@ public class droneBehaviour : MonoBehaviour
         target = newTarget;
     }
 
-    // Prevents collision by finding new heading direction
-    // FIXME: This should probably have its own class?
-    Vector3 RecalculatePath()
-    {
-        // Direction to target
-        Vector3 dir = (target.position - transform.position).normalized;
-
-        // Position of drone
-        Vector3 origin = transform.position;
-
-        // direction drone is flying
-        Vector3 direction = transform.forward;
-
-        RaycastHit hitInfo;
-
-        // TODO Finetune loength of ray
-        float distance = 15;
-
-
-        // Construct a temporary vector for different orientation
-        GameObject temp = new GameObject();
-        Vector3 t = origin;
-
-        temp.transform.position = t;
-        temp.transform.localEulerAngles = transform.localEulerAngles;
-
-
-        // Shoot 3 different rays
-        // One from the center of the drone to the fron
-        // two from the sides
-        // In case the ray hits a rigid body, change the course of the drone
-        if (Physics.Raycast(origin, direction, out hitInfo, distance))
-        {
-            if (hitInfo.transform != transform)
-            {
-
-                Debug.DrawLine(origin, hitInfo.point, Color.red);
-                Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
-                dir += hitInfo.normal * 20;
-            }
-        }
-        // Shoot ray to the right
-        temp.transform.localEulerAngles = new Vector3(0, 45 + transform.localEulerAngles.y, 0);
-
-        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
-        if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
-        {
-            if (hitInfo.transform != transform)
-            {
-
-                Debug.DrawLine(origin, hitInfo.point, Color.red);
-                Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
-                dir += hitInfo.normal * 20;
-            }
-        }
-
-        // Shoot ray to the left
-        temp.transform.localEulerAngles = new Vector3(0, -45 + transform.localEulerAngles.y, 0);
-
-        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
-        if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
-        {
-
-            if (hitInfo.transform != transform)
-            {
-
-                Debug.DrawLine(origin, hitInfo.point, Color.red);
-                Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
-                dir += hitInfo.normal * 20;
-            }
-        }
-
-        // Shoot ray up
-        temp.transform.localEulerAngles = new Vector3(40 + transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
-
-        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
-        if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
-        {
-            if (hitInfo.transform != transform)
-            {
-
-                Debug.DrawLine(origin, hitInfo.point, Color.red);
-                Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
-                dir += hitInfo.normal * 20;
-            }
-        }
-
-        // Shoot ray down
-        temp.transform.localEulerAngles = new Vector3(-40 + transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
-
-        Debug.DrawLine(origin, temp.transform.forward + origin, Color.green);
-        if (Physics.Raycast(origin, temp.transform.forward, out hitInfo, distance))
-        {
-
-            if (hitInfo.transform != transform)
-            {
-
-                Debug.DrawLine(origin, hitInfo.point, Color.red);
-                Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
-                dir += hitInfo.normal * 20;
-            }
-        }
-        Destroy(temp);
-        // Return final new direction
-        return dir;
-    }
+    
 
 }

@@ -4,7 +4,7 @@ using System.Collections;
 // TODO: make number of guns adaptive?
 // TODO: set collision radius here?
 
-public class turretBehaviour : MonoBehaviour {
+public class TurretBehaviour : MonoBehaviour {
     public Transform top;
     public Transform muzzleLeft;
     public Transform muzzleRight;
