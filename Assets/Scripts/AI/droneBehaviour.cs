@@ -13,7 +13,7 @@ public class DroneBehaviour : MonoBehaviour
     Shooter gunL;
     private Shooter[] gunScripts;
     
-    enum Behaviours{Patrol, Chase, Defend}
+    enum Behaviours{Patrol, Chase, Defend, GoTo}
     Behaviours currentState;
     Behaviours prevState;
 
@@ -30,6 +30,7 @@ public class DroneBehaviour : MonoBehaviour
         c.radius = 10;
         c.isTrigger = true;
 
+        currentState = Behaviours.GoTo;
 
         // initialize gunScripts array
         gunScripts = new Shooter[gun.Length];
@@ -64,26 +65,26 @@ public class DroneBehaviour : MonoBehaviour
     // Does the actual moving of the drone
     void MoveDrone()
     {
-
-
-
         Quaternion rot;
         Vector3 direction;
 
- 
-
         // In case we are in shooting range keep looking at the opponent
 
-        if (InShootingRange())
+        if (currentState == Behaviours.Chase && InShootingRange())
         {
             rot = Quaternion.LookRotation(target.position - transform.position);
             // Apply rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 8);
-            
-            if ((target.position - transform.position).magnitude > 5) 
+
+            if ((target.position - transform.position).magnitude > 5)
             {
                 // Move the drone to the viewed direction
                 transform.position += transform.forward * speed * Time.deltaTime;
+            }
+            // Do we want the bot to rotate or just hang in the air
+            else
+            {
+                transform.RotateAround(target.position, target.up, 30 * Time.deltaTime);
             }
         }
         else
@@ -101,51 +102,61 @@ public class DroneBehaviour : MonoBehaviour
 
         }
 
-        
-
     }
 
-    // Go back to original target
+    // Go back to original target and state
     void OnTriggerLeave(Collider Object)
     {
 
+        Debug.Log("return to previous");
         target = prevTarget;
+        currentState = prevState;
     }
-
 
     void OnTriggerStay(Collider Object)
     {
-
-        // In case we are in shoot radius, shoot shoot shoot.
-        if ((transform.position - Object.transform.position).magnitude < shootRadius)
-        {
-              if (first)
-              { 
-                  GetGunScript();
-                  first = false;
-              }
-              foreach (Shooter s in gunScripts)
-              {
-                  // Do not yet shoot
-                 s.Shoot();
-              }
-        }
         
+        // Check to make sure if the object getting this close is the object we 
+        // are targeting
+        if (Object.transform == target.transform)
+        {
+            // In case we are in shoot radius, shoot shoot shoot.
+            if ((transform.position - Object.transform.position).magnitude < shootRadius)
+            {
+                if (first)
+                {
+                    GetGunScript();
+                    first = false;
+                }
+
+                foreach (Shooter s in gunScripts)
+                {
+                    // Do not yet shoot
+                    s.Shoot();
+                }
+            }
+        }
     }
 
-    // 
     void OnTriggerEnter(Collider Object)
     {
-
         //  TODO change in some important condition like:
         //  - enough health
         //  - not state defending
         //  - is this object enemy team
         //  - some other?
-        if(Object.tag == "Player")
+        Debug.Log(Object.gameObject.tag);
+        if( (Object.gameObject.tag == "Player" || Object.gameObject.tag == "Npc") &&
+              (Object.gameObject.layer != this.gameObject.layer))
         {
+            Debug.Log("Go after this");
+            // Only chase if this object is closer than current target
+
             prevTarget = target;
             target = Object.transform;
+
+            prevState = currentState;
+            currentState = Behaviours.Chase;
         }
     }
 
@@ -164,7 +175,5 @@ public class DroneBehaviour : MonoBehaviour
         prevTarget = target;
         target = newTarget;
     }
-
-    
 
 }
