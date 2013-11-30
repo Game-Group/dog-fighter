@@ -108,7 +108,6 @@ public class DroneBehaviour : MonoBehaviour
     void OnTriggerLeave(Collider Object)
     {
 
-        Debug.Log("return to previous");
         target = prevTarget;
         currentState = prevState;
     }
@@ -145,11 +144,9 @@ public class DroneBehaviour : MonoBehaviour
         //  - not state defending
         //  - is this object enemy team
         //  - some other?
-        Debug.Log(Object.gameObject.tag);
         if( (Object.gameObject.tag == "Player" || Object.gameObject.tag == "Npc") &&
               (Object.gameObject.layer != this.gameObject.layer))
         {
-            Debug.Log("Go after this");
             // Only chase if this object is closer than current target
 
             prevTarget = target;
