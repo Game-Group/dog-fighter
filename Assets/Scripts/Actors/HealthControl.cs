@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthControl : MonoBehaviour 
 {
-	public Respawner RespawnPoint;
+	public PlayerRespawner RespawnPoint;
 	public float RespawnDelay;
 
 	public GameObject ExplosionGraphic;
@@ -21,7 +21,13 @@ public class HealthControl : MonoBehaviour
 	{
 		health = MaxHealth;
 		shieldStrength = MaxShields;
-		RespawnPoint = FindObjectOfType<Respawner>();
+		PlayerRespawner[] respawnpoints = FindObjectsOfType<PlayerRespawner>();
+		foreach (PlayerRespawner spawner in respawnpoints)
+			if (spawner.gameObject.layer == gameObject.layer)
+			{
+				RespawnPoint = spawner;
+				break;
+			}
 	}
 
 	public void OnEnable()
@@ -33,6 +39,9 @@ public class HealthControl : MonoBehaviour
 	void Update()
 	{
 		Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
+
+		if (Input.GetKeyDown(KeyCode.F7))
+			TakeDamage(MaxHealth, MaxShields);
 	}
 
 	/// <summary>
@@ -73,7 +82,7 @@ public class HealthControl : MonoBehaviour
 		GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
 		AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
 
-		RespawnPoint.DisableAndRespawn(gameObject, RespawnDelay);
+		RespawnPoint.DisableAndWaitForSpawn(RespawnDelay);
 	}
 
 	public void Heal(float hullHealing, float shieldHealing)
