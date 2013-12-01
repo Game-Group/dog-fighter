@@ -11,9 +11,9 @@ GameObject:
   - 33: {fileID: 3300000}
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: TemplateAstroid
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,9 +173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 800
   maxOffset: 300
-  minAstroidSize: 6
-  maxAstroidSize: 35
-  templateAstroid: {fileID: 100000}
+  minAsteroidSize: 2
+  maxAsteroidSize: 8
+  templateAsteroid: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

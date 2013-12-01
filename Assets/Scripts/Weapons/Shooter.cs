@@ -14,11 +14,21 @@ public class Shooter : MonoBehaviour
 	public float ProjectileSpeed { get; private set; }
 
 	private float reloadTimer;
+	private int projectileLayerMask; 
+	private string projectileTag;
 
 	void Start()
 	{
 		reloadTimer = 0;
 		ProjectileSpeed = Projectile.GetComponent<ProjectileController>().FlyControl.DesiredSpeed;
+		DetermineProjectileLayer();
+	}
+
+	private void DetermineProjectileLayer()
+	{
+		string teamName = LayerMask.LayerToName(gameObject.layer).Substring(0, 5);
+		projectileTag = teamName + "Projectile";
+		projectileLayerMask = LayerMask.NameToLayer(projectileTag);
 	}
 
 	public void Shoot()
@@ -56,7 +66,8 @@ public class Shooter : MonoBehaviour
 		// Transform the new projectile to align it properly.
 		shot.transform.Rotate(shotPosition.eulerAngles, Space.World);
 		shot.transform.position = shotPosition.position;
-		shot.gameObject.layer = gameObject.layer;
+		shot.gameObject.layer = projectileLayerMask;
+		shot.gameObject.tag = projectileTag;
 
 		// Fire it away by giving it a velocity.
 		ProjectileController pController = shot.GetComponent<ProjectileController>();

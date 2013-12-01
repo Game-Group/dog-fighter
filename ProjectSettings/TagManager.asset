@@ -3,9 +3,12 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Projectile
-  - Npc
+  - Team1Projectile
+  - Team2Projectile
   - Mothership
+  - Npc
+  - Obstacle
+  - Boundary
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -15,15 +18,15 @@ TagManager:
   Builtin Layer 5: 
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: Team1
-  User Layer 9: Team2
-  User Layer 10: Team0
-  User Layer 11: Obstacles
-  User Layer 12: Scenery
-  User Layer 13: Boundary
-  User Layer 14: 
-  User Layer 15: 
-  User Layer 16: 
+  User Layer 8: Team1Actor
+  User Layer 9: Team1Mothership
+  User Layer 10: Team1Projectile
+  User Layer 11: Team2Actor
+  User Layer 12: Team2Mothership
+  User Layer 13: Team2Projectile
+  User Layer 14: Obstacles
+  User Layer 15: Scenery
+  User Layer 16: Boundary
   User Layer 17: 
   User Layer 18: 
   User Layer 19: 

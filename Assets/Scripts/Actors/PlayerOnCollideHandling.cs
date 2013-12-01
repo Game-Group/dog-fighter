@@ -9,22 +9,28 @@ public class PlayerOnCollideHandling : MonoBehaviour
 	{
 		switch(info.collider.gameObject.tag)
 		{
-			case "Projectile":
-				HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage);
-				Destroy(info.collider);
+			case "Team1Projectile":
+				HandleProjectileCollision(info);
 				break;
+			case "Team2Projectile":
+				HandleProjectileCollision(info);
+				break;
+
 
 			case "Mothership":
 				HealthControl.TakeDamage(HealthControl.MaxHealth, HealthControl.MaxShields);
 				break;
-		}
 
-		Debug.Log("layer is " + LayerMask.LayerToName(info.collider.gameObject.layer));
-		switch(LayerMask.LayerToName(info.collider.gameObject.layer))
-		{
-			case "Obstacles": 
+			case "Obstacle": 
 				HealthControl.TakeDamage(HealthControl.MaxHealth, HealthControl.MaxShields);
 				break;
 		}
+	}
+
+	private void HandleProjectileCollision(Collision info)
+	{
+		HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage);
+
+		Destroy(info.gameObject);
 	}
 }
