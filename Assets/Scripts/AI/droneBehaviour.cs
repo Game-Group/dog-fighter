@@ -142,19 +142,57 @@ public class DroneBehaviour : MonoBehaviour
         //  TODO change in some important condition like:
         //  - enough health
         //  - not state defending
-        //  - is this object enemy team
         //  - some other?
-        if( (Object.gameObject.tag == "Player" || Object.gameObject.tag == "Npc") &&
-              (Object.gameObject.layer != this.gameObject.layer))
+
+        if (isOpponent(Object))
         {
-            // Only chase if this object is closer than current target
+                // TODO Only chase if this object is closer than current target
+            Debug.Log("Charge");
+                
+                prevTarget = target;
+                target = Object.transform;
 
-            prevTarget = target;
-            target = Object.transform;
+                prevState = currentState;
+                currentState = Behaviours.Chase;
 
-            prevState = currentState;
-            currentState = Behaviours.Chase;
+            
         }
+
+    }
+
+
+    bool isOpponent(Collider Object)
+    {
+
+        // Drone attacks players, Npcs, and mothership of the opposing team
+        if ((Object.gameObject.tag == "Player" || Object.gameObject.tag == "Npc" || Object.gameObject.tag == "Mothership") &&
+            (checkTeam(Object.gameObject) != checkTeam(this.gameObject)))
+        {
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    // Returns the team of a game object
+    int checkTeam(GameObject o)
+    {
+        string l = o.layer.ToString();
+        switch (l)
+        {
+            case "8":
+            case "9":
+            case "10":
+                return 1;
+            case "11":
+            case "12":
+            case "13":
+                return 2;
+        }
+        return 0;
+
     }
 
     bool InShootingRange()
