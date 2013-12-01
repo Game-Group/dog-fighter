@@ -17,8 +17,12 @@ public class PreventCollision : MonoBehaviour {
 
 
         //int layerMask = 1 << 8;
-        int layerMask = 1 << 9;
-        layerMask |= (1 << 8);
+        int layerMask = 1 << 8;
+        layerMask |= (1 << 9);
+        layerMask |= (1 << 10);
+        layerMask |= (1 << 11);
+        layerMask |= (1 << 12);
+        layerMask |= (1 << 13);
         layerMask = ~layerMask;
         if (Physics.Raycast(origin, direction, out hitInfo, distance, layerMask))
         {

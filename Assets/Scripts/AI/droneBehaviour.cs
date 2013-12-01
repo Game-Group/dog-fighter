@@ -147,7 +147,6 @@ public class DroneBehaviour : MonoBehaviour
         if (isOpponent(Object))
         {
                 // TODO Only chase if this object is closer than current target
-            Debug.Log("Charge");
                 
                 prevTarget = target;
                 target = Object.transform;
