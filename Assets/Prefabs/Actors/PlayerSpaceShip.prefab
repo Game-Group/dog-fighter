@@ -579,6 +579,8 @@ MonoBehaviour:
   maxSpeed: 0
   speedStages: []
   currentSpeed: 0
+  mousex: 0
+  mousey: 0
   rollLeft: 0
   rollRight: 0
   maxRadius: 0
@@ -636,7 +638,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aee91f160057da4a8587fc6f49b4b46, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c3dfd466987d146b984402a33b55fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11400012

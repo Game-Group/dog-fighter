@@ -23,7 +23,7 @@ public class ShipControl : MonoBehaviour {
     
 	public Vector2 MouseRotation { get; private set; }
 
-	private ObjectTransform objectTransform;
+	private ObjectTransformer objectTransform;
 
     float rollSpeed;
     float mouseFollowSpeed;
@@ -42,7 +42,7 @@ public class ShipControl : MonoBehaviour {
 
 	void Start () 
     {
-		this.objectTransform = this.GetComponent<ObjectTransform>();
+		this.objectTransform = this.GetComponent<ObjectTransformer>();
         // Init speeds in case no manual initailisation
         if (maxSpeed == 0)
         {
@@ -229,14 +229,24 @@ public class ShipControl : MonoBehaviour {
             backward = false;
         }
 
+		Vector3 currentRotation = this.objectTransform.Rotation;
+		
+
 		if(rollLeft)
 		{
-			transform.Rotate (0,0, rollSpeed * Time.deltaTime, Space.Self);
+			//transform.Rotate (0,0, rollSpeed * Time.deltaTime, Space.Self);
+			currentRotation.z = rollSpeed * Time.deltaTime;
 		}
-		if(rollRight)
+		else if(rollRight)
 		{
-			transform.Rotate (0,0, -rollSpeed * Time.deltaTime, Space.Self);
+			//transform.Rotate (0,0, -rollSpeed * Time.deltaTime, Space.Self);
+			currentRotation.z = -rollSpeed * Time.deltaTime;			
 		}
+		else
+			currentRotation.z = 0;
+
+		this.objectTransform.Rotation = currentRotation;
+		
 	
 	}
 }

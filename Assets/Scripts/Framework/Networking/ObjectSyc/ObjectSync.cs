@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public abstract class ObjectSync : MonoBehaviour 
+public abstract class ObjectSync : NetworkObject 
 {
 	public Player Owner { get; private set; }
 	public int GlobalID { get; private set; }
@@ -22,38 +22,32 @@ public abstract class ObjectSync : MonoBehaviour
 
 	public virtual void NetworkDestroy()
 	{
-		this.ObjectTable.RemovePlayerObject(this.Owner, this.GlobalID);
+		base.ObjectTables.RemovePlayerObject(this.Owner, this.GlobalID);
 	}
 
-	public void Dispose()
+	public override void Dispose()
 	{
-		this.NetworkControl.SyncTimeEvent -= this.SyncFunction;
-		this.NetworkControl = null;
+		base.NetworkControl.SyncTimeEvent -= this.SyncFunction;
 
 		if (this.IsIDAssigned)
 		{
 			this.Owner = null;
 
 			if (Network.isServer)
-			{
-				GUIDGenerator g = this.NetworkControl.GetComponent<GUIDGenerator>();
-				g.RecycleID(this.GlobalID);
-			}
+				base.GUIDGenerator.RecycleID(this.GlobalID);
 		}
-	}
 
-	protected NetworkControl NetworkControl { get; private set; }
-	protected GameObject RPCChannel { get; private set; }
-	protected PlayerObjectTable ObjectTable { get; private set; }
+		base.Dispose();
+	}
 
 	protected abstract void SyncFunction();
 
 	// Use this for initialization
-	protected virtual void Start () {
-		this.NetworkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
-		this.NetworkControl.SyncTimeEvent += this.SyncFunction;
-		this.RPCChannel = (GameObject)GameObject.Find("RPCChannel");
-		this.ObjectTable = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
+	protected override void Start () {
+
+		base.Start();
+
+		base.NetworkControl.SyncTimeEvent += this.SyncFunction;
 	}
 	
 	// Update is called once per frame

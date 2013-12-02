@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 public class PlayerObjectTable : MonoBehaviour
 {
+	public IDictionary<Player, GameObject> PlayerShips { get; private set; }
+
 	public PlayerObjectTable()
 	{
+		this.PlayerShips = new Dictionary<Player,  GameObject>(10);
 		this.objectTables = new Dictionary<NetworkViewID, ObjectTable>(10);
 	}
 
@@ -53,6 +56,8 @@ public class PlayerObjectTable : MonoBehaviour
 		else
 			throw new UnityException("Table for given player does not exist.");
 	}
+
+
 
 	private IDictionary<NetworkViewID, ObjectTable> objectTables;
 }

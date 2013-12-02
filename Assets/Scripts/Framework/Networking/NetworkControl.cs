@@ -20,7 +20,7 @@ public class NetworkControl : MonoBehaviour
 			else
 			{
 				this.syncRate = value;
-				this.timeForOneSync = 1 / this.syncRate;
+				this.timeForOneSync = 1 / (float)this.syncRate;
 			}
 		}
 	}
@@ -46,7 +46,7 @@ public class NetworkControl : MonoBehaviour
 	// Use this for initialization
 	public void Start () 
 	{
-		this.SyncRate = 1;
+		this.SyncRate = 15;
 
 		// Find the local IP Address.
 		IPAddress localAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];

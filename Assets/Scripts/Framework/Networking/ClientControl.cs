@@ -1,25 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ClientControl : MonoBehaviour {
+public class ClientControl : NetworkObject {
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+
+		base.Start();
+
 		Debug.Log("Connecting");
 
-		this.networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
-		this.playerObjectTable = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
-
-		Network.Connect(this.networkControl.ServerIP, this.networkControl.ServerPort);
+		Network.Connect(base.NetworkControl.ServerIP, base.NetworkControl.ServerPort);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
-	private NetworkControl networkControl;
-	private PlayerObjectTable playerObjectTable;
 
 	private void OnConnectedToServer()
 	{

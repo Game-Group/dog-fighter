@@ -10,6 +10,13 @@ public class PlayerRPC : RPCHolder {
 		channel.networkView.RPC("NewPlayerJoinedRPC", channel.RPCMode, networkPlayer, id);
 	}
 
+	public static void SingleNewPlayerJoined(NetworkPlayer target, NetworkPlayer networkPlayer, NetworkViewID id)
+	{
+		Debug.Log("Sending new player joined.");
+		
+		channel.networkView.RPC("NewPlayerJoinedRPC", target, networkPlayer, id);
+	}
+
 	[RPC]
 	private void NewPlayerJoinedRPC(NetworkPlayer networkPlayer, NetworkViewID id, NetworkMessageInfo info)
 	{
@@ -21,13 +28,13 @@ public class PlayerRPC : RPCHolder {
 
 		if (Network.isServer)
 		{
-			PlayerShipRPC.CreatePlayerShip(player, channel.GUIDGenerator.GenerateID()); 
+//			PlayerShipRPC.CreatePlayerShip(player, channel.GUIDGenerator.GenerateID()); 
 		}
 		else if (Network.isClient)
 		{
 			if (networkPlayer.ipAddress == base.NetworkControl.LocalIP)
 			{
-				Debug.Log ("It's me!");
+//				Debug.Log ("It's me!");
 				// Set own ID assigned by server.
 //				this.networkControl.networkView.viewID = id;
 				base.NetworkControl.LocalViewID = id;
@@ -35,8 +42,6 @@ public class PlayerRPC : RPCHolder {
 
 		}
 	}
-
-
 
 	private static PlayerRPC channel
 	{

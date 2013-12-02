@@ -1,31 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ServerControl : MonoBehaviour 
+public class ServerControl : NetworkObject 
 {
 	public Object RPCChannelPrefab;
 	public GameObject RPCChannel;
 
 	// Use this for initialization
-	void Start () 
+	protected override void Start ()
 	{
-		this.networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
-		this.playerObjectTable = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
+		base.Start();
 
-//		Player player = new Player(this.networkControl.LocalViewID, Network.player);
-//		this.networkControl.Players.Add(this.networkControl.LocalViewID, player);
-//		this.playerObjectTable.AddPlayerTable(player);
+		Player player = new Player(base.NetworkControl.LocalViewID, Network.player);
+		base.NetworkControl.Players.Add(base.NetworkControl.LocalViewID, player);
+		base.ObjectTables.AddPlayerTable(player);
 
-		Network.InitializeServer(10, this.networkControl.ServerPort, false);
+		Network.InitializeServer(10, base.NetworkControl.ServerPort, false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
-	private NetworkControl networkControl;
-	private PlayerObjectTable playerObjectTable;
 
 	private void OnServerInitialized()
 	{
@@ -36,11 +32,25 @@ public class ServerControl : MonoBehaviour
 	private void OnPlayerConnected(NetworkPlayer networkPlayer)
 	{
 		Debug.Log("A new player has joined.");
+		Debug.Log("Current number of players: " + base.Players.Count);
+
+		foreach (Player p in base.Players.Values)
+		{
+			PlayerRPC.SingleNewPlayerJoined(networkPlayer, p.NetworkPlayerInfo, p.ID);
+
+			if (p.ID != base.NetworkControl.LocalViewID)
+			{
+				GameObject playerShip = base.ObjectTables.PlayerShips[p];
+				ObjectSync objsync = playerShip.GetComponent<ObjectSync>();
+				PlayerShipRPC.SinglCreatePlayerShip(networkPlayer, p, objsync.GlobalID);
+			}
+		}
 
 		// Generate a viewID for the new player.
 		NetworkViewID viewID = Network.AllocateViewID();
 
 		// Notice everyone that the new player has joined.
 		PlayerRPC.NewPlayerJoined(networkPlayer, viewID);
+		PlayerShipRPC.CreatePlayerShip(base.Players[viewID], base.GUIDGenerator.GenerateID());		
 	}
 }
