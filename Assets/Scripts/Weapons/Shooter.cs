@@ -26,8 +26,7 @@ public class Shooter : MonoBehaviour
 
 	private void DetermineProjectileLayer()
 	{
-		string teamName = LayerMask.LayerToName(gameObject.layer).Substring(0, 5);
-		projectileTag = teamName + "Projectile";
+		projectileTag = TeamHelper.LayerToProjectileTag(gameObject.layer);
 		projectileLayerMask = LayerMask.NameToLayer(projectileTag);
 	}
 
