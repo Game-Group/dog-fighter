@@ -23,10 +23,13 @@ public class NetworkObject : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
-		
-		this.ObjectTables = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
-		this.NetworkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();		
-		this.GUIDGenerator = this.NetworkControl.GetComponent<GUIDGenerator>();
+
+		if (Network.peerType != NetworkPeerType.Disconnected)
+		{
+			this.ObjectTables = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
+			this.NetworkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();		
+			this.GUIDGenerator = this.NetworkControl.GetComponent<GUIDGenerator>();
+		}
 	}
 
 	protected virtual void OnNetworkInstantiate(NetworkMessageInfo info)

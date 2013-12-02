@@ -127,6 +127,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &13922072
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -152,13 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 1051932779}
-  muzzleLeft: {fileID: 520751701}
-  muzzleRight: {fileID: 485446160}
-  gunRight: {fileID: 1281467743}
-  gunLeft: {fileID: 1177928146}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &54046428
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +259,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &77583032
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -290,13 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 502229857}
-  muzzleLeft: {fileID: 1458734964}
-  muzzleRight: {fileID: 876773715}
-  gunRight: {fileID: 2017603059}
-  gunLeft: {fileID: 1522283381}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &92399490
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +689,58 @@ Prefab:
   m_RootGameObject: {fileID: 1321553734}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1001 &200899767
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2000.00012
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.000183105469
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 9.15527344e-05
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2000
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+  m_RootGameObject: {fileID: 780464157}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &204313144
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +893,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &214203344
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -878,13 +919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 1613891659}
-  muzzleLeft: {fileID: 554361325}
-  muzzleRight: {fileID: 172805544}
-  gunRight: {fileID: 1523141209}
-  gunLeft: {fileID: 1399683260}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &218443812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,6 +1701,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &454221088
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1692,13 +1727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 986809075}
-  muzzleLeft: {fileID: 1674594771}
-  muzzleRight: {fileID: 795360895}
-  gunRight: {fileID: 1381265854}
-  gunLeft: {fileID: 1995044066}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &461053995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,6 +1842,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &471064689
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1839,13 +1868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 741624125}
-  muzzleLeft: {fileID: 54046429}
-  muzzleRight: {fileID: 1805450417}
-  gunRight: {fileID: 1350897507}
-  gunLeft: {fileID: 1445113358}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &483195225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,6 +3041,58 @@ Transform:
   m_Children:
   - {fileID: 139203749}
   m_Father: {fileID: 1254268157}
+--- !u!1 &780464157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+  m_PrefabInternal: {fileID: 200899767}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 780464160}
+  - 114: {fileID: 780464159}
+  - 114: {fileID: 780464158}
+  m_Layer: 0
+  m_Name: Global
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &780464158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 53756d41146139c4c80f196b8dd7781c,
+    type: 2}
+  m_PrefabInternal: {fileID: 200899767}
+  m_GameObject: {fileID: 780464157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 671cba1288279b840bc4cf54cce0bf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &780464159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 53756d41146139c4c80f196b8dd7781c,
+    type: 2}
+  m_PrefabInternal: {fileID: 200899767}
+  m_GameObject: {fileID: 780464157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ff618c5f354604f8ea10179bf7f6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &780464160
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 53756d41146139c4c80f196b8dd7781c, type: 2}
+  m_PrefabInternal: {fileID: 200899767}
+  m_GameObject: {fileID: 780464157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2000.00012, y: -.000183105469, z: 9.15527344e-05}
+  m_LocalScale: {x: 700, y: 700, z: 2000}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &795360894
 GameObject:
   m_ObjectHideFlags: 0
@@ -3476,6 +3550,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &908740083
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3501,13 +3576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 1791094141}
-  muzzleLeft: {fileID: 1621173965}
-  muzzleRight: {fileID: 1677389859}
-  gunRight: {fileID: 1244357475}
-  gunLeft: {fileID: 1426675673}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &931138962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,6 +4133,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1109526765
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4090,13 +4159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 1836661798}
-  muzzleLeft: {fileID: 640232011}
-  muzzleRight: {fileID: 1047546594}
-  gunRight: {fileID: 589535462}
-  gunLeft: {fileID: 894866116}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &1111700776
 GameObject:
   m_ObjectHideFlags: 0
@@ -4391,6 +4453,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1187232658
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4416,13 +4479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 1506604990}
-  muzzleLeft: {fileID: 1211761918}
-  muzzleRight: {fileID: 714065737}
-  gunRight: {fileID: 1072850947}
-  gunLeft: {fileID: 395352219}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1001 &1207939899
 Prefab:
   m_ObjectHideFlags: 0
@@ -4641,6 +4697,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1254268159
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4666,13 +4723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 778260099}
-  muzzleLeft: {fileID: 651165373}
-  muzzleRight: {fileID: 1880359979}
-  gunRight: {fileID: 437071945}
-  gunLeft: {fileID: 969016663}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &1266157224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4863,6 +4913,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1301064811
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4888,13 +4939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 1314747750}
-  muzzleLeft: {fileID: 715441949}
-  muzzleRight: {fileID: 1812722178}
-  gunRight: {fileID: 1829120584}
-  gunLeft: {fileID: 1746310413}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &1314747749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,6 +5310,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1398921166
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5291,13 +5336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 326456502}
-  muzzleLeft: {fileID: 1779113621}
-  muzzleRight: {fileID: 1818150405}
-  gunRight: {fileID: 56200791}
-  gunLeft: {fileID: 1734699549}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &1399683259
 GameObject:
   m_ObjectHideFlags: 0
@@ -5626,6 +5664,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1493013078
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5651,13 +5690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 931138963}
-  muzzleLeft: {fileID: 957807771}
-  muzzleRight: {fileID: 92399491}
-  gunRight: {fileID: 1513234419}
-  gunLeft: {fileID: 690882315}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &1506604989
 GameObject:
   m_ObjectHideFlags: 0
@@ -6238,6 +6270,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &1726201283
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6263,13 +6296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 726718053}
-  muzzleLeft: {fileID: 1597272225}
-  muzzleRight: {fileID: 542268427}
-  gunRight: {fileID: 877231508}
-  gunLeft: {fileID: 1951217489}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &1734699548
 GameObject:
   m_ObjectHideFlags: 0
@@ -7962,6 +7988,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  CurrentGuns: []
 --- !u!135 &2023370412
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7987,13 +8014,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 156100170}
-  muzzleLeft: {fileID: 511686418}
-  muzzleRight: {fileID: 615265731}
-  gunRight: {fileID: 1021793510}
-  gunLeft: {fileID: 2078152484}
-  shootRadius: 100
-  followRadius: 400
 --- !u!1 &2043415935
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ public class Shooter : MonoBehaviour
         {
             if (GlobalSettings.HasFocus && Input.GetButton("Fire1"))
 			{
-				if (!this.KeepFiring)
+				if (!this.KeepFiring && Network.peerType != NetworkPeerType.Disconnected)
 					PlayerShipRPC.FireWeapon(this.Owner, true);
 
 				this.KeepFiring = true;
@@ -66,7 +66,7 @@ public class Shooter : MonoBehaviour
 			}
 			else
 			{
-				if (this.KeepFiring)
+				if (this.KeepFiring && Network.peerType != NetworkPeerType.Disconnected)
 					PlayerShipRPC.FireWeapon(this.Owner, false);
 
 				this.KeepFiring = false;					

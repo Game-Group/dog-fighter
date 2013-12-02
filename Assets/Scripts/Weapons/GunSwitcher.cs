@@ -19,11 +19,16 @@ public class GunSwitcher : MonoBehaviour
 
 	void Start()
 	{
-		NetworkControl networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
-		if (networkControl.ThisPlayer == this.GetComponent<ObjectSync>().Owner)
-			this.HumanControlledGuns = true;
-		else 
-			this.HumanControlledGuns = false;
+		NetworkControl networkControl = null;
+
+		if (Network.peerType != NetworkPeerType.Disconnected)
+		{
+				networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
+			if (networkControl.ThisPlayer == this.GetComponent<ObjectSync>().Owner)
+				this.HumanControlledGuns = true;
+			else 
+				this.HumanControlledGuns = false;
+		}
 
 		currentGunIndex = 0;
 		CurrentGuns = new GameObject[Hardpoints.Length];
@@ -67,9 +72,12 @@ public class GunSwitcher : MonoBehaviour
 		newGun.transform.parent = hardpoint;
 		newGun.layer = hardpoint.gameObject.layer;
 
-		Player owner = this.GetComponent<ObjectSync>().Owner;
-		Shooter shooter = newGun.GetComponent<Shooter>();
-		shooter.Owner = owner;
+		if (Network.peerType != NetworkPeerType.Disconnected)
+		{
+			Player owner = this.GetComponent<ObjectSync>().Owner;
+			Shooter shooter = newGun.GetComponent<Shooter>();
+			shooter.Owner = owner;
+		}
 
 		if (!ShowCrosshair)
 			newGun.GetComponent<ThirdPersonCrosshair>().enabled = false;

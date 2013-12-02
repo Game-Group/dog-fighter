@@ -47,7 +47,8 @@ public abstract class ObjectSync : NetworkObject
 
 		base.Start();
 
-		base.NetworkControl.SyncTimeEvent += this.SyncFunction;
+		if (Network.peerType != NetworkPeerType.Disconnected)		
+			base.NetworkControl.SyncTimeEvent += this.SyncFunction;
 	}
 	
 	// Update is called once per frame
