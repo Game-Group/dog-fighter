@@ -14,14 +14,22 @@ public class GunSwitcher : MonoBehaviour
 	public KeyCode NextGun;
 	public KeyCode PreviousGun;
 
-	private GameObject[] CurrentGuns;
+	public GameObject[] CurrentGuns;
 	private int currentGunIndex;
 
 	void Start()
 	{
+		NetworkControl networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
+		if (networkControl.ThisPlayer == this.GetComponent<ObjectSync>().Owner)
+			this.HumanControlledGuns = true;
+		else 
+			this.HumanControlledGuns = false;
+
 		currentGunIndex = 0;
 		CurrentGuns = new GameObject[Hardpoints.Length];
 		assignNewGuns(currentGunIndex);
+
+
 	}
 
 	void Update () 
@@ -58,6 +66,10 @@ public class GunSwitcher : MonoBehaviour
 		GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], hardpoint.position, hardpoint.rotation);
 		newGun.transform.parent = hardpoint;
 		newGun.layer = hardpoint.gameObject.layer;
+
+		Player owner = this.GetComponent<ObjectSync>().Owner;
+		Shooter shooter = newGun.GetComponent<Shooter>();
+		shooter.Owner = owner;
 
 		if (!ShowCrosshair)
 			newGun.GetComponent<ThirdPersonCrosshair>().enabled = false;

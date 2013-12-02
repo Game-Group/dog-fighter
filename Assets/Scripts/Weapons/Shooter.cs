@@ -11,6 +11,9 @@ public class Shooter : MonoBehaviour
 	public float ReloadDelay;
 	public bool HumanControlled;
 
+	public Player Owner { get; set; }
+	public bool KeepFiring { get; set; }
+
 	public float ProjectileSpeed { get; private set; }
 
 	private float reloadTimer;
@@ -52,9 +55,28 @@ public class Shooter : MonoBehaviour
 
         if (HumanControlled)
         {
-            if (Input.GetButton("Fire1"))
-                Shoot();
+            if (GlobalSettings.HasFocus && Input.GetButton("Fire1"))
+			{
+				if (!this.KeepFiring)
+					PlayerShipRPC.FireWeapon(this.Owner, true);
+
+				this.KeepFiring = true;
+
+				Shoot();
+			}
+			else
+			{
+				if (this.KeepFiring)
+					PlayerShipRPC.FireWeapon(this.Owner, false);
+
+				this.KeepFiring = false;					
+			}
+			
         }
+		else if (this.KeepFiring)
+		{
+			Shoot ();
+		}
 	}
 
 	private void SpawnProjectile(Transform shotPosition)

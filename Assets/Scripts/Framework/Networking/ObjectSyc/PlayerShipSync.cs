@@ -19,7 +19,7 @@ public class PlayerShipSync : ObjectSync {
 
 			if (pos != this.previousPos || orientation != this.previousOrientation)
 			{
-				PlayerShipRPC.PlayerShipPosition(base.Owner, base.GlobalID, pos, orientation);
+				PlayerShipRPC.PlayerShipPosition(base.Owner, pos, orientation);
 				this.previousPos = pos;
 				this.previousOrientation = orientation;
 			}

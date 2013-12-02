@@ -18,18 +18,31 @@ public class PlayerShipRPC : RPCHolder {
 		channel.networkView.RPC("CreatePlayerShipRPC", target, player.ID, objectID);
 	}
 
-	public static void PlayerShipPosition(Player player, int objectID, Vector3 position, Vector3 orientation)
+	public static void PlayerShipPosition(Player player, Vector3 position, Vector3 orientation)
 	{
 //		Debug.Log ("Sending player ship position.");
 
-		channel.networkView.RPC ("PlayerShipPositionRPC", RPCMode.Others, player.ID, objectID, position, orientation);
+		channel.networkView.RPC ("PlayerShipPositionRPC", RPCMode.Others, player.ID, position, orientation);
 	}
 
 	public static void PlayerShipVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
 	{
 //		Debug.Log("Sending player ship velocity.");
 
-		channel.networkView.RPC ("PlayerShipVelocityRPC", RPCMode.Server, player.ID, objectID, transform, rotation);
+		channel.networkView.RPC ("PlayerShipVelocityRPC", RPCMode.Server, player.ID, transform, rotation);
+		
+	}
+
+	public static void FireWeapon(Player player, bool fire) 
+	{
+		RPCMode mode;
+
+		if (Network.isClient)
+			mode = RPCMode.Server;
+		else
+			mode = RPCMode.Others;
+
+		channel.networkView.RPC ("FireWeaponRPC", RPCMode.Server, player.ID, fire);
 		
 	}
 
@@ -58,29 +71,49 @@ public class PlayerShipRPC : RPCHolder {
 	}
 
 	[RPC]
-	private void PlayerShipPositionRPC(NetworkViewID playerID, int objectID, Vector3 position, Vector3 orientation)
+	private void PlayerShipPositionRPC(NetworkViewID playerID, Vector3 position, Vector3 orientation)
 	{
 //		Debug.Log("Player ship position received.");
 
-		Player player = base.NetworkControl.Players[playerID];
-
-		GameObject playerShip = base.ObjectTables.GetPlayerObject(player, objectID);
+		GameObject playerShip = this.getPlayerShip(playerID);
 		playerShip.transform.position = position;
 		playerShip.transform.eulerAngles = orientation;
 	}
 
 	[RPC]
-	private void PlayerShipVelocityRPC(NetworkViewID playerID, int objectID, Vector3 translation, Vector3 rotation)
+	private void PlayerShipVelocityRPC(NetworkViewID playerID, Vector3 translation, Vector3 rotation)
 	{
 //		Debug.Log("Player ship velocity received.");		
 
-		Player player = base.NetworkControl.Players[playerID];
-
-		GameObject playerShip = base.ObjectTables.GetPlayerObject(player, objectID);
+		GameObject playerShip = this.getPlayerShip(playerID);
 		ObjectTransformer objectTransform = playerShip.GetComponent<ObjectTransformer>();
 
 		objectTransform.Translation = translation;
 		objectTransform.Rotation = rotation;
+	}
+
+	[RPC]
+	private void FireWeaponRPC(NetworkViewID playerID, bool fire)
+	{
+		GameObject playerShip = this.getPlayerShip(playerID);
+
+		GunSwitcher gunSwitcher = playerShip.GetComponent<GunSwitcher>();
+
+		foreach (GameObject gun in gunSwitcher.CurrentGuns)
+		{
+			Shooter shooter = gun.GetComponent<Shooter>();
+			shooter.KeepFiring = fire;
+		}
+
+		if (Network.isServer)
+			FireWeapon(base.Players[playerID], fire);
+	}
+
+	private GameObject getPlayerShip(NetworkViewID playerID)
+	{
+		Player player = base.NetworkControl.Players[playerID];
+		
+		return base.ObjectTables.PlayerShips[player];
 	}
 
 	private static PlayerShipRPC channel

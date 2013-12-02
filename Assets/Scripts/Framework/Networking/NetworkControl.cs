@@ -39,7 +39,7 @@ public class NetworkControl : MonoBehaviour
 	{
 		get
 		{
-			return this.Players[this.networkView.viewID];
+			return this.Players[this.LocalViewID];
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class NetworkControl : MonoBehaviour
 	// Update is called once per frame
 	public void Update () 
 	{
-		if (!GameObject.Find("Global").GetComponent<GlobalSettings>().HasFocus)
+		if (!GlobalSettings.HasFocus)
 			return;
 
 		if (Network.peerType == NetworkPeerType.Disconnected)

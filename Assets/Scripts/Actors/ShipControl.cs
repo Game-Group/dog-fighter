@@ -90,7 +90,7 @@ public class ShipControl : MonoBehaviour {
 
 		if (obj != null)
 		{
-			if (!obj.GetComponent<GlobalSettings>().HasFocus)
+			if (!GlobalSettings.HasFocus)
 				return;		
 		}
 
