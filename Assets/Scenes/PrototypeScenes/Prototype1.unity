@@ -649,6 +649,58 @@ Transform:
   m_Children:
   - {fileID: 2146676032}
   m_Father: {fileID: 218443813}
+--- !u!1001 &176391358
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1597683933}
+    m_Modifications:
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .532773435
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .26418671
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.256985873
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: DroneTarget
+      value: 
+      objectReference: {fileID: 1837366536}
+    - target: {fileID: 11400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: MaxActiveWaves
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+      propertyPath: DroneScale
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+  m_RootGameObject: {fileID: 1321553734}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &204313144
 GameObject:
   m_ObjectHideFlags: 0
@@ -4113,15 +4165,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1367.94373
+      value: -1536.13855
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 79.6689224
+      value: 184.080353
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -28.2188473
+      value: -528.088867
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4870,6 +4922,52 @@ Transform:
   m_Children:
   - {fileID: 1870999473}
   m_Father: {fileID: 1301064809}
+--- !u!1 &1321553734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+  m_PrefabInternal: {fileID: 176391358}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1321553735}
+  - 114: {fileID: 1321553736}
+  m_Layer: 11
+  m_Name: CreepSpawner_Team2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1321553735
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: c021211765b39f2448963e8e7e62c901, type: 2}
+  m_PrefabInternal: {fileID: 176391358}
+  m_GameObject: {fileID: 1321553734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .532773435, y: .26418671, z: -.256985873}
+  m_LocalScale: {x: .00142857141, y: .00142857141, z: .000500000024}
+  m_Children: []
+  m_Father: {fileID: 1597683933}
+--- !u!114 &1321553736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: c021211765b39f2448963e8e7e62c901,
+    type: 2}
+  m_PrefabInternal: {fileID: 176391358}
+  m_GameObject: {fileID: 1321553734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab603df8ac8f57459a0519123e07d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WavePrefabs:
+  - {fileID: 100004, guid: dfef6e9d32b95064392288cd2758b6c0, type: 2}
+  MaxActiveWaves: 5
+  TimeBeforeFirstWave: 3
+  TimeBetweenWaves: 1
+  DroneTarget: {fileID: 1837366536}
+  DroneScale: 3
 --- !u!1 &1342236119
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,6 +5928,7 @@ Transform:
   m_LocalPosition: {x: -2000, y: 0, z: 0}
   m_LocalScale: {x: 700, y: 700, z: 2000}
   m_Children:
+  - {fileID: 1321553735}
   - {fileID: 1301064809}
   - {fileID: 454221086}
   - {fileID: 908740081}
@@ -7026,7 +7125,7 @@ Transform:
   m_PrefabInternal: {fileID: 1153019096}
   m_GameObject: {fileID: 1879904993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1367.94373, y: 79.6689224, z: -28.2188473}
+  m_LocalPosition: {x: -1536.13855, y: 184.080353, z: -528.088867}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 587703150}
