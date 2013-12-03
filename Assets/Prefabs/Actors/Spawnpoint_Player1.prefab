@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnAtStart: {fileID: 100010, guid: 0c2d768e90809334293b686012effee1, type: 2}
   RespawnCameraGO: {fileID: 100002}
-  respawnCameraLookatDistance: 50
+  respawnCameraLookatDistance: 200
   DeathText: {fileID: 13200000}
 --- !u!124 &12400000
 Behaviour:

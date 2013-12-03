@@ -15,9 +15,6 @@ public class LimitedCreepSpawner : MonoBehaviour
 	// TODO get this transform from code or something
 	public Transform DroneTarget;
 
-	// TODO make drones bigger :P
-	public float DroneScale;
-
 	void Start () 
 	{
 		activeWaves = new List<GameObject[]>(MaxActiveWaves);
@@ -60,8 +57,6 @@ public class LimitedCreepSpawner : MonoBehaviour
 			newWave[i].layer = gameObject.layer;
 			DroneBehaviour behav = newWave[i].GetComponent<DroneBehaviour>();
 			behav.target = DroneTarget;
-
-			newWave[i].transform.localScale = new Vector3(DroneScale, DroneScale, DroneScale);
 		}
 
 		return newWave;

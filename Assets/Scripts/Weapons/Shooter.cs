@@ -87,8 +87,15 @@ public class Shooter : MonoBehaviour
 		// Transform the new projectile to align it properly.
 		shot.transform.Rotate(shotPosition.eulerAngles, Space.World);
 		shot.transform.position = shotPosition.position;
+		Debug.Log ("Scaling " + shot.transform.localScale);
+		Debug.Log ("By " + transform.lossyScale);
+		// Scale the projectile size relative to the gun size
+		shot.transform.localScale = Vector3.Scale(shot.transform.localScale, transform.lossyScale);
+		Debug.Log ("Resulting in " + shot.transform.localScale);
+
 		shot.gameObject.layer = projectileLayerMask;
 		shot.gameObject.tag = projectileTag;
+
 
 		// Fire it away by giving it a velocity.
 		ProjectileController pController = shot.GetComponent<ProjectileController>();

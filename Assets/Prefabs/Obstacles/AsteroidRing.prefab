@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 500
-  maxOffset: 500
+  maxOffset: 1000
   minAsteroidSize: 15
-  maxAsteroidSize: 100
+  maxAsteroidSize: 400
   templateAsteroid: {fileID: 100002}
   outerRadius: 3000
 --- !u!1001 &100100000

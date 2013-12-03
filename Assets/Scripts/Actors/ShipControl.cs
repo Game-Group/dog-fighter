@@ -46,7 +46,7 @@ public class ShipControl : MonoBehaviour {
         // Init speeds in case no manual initailisation
         if (maxSpeed == 0)
         {
-            maxSpeed = 100;
+            maxSpeed = 300;
         }
         // just always override currentspeed to be 0
         currentSpeed = 0;
@@ -60,7 +60,7 @@ public class ShipControl : MonoBehaviour {
 
         maxSpeed = 0;
         // initialisation of private variables
-        incrSpeed = 0.005f;
+		incrSpeed = 0.005f;
         rollSpeed = 50;
         mouseFollowSpeed = 0.5f;
 

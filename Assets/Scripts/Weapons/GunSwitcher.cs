@@ -69,7 +69,12 @@ public class GunSwitcher : MonoBehaviour
 
 		// Create the new gun, and assign the stored properties to it.
 		GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], hardpoint.position, hardpoint.rotation);
+
+		// Make sure the new gun IS scaled with the hardpoint
+		Vector3 initialScale = newGun.transform.localScale;
 		newGun.transform.parent = hardpoint;
+		newGun.transform.localScale = initialScale;
+
 		newGun.layer = hardpoint.gameObject.layer;
 
 		if (Network.peerType != NetworkPeerType.Disconnected)
