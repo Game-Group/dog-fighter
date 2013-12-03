@@ -153,6 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 1051932779}
+  muzzleLeft: {fileID: 520751701}
+  muzzleRight: {fileID: 485446160}
+  gunRight: {fileID: 1281467743}
+  gunLeft: {fileID: 1177928146}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &54046428
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +292,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 502229857}
+  muzzleLeft: {fileID: 1458734964}
+  muzzleRight: {fileID: 876773715}
+  gunRight: {fileID: 2017603059}
+  gunLeft: {fileID: 1522283381}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &92399490
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +849,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 3704b9b9881d7e14fa4650a5c427da84, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3704b9b9881d7e14fa4650a5c427da84, type: 2}
   m_RootGameObject: {fileID: 1597683928}
@@ -919,6 +937,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 1613891659}
+  muzzleLeft: {fileID: 554361325}
+  muzzleRight: {fileID: 172805544}
+  gunRight: {fileID: 1523141209}
+  gunLeft: {fileID: 1399683260}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &218443812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1752,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 986809075}
+  muzzleLeft: {fileID: 1674594771}
+  muzzleRight: {fileID: 795360895}
+  gunRight: {fileID: 1381265854}
+  gunLeft: {fileID: 1995044066}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &461053995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1900,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 741624125}
+  muzzleLeft: {fileID: 54046429}
+  muzzleRight: {fileID: 1805450417}
+  gunRight: {fileID: 1350897507}
+  gunLeft: {fileID: 1445113358}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &483195225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,6 +3615,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 1791094141}
+  muzzleLeft: {fileID: 1621173965}
+  muzzleRight: {fileID: 1677389859}
+  gunRight: {fileID: 1244357475}
+  gunLeft: {fileID: 1426675673}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &931138962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,6 +4205,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 1836661798}
+  muzzleLeft: {fileID: 640232011}
+  muzzleRight: {fileID: 1047546594}
+  gunRight: {fileID: 589535462}
+  gunLeft: {fileID: 894866116}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &1111700776
 GameObject:
   m_ObjectHideFlags: 0
@@ -4231,11 +4284,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 184.080353
+      value: -524.37085
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -528.088867
+      value: 847.665894
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4479,6 +4532,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 1506604990}
+  muzzleLeft: {fileID: 1211761918}
+  muzzleRight: {fileID: 714065737}
+  gunRight: {fileID: 1072850947}
+  gunLeft: {fileID: 395352219}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1001 &1207939899
 Prefab:
   m_ObjectHideFlags: 0
@@ -4723,6 +4783,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 778260099}
+  muzzleLeft: {fileID: 651165373}
+  muzzleRight: {fileID: 1880359979}
+  gunRight: {fileID: 437071945}
+  gunLeft: {fileID: 969016663}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &1266157224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,6 +5006,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 1314747750}
+  muzzleLeft: {fileID: 715441949}
+  muzzleRight: {fileID: 1812722178}
+  gunRight: {fileID: 1829120584}
+  gunLeft: {fileID: 1746310413}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &1314747749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5011,7 +5085,6 @@ MonoBehaviour:
   TimeBeforeFirstWave: 3
   TimeBetweenWaves: 1
   DroneTarget: {fileID: 1837366536}
-  DroneScale: 3
 --- !u!1 &1342236119
 GameObject:
   m_ObjectHideFlags: 0
@@ -5336,6 +5409,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 326456502}
+  muzzleLeft: {fileID: 1779113621}
+  muzzleRight: {fileID: 1818150405}
+  gunRight: {fileID: 56200791}
+  gunLeft: {fileID: 1734699549}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &1399683259
 GameObject:
   m_ObjectHideFlags: 0
@@ -5690,6 +5770,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 931138963}
+  muzzleLeft: {fileID: 957807771}
+  muzzleRight: {fileID: 92399491}
+  gunRight: {fileID: 1513234419}
+  gunLeft: {fileID: 690882315}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &1506604989
 GameObject:
   m_ObjectHideFlags: 0
@@ -6296,6 +6383,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 726718053}
+  muzzleLeft: {fileID: 1597272225}
+  muzzleRight: {fileID: 542268427}
+  gunRight: {fileID: 877231508}
+  gunLeft: {fileID: 1951217489}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &1734699548
 GameObject:
   m_ObjectHideFlags: 0
@@ -6974,9 +7068,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1837366536}
   - 33: {fileID: 1837366535}
-  - 65: {fileID: 1837366534}
   - 23: {fileID: 1837366533}
   - 114: {fileID: 1837366532}
+  - 136: {fileID: 1837366534}
   m_Layer: 9
   m_Name: Mothership_Red
   m_TagString: Mothership
@@ -7020,19 +7114,19 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
---- !u!65 &1837366534
-BoxCollider:
+--- !u!136 &1837366534
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500000, guid: bdf5b74d0652594449a4afaedbc7362f,
-    type: 2}
-  m_PrefabInternal: {fileID: 2011334427}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837366531}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 5
+  m_Height: 40
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 7}
 --- !u!33 &1837366535
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7040,7 +7134,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 2011334427}
   m_GameObject: {fileID: 1837366531}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: bf59dfb2459c128429724892f720eff0, type: 3}
 --- !u!4 &1837366536
 Transform:
   m_ObjectHideFlags: 0
@@ -7049,7 +7143,7 @@ Transform:
   m_GameObject: {fileID: 1837366531}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
   m_LocalPosition: {x: 2000, y: 0, z: 0}
-  m_LocalScale: {x: 700, y: 700, z: 2000}
+  m_LocalScale: {x: 70, y: 70, z: 70}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1870999472
@@ -7151,7 +7245,7 @@ Transform:
   m_PrefabInternal: {fileID: 1153019096}
   m_GameObject: {fileID: 1879904993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1536.13855, y: 184.080353, z: -528.088867}
+  m_LocalPosition: {x: -1536.13855, y: -524.37085, z: 847.665894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 587703150}
@@ -7904,7 +7998,40 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -4.37113883e-08
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2300000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: bf59dfb2459c128429724892f720eff0, type: 3}
+    - target: {fileID: 400000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
+      propertyPath: m_Size.y
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6500000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bdf5b74d0652594449a4afaedbc7362f, type: 2}
   m_RootGameObject: {fileID: 1837366531}
   m_IsPrefabParent: 0
@@ -8014,6 +8141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93758d61cf4a50a4182a563c1086c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  top: {fileID: 156100170}
+  muzzleLeft: {fileID: 511686418}
+  muzzleRight: {fileID: 615265731}
+  gunRight: {fileID: 1021793510}
+  gunLeft: {fileID: 2078152484}
+  shootRadius: 100
+  followRadius: 400
 --- !u!1 &2043415935
 GameObject:
   m_ObjectHideFlags: 0
@@ -8280,9 +8414,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 500
-  maxOffset: 500
+  maxOffset: 1000
   minAsteroidSize: 15
-  maxAsteroidSize: 100
+  maxAsteroidSize: 400
   templateAsteroid: {fileID: 326093493}
   outerRadius: 3000
 --- !u!1 &2146676031
