@@ -123,25 +123,37 @@ public class ShipControl : MonoBehaviour {
         {
                 // If closer together move slower to end position
                 float diffx = Mathf.Abs(rotationx - tempx);
-                rotationx += tempx * (diffx/25000);
+                rotationx += tempx * (diffx/30000);
         }
-        else if ((tempx > 0 && rotationx > tempx)|| (tempx < 0 && rotationx < tempx))
+        else if ((tempx > 0 && rotationx > tempx) || (tempx < 0 && rotationx < tempx))
         {
-                float diffx = Mathf.Abs(rotationx - tempx);
-                rotationx -= tempx * (diffx/25000);
+            float diffx = Mathf.Abs(rotationx - tempx);
+            rotationx -= tempx * (diffx / 30000);
+        }
+        else if (tempx == 0 && rotationx < tempx)
+        {
+            float diffx = Mathf.Abs(rotationx - tempx);
+            rotationx -= 0.001f * (diffx / 30000);
+           
+        }
+        else if (tempx == 0 && rotationx > tempx)
+        {
+            float diffx = Mathf.Abs(rotationx - tempx);
+            rotationx -= 0.001f * (diffx / 30000);
+
         }
 
         if((tempy > 0 && rotationy < tempy) || (tempy < 0 && rotationy > tempy))
         {
 
                 float diffy = Mathf.Abs(rotationy - tempy);
-                rotationy += tempy * (diffy/25000);
+                rotationy += tempy * (diffy/30000);
         }
         if((tempy > 0 && rotationy > tempy) || (tempy < 0 && rotationy < tempy))
         {
 
                 float diffy = Mathf.Abs(rotationy - tempy);
-                rotationy -= tempy * (diffy/25000);
+                rotationy -= tempy * (diffy/30000);
         }
 
 		this.MouseRotation = new Vector2(rotationx, rotationy);
