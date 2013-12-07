@@ -68,7 +68,7 @@ public class ShipControl : MonoBehaviour {
 		incrSpeed = 0.005f;
         rollSpeed = 50;
 
-        mouseFollowSpeed = 0.5f;
+        mouseFollowSpeed = 0.25f;
 
         // Init key press variables
 		forward = false;
@@ -117,43 +117,31 @@ public class ShipControl : MonoBehaviour {
         mousex = p[0];
         mousey = p[1];
         float tempx = mousex * mouseFollowSpeed;  // Time.deltaTime should be done later on.
-        float tempy = mousey * mouseFollowSpeed; 
+        float tempy = mousey * mouseFollowSpeed;
 
         if((tempx > 0 && rotationx < tempx) || (tempx < 0 && rotationx > tempx))
         {
                 // If closer together move slower to end position
                 float diffx = Mathf.Abs(rotationx - tempx);
-                rotationx += tempx * (diffx/30000);
+                rotationx += tempx * (diffx/15000);
         }
         else if ((tempx > 0 && rotationx > tempx) || (tempx < 0 && rotationx < tempx))
         {
             float diffx = Mathf.Abs(rotationx - tempx);
-            rotationx -= tempx * (diffx / 30000);
-        }
-        else if (tempx == 0 && rotationx < tempx)
-        {
-            float diffx = Mathf.Abs(rotationx - tempx);
-            rotationx -= 0.001f * (diffx / 30000);
-           
-        }
-        else if (tempx == 0 && rotationx > tempx)
-        {
-            float diffx = Mathf.Abs(rotationx - tempx);
-            rotationx -= 0.001f * (diffx / 30000);
-
+            rotationx -= tempx * (diffx / 15000);
         }
 
         if((tempy > 0 && rotationy < tempy) || (tempy < 0 && rotationy > tempy))
         {
 
                 float diffy = Mathf.Abs(rotationy - tempy);
-                rotationy += tempy * (diffy/30000);
+                rotationy += tempy * (diffy/15000);
         }
         if((tempy > 0 && rotationy > tempy) || (tempy < 0 && rotationy < tempy))
         {
 
                 float diffy = Mathf.Abs(rotationy - tempy);
-                rotationy -= tempy * (diffy/30000);
+                rotationy -= tempy * (diffy/15000);
         }
 
 		this.MouseRotation = new Vector2(rotationx, rotationy);
