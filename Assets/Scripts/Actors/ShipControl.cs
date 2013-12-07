@@ -20,6 +20,11 @@ public class ShipControl : MonoBehaviour {
     public float mousex;
     [HideInInspector]
     public float mousey;
+
+   [HideInInspector]
+    public float rotationx;
+    [HideInInspector]
+    public float rotationy;
     
 	public Vector2 MouseRotation { get; private set; }
 
@@ -62,6 +67,7 @@ public class ShipControl : MonoBehaviour {
         // initialisation of private variables
 		incrSpeed = 0.005f;
         rollSpeed = 50;
+
         mouseFollowSpeed = 0.5f;
 
         // Init key press variables
@@ -75,6 +81,8 @@ public class ShipControl : MonoBehaviour {
 		minRadius = 10;
         maxRadius = 400;
 
+        rotationx = 0;
+        rotationy = 0;
 
         mousex = 0;
         mousey = 0;
@@ -98,7 +106,9 @@ public class ShipControl : MonoBehaviour {
         HandleKeypress();
 		HandleMotion();
 	}
-	
+
+    float prevx = 0;
+    float prevy = 0;
 	// Rotates the spacecraft depending on the position of the mouse.
 	void HandleMouse()
 	{
@@ -106,8 +116,23 @@ public class ShipControl : MonoBehaviour {
 
         mousex = p[0];
         mousey = p[1];
-        float rotationx = mousex * mouseFollowSpeed * Time.deltaTime;
-        float rotationy = mousey * mouseFollowSpeed * Time.deltaTime;
+        float tempx = mousex * mouseFollowSpeed;  // Time.deltaTime should be done later on.
+        float tempy = mousey * mouseFollowSpeed; 
+
+        if((tempx > 0 && rotationx < tempx) || (tempx < 0 && rotationx > tempx))
+        {
+                // If closer together move slower to end position
+                float diffx = Mathf.Abs(rotationx - tempx);
+                rotationx += tempx * (diffx/25000);
+        }
+
+        if((tempy > 0 && rotationy < tempy) || (tempy < 0 && rotationy > tempy))
+        {
+
+                float diffy = Mathf.Abs(rotationy - tempy);
+                rotationy += tempy * (diffy/25000);
+                //rotationy += tempy * 0.05f;
+        }
 
 		this.MouseRotation = new Vector2(rotationx, rotationy);
 
@@ -117,6 +142,8 @@ public class ShipControl : MonoBehaviour {
 		Vector3 currentRotation = this.objectTransform.Rotation;
         
 		this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
+        prevx = mousex;
+
 	}
 
     // Returns the position of the mouse, bounded my minRadius and maxRadius

@@ -10,7 +10,7 @@ public class ShipOrientation : MonoBehaviour {
 
 	void Start () 
     {
-        mouseFollowSpeed = 0.1f;
+        mouseFollowSpeed = 0.3f;
         script = transform.parent.GetComponent<ShipControl>();
 		this.initialRotation = this.transform.localRotation;
 	}
@@ -25,8 +25,9 @@ public class ShipOrientation : MonoBehaviour {
 		else
 		{
             //Rotate spaceship 
-            float rotationx = script.mousex * mouseFollowSpeed;
-            float rotationy = script.mousey * mouseFollowSpeed;
+            float rotationx = script.rotationx * mouseFollowSpeed;
+            float rotationy = script.rotationy * mouseFollowSpeed;
+            //float rotationy = 0;
             
             transform.localRotation =
                 Quaternion.AngleAxis(rotationx, Vector3.up) * Quaternion.AngleAxis(rotationy, Vector3.left);
