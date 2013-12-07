@@ -31,6 +31,10 @@ public class ShipOrientation : MonoBehaviour {
             
             transform.localRotation =
                 Quaternion.AngleAxis(rotationx, Vector3.up) * Quaternion.AngleAxis(rotationy, Vector3.left);
+            Vector3 f;
+            f.x = transform.position.x +script.currentSpeed;
+            f.y = transform.position.y;
+            f.z = transform.position.z;
 
 		}
 	}

@@ -125,12 +125,23 @@ public class ShipControl : MonoBehaviour {
                 float diffx = Mathf.Abs(rotationx - tempx);
                 rotationx += tempx * (diffx/25000);
         }
+        else if ((tempx > 0 && rotationx > tempx)|| (tempx < 0 && rotationx < tempx))
+        {
+                float diffx = Mathf.Abs(rotationx - tempx);
+                rotationx -= tempx * (diffx/25000);
+        }
 
         if((tempy > 0 && rotationy < tempy) || (tempy < 0 && rotationy > tempy))
         {
 
                 float diffy = Mathf.Abs(rotationy - tempy);
                 rotationy += tempy * (diffy/25000);
+        }
+        if((tempy > 0 && rotationy > tempy) || (tempy < 0 && rotationy < tempy))
+        {
+
+                float diffy = Mathf.Abs(rotationy - tempy);
+                rotationy -= tempy * (diffy/25000);
         }
 
 		this.MouseRotation = new Vector2(rotationx, rotationy);
@@ -293,7 +304,6 @@ public class ShipControl : MonoBehaviour {
             }
         }
 
-            Debug.Log(currentRotation.z);
 		this.objectTransform.Rotation = currentRotation;
 		
 	
