@@ -131,13 +131,9 @@ public class ShipControl : MonoBehaviour {
 
                 float diffy = Mathf.Abs(rotationy - tempy);
                 rotationy += tempy * (diffy/25000);
-                //rotationy += tempy * 0.05f;
         }
 
 		this.MouseRotation = new Vector2(rotationx, rotationy);
-
-        //transform.Rotate(0, rotationx, 0, Space.Self);
-        //transform.Rotate (-rotationy, 0, 0, Space.Self);
 
 		Vector3 currentRotation = this.objectTransform.Rotation;
         
@@ -232,8 +228,6 @@ public class ShipControl : MonoBehaviour {
 
 		this.objectTransform.TranslationDirection = Vector3.forward;
 		this.objectTransform.TranslationSpeed = this.currentSpeed;
-        //transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
-
 
         // Make the spaceship move forward
         if (forward)
@@ -261,17 +255,45 @@ public class ShipControl : MonoBehaviour {
 
 		if(rollLeft)
 		{
-			//transform.Rotate (0,0, rollSpeed * Time.deltaTime, Space.Self);
-			currentRotation.z = rollSpeed * Time.deltaTime;
+            if (currentRotation.z < 1)
+            {
+                currentRotation.z += incrSpeed * rollSpeed * Time.deltaTime;
+            }
 		}
-		else if(rollRight)
-		{
-			//transform.Rotate (0,0, -rollSpeed * Time.deltaTime, Space.Self);
-			currentRotation.z = -rollSpeed * Time.deltaTime;			
-		}
-		else
-			currentRotation.z = 0;
+        else if (rollRight)
+        {
 
+            if (currentRotation.z > -1)
+            {
+                currentRotation.z += incrSpeed * -rollSpeed * Time.deltaTime;
+            }
+        }
+        else
+        {
+            // Roll out
+
+            if (currentRotation.z > 0)
+            {
+
+                currentRotation.z += incrSpeed * -rollSpeed * Time.deltaTime;
+                if (currentRotation.z < 0)
+                {
+                    currentRotation.z = 0;
+                }
+
+            }
+            else if (currentRotation.z < 0) 
+            {
+                currentRotation.z += incrSpeed * rollSpeed * Time.deltaTime;
+
+                if (currentRotation.z > 0)
+                {
+                    currentRotation.z = 0;
+                }
+            }
+        }
+
+            Debug.Log(currentRotation.z);
 		this.objectTransform.Rotation = currentRotation;
 		
 	
