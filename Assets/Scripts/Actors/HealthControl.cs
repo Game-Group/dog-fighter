@@ -14,6 +14,8 @@ public class HealthControl : MonoBehaviour
 	public float HealthPerSecond;
 	public float ShieldsPerSecond;
 
+	public GameObject ShieldImpactPrefab;
+
 	private float health;
 	private float shieldStrength;
 
@@ -62,9 +64,16 @@ public class HealthControl : MonoBehaviour
 		get { return shieldStrength; }
 	}
 
+	#region TakeDamageMethods
+
 	public void TakeDamage(float damage)
 	{
 		TakeDamage(Mathf.Max(0, damage - shieldStrength), damage);
+	}
+
+	public void TakeDamage(float damage, Vector3 impactPoint)
+	{
+		TakeDamage(Mathf.Max(0, damage - shieldStrength), damage, impactPoint);
 	}
 	
 	public void TakeDamage(float hullDamage, float shieldDamage)
@@ -76,6 +85,24 @@ public class HealthControl : MonoBehaviour
 		if (health <= 0)
 			Die();
 	}
+
+	public void TakeDamage(float hullDamage, float shieldDamage, Vector3 impactPoint)
+	{
+		if (shieldStrength > 0)
+		{
+			GameObject shieldPrefabInstance = (GameObject)Instantiate(ShieldImpactPrefab, transform.position, transform.rotation);
+			shieldPrefabInstance.transform.LookAt(impactPoint);
+			shieldPrefabInstance.transform.parent = transform;
+		}
+		shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
+		
+		health = Mathf.Max(0, health - hullDamage);;
+		
+		if (health <= 0)
+			Die();
+	}
+
+	#endregion
 
 	public void Die()
 	{

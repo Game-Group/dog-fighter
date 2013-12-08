@@ -80,7 +80,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1367.94373, y: 79.6689224, z: -28.2188473}
+  m_LocalPosition: {x: -1941.60864, y: 509.550781, z: -1049.59131}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnAtStart: {fileID: 100010, guid: 0c2d768e90809334293b686012effee1, type: 2}
   RespawnCameraGO: {fileID: 100002}
-  respawnCameraLookatDistance: 200
+  respawnCameraLookatDistance: 30
   DeathText: {fileID: 13200000}
 --- !u!124 &12400000
 Behaviour:
