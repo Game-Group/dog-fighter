@@ -69,9 +69,9 @@ public class HealthControl : MonoBehaviour
 	
 	public void TakeDamage(float hullDamage, float shieldDamage)
 	{
-		shieldStrength = Mathf.Min(0, shieldDamage);
+		shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
 
-		health -= hullDamage;
+		health = Mathf.Max(0, health - hullDamage);;
 
 		if (health <= 0)
 			Die();

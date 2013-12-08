@@ -9,16 +9,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
-  - 136: {fileID: 13600000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400002}
-  - 54: {fileID: 5400000}
-  - 96: {fileID: 9600000}
-  - 122: {fileID: 12200000}
   - 114: {fileID: 11400004}
+  - 54: {fileID: 5400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   - 114: {fileID: 11400006}
   m_Layer: 0
-  m_Name: GreenLaser
+  m_Name: DelayedHitscan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,8 +29,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: -.448818266, y: 2.82598305, z: 1.42905402}
-  m_LocalScale: {x: .00999999978, y: .0599999987, z: .00999999978}
+  m_LocalPosition: {x: -2965.55786, y: 1862.96631, z: 917.239563}
+  m_LocalScale: {x: .100000001, y: .400000006, z: .100000001}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!23 &2300000
@@ -47,8 +45,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: 375c06d870efe2f4089ac6f8f1311d3c, type: 2}
+  - {fileID: 2100000, guid: c2097ae7f12fcd6418df68d4e1820d93, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -79,49 +76,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!96 &9600000
-TrailRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 375c06d870efe2f4089ac6f8f1311d3c, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
-  m_Time: .0500000007
-  m_StartWidth: .00999999978
-  m_EndWidth: .00499999989
-  m_Colors:
-    m_Color[0]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[1]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[2]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[3]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[4]:
-      serializedVersion: 2
-      rgba: 16777215
-  m_MinVertexDistance: .100000001
-  m_Autodestruct: 1
---- !u!114 &11400002
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,11 +84,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2e83c86bcca591418842926f90e4b29, type: 3}
+  m_Script: {fileID: 11500000, guid: a28dcf26d0c51184093f52545143ee89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToLive: 3
---- !u!114 &11400004
+  Damage: 0
+  FlyControl: {fileID: 11400002}
+--- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -145,10 +101,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VelocityDirection: {x: 0, y: 0, z: 0}
-  DesiredSpeed: 350
+  DesiredSpeed: 1000
   Transform: {fileID: 400000}
   TimeBeforeFullSpeed: 0
   InitialSpeed: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6d8efcc00b32440a749630690f37b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,35 +124,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28dcf26d0c51184093f52545143ee89, type: 3}
+  m_Script: {fileID: 11500000, guid: caca8ceca2419494a9f1571e48a231f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
-  FlyControl: {fileID: 11400004}
---- !u!122 &12200000
-Halo:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4287037214
-  m_Size: 1
---- !u!136 &13600000
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  ProjectileController: {fileID: 11400000}
+  MaxTimeToLive: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
