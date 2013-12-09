@@ -11,9 +11,9 @@ public class ServerControl : NetworkObject
 	{
 		base.Start();
 
-		Player player = new Player(base.NetworkControl.LocalViewID, Network.player);
-		base.NetworkControl.Players.Add(base.NetworkControl.LocalViewID, player);
-		base.ObjectTables.AddPlayerTable(player);
+//		Player player = new Player(base.NetworkControl.LocalViewID, Network.player);
+//		base.NetworkControl.Players.Add(base.NetworkControl.LocalViewID, player);
+//		base.ObjectTables.AddPlayerTable(player);
 
 		Network.InitializeServer(10, base.NetworkControl.ServerPort, false);
 	}
@@ -27,6 +27,10 @@ public class ServerControl : NetworkObject
 	{
 		this.RPCChannel =
 			(GameObject)Network.Instantiate(this.RPCChannelPrefab, Vector3.zero, Quaternion.identity, 0);
+
+		Player player = new Player(base.NetworkControl.LocalViewID, Network.player);
+		base.NetworkControl.Players.Add(base.NetworkControl.LocalViewID, player);
+		base.ObjectTables.AddPlayerTable(player);
 	}
 
 	private void OnPlayerConnected(NetworkPlayer networkPlayer)

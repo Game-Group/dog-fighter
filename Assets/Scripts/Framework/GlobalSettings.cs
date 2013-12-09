@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GlobalSettings : MonoBehaviour {
+public class GlobalSettings : MonoBehaviour 
+{
+	public const bool SingePlayer = false;
 	
 	public static bool HasFocus { get; private set;}
 	
