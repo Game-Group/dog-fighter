@@ -7,12 +7,12 @@ public class GlobalSettings : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
 	}
+
 	
-	void OnApplicationFocus() 
+	void OnApplicationFocus(bool focus) 
 	{
-    	HasFocus = !HasFocus;    
+    	HasFocus = focus;    
 		//Debug.Log("Focus = " + this.HasFocus);
 	}
 	
