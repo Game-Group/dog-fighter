@@ -9,7 +9,9 @@ public class RPCChannel : NetworkObject {
 		base.Start();
 
 		if (Network.isServer)
+		{
 			base.NetworkControl.LocalViewID = this.networkView.viewID;
+		}
 
 		this.name = NetworkControl.RPCChannelObject;
 	
@@ -18,5 +20,12 @@ public class RPCChannel : NetworkObject {
 	// Update is called once per frame
 	protected override void Update () {
 	
+	}
+
+	protected override void OnNetworkInstantiate(NetworkMessageInfo info)
+	{
+		if (Network.isServer)
+			return;
+		this.Start();
 	}
 }

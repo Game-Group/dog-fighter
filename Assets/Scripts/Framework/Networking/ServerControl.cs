@@ -4,33 +4,29 @@ using System.Collections;
 public class ServerControl : NetworkObject 
 {
 	public Object RPCChannelPrefab;
-	public GameObject RPCChannel;
+
+	public LevelCreator StartingLevel { get; set; }
 
 	// Use this for initialization
 	protected override void Start ()
 	{
 		base.Start();
 
-//		Player player = new Player(base.NetworkControl.LocalViewID, Network.player);
-//		base.NetworkControl.Players.Add(base.NetworkControl.LocalViewID, player);
-//		base.ObjectTables.AddPlayerTable(player);
+		this.StartingLevel = new NetworkPrototypeLevel();
 
 		Network.InitializeServer(10, base.NetworkControl.ServerPort, false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	private void OnServerInitialized()
 	{
-		this.RPCChannel =
-			(GameObject)Network.Instantiate(this.RPCChannelPrefab, Vector3.zero, Quaternion.identity, 0);
+		// Network Initialize the RPCChannel to agree on a NetworkView with all clients.
+		Network.Instantiate(this.RPCChannelPrefab, Vector3.zero, Quaternion.identity, 0);
 
-		Player player = new Player(base.NetworkControl.LocalViewID, Network.player);
-		base.NetworkControl.Players.Add(base.NetworkControl.LocalViewID, player);
-		base.ObjectTables.AddPlayerTable(player);
+		Player server = new Player(base.NetworkControl.LocalViewID, Network.player);
+		base.NetworkControl.Players.Add(server.ID, server);
+		base.ObjectTables.AddPlayerTable(server);
+
+		ObjectRPC.LoadLevel(0);
 	}
 
 	private void OnPlayerConnected(NetworkPlayer networkPlayer)

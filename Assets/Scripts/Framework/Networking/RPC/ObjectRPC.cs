@@ -5,12 +5,32 @@ public class ObjectRPC : RPCHolder
 {
 	public GameObject PlayerSpawnPoint;
 
+	public static void LoadLevel(int levelID)
+	{
+		channel.networkView.RPC("LoadLevelRPC", RPCMode.All, levelID);
+	}
+
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
 	{
 		if (Network.peerType != NetworkPeerType.Server)
 			throw new UnityException("Only the server may use this function.");
 
 		channel.networkView.RPC("CreatePlayerSpawnpointRPC", RPCMode.All, owner.ID, objectID, position);
+	}
+
+	[RPC]
+	private void LoadLevelRPC(int levelID, NetworkMessageInfo info)
+	{
+		LevelCreator creator = null;
+		
+		switch (levelID)
+		{
+		case 0:
+			creator = new NetworkPrototypeLevel();
+			break;
+		}
+		
+		creator.CreateLevel();
 	}
 
 	[RPC]
