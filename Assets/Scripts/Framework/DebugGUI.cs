@@ -16,6 +16,9 @@ public class DebugGUI : MonoBehaviour {
 
 	void OnGUI()
 	{
+		if (GlobalSettings.SingePlayer)
+			return; 
+
 		GUI.contentColor = Color.white;
 		if (Network.peerType == NetworkPeerType.Disconnected)
 			GUI.Label(new Rect(10, 10, 1000, 1000), "Not connected. F1 = Server. F2 = Client");

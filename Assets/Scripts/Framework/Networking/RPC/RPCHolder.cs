@@ -21,7 +21,6 @@ public class RPCHolder : NetworkObject
 
 		objSync.AssignID(player, objectID);
 
-
 		this.ObjectTables.AddPlayerObject(player, objectID, obj);
 	}
 

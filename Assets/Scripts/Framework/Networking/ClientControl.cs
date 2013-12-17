@@ -3,12 +3,20 @@ using System.Collections;
 
 public class ClientControl : NetworkObject 
 {
-	public LevelCreator StartingLevel;
+	public LevelCreator CurrentLevel { get; private set; }
+	
+	public void ChangeLevel(LevelCreator level)
+	{
+		this.CurrentLevel = level;
+		this.CurrentLevel.CreateLevel();
+	}
 
 	// Use this for initialization
 	protected override void Start () {
 
 		base.Start();
+
+		this.name = "ClientControl";
 
 		Debug.Log("Connecting");
 
@@ -16,15 +24,13 @@ public class ClientControl : NetworkObject
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
 	
 	}
 
 	private void OnConnectedToServer()
 	{
 		Debug.Log("Connected to server.");
-
-		this.StartingLevel.CreateLevel();
 	}
 
 	private void OnFailedToConnect(NetworkConnectionError error) 

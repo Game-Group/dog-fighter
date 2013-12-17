@@ -23,8 +23,18 @@ public class PlayerRespawner : MonoBehaviour
 		deathTexts[3] = "#YOLO AMIRITE?";
 		deathTexts[4] = "DDDDDDEEEEEEEAAAAAAAADDDDDD.";
 
-		Spawn (SpawnAtStart);
+		//Spawn (SpawnAtStart);
 		SpawnAtStart = null;
+	}
+
+	public void Respawn(GameObject obj)
+	{
+		this.attachedPlayer = obj;
+		this.attachedPlayer.transform.position = gameObject.transform.position;
+		this.attachedPlayer.transform.rotation = gameObject.transform.rotation;
+		
+		DisableRespawnCamera();
+		attachedPlayer.SetActive(true);		
 	}
 
 	public void DisableAndWaitForSpawn(float timeBeforeRespawn)
@@ -73,6 +83,9 @@ public class PlayerRespawner : MonoBehaviour
 	
 	void Update () 
 	{
+		if (Network.peerType != NetworkPeerType.Server && !GlobalSettings.SingePlayer)
+			return;
+
 		if (waitingForRespawn)
 		{
 			respawnTimer -= Time.deltaTime;

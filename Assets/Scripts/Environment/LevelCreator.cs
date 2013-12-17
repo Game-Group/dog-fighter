@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LevelCreator : NetworkObject 
@@ -10,6 +10,10 @@ public class LevelCreator : NetworkObject
 	}
 
 	public virtual void CreateLevel()
+	{
+	}
+
+	public virtual void SyncNewPlayer(Player newPlayer)
 	{
 	}
 

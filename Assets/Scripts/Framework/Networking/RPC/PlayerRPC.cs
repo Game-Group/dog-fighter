@@ -10,7 +10,7 @@ public class PlayerRPC : RPCHolder {
 		channel.networkView.RPC("NewPlayerJoinedRPC", channel.RPCMode, networkPlayer, id);
 	}
 
-	public static void SingleNewPlayerJoined(NetworkPlayer target, NetworkPlayer networkPlayer, NetworkViewID id)
+	public static void NewPlayerJoined(NetworkPlayer target, NetworkPlayer networkPlayer, NetworkViewID id)
 	{
 		Debug.Log("Sending new player joined.");
 		

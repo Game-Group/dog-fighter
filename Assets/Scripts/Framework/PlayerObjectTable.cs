@@ -1,20 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerObjectTable : MonoBehaviour
+public class PlayerObjectTable : NetworkObject
 {
-	public IDictionary<Player, GameObject> PlayerShips { get; private set; }
+	public IDictionary<Player, PlayerObjects> PlayerObjects { get; private set; }
+	public PlayerObjects ThisPlayerObjects 
+	{
+		get
+		{
+			return this.PlayerObjects[base.NetworkControl.ThisPlayer];
+		}
+	}
 
 	public PlayerObjectTable()
+		: base()
 	{
-		this.PlayerShips = new Dictionary<Player,  GameObject>(10);
 		this.objectTables = new Dictionary<NetworkViewID, ObjectTable>(10);
+		this.PlayerObjects = new Dictionary<Player, PlayerObjects>(10);
 	}
 
 	public void AddPlayerTable(Player player)
 	{
 		if (!this.objectTables.ContainsKey(player.ID))
+		{
 			this.objectTables.Add(player.ID, new ObjectTable());
+			this.PlayerObjects.Add(player, new PlayerObjects());
+		}
 		else
 			throw new UnityException("Table for given player already exists.");
 	}
@@ -22,7 +33,10 @@ public class PlayerObjectTable : MonoBehaviour
 	public void RemovePlayerTable(Player player)
 	{
 		if (this.objectTables.ContainsKey(player.ID))
+		{
 			this.objectTables.Remove(player.ID);
+			this.PlayerObjects.Remove(player);
+		}
 		else
 			throw new UnityException("Table for given player does not exist.");
 	}

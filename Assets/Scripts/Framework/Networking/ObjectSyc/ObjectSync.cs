@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public abstract class ObjectSync : NetworkObject 
+public class ObjectSync : NetworkObject 
 {
 	public Player Owner { get; private set; }
 	public int GlobalID { get; private set; }
@@ -40,7 +40,9 @@ public abstract class ObjectSync : NetworkObject
 		base.Dispose();
 	}
 
-	protected abstract void SyncFunction();
+	protected virtual void SyncFunction()
+	{
+	}
 
 	// Use this for initialization
 	protected override void Start () {
@@ -52,7 +54,7 @@ public abstract class ObjectSync : NetworkObject
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
 	
 	}
 }

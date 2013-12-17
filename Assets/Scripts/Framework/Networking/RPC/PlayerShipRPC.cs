@@ -6,16 +6,31 @@ public class PlayerShipRPC : RPCHolder {
 
 	public GameObject PlayerPrefab;
 
+	#region Call Functions
 	public static void CreatePlayerShip(Player player, int objectID)
 	{
-		Debug.Log("Sending create player ship.");
+//		Debug.Log("Sending create player ship.");
 
 		channel.networkView.RPC("CreatePlayerShipRPC", channel.RPCMode, player.ID, objectID);
 	}
 
-	public static void SinglCreatePlayerShip(NetworkPlayer target, Player player, int objectID)
+	public static void CreatePlayerShip(NetworkPlayer target, Player player, int objectID)
 	{
 		channel.networkView.RPC("CreatePlayerShipRPC", target, player.ID, objectID);
+	}
+
+	public static void SpawnPlayerShip(Player player, int spawnPointID, int playerShipID)
+	{
+//		Debug.Log ("Sending spawn player RPC");
+
+		channel.networkView.RPC("SpawnPlayerShipRPC", RPCMode.All, player.ID, spawnPointID, playerShipID);
+		
+	}
+	public static void SpawnPlayerShip(NetworkPlayer target, Player player, int spawnPointID, int playerShipID)
+	{
+//		Debug.Log ("Sending spawn player RPC");
+
+		channel.networkView.RPC("SpawnPlayerShipRPC", target, player.ID, spawnPointID, playerShipID);			
 	}
 
 	public static void PlayerShipPosition(Player player, Vector3 position, Vector3 orientation)
@@ -45,17 +60,21 @@ public class PlayerShipRPC : RPCHolder {
 		channel.networkView.RPC ("FireWeaponRPC", RPCMode.Server, player.ID, fire);
 		
 	}
+	#endregion
 
+	#region RPC Definitions
 	[RPC]
 	private void CreatePlayerShipRPC(NetworkViewID playerID, int objectID, NetworkMessageInfo info)
 	{
-		Debug.Log("Create player ship RPC received!");
+//		Debug.Log("Create player ship RPC received!");
+
+		Player owner = base.NetworkControl.Players[playerID];
 		
 		GameObject playerShip = (GameObject)GameObject.Instantiate(this.PlayerPrefab);
 		
 		if (base.NetworkControl.LocalViewID == playerID)
 		{
-//			Debug.Log("Yes!");
+			base.ObjectTables.ThisPlayerObjects.PlayerShipID = objectID;
 			playerShip.GetComponentInChildren<Camera>().enabled = true;
 		}
 		else
@@ -66,8 +85,20 @@ public class PlayerShipRPC : RPCHolder {
 			playerShip.GetComponent<ShipControl>().enabled = false;
 		}
 
-		base.ObjectTables.PlayerShips.Add(base.Players[playerID], playerShip);
+		base.ObjectTables.PlayerObjects[owner].PlayerShipID = objectID;
 		base.AddToObjectTables(playerShip, playerID, objectID);
+	}
+
+	[RPC]
+	private void SpawnPlayerShipRPC(NetworkViewID owner, int spawnPointID, int playerShipID)
+	{
+//		Debug.Log("Spawn player RPC received.");
+
+		Player player = base.Players[owner];
+		GameObject spawnPoint = base.ObjectTables.GetPlayerObject(player, spawnPointID);
+		GameObject playerShip = base.ObjectTables.GetPlayerObject(player, playerShipID);
+
+		spawnPoint.GetComponent<PlayerRespawner>().Respawn(playerShip);
 	}
 
 	[RPC]
@@ -112,10 +143,14 @@ public class PlayerShipRPC : RPCHolder {
 	private GameObject getPlayerShip(NetworkViewID playerID)
 	{
 		Player player = base.NetworkControl.Players[playerID];
-		
-		return base.ObjectTables.PlayerShips[player];
-	}
 
+		int playerShipID = base.ObjectTables.PlayerObjects[player].PlayerShipID;
+		
+		return base.ObjectTables.GetPlayerObject(player, playerShipID);
+	}
+	#endregion
+
+	#region Singleton
 	private static PlayerShipRPC channel
 	{
 		get
@@ -127,4 +162,5 @@ public class PlayerShipRPC : RPCHolder {
 	}
 
 	private static PlayerShipRPC channel_;
+	#endregion
 }

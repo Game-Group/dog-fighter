@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 8
   m_Name: Spawnpoint_Player1
   m_TagString: Untagged
@@ -144,6 +145,17 @@ MonoBehaviour:
   RespawnCameraGO: {fileID: 100002}
   respawnCameraLookatDistance: 30
   DeathText: {fileID: 13200000}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3db84390dec6041b3bf03b9f783800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
