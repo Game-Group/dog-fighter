@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ClientControl : NetworkObject {
+public class ClientControl : NetworkObject 
+{
+	public LevelCreator StartingLevel;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -21,6 +23,8 @@ public class ClientControl : NetworkObject {
 	private void OnConnectedToServer()
 	{
 		Debug.Log("Connected to server.");
+
+		this.StartingLevel.CreateLevel();
 	}
 
 	private void OnFailedToConnect(NetworkConnectionError error) 

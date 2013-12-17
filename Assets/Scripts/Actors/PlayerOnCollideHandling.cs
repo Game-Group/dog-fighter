@@ -15,12 +15,9 @@ public class PlayerOnCollideHandling : MonoBehaviour
 			case "Team2Projectile":
 				HandleProjectileCollision(info);
 				break;
-
-
 			case "Mothership":
 				HealthControl.TakeDamage(HealthControl.MaxHealth, HealthControl.MaxShields);
 				break;
-
 			case "Obstacle": 
 				HealthControl.TakeDamage(HealthControl.MaxHealth, HealthControl.MaxShields);
 				break;
@@ -29,7 +26,8 @@ public class PlayerOnCollideHandling : MonoBehaviour
 
 	private void HandleProjectileCollision(Collision info)
 	{
-		HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage);
+		if (!TeamHelper.IsSameTeam(info.collider.gameObject.tag, gameObject.layer))
+			HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage, info.contacts[0].point);
 
 		Destroy(info.gameObject);
 	}

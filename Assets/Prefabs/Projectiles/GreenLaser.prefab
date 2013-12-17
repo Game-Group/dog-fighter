@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28dcf26d0c51184093f52545143ee89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 1
   FlyControl: {fileID: 11400004}
 --- !u!122 &12200000
 Halo:
