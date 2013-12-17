@@ -263,26 +263,30 @@ public class ShipControl : MonoBehaviour {
 
 		Vector3 currentRotation = this.objectTransform.Rotation;
 		
-
+        // Make the roll movement
+        // In case the player wants to roll left
+        // make the roll go faster if not yet on limit
 		if(rollLeft)
 		{
-            if (currentRotation.z < 1)
+            if (currentRotation.z < 0.5f)
             {
                 currentRotation.z += incrSpeed * rollSpeed * Time.deltaTime;
             }
 		}
+           
+        // In case the player wants to roll right
+        // make the roll go faster if not yet on limit
         else if (rollRight)
         {
 
-            if (currentRotation.z > -1)
+            if (currentRotation.z > -0.5f)
             {
                 currentRotation.z += incrSpeed * -rollSpeed * Time.deltaTime;
             }
         }
         else
         {
-            // Roll out
-
+            // In case passively rolling, roll out
             if (currentRotation.z > 0)
             {
 
