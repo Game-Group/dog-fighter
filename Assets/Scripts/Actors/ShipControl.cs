@@ -66,7 +66,7 @@ public class ShipControl : MonoBehaviour {
         maxSpeed = 0;
         // initialisation of private variables
 		incrSpeed = 0.005f;
-        rollSpeed = 50;
+        rollSpeed = 1000;
 
         mouseFollowSpeed = 0.25f;
 
@@ -268,7 +268,7 @@ public class ShipControl : MonoBehaviour {
         // make the roll go faster if not yet on limit
 		if(rollLeft)
 		{
-            if (currentRotation.z < 0.5f)
+            if (currentRotation.z < 500)
             {
                 currentRotation.z += incrSpeed * rollSpeed * Time.deltaTime;
             }
@@ -279,7 +279,7 @@ public class ShipControl : MonoBehaviour {
         else if (rollRight)
         {
 
-            if (currentRotation.z > -0.5f)
+            if (currentRotation.z > -500)
             {
                 currentRotation.z += incrSpeed * -rollSpeed * Time.deltaTime;
             }
