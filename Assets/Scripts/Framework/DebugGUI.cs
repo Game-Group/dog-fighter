@@ -16,7 +16,7 @@ public class DebugGUI : MonoBehaviour {
 
 	void OnGUI()
 	{
-		if (GlobalSettings.SingePlayer)
+		if (GlobalSettings.SinglePlayer)
 			return; 
 
 		GUI.contentColor = Color.white;

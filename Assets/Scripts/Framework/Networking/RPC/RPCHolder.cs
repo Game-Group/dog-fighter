@@ -24,5 +24,11 @@ public class RPCHolder : NetworkObject
 		this.ObjectTables.AddPlayerObject(player, objectID, obj);
 	}
 
+	protected void CheckServer()
+	{
+		if (Network.peerType != NetworkPeerType.Server)
+			throw new UnityException("Only the server may use this function.");
+	}
+
 
 }

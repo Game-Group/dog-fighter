@@ -30,6 +30,8 @@ public class HealthControl : MonoBehaviour
 				RespawnPoint = spawner;
 				break;
 			}
+
+		this.objSync = this.GetComponent<DestroyableObjectSync>();
 	}
 
 	public void OnEnable()
@@ -46,22 +48,15 @@ public class HealthControl : MonoBehaviour
 			TakeDamage(MaxHealth, MaxShields);
 	}
 
-	/// <summary>
-	/// Changing health goes through the TakeDamage and Heal methods.
-	/// </summary>
-	/// <value>The current health of this object.</value>
 	public float CurrentHealth 
 	{
 		get { return health; }
+		set { this.health = value; }
 	}
-
-	/// <summary>
-	/// Changing shields goes through the TakeDamage and Heal methods.
-	/// </summary>
-	/// <value>The current shields of this object.</value>
 	public float CurrentShields 
 	{
 		get { return shieldStrength; }
+		set { this.shieldStrength = value; }
 	}
 
 	#region TakeDamageMethods
@@ -97,6 +92,8 @@ public class HealthControl : MonoBehaviour
 		shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
 		
 		health = Mathf.Max(0, health - hullDamage);;
+
+		this.objSync.RequestHealthSync();
 		
 		if (health <= 0)
 			Die();
@@ -124,4 +121,6 @@ public class HealthControl : MonoBehaviour
 		          , "Health: " + health + "/" + MaxHealth + "\n"
 		          + "Shields: " + shieldStrength + "/" + MaxShields);
 	}
+
+	private DestroyableObjectSync objSync;
 }

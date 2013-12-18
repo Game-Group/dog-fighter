@@ -22,10 +22,16 @@ public class NetworkObject : MonoBehaviour {
 		}
 	}
 
+	protected GameObject GetObject(NetworkViewID owner, int objectID)
+	{
+		Player player = this.Players[owner];
+		return this.ObjectTables.GetPlayerObject(player, objectID);
+	}
+
 	// Use this for initialization
 	protected virtual void Start () {
 
-		if (!GlobalSettings.SingePlayer)
+		if (!GlobalSettings.SinglePlayer)
 		{
 			this.ObjectTables = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
 			this.NetworkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();		
