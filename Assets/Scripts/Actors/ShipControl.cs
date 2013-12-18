@@ -110,8 +110,8 @@ public class ShipControl : MonoBehaviour {
     float prevx = 0;
     float prevy = 0;
 	// Rotates the spacecraft depending on the position of the mouse.
-	void HandleMouse()
-	{
+    void HandleMouse()
+    {
         float[] p = CalculateMousePosition();
 
         mousex = p[0];
@@ -119,39 +119,40 @@ public class ShipControl : MonoBehaviour {
         float tempx = mousex * mouseFollowSpeed;  // Time.deltaTime should be done later on.
         float tempy = mousey * mouseFollowSpeed;
 
-        if((tempx > 0 && rotationx < tempx) || (tempx < 0 && rotationx > tempx))
+        int randomHardcodedVariable = 150;
+
+        if ((tempx > 0 && rotationx < tempx) || (tempx < 0 && rotationx > tempx))
         {
-                // If closer together move slower to end position
-                float diffx = Mathf.Abs(rotationx - tempx);
-                rotationx += tempx * (diffx/15000);
+            // If closer together move slower to end position
+            float diffx = Mathf.Abs(rotationx - tempx);
+            Debug.Log(Time.deltaTime);
+            rotationx += tempx * (diffx / randomHardcodedVariable) * Time.deltaTime;
         }
         else if ((tempx > 0 && rotationx > tempx) || (tempx < 0 && rotationx < tempx))
         {
             float diffx = Mathf.Abs(rotationx - tempx);
-            rotationx -= tempx * (diffx / 15000);
+            rotationx -= tempx * (diffx / randomHardcodedVariable) * Time.deltaTime;
         }
 
-        if((tempy > 0 && rotationy < tempy) || (tempy < 0 && rotationy > tempy))
+        if ((tempy > 0 && rotationy < tempy) || (tempy < 0 && rotationy > tempy))
         {
-
-                float diffy = Mathf.Abs(rotationy - tempy);
-                rotationy += tempy * (diffy/15000);
+            float diffy = Mathf.Abs(rotationy - tempy);
+            rotationy += tempy * (diffy / randomHardcodedVariable) * Time.deltaTime;
         }
-        if((tempy > 0 && rotationy > tempy) || (tempy < 0 && rotationy < tempy))
+        if ((tempy > 0 && rotationy > tempy) || (tempy < 0 && rotationy < tempy))
         {
-
-                float diffy = Mathf.Abs(rotationy - tempy);
-                rotationy -= tempy * (diffy/15000);
+            float diffy = Mathf.Abs(rotationy - tempy);
+            rotationy -= tempy * (diffy / randomHardcodedVariable) * Time.deltaTime;
         }
 
-		this.MouseRotation = new Vector2(rotationx, rotationy);
+        this.MouseRotation = new Vector2(rotationx, rotationy);
 
-		Vector3 currentRotation = this.objectTransform.Rotation;
-        
-		this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
+        Vector3 currentRotation = this.objectTransform.Rotation;
+
+        this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
         prevx = mousex;
 
-	}
+    }
 
     // Returns the position of the mouse, bounded my minRadius and maxRadius
     public float[] CalculateMousePosition()
