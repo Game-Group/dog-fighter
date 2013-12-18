@@ -23,7 +23,8 @@ public class PlayerRespawner : MonoBehaviour
 		deathTexts[3] = "#YOLO AMIRITE?";
 		deathTexts[4] = "DDDDDDEEEEEEEAAAAAAAADDDDDD.";
 
-		//Spawn (SpawnAtStart);
+		if (GlobalSettings.SingePlayer)
+			Spawn (SpawnAtStart);
 		SpawnAtStart = null;
 	}
 
@@ -83,7 +84,7 @@ public class PlayerRespawner : MonoBehaviour
 	
 	void Update () 
 	{
-		if (Network.peerType != NetworkPeerType.Server && !GlobalSettings.SingePlayer)
+		if (!GlobalSettings.SingePlayer)
 			return;
 
 		if (waitingForRespawn)
