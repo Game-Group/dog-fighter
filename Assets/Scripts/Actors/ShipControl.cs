@@ -125,7 +125,6 @@ public class ShipControl : MonoBehaviour {
         {
             // If closer together move slower to end position
             float diffx = Mathf.Abs(rotationx - tempx);
-            Debug.Log(Time.deltaTime);
             rotationx += tempx * (diffx / randomHardcodedVariable) * Time.deltaTime;
         }
         else if ((tempx > 0 && rotationx > tempx) || (tempx < 0 && rotationx < tempx))
