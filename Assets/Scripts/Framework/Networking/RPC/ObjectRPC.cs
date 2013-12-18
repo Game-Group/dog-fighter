@@ -7,22 +7,29 @@ public class ObjectRPC : RPCHolder
 
 	public static void LoadLevel(int levelID)
 	{
+		channel.CheckServer();
+
 		channel.networkView.RPC("LoadLevelRPC", RPCMode.All, levelID);
 	}
 
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
 	{
-		if (Network.peerType != NetworkPeerType.Server)
-			throw new UnityException("Only the server may use this function.");
+		channel.CheckServer();
 
 		channel.networkView.RPC("CreatePlayerSpawnpointRPC", RPCMode.All, owner.ID, objectID, position);
 	}
 	public static void CreatePlayerSpawnpoint(NetworkPlayer target, Player owner, int objectID, Vector3 position)
 	{
-		if (Network.peerType != NetworkPeerType.Server)
-			throw new UnityException("Only the server may use this function.");
+		channel.CheckServer();		
 		
 		channel.networkView.RPC("CreatePlayerSpawnpointRPC", target, owner.ID, objectID, position);
+	}
+
+	public static void SetObjectHealth(Player objectOwner, int objectID, float health, float shields)
+	{
+		channel.CheckServer();
+
+		channel.networkView.RPC("SetObjectHealthRPC", RPCMode.Others, objectOwner.ID, objectID, health, shields);
 	}
 
 	[RPC]
@@ -55,6 +62,16 @@ public class ObjectRPC : RPCHolder
 
 		Object spawnPoint = GameObject.Instantiate(this.PlayerSpawnPoint, position, Quaternion.identity);
 		base.AddToObjectTables((GameObject)spawnPoint, owner, objectID);
+	}
+
+	[RPC]
+	private void SetHealthRPC(NetworkViewID objectOwner, int objectID, float health, float shields)
+	{
+		GameObject obj = base.GetObject(objectOwner, objectID);
+		HealthControl healthControl = obj.GetComponent<HealthControl>();
+
+		healthControl.CurrentHealth = health;
+		healthControl.CurrentShields = shields;
 	}
 	
 	private static ObjectRPC channel

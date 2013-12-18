@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerShipSync : ObjectSync {
-
+public class PlayerShipSync : DestroyableObjectSync 
+{
 	protected override void Start ()
 	{
 		base.Start ();
