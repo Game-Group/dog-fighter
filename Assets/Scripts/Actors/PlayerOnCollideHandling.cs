@@ -26,7 +26,7 @@ public class PlayerOnCollideHandling : MonoBehaviour
 
 	private void HandleProjectileCollision(Collision info)
 	{
-		if (Network.peerType == NetworkPeerType.Server)
+		if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
 		{
 			if (!TeamHelper.IsSameTeam(info.collider.gameObject.tag, gameObject.layer))
 				HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage, info.contacts[0].point);
