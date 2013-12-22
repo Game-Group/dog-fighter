@@ -76,7 +76,7 @@ public class DroneBehaviour : MonoBehaviour
             // Apply rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 8);
 
-            if ((target.position - transform.position).magnitude > 5)
+            if ((target.position - transform.position).magnitude > 50)
             {
                 // Move the drone to the viewed direction
                 transform.position += transform.forward * speed * Time.deltaTime;
@@ -84,7 +84,7 @@ public class DroneBehaviour : MonoBehaviour
             // Do we want the bot to rotate or just hang in the air
             else
             {
-                transform.RotateAround(target.position, target.up, 30 * Time.deltaTime);
+                //transform.RotateAround(target.position, target.up, 30 * Time.deltaTime);
             }
         }
         else
@@ -153,7 +153,6 @@ public class DroneBehaviour : MonoBehaviour
 
                 prevState = currentState;
                 currentState = Behaviours.Chase;
-
             
         }
 
