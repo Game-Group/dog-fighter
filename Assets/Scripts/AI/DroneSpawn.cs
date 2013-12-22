@@ -3,6 +3,9 @@ using System.Collections;
 
 public class DroneSpawn : MonoBehaviour {
 
+
+    // TODO: Add mid level checkpoints (easy)
+    // TODO: Only spawn in case enough creeps died. (hard)
     public Transform[] spawn_locations;
     [HideInInspector]
     Transform[] destination;
@@ -11,13 +14,16 @@ public class DroneSpawn : MonoBehaviour {
     public int repeatTime;
     public GameObject drone;
 
+    // an optional checkpoint to which the drones can fly
+    public GameObject checkpoint;
+
     // The number of drones spawned each interval
     public int drone_number;
     int drones_per_location;
     
     // Use this for initialization
 	void Start () {
-
+      
         // The total of drones should be divisible by the number of spawn locations;
         if (drone_number % spawn_locations.Length == 0)
         {
@@ -29,36 +35,47 @@ public class DroneSpawn : MonoBehaviour {
         }
 
         destination = new Transform[spawn_locations.Length];
-	    //Find the corresponding destination locatios
-        GameObject[] candidates = GameObject.FindGameObjectsWithTag("Mothership");
-        if (candidates.Length > 1)
+	    //Find the corresponding destination locations
+        // In case we have a checkpoint, the destination becomes that checkpoint,
+        //  Else we will just use end position
+        if (checkpoint == null)
         {
-            DroneSpawn s;
-            // Check for both objects if it is the mothership we want
-            if (candidates[0].transform == this.transform)
+            GameObject[] candidates = GameObject.FindGameObjectsWithTag("Mothership");
+            if (candidates.Length > 1)
             {
-                s = candidates[1].GetComponent<DroneSpawn>();
+                DroneSpawn s;
+                // Check for both objects if it is the mothership we want
+                if (candidates[0].transform == this.transform)
+                {
+                    s = candidates[1].GetComponent<DroneSpawn>();
+                }
+                else
+                {
+                    s = candidates[0].GetComponent<DroneSpawn>();
+                }
+
+                Transform[] temp_spawn = s.spawn_locations;
+
+                // Copy the spawn locations on the opposing mothership
+                // as the destination of our mothership
+                for (int i = 0; i < temp_spawn.Length; i++)
+                {
+                    destination[temp_spawn.Length - 1 - i] = temp_spawn[i];
+                }
+
             }
             else
             {
-                s = candidates[0].GetComponent<DroneSpawn>();
+                Debug.LogError("No Destination Mothership in scene");
             }
-
-            Transform[] temp_spawn = s.spawn_locations;
-            
-            // Copy the spawn locations on the opposing mothership
-            // as the destination of our mothership
-            for (int i = 0; i < temp_spawn.Length; i++)
-            {
-                destination[temp_spawn.Length -1 - i] = temp_spawn[i];
-            }
-
         }
         else
         {
-            Debug.LogError("No Destination Mothership in scene");
+            for (int i = 0; i < destination.Length; i++)
+                {
+                    destination[i] = checkpoint.transform;
+                }
         }
-
         // Start the spawn calls in startTime seconds
         InvokeRepeating("SpawnDrones", startTime, repeatTime);
        

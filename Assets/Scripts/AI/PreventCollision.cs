@@ -26,7 +26,6 @@ public class PreventCollision : MonoBehaviour {
         layerMask = ~layerMask;
         if (Physics.Raycast(origin, direction, out hitInfo, distance, layerMask))
         {
-            Debug.Log(hitInfo.transform.gameObject.layer);
             if (hitInfo.transform != drone)
             {
                 Debug.DrawLine(origin, hitInfo.point, Color.red);
