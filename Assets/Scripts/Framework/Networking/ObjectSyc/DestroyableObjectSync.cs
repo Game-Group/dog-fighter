@@ -11,6 +11,9 @@ public class DestroyableObjectSync : ObjectSync
 		if (Network.peerType != NetworkPeerType.Server)
 			return;
 
+        Debug.Log("Health sync requested.");
+
+
 		this.SyncHealth = true;
 
 	}

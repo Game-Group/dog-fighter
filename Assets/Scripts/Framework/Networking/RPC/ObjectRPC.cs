@@ -65,8 +65,10 @@ public class ObjectRPC : RPCHolder
 	}
 
 	[RPC]
-	private void SetHealthRPC(NetworkViewID objectOwner, int objectID, float health, float shields)
+	private void SetObjectHealthRPC(NetworkViewID objectOwner, int objectID, float health, float shields)
 	{
+        Debug.Log("SetObjectHealthRPC received.");
+
 		GameObject obj = base.GetObject(objectOwner, objectID);
 		HealthControl healthControl = obj.GetComponent<HealthControl>();
 
