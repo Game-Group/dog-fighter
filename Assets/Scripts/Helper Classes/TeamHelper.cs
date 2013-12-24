@@ -13,6 +13,17 @@ public static class TeamHelper
 		else return -1;
 	}
 
+    public static int GetTeamNumber(int layer)
+    {
+        string layerString = LayerMask.LayerToName(layer);
+        string c = layerString.Substring(4, 1);
+
+        int result = -1;
+        if (int.TryParse(c, out result))
+            return result;
+        else return -1;
+    }
+
 	public static bool IsSameTeam(int layer1, int layer2)
 	{
 		string layer1Name = LayerMask.LayerToName(layer1);

@@ -10,13 +10,24 @@ public class ThirdPersonCrosshair : MonoBehaviour
 	public float MaxDistance; 
 
 	public GUITexture CrosshairPrefab;
-	
-	private int layerMask = ~(1 << 11);
+
+	private int layerMask;
 	private Camera _camera;
 	private GUITexture crosshair;
 
 	void Start()
 	{
+        int teamNumber = TeamHelper.GetTeamNumber(gameObject.layer);
+
+        int teamXActorMask;
+        if (teamNumber == 1)
+            teamXActorMask = 1 << 8;
+        else teamXActorMask = 1 << 11;
+
+        int projectileMask = (1 << 10) | (1 << 13);
+
+        layerMask = ~(teamXActorMask | projectileMask);
+
 		_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
 		crosshair = (GUITexture)Instantiate(CrosshairPrefab);
 	}

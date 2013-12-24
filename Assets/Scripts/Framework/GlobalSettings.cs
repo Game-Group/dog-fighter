@@ -11,7 +11,11 @@ public class GlobalSettings : MonoBehaviour
 	void Start () {
 	}
 
-	
+    void Awake()
+    {
+        HasFocus = true;
+    }
+
 	void OnApplicationFocus(bool focus) 
 	{
     	HasFocus = focus;    
