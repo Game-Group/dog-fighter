@@ -50,7 +50,7 @@ public class ObjectRPC : RPCHolder
 	{
 		channel.CheckServer();
 
-        Debug.Log("Sending SetObjectHealthRPC");
+        //Debug.Log("Sending SetObjectHealthRPC");
 
 		channel.networkView.RPC("SetObjectHealthRPC", RPCMode.Others, objectOwner.ID, objectID, health, shields);
 	}
@@ -67,7 +67,7 @@ public class ObjectRPC : RPCHolder
     [RPC]
     private void SetObjectLayerRPC(NetworkViewID owner, int objectID, int layer)
     {
-        Debug.Log("SetObjectLayerRPC received.");
+        //Debug.Log("SetObjectLayerRPC received.");
 
         GameObject obj = base.GetObject(owner, objectID);
         obj.name = "Player_" + layer;

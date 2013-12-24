@@ -39,13 +39,13 @@ public static class TeamHelper
 	{
 		string layerName = LayerMask.LayerToName(layer);
 
-        Debug.Log("Checking for same team.");
+        //Debug.Log("Checking for same team.");
 		
 		string tagTeam = tag.Substring(0, 5);
 		string layerTeam = layerName.Substring(0, 5);
 
-        Debug.Log("Tag: " + tag);
-        Debug.Log("Layer: " + layer);
+        //Debug.Log("Tag: " + tag);
+        //Debug.Log("Layer: " + layer);
 		
 		return tagTeam == layerTeam;
 	}
