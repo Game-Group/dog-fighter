@@ -68,6 +68,9 @@ public class HealthControl : MonoBehaviour
 
     void OnGUI()
     {
+        if (!this.DrawHealthInfo)
+            return;
+
         Color hullColor = Color.Lerp(Color.red, Color.green, health / MaxHealth);
 
         GUI.color = hullColor;
@@ -157,15 +160,6 @@ public class HealthControl : MonoBehaviour
         if (ignoreShieldDelay || currentShieldDelay <= 0)
             shieldStrength = Mathf.Min(shieldStrength + shieldHealing, MaxShields);
     }
-	public void OnGUI()
-	{
-        if (!this.DrawHealthInfo)
-            return;
-
-		GUI.Label(new Rect(0, 0, 100, 100)
-		          , "Health: " + health + "/" + MaxHealth + "\n"
-		          + "Shields: " + shieldStrength + "/" + MaxShields);
-	}
 
 	private DestroyableObjectSync objSync;
 }
