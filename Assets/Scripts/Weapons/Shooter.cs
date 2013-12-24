@@ -33,11 +33,11 @@ public class Shooter : MonoBehaviour
 	{
 		projectileTag = TeamHelper.LayerToProjectileTag(gameObject.layer);
 		projectileLayerMask = LayerMask.NameToLayer(projectileTag);
-        Debug.Log("Determining layers.");
-        Debug.Log(gameObject.name);
-        Debug.Log("Player ship layer: " + gameObject.layer);
-        Debug.Log("Previous ship layer: " + previousObjLayer);
-        Debug.Log("Output layer: " + projectileLayerMask);
+        //Debug.Log("Determining layers.");
+        //Debug.Log(gameObject.name);
+        //Debug.Log("Player ship layer: " + gameObject.layer);
+        //Debug.Log("Previous ship layer: " + previousObjLayer);
+        //Debug.Log("Output layer: " + projectileLayerMask);
         this.previousObjLayer = gameObject.layer;
 	}
 
