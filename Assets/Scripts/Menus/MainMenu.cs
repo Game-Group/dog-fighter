@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public string MultiplayerButton_Text;
     public string QuitButton_Text;
 
-    public float ScreenPercentageYOffset;
+    public float TopMargin;
     public float ButtonWidth;
     public float ButtonHeight;
     public float ButtonVerticalSpacing;
@@ -20,28 +20,28 @@ public class MainMenu : MonoBehaviour
         if (
             GUI.Button(
             new Rect(Screen.width / 2 - ButtonWidth / 2,
-                     (ScreenPercentageYOffset / 100) * Screen.height + (ButtonHeight  + ButtonVerticalSpacing)* i++,
+                     TopMargin * Screen.height + (ButtonHeight  + ButtonVerticalSpacing)* i++,
                      ButtonWidth,
                      ButtonHeight),
             new GUIContent(SinglePlayerButton_Text))
             )
         {
             GlobalSettings.SinglePlayer = true;
-            Application.LoadLevel("Prototype1");
+            Application.LoadLevel("ScenePickMenu");
         }
 
         // multiplayer button
         if (
             GUI.Button(
             new Rect(Screen.width / 2 - ButtonWidth / 2,
-                     (ScreenPercentageYOffset / 100) * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
+                     TopMargin * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
                      ButtonWidth,
                      ButtonHeight),
             new GUIContent(MultiplayerButton_Text))
             )
         {
             GlobalSettings.SinglePlayer = false;
-            Application.LoadLevel("Prototype1");
+            Application.LoadLevel("ScenePickMenu");
         }
 
 
@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
         if (
             GUI.Button(
             new Rect(Screen.width / 2 - ButtonWidth / 2,
-            (ScreenPercentageYOffset / 100) * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
+            TopMargin * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
             ButtonWidth,
             ButtonHeight),
             new GUIContent(QuitButton_Text))

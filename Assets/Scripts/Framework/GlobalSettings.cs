@@ -18,12 +18,4 @@ public class GlobalSettings : MonoBehaviour
     	HasFocus = focus;    
 		//Debug.Log("Focus = " + this.HasFocus);
 	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-
-	}
-
-
 }
