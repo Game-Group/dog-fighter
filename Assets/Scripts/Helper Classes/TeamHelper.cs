@@ -38,9 +38,14 @@ public static class TeamHelper
 	public static bool IsSameTeam(string tag, int layer)
 	{
 		string layerName = LayerMask.LayerToName(layer);
+
+        Debug.Log("Checking for same team.");
 		
 		string tagTeam = tag.Substring(0, 5);
 		string layerTeam = layerName.Substring(0, 5);
+
+        Debug.Log("Tag: " + tag);
+        Debug.Log("Layer: " + layer);
 		
 		return tagTeam == layerTeam;
 	}
@@ -78,4 +83,14 @@ public static class TeamHelper
 
 		return "Invalid";
 	}
+
+    public static void IterativeLayerAssignment(Transform obj, int layer)
+    {
+        obj.gameObject.layer = layer;
+
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            IterativeLayerAssignment(obj.transform.GetChild(i), layer);
+        }
+    }
 }

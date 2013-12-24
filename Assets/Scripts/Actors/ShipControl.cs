@@ -68,7 +68,7 @@ public class ShipControl : MonoBehaviour {
 		incrSpeed = 0.005f;
         rollSpeed = 1000;
 
-        mouseFollowSpeed = 0.25f;
+        mouseFollowSpeed = 0.50f;
 
         // Init key press variables
 		forward = false;

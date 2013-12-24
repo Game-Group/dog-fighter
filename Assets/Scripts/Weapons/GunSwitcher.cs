@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Allows for switching between a list of guns using specified keyboard keys.
@@ -16,6 +16,12 @@ public class GunSwitcher : MonoBehaviour
 
 	public GameObject[] CurrentGuns;
 	private int currentGunIndex;
+    //private IList<int> previousLayers;
+
+    //private void Awake()
+    //{
+    //    this.previousLayers = new List<int>(2);
+    //}
 
 	void Start()
 	{
@@ -34,11 +40,21 @@ public class GunSwitcher : MonoBehaviour
 		CurrentGuns = new GameObject[Hardpoints.Length];
 		assignNewGuns(currentGunIndex);
 
-
+        //foreach (Transform hardpoint in this.Hardpoints)
+        //    this.previousLayers.Add(-1);
 	}
 
 	void Update () 
 	{
+        for (int i = 0; i < this.Hardpoints.Length; i++)
+        {
+            if (this.CurrentGuns[i].layer != this.Hardpoints[i].gameObject.layer)
+            {
+                this.CurrentGuns[i].layer = this.Hardpoints[i].gameObject.layer;
+                Debug.Log("Found!");
+            }
+        }
+
 		// Check for input and swap accordingly.
 		if(Input.GetKeyDown(NextGun))
 		{

@@ -8,10 +8,13 @@ public class PlayerShipSync : DestroyableObjectSync
 		base.Start ();
 
 		this.objectTransformer = this.GetComponent<ObjectTransformer>();
+        this.tag = Tags.Player;
 	}
 
 	protected override void SyncFunction ()
 	{
+        base.SyncFunction();
+
 		if (Network.isServer)
 		{
 			Vector3 pos = this.transform.position;

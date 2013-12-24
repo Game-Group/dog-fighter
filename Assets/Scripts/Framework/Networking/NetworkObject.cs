@@ -25,8 +25,12 @@ public class NetworkObject : MonoBehaviour {
 	protected GameObject GetObject(NetworkViewID owner, int objectID)
 	{
 		Player player = this.Players[owner];
-		return this.ObjectTables.GetPlayerObject(player, objectID);
+        return this.GetObject(player, objectID);
 	}
+    protected GameObject GetObject(Player player, int objectID)
+    {
+        return this.ObjectTables.GetPlayerObject(player, objectID);
+    }
 
 	// Use this for initialization
 	protected virtual void Start () {

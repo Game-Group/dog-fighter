@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HealthControl : MonoBehaviour 
 {
+    public bool DrawHealthInfo { get; set; }
+
 	public PlayerRespawner RespawnPoint;
 	public float RespawnDelay;
 
@@ -27,6 +29,11 @@ public class HealthControl : MonoBehaviour
 	private float health;
 	private float shieldStrength;
     private float currentShieldDelay;
+
+    private void Awake()
+    {
+        this.DrawHealthInfo = true;
+    }
 
 	void Start()
 	{
@@ -53,7 +60,7 @@ public class HealthControl : MonoBehaviour
 	{
         currentShieldDelay = Mathf.Max(currentShieldDelay - Time.deltaTime, 0);
 
-		Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime, false);
+		//Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
 
 		if (Input.GetKeyDown(KeyCode.F7))
 			TakeDamage(MaxHealth, MaxShields);
@@ -144,12 +151,20 @@ public class HealthControl : MonoBehaviour
 		RespawnPoint.DisableAndWaitForSpawn(RespawnDelay);
 	}
 
-	public void Heal(float hullHealing, float shieldHealing, bool ignoreShieldDelay = true)
-	{
-		health = Mathf.Min(health + hullHealing, MaxHealth);
-
+    public void Heal(float hullHealing, float shieldHealing, bool ignoreShieldDelay = true)
+    {
+        health = Mathf.Min(health + hullHealing, MaxHealth);
         if (ignoreShieldDelay || currentShieldDelay <= 0)
             shieldStrength = Mathf.Min(shieldStrength + shieldHealing, MaxShields);
+    }
+	public void OnGUI()
+	{
+        if (!this.DrawHealthInfo)
+            return;
+
+		GUI.Label(new Rect(0, 0, 100, 100)
+		          , "Health: " + health + "/" + MaxHealth + "\n"
+		          + "Shields: " + shieldStrength + "/" + MaxShields);
 	}
 
 	private DestroyableObjectSync objSync;

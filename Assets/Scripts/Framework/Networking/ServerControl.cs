@@ -23,7 +23,8 @@ public class ServerControl : NetworkObject
 		Network.InitializeServer(10, base.NetworkControl.ServerPort, false);
 	}
 
-	private bool firstPlayer;
+	private bool firstPlayerJoined;
+    private bool firstTeamAssigned;
 
 	private void OnServerInitialized()
 	{
@@ -33,9 +34,8 @@ public class ServerControl : NetworkObject
 
 	private void OnPlayerConnected(NetworkPlayer networkPlayer)
 	{
-		if (!this.firstPlayer)
+        if (!this.firstPlayerJoined)
 		{			
-			this.firstPlayer = true;
 			ObjectRPC.LoadLevel(0);
 		}
 
@@ -52,6 +52,29 @@ public class ServerControl : NetworkObject
 
 		// Notice everyone that the new player has joined.
 		PlayerRPC.NewPlayerJoined(networkPlayer, viewID);
-		this.CurrentLevel.SyncNewPlayer(base.Players[viewID]);
+
+        // Sync the existing game world with the new player.
+        Player newPlayer = base.Players[viewID];
+        this.CurrentLevel.SyncNewPlayer(newPlayer);
+
+        this.assignTeam(newPlayer);
+
+        this.firstPlayerJoined = true;
 	}
+
+    private void assignTeam(Player player)
+    {
+        Layers layer = Layers.Team1Actor;
+
+        if (this.firstPlayerJoined)
+            layer = Layers.Team2Actor;
+
+        PlayerObjects objs = base.ObjectTables.PlayerObjects[player];
+        GameObject playerShip = base.ObjectTables.GetPlayerObject(player, objs.PlayerShipID);
+        playerShip.layer = (int)layer;
+
+        Debug.Log("Assigned layer: " + layer);
+
+        ObjectRPC.SetObjectLayer(player, objs.PlayerShipID, layer);
+    }
 }

@@ -34,7 +34,10 @@ public class NetworkPrototypeLevel : LevelCreator {
 					newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerSpawnPointID, playerSpawnPoint.transform.position
 					); 				
 
+                GameObject playerShip = base.GetObject(p, playerObjects.PlayerShipID);
+
 				PlayerShipRPC.CreatePlayerShip(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID);
+                ObjectRPC.SetObjectLayer(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID, (Layers)playerShip.layer);
 			}
 			else
 			{

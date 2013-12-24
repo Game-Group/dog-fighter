@@ -13,7 +13,6 @@ public class DestroyableObjectSync : ObjectSync
 
         Debug.Log("Health sync requested.");
 
-
 		this.SyncHealth = true;
 
 	}
@@ -28,10 +27,14 @@ public class DestroyableObjectSync : ObjectSync
 		{
 			if (this.SyncHealth)
 			{
+                //Debug.Log("Syncing health.");
+
 				float health = this.healthControl.CurrentHealth;
 				float shield = this.healthControl.CurrentShields;
 
 				ObjectRPC.SetObjectHealth(base.Owner, base.GlobalID, health, shield);
+
+                this.SyncHealth = false;
 			}
 		}
 	}

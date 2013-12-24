@@ -19,18 +19,26 @@ public class Shooter : MonoBehaviour
 	private float reloadTimer;
 	private int projectileLayerMask; 
 	private string projectileTag;
+    private int previousObjLayer;
 
 	void Start()
 	{
 		reloadTimer = 0;
 		ProjectileSpeed = Projectile.GetComponent<ProjectileController>().FlyControl.DesiredSpeed;
-		DetermineProjectileLayer();
+        this.previousObjLayer = -1;
+		//DetermineProjectileLayer();
 	}
 
 	private void DetermineProjectileLayer()
 	{
 		projectileTag = TeamHelper.LayerToProjectileTag(gameObject.layer);
 		projectileLayerMask = LayerMask.NameToLayer(projectileTag);
+        Debug.Log("Determining layers.");
+        Debug.Log(gameObject.name);
+        Debug.Log("Player ship layer: " + gameObject.layer);
+        Debug.Log("Previous ship layer: " + previousObjLayer);
+        Debug.Log("Output layer: " + projectileLayerMask);
+        this.previousObjLayer = gameObject.layer;
 	}
 
 	public void Shoot()
@@ -81,6 +89,9 @@ public class Shooter : MonoBehaviour
 
 	private void SpawnProjectile(Transform shotPosition)
 	{
+        if (this.previousObjLayer != this.gameObject.layer)
+            this.DetermineProjectileLayer();
+
 		// Create an instance of the prefab projectile.
 		Rigidbody shot = Instantiate(Projectile) as Rigidbody;
 
@@ -93,6 +104,9 @@ public class Shooter : MonoBehaviour
 		shot.gameObject.layer = projectileLayerMask;
 		shot.gameObject.tag = projectileTag;
 
+        //Debug.Log("Assigning stuff to projectile.");
+        //Debug.Log("Layer: " + projectileLayerMask);
+        //Debug.Log("Tag: " + projectileTag);
 
 		// Fire it away by giving it a velocity.
 		ProjectileController pController = shot.GetComponent<ProjectileController>();

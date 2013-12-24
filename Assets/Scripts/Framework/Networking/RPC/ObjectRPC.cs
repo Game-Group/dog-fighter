@@ -5,7 +5,28 @@ public class ObjectRPC : RPCHolder
 {
 	public GameObject PlayerSpawnPoint;
 
-	public static void LoadLevel(int levelID)
+    #region Calls
+
+    public static void SetObjectTag(Player objectOwner, int objectID, string tag)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("SetObjectTagRPC", RPCMode.All, objectOwner.ID, objectID, tag);
+    }
+    public static void SetObjectLayer(Player objectOwner, int objectID, Layers layer)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("SetObjectLayerRPC", RPCMode.All, objectOwner.ID, objectID, (int)layer);
+    }
+    public static void SetObjectLayer(NetworkPlayer target, Player objectOwner, int objectID, Layers layer)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("SetObjectLayerRPC", target, objectOwner.ID, objectID, (int)layer);
+    }
+
+    public static void LoadLevel(int levelID)
 	{
 		channel.CheckServer();
 
@@ -29,10 +50,32 @@ public class ObjectRPC : RPCHolder
 	{
 		channel.CheckServer();
 
+        Debug.Log("Sending SetObjectHealthRPC");
+
 		channel.networkView.RPC("SetObjectHealthRPC", RPCMode.Others, objectOwner.ID, objectID, health, shields);
 	}
 
-	[RPC]
+    #endregion
+
+    #region RPCs
+    [RPC]
+    private void SetObjectTagRPC(NetworkViewID owner, int objectID, string tag)
+    {
+        GameObject obj = base.GetObject(owner, objectID);
+        obj.tag = tag;
+    }
+    [RPC]
+    private void SetObjectLayerRPC(NetworkViewID owner, int objectID, int layer)
+    {
+        Debug.Log("SetObjectLayerRPC received.");
+
+        GameObject obj = base.GetObject(owner, objectID);
+        obj.name = "Player_" + layer;
+        obj.layer = layer;
+        TeamHelper.IterativeLayerAssignment(obj.transform, layer);
+    }
+
+    [RPC]
 	private void LoadLevelRPC(int levelID, NetworkMessageInfo info)
 	{
 		LevelCreator creator = null;
@@ -75,8 +118,9 @@ public class ObjectRPC : RPCHolder
 		healthControl.CurrentHealth = health;
 		healthControl.CurrentShields = shields;
 	}
-	
-	private static ObjectRPC channel
+    #endregion
+
+    private static ObjectRPC channel
 	{
 		get
 		{
