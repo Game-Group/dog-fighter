@@ -28,8 +28,8 @@ public class PlayerOnCollideHandling : MonoBehaviour
 	{
 		if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
 		{
-            Debug.Log("Collision detected.");
-            Debug.Log(info.gameObject.name);
+            //Debug.Log("Collision detected.");
+            //Debug.Log(info.gameObject.name);
 
 			if (!TeamHelper.IsSameTeam(info.collider.gameObject.tag, gameObject.layer))
 				HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage, info.contacts[0].point);
