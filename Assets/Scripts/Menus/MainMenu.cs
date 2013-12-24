@@ -4,6 +4,7 @@ using System.Collections;
 public class MainMenu : MonoBehaviour 
 {
     public string SinglePlayerButton_Text;
+    public string MultiplayerButton_Text;
     public string QuitButton_Text;
 
     public float ScreenPercentageYOffset;
@@ -25,8 +26,24 @@ public class MainMenu : MonoBehaviour
             new GUIContent(SinglePlayerButton_Text))
             )
         {
+            GlobalSettings.SinglePlayer = true;
             Application.LoadLevel("Prototype1");
         }
+
+        // multiplayer button
+        if (
+            GUI.Button(
+            new Rect(Screen.width / 2 - ButtonWidth / 2,
+                     (ScreenPercentageYOffset / 100) * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
+                     ButtonWidth,
+                     ButtonHeight),
+            new GUIContent(MultiplayerButton_Text))
+            )
+        {
+            GlobalSettings.SinglePlayer = false;
+            Application.LoadLevel("Prototype1");
+        }
+
 
         // exit button
         if (

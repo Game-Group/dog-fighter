@@ -3,18 +3,15 @@ using System.Collections;
 
 public class GlobalSettings : MonoBehaviour 
 {
-	public const bool SinglePlayer = false;
+	public static bool SinglePlayer = true;
 	
 	public static bool HasFocus { get; private set;}
 	
 	// Use this for initialization
-	void Start () {
-	}
-
-    void Awake()
+	void Start () 
     {
-        HasFocus = true;
-    }
+        DontDestroyOnLoad(this);
+	}
 
 	void OnApplicationFocus(bool focus) 
 	{
@@ -23,7 +20,8 @@ public class GlobalSettings : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 
 	}
 
