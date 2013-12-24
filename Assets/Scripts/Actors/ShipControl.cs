@@ -26,6 +26,7 @@ public class ShipControl : MonoBehaviour
     public float rotationx;
     [HideInInspector]
     public float rotationy;
+    public Vector3 currentRotation;
 
     public Vector2 MouseRotation { get; private set; }
 
@@ -84,6 +85,7 @@ public class ShipControl : MonoBehaviour
 
         rotationx = 0;
         rotationy = 0;
+        currentRotation = new Vector3(0, 0, 0);
 
         mousex = 0;
         mousey = 0;
@@ -117,12 +119,12 @@ public class ShipControl : MonoBehaviour
 
         float[] p = CalculateMousePosition();
 
-        float rotationx = p[0] * mouseFollowSpeed * Time.deltaTime;
-        float rotationy = p[1] * mouseFollowSpeed * Time.deltaTime;
+        float rotationx =  p[0] * mouseFollowSpeed * Time.deltaTime;
+        float rotationy =  p[1] * mouseFollowSpeed * Time.deltaTime;
 
         this.MouseRotation = new Vector2(rotationx, rotationy);
 
-        Vector3 currentRotation = this.objectTransform.Rotation;
+        currentRotation = this.objectTransform.Rotation;
 
         this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
     }
