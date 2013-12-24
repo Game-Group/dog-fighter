@@ -76,7 +76,6 @@ public class ThirdPersonCamera : MonoBehaviour
             {
                 rotationz += s.currentRotation.z;
                 this.transform.Rotate(0, 0, rotationz * Time.deltaTime, Space.Self);
-                Debug.Log(transform.rotation.z);
                 // Convert the angle into a rotation
             }
             catch(System.Exception e)
