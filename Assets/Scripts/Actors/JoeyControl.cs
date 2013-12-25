@@ -167,7 +167,7 @@ public class JoeyControl : MonoBehaviour
 
             Vector3 translation = new Vector3(
                                               xCameraOffset,
-                                              yCameraOffset,
+                                              -yCameraOffset,
                                               -zCameraOffset);
 
             // Apply the offset.
