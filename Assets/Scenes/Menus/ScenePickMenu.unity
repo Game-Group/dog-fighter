@@ -184,6 +184,8 @@ MonoBehaviour:
   SceneButtons:
   - ButtonText: Prototype 1
     SceneName: Prototype1
+  - ButtonText: Joey Control
+    SceneName: reworked_Controls
   - ButtonText: Main Menu
     SceneName: MainMenu
   ButtonWidth: 300
