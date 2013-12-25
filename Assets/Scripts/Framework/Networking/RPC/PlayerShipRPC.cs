@@ -33,21 +33,6 @@ public class PlayerShipRPC : RPCHolder {
 		channel.networkView.RPC("SpawnPlayerShipRPC", target, player.ID, spawnPointID, playerShipID);			
 	}
 
-	public static void PlayerShipPosition(Player player, Vector3 position, Vector3 orientation)
-	{
-//		Debug.Log ("Sending player ship position.");
-
-		channel.networkView.RPC ("PlayerShipPositionRPC", RPCMode.Others, player.ID, position, orientation);
-	}
-
-	public static void PlayerShipVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
-	{
-//		Debug.Log("Sending player ship velocity.");
-
-		channel.networkView.RPC ("PlayerShipVelocityRPC", RPCMode.Server, player.ID, transform, rotation);
-		
-	}
-
 	public static void FireWeapon(Player player, bool fire) 
 	{
 		RPCMode mode;
@@ -103,31 +88,9 @@ public class PlayerShipRPC : RPCHolder {
 	}
 
 	[RPC]
-	private void PlayerShipPositionRPC(NetworkViewID playerID, Vector3 position, Vector3 orientation)
-	{
-//		Debug.Log("Player ship position received.");
-
-		GameObject playerShip = this.getPlayerShip(playerID);
-		playerShip.transform.position = position;
-		playerShip.transform.eulerAngles = orientation;
-	}
-
-	[RPC]
-	private void PlayerShipVelocityRPC(NetworkViewID playerID, Vector3 translation, Vector3 rotation)
-	{
-//		Debug.Log("Player ship velocity received.");		
-
-		GameObject playerShip = this.getPlayerShip(playerID);
-		ObjectTransformer objectTransform = playerShip.GetComponent<ObjectTransformer>();
-
-		objectTransform.Translation = translation;
-		objectTransform.Rotation = rotation;
-	}
-
-	[RPC]
 	private void FireWeaponRPC(NetworkViewID playerID, bool fire)
 	{
-		GameObject playerShip = this.getPlayerShip(playerID);
+		GameObject playerShip = base.GetPlayerShip(playerID);
 
 		GunSwitcher gunSwitcher = playerShip.GetComponent<GunSwitcher>();
 
@@ -139,15 +102,6 @@ public class PlayerShipRPC : RPCHolder {
 
 		if (Network.isServer)
 			FireWeapon(base.Players[playerID], fire);
-	}
-
-	private GameObject getPlayerShip(NetworkViewID playerID)
-	{
-		Player player = base.NetworkControl.Players[playerID];
-
-		int playerShipID = base.ObjectTables.PlayerObjects[player].PlayerShipID;
-		
-		return base.ObjectTables.GetPlayerObject(player, playerShipID);
 	}
 	#endregion
 

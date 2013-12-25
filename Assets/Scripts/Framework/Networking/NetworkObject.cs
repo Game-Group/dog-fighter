@@ -31,6 +31,14 @@ public class NetworkObject : MonoBehaviour {
     {
         return this.ObjectTables.GetPlayerObject(player, objectID);
     }
+    protected GameObject GetPlayerShip(NetworkViewID playerID)
+    {
+        Player player = this.NetworkControl.Players[playerID];
+
+        int playerShipID = this.ObjectTables.PlayerObjects[player].PlayerShipID;
+
+        return this.ObjectTables.GetPlayerObject(player, playerShipID);
+    }
 
 	// Use this for initialization
 	protected virtual void Start () {

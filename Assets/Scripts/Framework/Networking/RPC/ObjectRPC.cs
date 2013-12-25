@@ -33,6 +33,21 @@ public class ObjectRPC : RPCHolder
 		channel.networkView.RPC("LoadLevelRPC", RPCMode.All, levelID);
 	}
 
+    public static void ObjectPosition(Player player, Vector3 position, Vector3 orientation)
+    {
+        //		Debug.Log ("Sending player ship position.");
+
+        channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, position, orientation);
+    }
+
+    public static void ObjectVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
+    {
+        //		Debug.Log("Sending player ship velocity.");
+
+        channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, transform, rotation);
+
+    }
+
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
 	{
 		channel.CheckServer();
@@ -118,6 +133,28 @@ public class ObjectRPC : RPCHolder
 			GameObject.Find("ClientControl").GetComponent<ClientControl>().ChangeLevel(creator);
 		}
 	}
+
+    [RPC]
+    private void ObjectPositionRPC(NetworkViewID playerID, Vector3 position, Vector3 orientation)
+    {
+        //		Debug.Log("Player ship position received.");
+
+        GameObject playerShip = base.GetPlayerShip(playerID);
+        playerShip.transform.position = position;
+        playerShip.transform.eulerAngles = orientation;
+    }
+
+    [RPC]
+    private void ObjectVelocityRPC(NetworkViewID playerID, Vector3 translation, Vector3 rotation)
+    {
+        //		Debug.Log("Player ship velocity received.");		
+
+        GameObject playerShip = base.GetPlayerShip(playerID);
+        ObjectTransformer objectTransform = playerShip.GetComponent<ObjectTransformer>();
+
+        objectTransform.Translation = translation;
+        objectTransform.Rotation = rotation;
+    }
 
 	[RPC]
 	private void CreatePlayerSpawnpointRPC(NetworkViewID owner, int objectID, Vector3 position, NetworkMessageInfo info)

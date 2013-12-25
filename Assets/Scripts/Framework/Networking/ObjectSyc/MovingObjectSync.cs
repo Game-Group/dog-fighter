@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerShipSync : DestroyableObjectSync 
+public class MovingObjectSync : DestroyableObjectSync 
 {
 	protected override void Start ()
 	{
 		base.Start ();
 
 		this.objectTransformer = this.GetComponent<ObjectTransformer>();
-        this.tag = Tags.Player;
 	}
 
 	protected override void SyncFunction ()
@@ -22,7 +21,7 @@ public class PlayerShipSync : DestroyableObjectSync
 
 			if (pos != this.previousPos || orientation != this.previousOrientation)
 			{
-				PlayerShipRPC.PlayerShipPosition(base.Owner, pos, orientation);
+				ObjectRPC.ObjectPosition(base.Owner, pos, orientation);
 				this.previousPos = pos;
 				this.previousOrientation = orientation;
 			}
@@ -34,7 +33,7 @@ public class PlayerShipSync : DestroyableObjectSync
 
 			if (translation != this.previousTranslation || rotation != this.previousRotation)
 			{
-				PlayerShipRPC.PlayerShipVelocity(base.Owner, base.GlobalID, translation, rotation);
+				ObjectRPC.ObjectVelocity(base.Owner, base.GlobalID, translation, rotation);
 
 				this.previousTranslation = translation;
 				this.previousRotation = rotation;
