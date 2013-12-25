@@ -26,7 +26,7 @@ public class PlayerOnCollideHandling : MonoBehaviour
 
 	private void HandleProjectileCollision(Collision info)
 	{
-		if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
+		//if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
 		{
             //Debug.Log("Collision detected.");
             //Debug.Log(info.gameObject.name);

@@ -99,7 +99,12 @@ public class HealthControl : MonoBehaviour
 	public float CurrentHealth 
 	{
 		get { return health; }
-		set { this.health = value; }
+        set
+        {
+            this.health = value;
+            //if (!this.CheckIfAlive())
+            //    this.Die();
+        }
 	}
 	public float CurrentShields 
 	{
@@ -121,6 +126,9 @@ public class HealthControl : MonoBehaviour
 	
 	public void TakeDamage(float hullDamage, float shieldDamage)
 	{
+        if (Network.peerType != NetworkPeerType.Server)
+            return;
+
         currentShieldDelay = ShieldRechargeDelay;
 		shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
 
@@ -128,7 +136,7 @@ public class HealthControl : MonoBehaviour
 
         this.objSync.RequestHealthSync();
 
-		if (health <= 0)
+		if (!this.CheckIfAlive())
 			Die();
 	}
 
@@ -146,8 +154,16 @@ public class HealthControl : MonoBehaviour
 
 	#endregion
 
+    public bool CheckIfAlive()
+    {
+        return this.health > 0;
+    }
+
 	public void Die()
 	{
+        // Notify others that the object should start 'dying'.
+        ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
+
 		GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
 		AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
 

@@ -54,6 +54,28 @@ public class ObjectRPC : RPCHolder
 
 		channel.networkView.RPC("SetObjectHealthRPC", RPCMode.Others, objectOwner.ID, objectID, health, shields);
 	}
+    public static void KillObject(Player objectOwner, int objectID)
+    {
+        channel.CheckServer();
+
+        Debug.Log("Sending KillObjectRPC.");
+
+        channel.networkView.RPC("KillObjectRPC", RPCMode.Others, objectOwner.ID, objectID);
+    }
+    /// <summary>
+    /// Send an RPC to all clients to respawn a certain object. May only be used by the server.
+    /// This function currently only works for player ships.
+    /// </summary>
+    /// <param name="spawnPointOwner">The spawnpoint that will respawn the attatched player.</param>
+    /// <param name="spawnPointID">The ID of the spawnpoint.</param>
+    public static void RespawnObject(Player spawnPointOwner, int spawnPointID)
+    {
+        channel.CheckServer();
+
+        Debug.Log("Sending RespawnObjectRPC.");
+
+        channel.networkView.RPC("RespawnObjectRPC", RPCMode.Others, spawnPointOwner.ID, spawnPointID);
+    }
 
     #endregion
 
@@ -118,6 +140,32 @@ public class ObjectRPC : RPCHolder
 		healthControl.CurrentHealth = health;
 		healthControl.CurrentShields = shields;
 	}
+
+    [RPC]
+    private void KillObjectRPC(NetworkViewID objectOwner, int objectID)
+    {
+        Debug.Log("KillObjectRPC received.");
+
+        GameObject obj = base.GetObject(objectOwner, objectID);
+        HealthControl healthControl = obj.GetComponent<HealthControl>();
+        healthControl.Die();
+    }
+
+    /// <summary>
+    /// RPC to respawn a certain object. This function currently only works for player ships.
+    /// </summary>
+    /// <param name="spawnPointOwner">The spawnpoint that will respawn the attatched player.</param>
+    /// <param name="spawnPointID">The ID of the spawnpoint.</param>
+    [RPC]
+    private void RespawnObjectRPC(NetworkViewID spawnPointOwner, int spawnPointID)
+    {
+        Debug.Log("RespawnObjectRPC received.");
+
+        GameObject spawnPoint = base.GetObject(spawnPointOwner, spawnPointID);
+        PlayerRespawner respawner = spawnPoint.GetComponent<PlayerRespawner>();
+
+        respawner.Respawn();
+    }
     #endregion
 
     private static ObjectRPC channel

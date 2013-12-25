@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GlobalSettings : MonoBehaviour 
 {
-	public static bool SinglePlayer = true;
+	public static bool SinglePlayer = false;
 	
 	public static bool HasFocus { get; private set;}
 	

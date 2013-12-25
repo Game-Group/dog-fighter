@@ -8,6 +8,17 @@ public class ObjectSync : NetworkObject
 	public int GlobalID { get; private set; }
 	public bool IsIDAssigned { get; private set; }
 
+    public bool IsOwner
+    {
+        get
+        {
+            if (GlobalSettings.SinglePlayer)
+                return true;
+
+            return base.NetworkControl.ThisPlayer.ID == this.Owner.ID;
+        }
+    }
+
 	public void AssignID(Player owner, int globalID)
 	{
 		if (!this.IsIDAssigned)
@@ -17,7 +28,7 @@ public class ObjectSync : NetworkObject
 			this.IsIDAssigned = true;
 		}
 		else
-			throw new UnityException("IDs cannot be reassigned.");
+			throw new UnityException("IDs have already been assigned.");
 	}
 
 	public virtual void NetworkDestroy()

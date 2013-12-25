@@ -14,6 +14,13 @@ public class PlayerRespawner : MonoBehaviour
 	private float respawnTimer;
 	private string[] deathTexts;
 
+    private ObjectSync objSync;
+
+    private void Awake()
+    {
+        this.objSync = this.GetComponent<ObjectSync>();
+    }
+
 	void Start () 
 	{
 		deathTexts = new string[5];
@@ -42,7 +49,11 @@ public class PlayerRespawner : MonoBehaviour
 	{
 		attachedPlayer.SetActive(false);
 
-		ActivateRespawnCamera(attachedPlayer.transform);
+        if (Network.peerType != NetworkPeerType.Server || GlobalSettings.SinglePlayer)
+        {
+           if (this.attachedPlayer.GetComponent<ObjectSync>().IsOwner)
+                ActivateRespawnCamera(attachedPlayer.transform);
+        }
 
 		waitingForRespawn = true;
 		respawnTimer = timeBeforeRespawn;
@@ -66,8 +77,10 @@ public class PlayerRespawner : MonoBehaviour
 		DeathText.gameObject.SetActive(false);
 	}
 
-	private void Respawn()
+	public void Respawn()
 	{
+        this.waitingForRespawn = false;
+
 		attachedPlayer.transform.position = gameObject.transform.position;
 		attachedPlayer.transform.rotation = gameObject.transform.rotation;
 
@@ -84,17 +97,18 @@ public class PlayerRespawner : MonoBehaviour
 	
 	void Update () 
 	{
-		if (!GlobalSettings.SinglePlayer)
-			return;
+        if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
+        {
+            if (this.waitingForRespawn)
+            {
+                this.respawnTimer -= Time.deltaTime;
 
-		if (waitingForRespawn)
-		{
-			respawnTimer -= Time.deltaTime;
-			if (respawnTimer <= 0)
-			{
-				Respawn();
-				waitingForRespawn = false;
-			}
-		}
+                if (this.respawnTimer <= 0)
+                {
+                    ObjectRPC.RespawnObject(this.objSync.Owner, this.objSync.GlobalID);
+                    this.Respawn();
+                }
+            }
+        }
 	}
 }
