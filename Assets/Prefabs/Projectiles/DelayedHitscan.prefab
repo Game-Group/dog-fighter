@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28dcf26d0c51184093f52545143ee89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 30
   FlyControl: {fileID: 11400002}
 --- !u!114 &11400002
 MonoBehaviour:

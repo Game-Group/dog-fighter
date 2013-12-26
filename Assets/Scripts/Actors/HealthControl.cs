@@ -1,174 +1,119 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthControl : MonoBehaviour 
+public class HealthControl : MonoBehaviour
 {
-    public bool DrawHealthInfo { get; set; }
-
-	public PlayerRespawner RespawnPoint;
-	public float RespawnDelay;
-
-	public GameObject ExplosionGraphic;
-	public AudioClip ExplosionSound;
-
-	public float MaxHealth;
-	public float MaxShields;
-	public float HealthPerSecond;
-	public float ShieldsPerSecond;
+    public float MaxHealth;
+    public float MaxShields;
+    public float HealthPerSecond;
+    public float ShieldsPerSecond;
     public float ShieldRechargeDelay;
 
-	public GameObject ShieldImpactPrefab;
+    public GameObject ShieldImpactPrefab;
+    public float ShieldImpactScale = 1;
 
-    public float StatusTexture_Left;
-    public float StatusTexture_Top;
-    public float StatusTexture_Width;
-    public float StatusTexture_Height;
-    public Texture2D HullTexture;
-    public Texture2D ShieldTexture;
+    protected float health;
+    protected float shieldStrength;
+    protected float currentShieldDelay;
 
-	private float health;
-	private float shieldStrength;
-    private float currentShieldDelay;
-
-    private void Awake()
+    void Start()
     {
-        this.DrawHealthInfo = true;
+        Initialize();
+
+        health = MaxHealth;
+        shieldStrength = MaxShields;
+        this.objSync = this.GetComponent<DestroyableObjectSync>();
     }
 
-	void Start()
-	{
-		health = MaxHealth;
-		shieldStrength = MaxShields;
-		PlayerRespawner[] respawnpoints = FindObjectsOfType<PlayerRespawner>();
-		foreach (PlayerRespawner spawner in respawnpoints)
-			if (spawner.gameObject.layer == gameObject.layer)
-			{
-				RespawnPoint = spawner;
-				break;
-			}
+    /// <summary>
+    /// Called at the first line of the Start() method.
+    /// </summary>
+    protected virtual void Initialize()
+    {
 
-		this.objSync = this.GetComponent<DestroyableObjectSync>();
-	}
+    }
 
-	public void OnEnable()
-	{
-		health = MaxHealth;
-		shieldStrength = MaxShields;
-	}
+    protected virtual void OnEnable()
+    {
+        health = MaxHealth;
+        shieldStrength = MaxShields;
+    }
 
-	void Update()
-	{
+    protected virtual void Update()
+    {
         currentShieldDelay = Mathf.Max(currentShieldDelay - Time.deltaTime, 0);
 
-		//Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
-
-		if (Input.GetKeyDown(KeyCode.F7))
-			TakeDamage(MaxHealth, MaxShields);
-	}
-
-    void OnGUI()
-    {
-        if (!this.DrawHealthInfo)
-            return;
-
-        Color hullColor = Color.Lerp(Color.red, Color.green, health / MaxHealth);
-
-        GUI.color = hullColor;
-        GUI.Label(
-            new Rect(StatusTexture_Left, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-            new GUIContent(HullTexture));
-
-        Color shieldColor = Color.white;
-        shieldColor.a = shieldStrength / MaxShields;
-
-        GUI.color = shieldColor;
-        GUI.Label(
-             new Rect(StatusTexture_Left, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-             new GUIContent(ShieldTexture));
-
-        GUI.color = Color.white;
-        GUI.Label(
-                new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent("Hull: " + health + "/" + MaxHealth));
-        GUI.Label(
-                new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top + 20, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent("Shields: " + shieldStrength + "/" + MaxShields));
-
+        Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
     }
 
-	public float CurrentHealth 
-	{
-		get { return health; }
+    public float CurrentHealth
+    {
+        get { return health; }
         set
         {
             this.health = value;
             //if (!this.CheckIfAlive())
             //    this.Die();
         }
-	}
-	public float CurrentShields 
-	{
-		get { return shieldStrength; }
-		set { this.shieldStrength = value; }
-	}
+    }
+    public float CurrentShields
+    {
+        get { return shieldStrength; }
+        set { this.shieldStrength = value; }
+    }
 
-	#region TakeDamageMethods
+    #region TakeDamageMethods
 
-	public void TakeDamage(float damage)
-	{
-		TakeDamage(Mathf.Max(0, damage - shieldStrength), damage);
-	}
+    public virtual void TakeDamage(float damage)
+    {
+        TakeDamage(Mathf.Max(0, damage - shieldStrength), damage);
+    }
 
-	public void TakeDamage(float damage, Vector3 impactPoint)
-	{
-		TakeDamage(Mathf.Max(0, damage - shieldStrength), damage, impactPoint);
-	}
-	
-	public void TakeDamage(float hullDamage, float shieldDamage)
-	{
-        if (Network.peerType != NetworkPeerType.Server)
+    public virtual void TakeDamage(float damage, Vector3 impactPoint)
+    {
+        TakeDamage(Mathf.Max(0, damage - shieldStrength), damage, impactPoint);
+    }
+
+    public virtual void TakeDamage(float hullDamage, float shieldDamage)
+    {
+        if (Network.peerType != NetworkPeerType.Server && !GlobalSettings.SinglePlayer)
             return;
 
         currentShieldDelay = ShieldRechargeDelay;
-		shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
+        shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
 
-		health = Mathf.Max(0, health - hullDamage);
+        health = Mathf.Max(0, health - hullDamage);
 
         this.objSync.RequestHealthSync();
 
-		if (!this.CheckIfAlive())
-			Die();
-	}
+        if (!this.CheckIfAlive())
+            Die();
+    }
 
-	public void TakeDamage(float hullDamage, float shieldDamage, Vector3 impactPoint)
-	{
-		if (shieldStrength > 0)
-		{
-			GameObject shieldPrefabInstance = (GameObject)Instantiate(ShieldImpactPrefab, transform.position, transform.rotation);
-			shieldPrefabInstance.transform.LookAt(impactPoint);
-			shieldPrefabInstance.transform.parent = transform;
-		}
+    public virtual void TakeDamage(float hullDamage, float shieldDamage, Vector3 impactPoint)
+    {
+        if (shieldStrength > 0)
+        {
+            GameObject shieldPrefabInstance = (GameObject)Instantiate(ShieldImpactPrefab, transform.position, transform.rotation);
+            shieldPrefabInstance.transform.LookAt(impactPoint);
+            shieldPrefabInstance.transform.parent = transform;
+            shieldPrefabInstance.transform.localScale *= ShieldImpactScale;
+        }
 
         TakeDamage(hullDamage, shieldDamage);
-	}
+    }
 
-	#endregion
+    #endregion
 
     public bool CheckIfAlive()
     {
         return this.health > 0;
     }
 
-	public void Die()
-	{
-        // Notify others that the object should start 'dying'.
-        ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
-
-		GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
-		AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
-
-		RespawnPoint.DisableAndWaitForSpawn(RespawnDelay);
-	}
+    public virtual void Die()
+    {
+        Destroy(gameObject);
+    }
 
     public void Heal(float hullHealing, float shieldHealing, bool ignoreShieldDelay = true)
     {
@@ -177,5 +122,5 @@ public class HealthControl : MonoBehaviour
             shieldStrength = Mathf.Min(shieldStrength + shieldHealing, MaxShields);
     }
 
-	private DestroyableObjectSync objSync;
+    protected DestroyableObjectSync objSync;
 }

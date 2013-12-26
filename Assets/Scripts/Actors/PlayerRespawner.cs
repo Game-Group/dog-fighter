@@ -105,7 +105,8 @@ public class PlayerRespawner : MonoBehaviour
 
                 if (this.respawnTimer <= 0)
                 {
-                    ObjectRPC.RespawnObject(this.objSync.Owner, this.objSync.GlobalID);
+                    if (!GlobalSettings.SinglePlayer)
+                        ObjectRPC.RespawnObject(this.objSync.Owner, this.objSync.GlobalID);
                     this.Respawn();
                 }
             }

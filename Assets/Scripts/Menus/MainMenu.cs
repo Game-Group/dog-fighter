@@ -3,27 +3,33 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour 
 {
-    public string SinglePlayerButton_Text;
-    public string MultiplayerButton_Text;
-    public string QuitButton_Text;
+    public string SinglePlayerButtonText;
+    public string MultiplayerButtonText;
+    public string QuitButtonText;
+
+    public float ButtonWidth;
 
     public float TopMargin;
-    public float ButtonWidth;
-    public float ButtonHeight;
+    public float BottomMargin;
+
     public float ButtonVerticalSpacing;
 
     void OnGUI()
     {
+        float nrOfButtons = 3;
+        float buttonAreaHeight = Screen.height * (1 - TopMargin - BottomMargin) - (nrOfButtons - 1) * ButtonVerticalSpacing;
+        float buttonHeight = buttonAreaHeight / nrOfButtons;
+
         int i = 0;
 
         // singleplayer button
         if (
             GUI.Button(
             new Rect(Screen.width / 2 - ButtonWidth / 2,
-                     TopMargin * Screen.height + (ButtonHeight  + ButtonVerticalSpacing)* i++,
+                     TopMargin * Screen.height + (buttonHeight + ButtonVerticalSpacing) * i++,
                      ButtonWidth,
-                     ButtonHeight),
-            new GUIContent(SinglePlayerButton_Text))
+                     buttonHeight),
+            new GUIContent(SinglePlayerButtonText))
             )
         {
             GlobalSettings.SinglePlayer = true;
@@ -34,10 +40,10 @@ public class MainMenu : MonoBehaviour
         if (
             GUI.Button(
             new Rect(Screen.width / 2 - ButtonWidth / 2,
-                     TopMargin * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
+                     TopMargin * Screen.height + (buttonHeight + ButtonVerticalSpacing) * i++,
                      ButtonWidth,
-                     ButtonHeight),
-            new GUIContent(MultiplayerButton_Text))
+                     buttonHeight),
+            new GUIContent(MultiplayerButtonText))
             )
         {
             GlobalSettings.SinglePlayer = false;
@@ -49,10 +55,10 @@ public class MainMenu : MonoBehaviour
         if (
             GUI.Button(
             new Rect(Screen.width / 2 - ButtonWidth / 2,
-            TopMargin * Screen.height + (ButtonHeight + ButtonVerticalSpacing) * i++,
-            ButtonWidth,
-            ButtonHeight),
-            new GUIContent(QuitButton_Text))
+                     TopMargin * Screen.height + (buttonHeight + ButtonVerticalSpacing) * i++,
+                     ButtonWidth,
+                     buttonHeight),
+            new GUIContent(QuitButtonText))
             )
         {
             Debug.Log("Quit pressed. Quit does not work in the editor, only in standalone builds.");

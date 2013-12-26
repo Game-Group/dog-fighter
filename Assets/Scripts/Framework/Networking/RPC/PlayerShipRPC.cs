@@ -68,7 +68,7 @@ public class PlayerShipRPC : RPCHolder {
 			playerShip.GetComponentInChildren<AudioListener>().enabled = false;
 			playerShip.GetComponentInChildren<ShipOrientation>().enabled = false;			
 			playerShip.GetComponent<ShipControl>().enabled = false;
-            playerShip.GetComponent<HealthControl>().DrawHealthInfo = false;
+            playerShip.GetComponent<PlayerHealthControl>().DrawHealthInfo = false;
 		}
 
 		base.ObjectTables.PlayerObjects[owner].PlayerShipID = objectID;

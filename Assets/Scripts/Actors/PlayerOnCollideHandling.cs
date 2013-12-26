@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerOnCollideHandling : MonoBehaviour 
 {
-	public HealthControl HealthControl;
+	public PlayerHealthControl HealthControl;
 
 	void OnCollisionEnter(Collision info)
 	{

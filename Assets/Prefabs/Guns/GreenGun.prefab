@@ -134,14 +134,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932725a5f17fbda49af516a0b6c1e2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RayTransform: {fileID: 400002}
   MaxDistance: 200
-  CrosshairPrefab: {fileID: 13100000, guid: be3d0fb08bbc59a428444b562c2eaec0, type: 2}
+  CrosshairTexture: {fileID: 2800000, guid: 031b19d1f4a4bee469d41e1601915d1b, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

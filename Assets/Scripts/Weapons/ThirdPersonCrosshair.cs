@@ -6,17 +6,18 @@ using System.Collections;
 /// </summary>
 public class ThirdPersonCrosshair : MonoBehaviour 
 {
+    public Camera Camera;
+
 	public Transform RayTransform;
 	public float MaxDistance; 
 
-	public GUITexture CrosshairPrefab;
+	public Texture2D CrosshairTexture;
 
+    private Vector2 crosshairPosition;
 	private int layerMask;
-	private Camera _camera;
-	private GUITexture crosshair;
 
 	void Start()
-	{
+	{       
         int teamNumber = TeamHelper.GetTeamNumber(gameObject.layer);
 
         int teamXActorMask;
@@ -28,41 +29,39 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
         layerMask = ~(teamXActorMask | projectileMask);
 
-		_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
-		crosshair = (GUITexture)Instantiate(CrosshairPrefab);
-	}
-
-	void OnDestroy()
-	{
-		Destroy(crosshair);
+        crosshairPosition = new Vector2(0, 0);
 	}
 	
 	void Update () 
 	{
-		if (_camera == null)
-		{
-			_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
-			return;
-		}
-
 		RaycastHit hitInfo;
 		Vector3 newCrosshairPosition;
 
 		// Fire a ray, and check for collisions.
 		// Use the collision point if it exists, and the max distance if it doesnt.
-		if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
-			newCrosshairPosition = hitInfo.point;
-		else newCrosshairPosition = RayTransform.position + RayTransform.forward.normalized * MaxDistance;
+        if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
+        {
+            //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.red);
+            newCrosshairPosition = hitInfo.point;
+        }
+        else
+        {
+            newCrosshairPosition = RayTransform.position + RayTransform.forward.normalized * MaxDistance;
+            //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.green);
+        }
 
 		// Obtain the position of the 3D crosshair in 2D.
-		Vector3 screenPosition = _camera.WorldToScreenPoint(newCrosshairPosition);
+        Vector3 screenPosition = Camera.WorldToScreenPoint(newCrosshairPosition);
 
-		// Clamp the position so the crosshair is always on-screen.
-		screenPosition.x = Mathf.Clamp(screenPosition.x / Screen.width, 0, 1);
-		screenPosition.y = Mathf.Clamp(screenPosition.y / Screen.height, 0, 1);
-		screenPosition.z = 0;		
-
-		// Move the 2D texture.
-		crosshair.transform.position = screenPosition;
+        crosshairPosition.x = screenPosition.x;
+        crosshairPosition.y = Screen.height - screenPosition.y;
 	}
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(crosshairPosition.x - CrosshairTexture.width / 2f,
+                           crosshairPosition.y - CrosshairTexture.height / 2f,
+                           CrosshairTexture.width, CrosshairTexture.height), 
+                  new GUIContent(CrosshairTexture));
+    }
 }

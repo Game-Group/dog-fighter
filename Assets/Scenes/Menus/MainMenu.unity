@@ -273,12 +273,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3eeae3b51e7d3145be4aaab2226fb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SinglePlayerButton_Text: Single Player
-  MultiplayerButton_Text: Multiplayer
-  QuitButton_Text: Exit
-  TopMargin: .100000001
+  SinglePlayerButtonText: Singleplayer
+  MultiplayerButtonText: Multiplayer
+  QuitButtonText: Exit
   ButtonWidth: 300
-  ButtonHeight: 150
+  TopMargin: .100000001
+  BottomMargin: .100000001
   ButtonVerticalSpacing: 20
 --- !u!4 &1872979719
 Transform:
