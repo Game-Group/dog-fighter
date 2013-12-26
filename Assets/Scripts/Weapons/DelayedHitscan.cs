@@ -30,18 +30,21 @@ public class DelayedHitscan : MonoBehaviour
 		{
 			if (raycastHit != null)
 				if (!TeamHelper.IsSameTeam(gameObject.layer, raycastHit.layer))
+                {
+                    Vector3 impactPoint = raycastHit.transform.position - ProjectileController.FlyControl.VelocityDirection;
 					switch (raycastHit.tag)
 					{
 						case "Player":
-							raycastHit.GetComponent<HealthControl>().TakeDamage(ProjectileController.Damage);
+							raycastHit.GetComponent<HealthControl>().TakeDamage(ProjectileController.Damage, impactPoint);
 							break;
 						case "Npc":
-							// TODO
+                            raycastHit.GetComponent<HealthControl>().TakeDamage(ProjectileController.Damage, impactPoint);
 							break;
 						case "Mothership":
-							// TODO
+                            raycastHit.GetComponent<HealthControl>().TakeDamage(ProjectileController.Damage, impactPoint);
 							break;
 					}
+                }
 
 			Destroy (gameObject);
 		}

@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VelocityDirection: {x: 0, y: 0, z: 0}
-  DesiredSpeed: 350
+  DesiredSpeed: 800
   Transform: {fileID: 400000}
   TimeBeforeFullSpeed: 0
   InitialSpeed: 0

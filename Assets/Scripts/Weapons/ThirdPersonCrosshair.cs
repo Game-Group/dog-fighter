@@ -6,6 +6,8 @@ using System.Collections;
 /// </summary>
 public class ThirdPersonCrosshair : MonoBehaviour 
 {
+    public Camera Camera;
+
 	public Transform RayTransform;
 	public float MaxDistance; 
 
@@ -13,10 +15,9 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
     private Vector2 crosshairPosition;
 	private int layerMask;
-	private Camera _camera;
 
 	void Start()
-	{
+	{       
         int teamNumber = TeamHelper.GetTeamNumber(gameObject.layer);
 
         int teamXActorMask;
@@ -28,39 +29,38 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
         layerMask = ~(teamXActorMask | projectileMask);
 
-		_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
-
         crosshairPosition = new Vector2(0, 0);
 	}
 	
 	void Update () 
 	{
-		if (_camera == null)
-		{
-			_camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
-			return;
-		}
-
 		RaycastHit hitInfo;
 		Vector3 newCrosshairPosition;
 
 		// Fire a ray, and check for collisions.
 		// Use the collision point if it exists, and the max distance if it doesnt.
-		if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
-			newCrosshairPosition = hitInfo.point;
-		else newCrosshairPosition = RayTransform.position + RayTransform.forward.normalized * MaxDistance;
+        if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
+        {
+            //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.red);
+            newCrosshairPosition = hitInfo.point;
+        }
+        else
+        {
+            newCrosshairPosition = RayTransform.position + RayTransform.forward.normalized * MaxDistance;
+            //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.green);
+        }
 
 		// Obtain the position of the 3D crosshair in 2D.
-		Vector3 screenPosition = _camera.WorldToScreenPoint(newCrosshairPosition);
+        Vector3 screenPosition = Camera.WorldToScreenPoint(newCrosshairPosition);
 
         crosshairPosition.x = screenPosition.x;
-        crosshairPosition.y = screenPosition.y;
+        crosshairPosition.y = Screen.height - screenPosition.y;
 	}
 
     void OnGUI()
     {
-        GUI.Label(new Rect(crosshairPosition.x - CrosshairTexture.width / 2,
-                           crosshairPosition.y - CrosshairTexture.height / 2,
+        GUI.Label(new Rect(crosshairPosition.x - CrosshairTexture.width / 2f,
+                           crosshairPosition.y - CrosshairTexture.height / 2f,
                            CrosshairTexture.width, CrosshairTexture.height), 
                   new GUIContent(CrosshairTexture));
     }

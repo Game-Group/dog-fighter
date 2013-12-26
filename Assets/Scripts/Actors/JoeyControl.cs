@@ -28,8 +28,14 @@ public class JoeyControl : MonoBehaviour
 
     private Vector2 smoothingGhostMouse;
 
+    private Vector3 fullRotation;
+    private ObjectTransformer transformer;
+
 	void Start () 
     {
+        transformer = gameObject.GetComponent<ObjectTransformer>();
+        fullRotation = new Vector3(0, 0, 0);
+
         // Remember the camera position in the editor.
         baseCameraPosition = Camera.transform.localPosition;
         baseCameraRotation = Camera.transform.localRotation;
@@ -50,6 +56,7 @@ public class JoeyControl : MonoBehaviour
 
     void OnGUI()
     {
+        return;
         // Print settings info
         string smoothingOnText;
         if (SmoothRotation) 
@@ -150,8 +157,11 @@ public class JoeyControl : MonoBehaviour
         float yDistanceScreenPercentage = difference.y / screenCenter.y;
 
         // Rotate proportional to the distance with the screen center.
-        transform.Rotate(Vector3.up, xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.right, yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
+        //transform.Rotate(Vector3.up, xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
+        //transform.Rotate(Vector3.right, yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
+        transformer.Rotation = new Vector3(xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime, 
+                                           yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime,
+                                           transformer.Rotation.z);
 
         // Reset the camera to its original position.
         Camera.transform.localPosition = baseCameraPosition;
@@ -187,7 +197,11 @@ public class JoeyControl : MonoBehaviour
             rollRotation += KeyboardRollSpeed * Time.deltaTime;
 
         // Apply the roll.
-        transform.Rotate(Vector3.forward, rollRotation);
+        //transform.Rotate(Vector3.forward, rollRotation);
+
+        transformer.Rotation = new Vector3(transformer.Rotation.x,
+                                           transformer.Rotation.y,
+                                           rollRotation);
     }
     
     private void HandleKeyboardTranslation()
@@ -206,6 +220,7 @@ public class JoeyControl : MonoBehaviour
         }
 
         // Translate forwards with the current speed.
-        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+        //transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+        transformer.Translation = Vector3.forward * currentSpeed * Time.deltaTime;
     }
 }

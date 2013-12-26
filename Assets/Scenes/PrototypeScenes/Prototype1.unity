@@ -1479,6 +1479,10 @@ Prefab:
       propertyPath: respawnCameraLookatDistance
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
+      propertyPath: SpawnAtStart
+      value: 
+      objectReference: {fileID: 100014, guid: 0c2d768e90809334293b686012effee1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
   m_RootGameObject: {fileID: 1879904993}
@@ -1869,7 +1873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713b054abc48a15408c4f0eb55cddf0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnAtStart: {fileID: 100010, guid: 0c2d768e90809334293b686012effee1, type: 2}
+  SpawnAtStart: {fileID: 100014, guid: 0c2d768e90809334293b686012effee1, type: 2}
   RespawnCameraGO: {fileID: 587703149}
   respawnCameraLookatDistance: 30
   DeathText: {fileID: 2073583931}
