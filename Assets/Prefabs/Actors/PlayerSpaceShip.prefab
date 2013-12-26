@@ -560,18 +560,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f16d2d3ccad2af45944281a61ae3d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RespawnPoint: {fileID: 0}
-  RespawnDelay: 3
-  ExplosionGraphic: {fileID: 100000, guid: b5aa57d4bf54d5d4cb8a2bcc8eec4389, type: 2}
-  ExplosionSound: {fileID: 8300000, guid: 33cd429e81395944088573e40e271f18, type: 3}
-  MaxHealth: 100
+  MaxHealth: 1000
   MaxShields: 100
-  HealthPerSecond: 10
+  HealthPerSecond: 100
   ShieldsPerSecond: 10
-  ShieldRechargeDelay: 0
+  ShieldRechargeDelay: 3
   ShieldImpactPrefab: {fileID: 100000, guid: 5493aa2a445c04d4a820cfd1490cf459, type: 2}
-  StatusTexture_Left: 20
-  StatusTexture_Top: 20
+  RespawnPoint: {fileID: 0}
+  RespawnDelay: 5
+  ExplosionGraphic: {fileID: 100000, guid: 809320482fb694b6e8149a226202b86a, type: 2}
+  ExplosionSound: {fileID: 8300000, guid: 33cd429e81395944088573e40e271f18, type: 3}
+  StatusTexture_Left: 10
+  StatusTexture_Top: 10
   StatusTexture_Width: 256
   StatusTexture_Height: 256
   HullTexture: {fileID: 2800000, guid: 1e701984a21d78c45a3193498fba6a0d, type: 3}

@@ -89,6 +89,20 @@ public class DroneBehaviour : MonoBehaviour
         }
         else
         {
+            ///////////////
+            // ROADBLOCK //
+            ///////////////
+            if (target == null || target.transform == null)
+            {
+                OnTriggerLeave(null);
+            }
+            if (target == null || target.transform == null)
+            {
+                return;
+            }
+            ///////////////////
+            // END ROADBLOCK //
+            ///////////////////
 
             // Recalculates the path to get to the target
             direction = pc.RecalculatePath(target);
@@ -107,14 +121,24 @@ public class DroneBehaviour : MonoBehaviour
     // Go back to original target and state
     void OnTriggerLeave(Collider Object)
     {
-
         target = prevTarget;
         currentState = prevState;
     }
 
     void OnTriggerStay(Collider Object)
     {
-        
+        ///////////////
+        // ROADBLOCK //
+        ///////////////
+        if (Object == null || Object.transform == null || target == null || target.transform == null)
+        {
+            OnTriggerLeave(null);
+            return;
+        }
+        ///////////////////
+        // End ROADBLOCK //
+        ///////////////////
+
         // Check to make sure if the object getting this close is the object we 
         // are targeting
         if (Object.transform == target.transform)
@@ -146,14 +170,13 @@ public class DroneBehaviour : MonoBehaviour
 
         if (isOpponent(Object))
         {
-                // TODO Only chase if this object is closer than current target
-                
-                prevTarget = target;
-                target = Object.transform;
+            // TODO Only chase if this object is closer than current target
 
-                prevState = currentState;
-                currentState = Behaviours.Chase;
-            
+            prevTarget = target;
+            target = Object.transform;
+
+            prevState = currentState;
+            currentState = Behaviours.Chase;
         }
 
     }
@@ -171,7 +194,6 @@ public class DroneBehaviour : MonoBehaviour
         }
 
         return false;
-
     }
 
     // Returns the team of a game object
@@ -190,11 +212,22 @@ public class DroneBehaviour : MonoBehaviour
                 return 2;
         }
         return 0;
-
     }
 
     bool InShootingRange()
     {
+        ///////////////
+        // ROADBLOCK //
+        ///////////////
+        if (target == null || target.transform == null)
+        {
+            OnTriggerLeave(null);
+            return false;
+        }
+        ///////////////////
+        // END ROADBLOCK //
+        ///////////////////
+
         if ((transform.position - target.transform.position).magnitude < shootRadius)
         {
             return true;
