@@ -122,9 +122,10 @@ public class DroneBehaviour : MonoBehaviour
     void OnTriggerLeave(Collider Object)
     {
 
-        if (Object == null)
+        // In case object no longer exists or target leaves
+        // go back to main target
+        if (Object == null || Object.transform == target)
         {
-
             target = prevTarget;
             currentState = prevState;
         }
