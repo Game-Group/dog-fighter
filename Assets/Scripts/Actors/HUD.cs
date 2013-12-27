@@ -64,7 +64,6 @@ public class HUD : MonoBehaviour
         for (int i = 0; i < npcs.Count; i++)
         {
             Vector3 screenPosition = Camera.WorldToScreenPoint(npcs[i].transform.position);
-            screenPosition.y = Screen.height - screenPosition.y;
 
             screenPosition.x = Mathf.Clamp(screenPosition.x, 0, Screen.width);
             screenPosition.y = Mathf.Clamp(screenPosition.y, 0, Screen.height);
@@ -75,6 +74,8 @@ public class HUD : MonoBehaviour
                     screenPosition.x = 0;
                 else screenPosition.x = Screen.width;
             }
+            else
+                screenPosition.y = Screen.height - screenPosition.y;
 
             GUI.Label(new Rect(screenPosition.x - HostileNpcTexture.width / 2f,
                                screenPosition.y - HostileNpcTexture.height / 2f,
