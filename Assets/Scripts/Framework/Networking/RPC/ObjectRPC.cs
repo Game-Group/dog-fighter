@@ -36,13 +36,13 @@ public class ObjectRPC : RPCHolder
 
     public static void ObjectPosition(Player player, int objectID, Vector3 position, Vector3 orientation)
     {
-        //		Debug.Log ("Sending player ship position.");
+        Debug.Log ("Sending player ship position.");
 
         channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, objectID, position, orientation);
     }
     public static void ObjectVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
-        //		Debug.Log("Sending player ship velocity.");
+        Debug.Log("Sending player ship velocity.");
 
         channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, objectID, transform, rotation);
     }

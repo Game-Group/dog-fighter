@@ -86,21 +86,24 @@ public class NetworkControl : MonoBehaviour
 
 	public void LateUpdate()
 	{
+        //Debug.Log("Late update!");
+
 		if (Network.peerType == NetworkPeerType.Disconnected)
 			return;
 
-//		Debug.Log("Late update!");
+        //Debug.Log("Past check.");
 
 		this.elapsedTime += Time.deltaTime;
 
 		if (this.elapsedTime > this.timeForOneSync)
 		{
-			if (this.SyncTimeEvent != null)
-				this.SyncTimeEvent.Invoke();
+            if (this.SyncTimeEvent != null)
+            {
+                //Debug.Log("Sync moment!");
+                this.SyncTimeEvent.Invoke();
+            }
 
 			this.elapsedTime = 0;
-
-//			Debug.Log("Sync moment!");
 
 			// Make sure the elapsed time is lower than the timeForOneSync.
 //			while (this.elapsedTime > this.timeForOneSync)

@@ -70,8 +70,11 @@ public class ObjectSync : NetworkObject
 
 		base.Start();
 
-		if (Network.peerType != NetworkPeerType.Disconnected)		
-			base.NetworkControl.SyncTimeEvent += this.SyncFunction;
+        if (!GlobalSettings.SinglePlayer)
+        {
+            base.NetworkControl.SyncTimeEvent += this.SyncFunction;
+            Debug.Log("Syncfunction registered.");
+        }
 	}
 	
 	// Update is called once per frame

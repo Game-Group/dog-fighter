@@ -64,15 +64,16 @@ public class PlayerShipRPC : RPCHolder {
 		}
 		else
 		{
-			playerShip.GetComponentInChildren<Camera>().enabled = false;
+            playerShip.GetComponentInChildren<Camera>().enabled = false;
             //playerShip.GetComponentInChildren<AudioListener>().enabled = false;
             //playerShip.GetComponentInChildren<ShipOrientation>().enabled = false;			
             //playerShip.GetComponent<ShipControl>().enabled = false;
-            playerShip.GetComponent<ShipControl>().enabled = false;
+            playerShip.GetComponent<JoeyControl>().enabled = false;
             playerShip.GetComponent<SoftwareMouse>().enabled = false;
             playerShip.GetComponent<HUD>().enabled = false;
             playerShip.GetComponent<PlayerHealthControl>().DrawHealthInfo = false;
-		}
+            playerShip.GetComponentInChildren<ThirdPersonCrosshair>().enabled = false;
+        }
 
         ObjectSync objSync = playerShip.GetComponent<ObjectSync>();
         objSync.Type = ObjectSyncType.PlayerShip;

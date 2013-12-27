@@ -62,6 +62,12 @@ public class ServerControl : NetworkObject
         this.firstPlayerJoined = true;
 	}
 
+    private void OnPlayerDisconnected()
+    {
+        throw new UnityException("Player disconnected!");
+
+    }
+
     private void assignTeam(Player player)
     {
         Layers layer = Layers.Team1Actor;

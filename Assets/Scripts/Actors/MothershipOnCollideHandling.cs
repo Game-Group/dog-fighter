@@ -7,7 +7,7 @@ public class MothershipOnCollideHandling : MonoBehaviour
 
     void OnCollisionEnter(Collision info)
     {
-        Debug.Log("Collision detected: " + info.collider.gameObject.tag);
+        //Debug.Log("Collision detected: " + info.collider.gameObject.tag);
 
         switch (info.collider.gameObject.tag)
         {
@@ -28,8 +28,8 @@ public class MothershipOnCollideHandling : MonoBehaviour
     {
         //if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
         {
-            Debug.Log("Collision detected.");
-            Debug.Log(info.gameObject.name);
+            //Debug.Log("Collision detected.");
+            //Debug.Log(info.gameObject.name);
 
             if (!TeamHelper.IsSameTeam(info.collider.gameObject.tag, gameObject.layer))
                 HealthControl.TakeDamage(info.gameObject.GetComponent<ProjectileController>().Damage, info.contacts[0].point);

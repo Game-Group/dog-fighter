@@ -83,8 +83,6 @@ public class HealthControl : MonoBehaviour
 
     public virtual void TakeDamage(float hullDamage, float shieldDamage)
     {
-        Debug.Log("Taking damage called!");
-
         if (Network.peerType != NetworkPeerType.Server && !GlobalSettings.SinglePlayer)
             return;
 
@@ -93,7 +91,7 @@ public class HealthControl : MonoBehaviour
 
         health = Mathf.Max(0, health - hullDamage);
 
-        Debug.Log("Taking damage! " + health + " " + shieldStrength);
+        //Debug.Log("Taking damage! " + health + " " + shieldStrength);
 
         this.objSync.RequestHealthSync();
 

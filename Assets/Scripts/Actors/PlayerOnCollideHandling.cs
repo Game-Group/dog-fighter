@@ -7,6 +7,8 @@ public class PlayerOnCollideHandling : MonoBehaviour
 
 	void OnCollisionEnter(Collision info)
 	{
+        //Debug.Log("Player collision!");
+
 		switch(info.collider.gameObject.tag)
 		{
 			case "Team1Projectile":

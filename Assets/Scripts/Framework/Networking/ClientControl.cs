@@ -33,6 +33,11 @@ public class ClientControl : NetworkObject
 		Debug.Log("Connected to server.");
 	}
 
+    private void OnDisconnectedFromServer()
+    {
+        throw new UnityException("Disconnected from server!");
+    }
+
 	private void OnFailedToConnect(NetworkConnectionError error) 
 	{
 		GameObject.Destroy(this);
