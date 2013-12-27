@@ -25,8 +25,16 @@ public class ObjectSync : NetworkObject
 	{
 		if (!this.IsIDAssigned)
 		{
-			this.Owner = owner;
-			this.GlobalID = globalID;
+            if (owner != null)
+                this.Owner = owner;
+            else
+                throw new UnityException("Given owner may not be null.");
+
+            if (globalID != null)
+			    this.GlobalID = globalID;
+            else
+                throw new UnityException("Given globalID may not be null.");
+
 			this.IsIDAssigned = true;
 		}
 		else

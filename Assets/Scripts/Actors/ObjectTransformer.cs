@@ -47,6 +47,9 @@ public class ObjectTransformer : MonoBehaviour {
 		}
 	}
 	
+    /// <summary>
+    /// Gets or sets the rotation per second in euler-angles.
+    /// </summary>
 	public Vector3 Rotation
 	{
 		get { return this.rotation; }

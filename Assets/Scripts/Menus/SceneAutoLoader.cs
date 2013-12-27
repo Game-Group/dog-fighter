@@ -1,4 +1,4 @@
-﻿#if !UNITYSTANDALONEWIN     
+﻿#if !UNITY_STANDALONE     
 using UnityEngine;
 using UnityEditor;
 

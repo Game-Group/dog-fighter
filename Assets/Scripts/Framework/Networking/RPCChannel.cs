@@ -10,7 +10,6 @@ public class RPCChannel : NetworkObject {
 
 		if (Network.isServer)
 		{
-
 			base.NetworkControl.LocalViewID = this.networkView.viewID;
 			Player server = new Player(base.NetworkControl.LocalViewID, Network.player);
 			base.NetworkControl.Players.Add(server.ID, server);

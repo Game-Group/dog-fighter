@@ -42,7 +42,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29df02d8f5723446bc43e1c692b8fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSpawnPoint: {fileID: 100004, guid: 12a26cc6368372b4aa5c312e9351545f, type: 2}
+  PlayerSpawnPointPrefab: {fileID: 100004, guid: 12a26cc6368372b4aa5c312e9351545f,
+    type: 2}
+  MothershipPrefab: {fileID: 100012, guid: 1abf41b51d5bec741bf43aff3e162e7c, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163fed4431a50f648812a1d699f67eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 100010, guid: 0c2d768e90809334293b686012effee1, type: 2}
+  PlayerPrefab: {fileID: 100014, guid: 0c2d768e90809334293b686012effee1, type: 2}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,7 +17,7 @@ public class RPCHolder : NetworkObject
 	{
 		ObjectSync objSync = obj.GetComponent<ObjectSync>();
 
-		Player player = this.NetworkControl.Players[playerID];		
+		Player player = this.NetworkControl.Players[playerID];
 
 		objSync.AssignID(player, objectID);
 

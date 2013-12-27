@@ -27,7 +27,9 @@ public class DestroyableObjectSync : ObjectSync
 		{
 			if (this.SyncHealth)
 			{
-                //Debug.Log("Syncing health.");
+                //Debug.Log("Syncing health: " + this.Type);
+                //Debug.Log(base.Owner == null);
+                //Debug.Log(base.GlobalID == null);
 
 				float health = this.healthControl.CurrentHealth;
 				float shield = this.healthControl.CurrentShields;

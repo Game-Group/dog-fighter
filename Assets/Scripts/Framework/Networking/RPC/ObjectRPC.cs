@@ -34,18 +34,17 @@ public class ObjectRPC : RPCHolder
 		channel.networkView.RPC("LoadLevelRPC", RPCMode.All, levelID);
 	}
 
-    public static void ObjectPosition(Player player, Vector3 position, Vector3 orientation)
+    public static void ObjectPosition(Player player, int objectID, Vector3 position, Vector3 orientation)
     {
         //		Debug.Log ("Sending player ship position.");
 
-        channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, position, orientation);
+        channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, objectID, position, orientation);
     }
     public static void ObjectVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
         //		Debug.Log("Sending player ship velocity.");
 
-        channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, transform, rotation);
-
+        channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, objectID, transform, rotation);
     }
 
     public static void CreateMothership(NetworkPlayer target, Player owner, int objectID, int layer)
@@ -72,7 +71,7 @@ public class ObjectRPC : RPCHolder
 	{
 		channel.CheckServer();
 
-        //Debug.Log("Sending SetObjectHealthRPC");
+        Debug.Log("Sending SetObjectHealthRPC");
 
 		channel.networkView.RPC("SetObjectHealthRPC", RPCMode.Others, objectOwner.ID, objectID, health, shields);
 	}
@@ -126,9 +125,11 @@ public class ObjectRPC : RPCHolder
 		
 		switch (levelID)
 		{
-		case 0:
-			creator = new NetworkPrototypeLevel();
-			break;
+		    case 0:
+                    NetworkPrototypeLevel npl = new NetworkPrototypeLevel();
+                    npl.MothershipPrefab = this.MothershipPrefab;
+                    creator = npl;
+			        break;
 		}
 
 		if (Network.peerType == NetworkPeerType.Server)
@@ -142,22 +143,22 @@ public class ObjectRPC : RPCHolder
 	}
 
     [RPC]
-    private void ObjectPositionRPC(NetworkViewID playerID, Vector3 position, Vector3 orientation)
+    private void ObjectPositionRPC(NetworkViewID objectOwner, int objectID, Vector3 position, Vector3 orientation)
     {
         //		Debug.Log("Player ship position received.");
 
-        GameObject playerShip = base.GetPlayerShip(playerID);
-        playerShip.transform.position = position;
-        playerShip.transform.eulerAngles = orientation;
+        GameObject obj = base.GetObject(objectOwner, objectID);
+        obj.transform.position = position;
+        obj.transform.eulerAngles = orientation;
     }
 
     [RPC]
-    private void ObjectVelocityRPC(NetworkViewID playerID, Vector3 translation, Vector3 rotation)
+    private void ObjectVelocityRPC(NetworkViewID objectOwner, int objectID, Vector3 translation, Vector3 rotation)
     {
         //		Debug.Log("Player ship velocity received.");		
 
-        GameObject playerShip = base.GetPlayerShip(playerID);
-        ObjectTransformer objectTransform = playerShip.GetComponent<ObjectTransformer>();
+        GameObject obj = base.GetObject(objectOwner, objectID);
+        ObjectTransformer objectTransform = obj.GetComponent<ObjectTransformer>();
 
         objectTransform.Translation = translation;
         objectTransform.Rotation = rotation;
@@ -179,7 +180,10 @@ public class ObjectRPC : RPCHolder
     [RPC]
     private void CreateMothershipRPC(NetworkViewID owner, int objectID, int layer)
     {
+        Debug.Log("Received CreateMothershipRPC");
+
         GameObject motherShip = (GameObject)GameObject.Instantiate(this.MothershipPrefab);
+        motherShip.GetComponent<DroneSpawn>().enabled = false;
 
         base.AddToObjectTables(motherShip, owner, objectID);
         TeamHelper.IterativeLayerAssignment(motherShip.transform, layer);

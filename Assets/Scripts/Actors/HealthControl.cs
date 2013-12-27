@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HealthControl : MonoBehaviour
 {
+    public bool DrawHealthInfo { get; set; }
+
     public float MaxHealth;
     public float MaxShields;
     public float HealthPerSecond;
@@ -16,7 +18,12 @@ public class HealthControl : MonoBehaviour
     protected float shieldStrength;
     protected float currentShieldDelay;
 
-    void Start()
+    protected virtual void Awake()
+    {
+        this.DrawHealthInfo = true;
+    }
+
+    protected virtual void Start()
     {
         Initialize();
 
@@ -76,6 +83,8 @@ public class HealthControl : MonoBehaviour
 
     public virtual void TakeDamage(float hullDamage, float shieldDamage)
     {
+        Debug.Log("Taking damage called!");
+
         if (Network.peerType != NetworkPeerType.Server && !GlobalSettings.SinglePlayer)
             return;
 
@@ -83,6 +92,8 @@ public class HealthControl : MonoBehaviour
         shieldStrength = Mathf.Max(0, shieldStrength - shieldDamage);
 
         health = Mathf.Max(0, health - hullDamage);
+
+        Debug.Log("Taking damage! " + health + " " + shieldStrength);
 
         this.objSync.RequestHealthSync();
 

@@ -3,18 +3,12 @@ using System.Collections;
 
 public class PlayerHealthControl : HealthControl 
 {
-    public bool DrawHealthInfo { get; set; }
 
 	public PlayerRespawner RespawnPoint;
 	public float RespawnDelay;
 
 	public GameObject ExplosionGraphic;
 	public AudioClip ExplosionSound;
-
-    private void Awake()
-    {
-        this.DrawHealthInfo = true;
-    }
 
     protected override void Initialize()
     {

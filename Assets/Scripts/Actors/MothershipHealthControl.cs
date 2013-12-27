@@ -36,6 +36,9 @@ public class MothershipHealthControl : HealthControl
 
     void OnGUI()
     {
+        if (!this.DrawHealthInfo)
+            return;
+
         if (team == 1)
         {
             GUI.Label(new Rect(Screen.width - Screen.width * 0.1f - 200,

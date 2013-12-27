@@ -21,7 +21,7 @@ public class MovingObjectSync : DestroyableObjectSync
 
 			if (pos != this.previousPos || orientation != this.previousOrientation)
 			{
-				ObjectRPC.ObjectPosition(base.Owner, pos, orientation);
+				ObjectRPC.ObjectPosition(base.Owner, base.GlobalID, pos, orientation);
 				this.previousPos = pos;
 				this.previousOrientation = orientation;
 			}
