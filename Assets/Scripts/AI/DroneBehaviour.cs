@@ -27,7 +27,7 @@ public class DroneBehaviour : MonoBehaviour
         // Radius in which drone follows the player for attacking
         SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
         //followRadius;
-        c.radius = 10;
+        c.radius = 100;
         c.isTrigger = true;
 
         currentState = Behaviours.GoTo;
