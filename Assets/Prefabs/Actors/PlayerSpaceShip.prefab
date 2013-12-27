@@ -28,6 +28,7 @@ GameObject:
   - 20: {fileID: 2000000}
   - 92: {fileID: 9200000}
   - 124: {fileID: 12400000}
+  - 81: {fileID: 8100000}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -136,6 +137,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400016}
   m_Layer: 8
   m_Name: PlayerSpaceShip
   m_TagString: Player
@@ -170,22 +172,6 @@ GameObject:
   - 4: {fileID: 400018}
   m_Layer: 0
   m_Name: Engine_ParticleSystems
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100020
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400020}
-  - 114: {fileID: 11400016}
-  m_Layer: 0
-  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,12 +261,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.1131287, y: 76.1788712, z: -184.774597}
+  m_LocalPosition: {x: 14.1131287, y: 94.6030197, z: -184.774597}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 400004}
   - {fileID: 400018}
-  - {fileID: 400020}
   - {fileID: 400012}
   - {fileID: 400006}
   - {fileID: 400002}
@@ -310,17 +295,6 @@ Transform:
   - {fileID: 400000}
   - {fileID: 400010}
   - {fileID: 400016}
-  m_Father: {fileID: 400014}
---- !u!4 &400020
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: .618558526}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
   m_Father: {fileID: 400014}
 --- !u!20 &2000000
 Camera:
@@ -406,6 +380,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .600000024, y: .400000006, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!81 &8100000
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
 --- !u!92 &9200000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -438,9 +419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0436ad3ca9a919f48b96ec90c920a3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 3000
+  Sensitivity: 1500
   Cursor: {fileID: 2800000, guid: 031b19d1f4a4bee469d41e1601915d1b, type: 3}
-  ShowCursor: 0
+  ShowCursor: 1
+  UseCustomBoundary: 1
+  CustomBoundaryRadius: .75
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,22 +538,25 @@ MonoBehaviour:
   ShowCrosshair: 1
   NextGun: 275
   PreviousGun: 276
+  Crosshair: {fileID: 11400016}
   CurrentGuns: []
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
+  m_GameObject: {fileID: 100014}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932725a5f17fbda49af516a0b6c1e2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 2000000}
-  RayTransform: {fileID: 400020}
-  MaxDistance: 2500
+  RayTransform: {fileID: 400002}
+  MaxDistance: 1500
   CrosshairTexture: {fileID: 2800000, guid: 031b19d1f4a4bee469d41e1601915d1b, type: 3}
+  Mouse: {fileID: 11400000}
+  ThreeDimensionalCrosshair: {x: 0, y: 0, z: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1

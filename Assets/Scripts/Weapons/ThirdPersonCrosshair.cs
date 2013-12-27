@@ -13,6 +13,11 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
 	public Texture2D CrosshairTexture;
 
+    public SoftwareMouse Mouse;
+
+    [HideInInspector]
+    public Vector3 ThreeDimensionalCrosshair;
+
     private Vector2 crosshairPosition;
 	private int layerMask;
 
@@ -22,36 +27,42 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
         int teamXActorMask;
         if (teamNumber == 1)
+        {
             teamXActorMask = 1 << 8;
+        }
         else teamXActorMask = 1 << 11;
 
         int projectileMask = (1 << 10) | (1 << 13);
 
         layerMask = ~(teamXActorMask | projectileMask);
 
+        ThreeDimensionalCrosshair = new Vector3(0, 0, 0);
         crosshairPosition = new Vector2(0, 0);
 	}
 	
 	void Update () 
 	{
 		RaycastHit hitInfo;
-		Vector3 newCrosshairPosition;
 
 		// Fire a ray, and check for collisions.
 		// Use the collision point if it exists, and the max distance if it doesnt.
-        if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
+        Vector3 screenPosRayPreparation = new Vector3(Mouse.ScreenPosition.x, Screen.height - Mouse.ScreenPosition.y, 0);
+        Ray ray = Camera.ScreenPointToRay(screenPosRayPreparation);
+
+        //if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
+        if (Physics.Raycast(ray, out hitInfo, MaxDistance, layerMask))
         {
             //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.red);
-            newCrosshairPosition = hitInfo.point;
+            ThreeDimensionalCrosshair = hitInfo.point;
         }
         else
         {
-            newCrosshairPosition = RayTransform.position + RayTransform.forward.normalized * MaxDistance;
+            ThreeDimensionalCrosshair = ray.origin + ray.direction * MaxDistance;
             //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.green);
         }
 
 		// Obtain the position of the 3D crosshair in 2D.
-        Vector3 screenPosition = Camera.WorldToScreenPoint(newCrosshairPosition);
+        Vector3 screenPosition = Camera.WorldToScreenPoint(ThreeDimensionalCrosshair);
 
         crosshairPosition.x = screenPosition.x;
         crosshairPosition.y = Screen.height - screenPosition.y;

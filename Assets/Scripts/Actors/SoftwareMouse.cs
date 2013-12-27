@@ -10,16 +10,18 @@ public class SoftwareMouse : MonoBehaviour
     public Texture2D Cursor;
     public bool ShowCursor;
 
-    private float xAxis;
-    private float yAxis;
+    public bool UseCustomBoundary = false;
+    public float CustomBoundaryRadius = 0;
 
     private Vector2 screenPosition;
+    private Vector2 screenCenter;
 
     void Start () 
-    {
+    {        
         Screen.lockCursor = true;
-        xAxis = Screen.width / 2;
-        yAxis = Screen.height / 2;
+
+        screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        screenPosition = screenCenter;
 
         CalculateNewPosition();
 	}
@@ -42,12 +44,19 @@ public class SoftwareMouse : MonoBehaviour
 
     private void CalculateNewPosition()
     {
-        xAxis += Input.GetAxis("Mouse X") * Time.deltaTime * Sensitivity;
-        yAxis -= Input.GetAxis("Mouse Y") * Time.deltaTime * Sensitivity;
+        screenPosition.x += Input.GetAxis("Mouse X") * Time.deltaTime * Sensitivity;
+        screenPosition.y -= Input.GetAxis("Mouse Y") * Time.deltaTime * Sensitivity;
 
-        xAxis = Mathf.Clamp(xAxis, 0, Screen.width);
-        yAxis = Mathf.Clamp(yAxis, 0, Screen.height);
+        screenPosition.x = Mathf.Clamp(screenPosition.x, 0, Screen.width);
+        screenPosition.y = Mathf.Clamp(screenPosition.y, 0, Screen.height);
 
-        screenPosition = new Vector2(xAxis, yAxis);
+        if (UseCustomBoundary)
+        {
+            Vector2 differenceWithCenter = screenPosition - screenCenter;
+            float maxDifference = CustomBoundaryRadius * Screen.height/  2;
+
+            if (differenceWithCenter.magnitude > maxDifference)
+                screenPosition = screenCenter + differenceWithCenter.normalized * maxDifference;
+        }
     }
 }

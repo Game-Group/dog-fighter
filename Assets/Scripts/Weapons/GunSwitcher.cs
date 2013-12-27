@@ -14,6 +14,8 @@ public class GunSwitcher : MonoBehaviour
 	public KeyCode NextGun;
 	public KeyCode PreviousGun;
 
+    public ThirdPersonCrosshair Crosshair;
+
 	public GameObject[] CurrentGuns;
 	private int currentGunIndex;
     //private IList<int> previousLayers;
@@ -103,8 +105,10 @@ public class GunSwitcher : MonoBehaviour
 		if (!ShowCrosshair)
 			newGun.GetComponent<ThirdPersonCrosshair>().enabled = false;
 
-		if (!HumanControlledGuns)
-			newGun.GetComponent<Shooter>().HumanControlled = false;
+        if (!HumanControlledGuns)
+            newGun.GetComponent<Shooter>().HumanControlled = false;
+        else
+            newGun.GetComponent<AimAtTarget>().Crosshair = Crosshair;        
 
 		CurrentGuns[gunToReplaceIndex] = newGun;
 	}
