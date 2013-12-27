@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ObjectTransformer : MonoBehaviour {
 	
+    /// <summary>
+    /// Gets or sets the translational speed per second in the translation direction.
+    /// </summary>
 	public float TranslationSpeed
 	{
 		get { return this.translationSpeed; }
@@ -16,6 +19,9 @@ public class ObjectTransformer : MonoBehaviour {
 			this.recalculateTranslation();
 		}
 	}
+    /// <summary>
+    /// Get or sets the normalized direction of the translation.
+    /// </summary>
 	public Vector3 TranslationDirection
 	{
 		get { return this.translationDirection; }
@@ -26,6 +32,10 @@ public class ObjectTransformer : MonoBehaviour {
 			this.recalculateTranslation();
 		}
 	}
+    /// <summary>
+    /// Gets or sets the translation per second. This value implicitly contains
+    /// translation speed and direction.
+    /// </summary>
 	public Vector3 Translation
 	{
 		get { return this.translation; }

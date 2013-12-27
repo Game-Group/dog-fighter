@@ -15,12 +15,20 @@ public class MothershipFlight : MonoBehaviour {
 	void Start () {
 		float circumference = radius * Mathf.PI * 2;
 		angularVelocity = (speed / circumference) * 360;
+
+        this.objTransformer = this.GetComponent<ObjectTransformer>();
+        this.objTransformer.TranslationDirection = Vector3.forward;
+        this.objTransformer.TranslationSpeed = this.speed;
+        this.objTransformer.Rotation = new Vector3(0, angularVelocity * Time.deltaTime, 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate(/*transform.forward*/Vector3.forward * speed * Time.deltaTime);
-		transform.Rotate(new Vector3(0, angularVelocity * Time.deltaTime, 0));
+
+        //transform.Translate(/*transform.forward*/Vector3.forward * speed * Time.deltaTime);
+        //transform.Rotate(new Vector3(0, angularVelocity * Time.deltaTime, 0));
 	}
+
+    private ObjectTransformer objTransformer;
 }
 //""

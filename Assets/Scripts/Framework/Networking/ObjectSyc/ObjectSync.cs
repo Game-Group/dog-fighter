@@ -4,6 +4,8 @@ using System;
 
 public class ObjectSync : NetworkObject 
 {
+    public ObjectSyncType Type { get; set; }
+
 	public Player Owner { get; private set; }
 	public int GlobalID { get; private set; }
 	public bool IsIDAssigned { get; private set; }

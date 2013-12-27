@@ -71,6 +71,9 @@ public class PlayerShipRPC : RPCHolder {
             playerShip.GetComponent<PlayerHealthControl>().DrawHealthInfo = false;
 		}
 
+        ObjectSync objSync = playerShip.GetComponent<ObjectSync>();
+        objSync.Type = ObjectSyncType.PlayerShip;
+
 		base.ObjectTables.PlayerObjects[owner].PlayerShipID = objectID;
 		base.AddToObjectTables(playerShip, playerID, objectID);
 	}

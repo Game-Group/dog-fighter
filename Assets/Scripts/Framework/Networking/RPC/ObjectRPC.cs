@@ -3,7 +3,8 @@ using System.Collections;
 
 public class ObjectRPC : RPCHolder 
 {
-	public GameObject PlayerSpawnPoint;
+	public GameObject PlayerSpawnPointPrefab;
+    public GameObject MothershipPrefab;
 
     #region Calls
 
@@ -39,13 +40,19 @@ public class ObjectRPC : RPCHolder
 
         channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, position, orientation);
     }
-
     public static void ObjectVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
         //		Debug.Log("Sending player ship velocity.");
 
         channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, transform, rotation);
 
+    }
+
+    public static void CreateMothership(NetworkPlayer target, Player owner, int objectID, int layer)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("CreateMothershipRPC", target, owner.ID, objectID, layer);
     }
 
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
@@ -160,11 +167,23 @@ public class ObjectRPC : RPCHolder
 	private void CreatePlayerSpawnpointRPC(NetworkViewID owner, int objectID, Vector3 position, NetworkMessageInfo info)
 	{		
 //		Debug.Log("Create player spawn point RPC received.");
-		base.ObjectTables.PlayerObjects[base.Players[owner]].PlayerSpawnPointID = objectID;
 
-		Object spawnPoint = GameObject.Instantiate(this.PlayerSpawnPoint, position, Quaternion.identity);
-		base.AddToObjectTables((GameObject)spawnPoint, owner, objectID);
+		GameObject spawnPoint = (GameObject)GameObject.Instantiate(this.PlayerSpawnPointPrefab, position, Quaternion.identity);
+        ObjectSync spawnPointSync = spawnPoint.GetComponent<ObjectSync>();
+        spawnPointSync.Type = ObjectSyncType.PlayerSpawnPoint;
+
+        base.ObjectTables.PlayerObjects[base.Players[owner]].PlayerSpawnPointID = objectID;
+		base.AddToObjectTables(spawnPoint, owner, objectID);
 	}
+
+    [RPC]
+    private void CreateMothershipRPC(NetworkViewID owner, int objectID, int layer)
+    {
+        GameObject motherShip = (GameObject)GameObject.Instantiate(this.MothershipPrefab);
+
+        base.AddToObjectTables(motherShip, owner, objectID);
+        TeamHelper.IterativeLayerAssignment(motherShip.transform, layer);
+    }
 
 	[RPC]
 	private void SetObjectHealthRPC(NetworkViewID objectOwner, int objectID, float health, float shields)

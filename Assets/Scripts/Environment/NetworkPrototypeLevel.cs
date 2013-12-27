@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
-public class NetworkPrototypeLevel : LevelCreator {
+public class NetworkPrototypeLevel : LevelCreator 
+{
+    public GameObject MothershipPrefab;
 
 	public override void CreateLevel ()
 	{
@@ -13,40 +15,43 @@ public class NetworkPrototypeLevel : LevelCreator {
 	{
 		base.SyncNewPlayer(newPlayer);
 
-//		Debug.Log("Syncing new player.");
-//		Debug.Log(base.Players.Values.Count);
+        // Sync the objects that are not associated with any player.
+        ObjectTable serverTable = base.ObjectTables.GetPlayerTable(base.NetworkControl.ThisPlayer);
+        ICollection<GameObject> serverObjects = serverTable.GetAllObjects();
 
+        foreach (GameObject obj in serverObjects)
+        {
+            ObjectSync objSync = obj.GetComponent<ObjectSync>();
+
+            switch (objSync.Type)
+            {
+                case ObjectSyncType.Mothership:
+                    ObjectRPC.CreateMothership(newPlayer.NetworkPlayerInfo, objSync.Owner, objSync.GlobalID, obj.layer);
+                    break;
+            }
+        }
+
+        // Sync the objects that belong to other players.
 		foreach (Player p in base.Players.Values)
 		{
-//			Debug.Log("Found new player with ID: " + p.ID);
+            if (!(p.ID == base.NetworkControl.LocalViewID || p.ID == newPlayer.ID))
+            {
+                PlayerObjects playerObjects = base.ObjectTables.PlayerObjects[p];
 
-			if (!(p.ID == base.NetworkControl.LocalViewID || p.ID == newPlayer.ID))
-			{
-//				Debug.Log("Syncing this player.");
+                GameObject playerSpawnPoint = base.ObjectTables.GetPlayerObject(p, playerObjects.PlayerSpawnPointID);
 
-				PlayerObjects playerObjects = base.ObjectTables.PlayerObjects[p];			
-
-				GameObject playerSpawnPoint = base.ObjectTables.GetPlayerObject(p, playerObjects.PlayerSpawnPointID);
-				
-//				Debug.Log("Got spawn point.");	
-
-				ObjectRPC.CreatePlayerSpawnpoint(
-					newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerSpawnPointID, playerSpawnPoint.transform.position
-					); 				
+                ObjectRPC.CreatePlayerSpawnpoint(
+                    newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerSpawnPointID, playerSpawnPoint.transform.position
+                    );
 
                 GameObject playerShip = base.GetObject(p, playerObjects.PlayerShipID);
 
-				PlayerShipRPC.CreatePlayerShip(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID);
+                PlayerShipRPC.CreatePlayerShip(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID);
                 ObjectRPC.SetObjectLayer(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID, (Layers)playerShip.layer);
-			}
-			else
-			{
-//				Debug.Log("Skipped server player.");				
-			}
+            }
 		}
 
-//		Debug.Log("Done syncing old players.");
-
+        // Create the objects for the new player.
 		int spawnPointID = base.GUIDGenerator.GenerateID();
 		int playerShipID = base.GUIDGenerator.GenerateID();
 		Vector3 spawnPointPos = Vector3.zero;
@@ -56,12 +61,44 @@ public class NetworkPrototypeLevel : LevelCreator {
 
 	}
 
+    /// <summary>
+    /// Initializes the server-side objects.
+    /// </summary>
 	private void createServerSideObjects()
 	{
-//		Player server = base.NetworkControl.ThisPlayer;
-//
-//		int spawnPointID = base.GUIDGenerator.GenerateID();
-//		Vector3 spawnPointPos = Vector3.zero;
-//		ObjectRPC.CreatePlayerSpawnpoint(server, spawnPointID, spawnPointPos);
+        Player serverPlayer = base.NetworkControl.ThisPlayer;
+
+        // Initialize the starting positions of the motherships.
+        Vector3 team1MothershipPos = new Vector3(1000, 0, 0);
+        Vector3 team2MothershipPos = new Vector3(-1000, 0, 0);
+
+        // Initialize te motherships.
+        GameObject team1Mothership = (GameObject)GameObject.Instantiate(
+            this.MothershipPrefab, team1MothershipPos, Quaternion.identity
+            );
+        GameObject team2Mothership = (GameObject)GameObject.Instantiate(
+           this.MothershipPrefab, team2MothershipPos, Quaternion.identity
+           );
+
+        // Assign teams to the motherships.
+        TeamHelper.IterativeLayerAssignment(team1Mothership.transform, (int)Layers.Team1Mothership);
+        TeamHelper.IterativeLayerAssignment(team2Mothership.transform, (int)Layers.Team2Mothership);
+
+        // Generate object IDs for the motherships.
+        int team1MothershipID = base.GUIDGenerator.GenerateID();
+        int team2MothershipID = base.GUIDGenerator.GenerateID();
+
+        // Assign the IDs and ObjetSyncType.
+        ObjectSync team1MSObjSync = team1Mothership.GetComponent<ObjectSync>();
+        team1MSObjSync.Type = ObjectSyncType.Mothership;
+        team1MSObjSync.AssignID(serverPlayer, team1MothershipID);
+
+        ObjectSync team2MSObjSync = team1Mothership.GetComponent<ObjectSync>();
+        team2MSObjSync.Type = ObjectSyncType.Mothership;
+        team2MSObjSync.AssignID(serverPlayer, team2MothershipID);
+
+        //int spawnPointID = base.GUIDGenerator.GenerateID();
+        //Vector3 spawnPointPos = Vector3.zero;
+        //ObjectRPC.CreatePlayerSpawnpoint(server, spawnPointID, spawnPointPos);
 	}
 }

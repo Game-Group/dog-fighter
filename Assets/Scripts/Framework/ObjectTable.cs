@@ -8,6 +8,11 @@ public class ObjectTable
 		this.objectTable = new Dictionary<int, GameObject>(100);
 	}
 
+    public ICollection<GameObject> GetAllObjects()
+    {
+        return this.objectTable.Values;
+    }
+
 	public GameObject GetObject(int id)
 	{
 		GameObject obj;

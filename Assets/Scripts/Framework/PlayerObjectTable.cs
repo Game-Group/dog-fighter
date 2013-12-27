@@ -19,6 +19,16 @@ public class PlayerObjectTable : NetworkObject
 		this.PlayerObjects = new Dictionary<Player, PlayerObjects>(10);
 	}
 
+    public ObjectTable GetPlayerTable(Player player)
+    {
+        ObjectTable table;
+
+        if (this.objectTables.TryGetValue(player.ID, out table))
+            return table;
+        else
+            throw new UnityException("Table for given player does not exist.");
+    }
+
 	public void AddPlayerTable(Player player)
 	{
 		if (!this.objectTables.ContainsKey(player.ID))
@@ -43,12 +53,7 @@ public class PlayerObjectTable : NetworkObject
 
 	public GameObject GetPlayerObject(Player player, int objID)
 	{
-		ObjectTable table;
-		
-		if (this.objectTables.TryGetValue(player.ID, out table))
-			return table.GetObject(objID);
-		else
-			throw new UnityException("Table for given player does not exist.");
+        return this.GetPlayerTable(player).GetObject(objID);
 	}
 
 	public void AddPlayerObject(Player player, int objID, GameObject obj)
@@ -70,8 +75,6 @@ public class PlayerObjectTable : NetworkObject
 		else
 			throw new UnityException("Table for given player does not exist.");
 	}
-
-
 
 	private IDictionary<NetworkViewID, ObjectTable> objectTables;
 }
