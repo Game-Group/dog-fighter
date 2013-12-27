@@ -164,6 +164,12 @@ public class DroneBehaviour : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            // If we are not in chasing mode check if 
+            // we want to fight opponent
+            OnTriggerEnter(Object);
+        }
     }
 
     void OnTriggerEnter(Collider Object)
