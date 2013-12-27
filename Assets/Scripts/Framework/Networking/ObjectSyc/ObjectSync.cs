@@ -73,7 +73,7 @@ public class ObjectSync : NetworkObject
         if (!GlobalSettings.SinglePlayer)
         {
             base.NetworkControl.SyncTimeEvent += this.SyncFunction;
-            Debug.Log("Syncfunction registered.");
+            //Debug.Log("Syncfunction registered.");
         }
 	}
 	

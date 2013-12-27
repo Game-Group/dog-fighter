@@ -23,12 +23,11 @@ public class PlayerHealthControl : HealthControl
 
 	public override void Die()
 	{
-        // Notify others that the object should start 'dying'.
-        if (!GlobalSettings.SinglePlayer)
-            ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
-
-		GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
-		AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
+        if (Network.peerType != NetworkPeerType.Server)
+        {
+            GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
+            AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
+        }
 
 		RespawnPoint.DisableAndWaitForSpawn(RespawnDelay);
 	}

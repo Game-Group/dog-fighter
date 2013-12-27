@@ -256,6 +256,7 @@ GameObject:
   - 4: {fileID: 1379664324}
   - 114: {fileID: 1379664325}
   - 114: {fileID: 1379664326}
+  - 81: {fileID: 1379664327}
   m_Layer: 0
   m_Name: Global
   m_TagString: Untagged
@@ -298,6 +299,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671cba1288279b840bc4cf54cce0bf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &1379664327
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1379664323}
+  m_Enabled: 1
 --- !u!1 &1442909365
 GameObject:
   m_ObjectHideFlags: 0

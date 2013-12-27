@@ -164,6 +164,7 @@ GameObject:
   - 4: {fileID: 1176221154}
   - 114: {fileID: 1176221153}
   - 114: {fileID: 1176221152}
+  - 81: {fileID: 1176221155}
   m_Layer: 0
   m_Name: Global
   m_TagString: Untagged
@@ -206,6 +207,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!81 &1176221155
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8100000, guid: 53756d41146139c4c80f196b8dd7781c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1275597240}
+  m_GameObject: {fileID: 1176221151}
+  m_Enabled: 1
 --- !u!1001 &1275597240
 Prefab:
   m_ObjectHideFlags: 0

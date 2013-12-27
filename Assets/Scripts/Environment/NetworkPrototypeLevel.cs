@@ -35,7 +35,7 @@ public class NetworkPrototypeLevel : LevelCreator
                     }
                     else
                     {
-                        ObjectRPC.ObjectPosition(objSync.Owner, objSync.GlobalID,  new Vector3(1100, 0, 0), Vector3.zero);
+                        ObjectRPC.ObjectPosition(objSync.Owner, objSync.GlobalID,  new Vector3(-1000, 0, 0), Vector3.zero);
                     }
 
                     break;
@@ -81,7 +81,7 @@ public class NetworkPrototypeLevel : LevelCreator
 
         // Initialize the starting positions of the motherships.
         Vector3 team1MothershipPos = new Vector3(1000, 0, 0);
-        Vector3 team2MothershipPos = new Vector3(1100, 0, 0);
+        Vector3 team2MothershipPos = new Vector3(-1000, 0, 0);
 
         // Initialize te motherships.
         GameObject team1Mothership = (GameObject)GameObject.Instantiate(

@@ -36,13 +36,13 @@ public class ObjectRPC : RPCHolder
 
     public static void ObjectPosition(Player player, int objectID, Vector3 position, Vector3 orientation)
     {
-        Debug.Log ("Sending player ship position.");
+        //Debug.Log ("Sending player ship position.");
 
         channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, objectID, position, orientation);
     }
     public static void ObjectVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
-        Debug.Log("Sending player ship velocity.");
+        //Debug.Log("Sending player ship velocity.");
 
         channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, objectID, transform, rotation);
     }
@@ -71,7 +71,7 @@ public class ObjectRPC : RPCHolder
 	{
 		channel.CheckServer();
 
-        Debug.Log("Sending SetObjectHealthRPC");
+        //Debug.Log("Sending SetObjectHealthRPC");
 
 		channel.networkView.RPC("SetObjectHealthRPC", RPCMode.Others, objectOwner.ID, objectID, health, shields);
 	}
@@ -180,7 +180,7 @@ public class ObjectRPC : RPCHolder
     [RPC]
     private void CreateMothershipRPC(NetworkViewID owner, int objectID, int layer)
     {
-        Debug.Log("Received CreateMothershipRPC");
+        //Debug.Log("Received CreateMothershipRPC");
 
         GameObject motherShip = (GameObject)GameObject.Instantiate(this.MothershipPrefab);
         motherShip.GetComponent<DroneSpawn>().enabled = false;
@@ -204,7 +204,7 @@ public class ObjectRPC : RPCHolder
     [RPC]
     private void KillObjectRPC(NetworkViewID objectOwner, int objectID)
     {
-        Debug.Log("KillObjectRPC received.");
+        //Debug.Log("KillObjectRPC received.");
 
         GameObject obj = base.GetObject(objectOwner, objectID);
         HealthControl healthControl = obj.GetComponent<HealthControl>();
@@ -219,7 +219,7 @@ public class ObjectRPC : RPCHolder
     [RPC]
     private void RespawnObjectRPC(NetworkViewID spawnPointOwner, int spawnPointID)
     {
-        Debug.Log("RespawnObjectRPC received.");
+        //Debug.Log("RespawnObjectRPC received.");
 
         GameObject spawnPoint = base.GetObject(spawnPointOwner, spawnPointID);
         PlayerRespawner respawner = spawnPoint.GetComponent<PlayerRespawner>();

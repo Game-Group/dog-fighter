@@ -96,7 +96,12 @@ public class HealthControl : MonoBehaviour
         this.objSync.RequestHealthSync();
 
         if (!this.CheckIfAlive())
+        {
+            // Notify others that the object should start 'dying'.
+            if (!GlobalSettings.SinglePlayer)
+                ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
             Die();
+        }
     }
 
     public virtual void TakeDamage(float hullDamage, float shieldDamage, Vector3 impactPoint)

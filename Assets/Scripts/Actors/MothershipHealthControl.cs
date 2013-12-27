@@ -21,9 +21,13 @@ public class MothershipHealthControl : HealthControl
     {
         if (dead)
             return;
-        GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
-        explinst.transform.localScale *= ExplosionScale;
-        AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
+
+        if (Network.peerType != NetworkPeerType.Server)
+        {
+            GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
+            explinst.transform.localScale *= ExplosionScale;
+            AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
+        }
 
         Destroy(gameObject, 5);
         dead = true;
