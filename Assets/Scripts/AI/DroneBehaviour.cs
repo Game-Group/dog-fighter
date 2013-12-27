@@ -121,8 +121,13 @@ public class DroneBehaviour : MonoBehaviour
     // Go back to original target and state
     void OnTriggerLeave(Collider Object)
     {
-        target = prevTarget;
-        currentState = prevState;
+
+        if (Object == null)
+        {
+
+            target = prevTarget;
+            currentState = prevState;
+        }
     }
 
     void OnTriggerStay(Collider Object)
@@ -171,11 +176,13 @@ public class DroneBehaviour : MonoBehaviour
         if (isOpponent(Object))
         {
             // TODO Only chase if this object is closer than current target
-
-            prevTarget = target;
+            if (currentState != Behaviours.Chase)
+            {
+                prevTarget = target;
+                prevState = currentState;
+            }
             target = Object.transform;
 
-            prevState = currentState;
             currentState = Behaviours.Chase;
         }
 
