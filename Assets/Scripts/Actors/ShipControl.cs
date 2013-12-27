@@ -1,291 +1,229 @@
 ﻿using UnityEngine;
 using System.Collections;
-//TODO:	Add max rotation value
-//		Lose the magic number 80. Try to think of a more intuitive rotation computation
-// 		Create control key file.
-//		Remove all bools and create array instead.
-//		Change velocity instead of translating when moving forward
-public class ShipControl : MonoBehaviour
+
+public class ShipControl : MonoBehaviour 
 {
+    public SoftwareMouse Mouse;
+    public Camera Camera;
 
-    // speeds
-    public float maxSpeed;
-    public float[] speedStages;
-    int currentSpeedStage;
+    public float MaxSpeed;
+    public float MaxSpeedZOffset;
+    public float Acceleration;
+
+    public float MouseRotationSpeed;
+    public float KeyboardRollSpeed;
+
+    public float XCameraOffsetTweak;
+    public float YCameraOffsetTweak;
+
+    public bool SmoothRotation;
+    public float SmoothingFactor;
+
+    public bool UseCameraOffset;
+
     [HideInInspector]
-    public float currentSpeed;
-    float incrSpeed;
+    public float CurrentSpeed { get { return currentSpeed; } }
 
-    // Rotation of space ship
-    [HideInInspector]
-    public float mousex;
-    [HideInInspector]
-    public float mousey;
+    private Vector2 screenCenter;
+    private float currentSpeed;
+    private Vector3 baseCameraPosition;
+    private Quaternion baseCameraRotation;
 
-    [HideInInspector]
-    public float rotationx;
-    [HideInInspector]
-    public float rotationy;
-    public Vector3 currentRotation;
+    private Vector2 smoothingGhostMouse;
 
-    public Vector2 MouseRotation { get; private set; }
+    private Vector3 fullRotation;
+    private ObjectTransformer transformer;
 
-    private ObjectTransformer objectTransform;
-
-    float rollSpeed;
-    float mouseFollowSpeed;
-
-    // variables to keep track of the
-    // pressed keys
-    bool forward;
-    bool backward;
-    public bool rollLeft;
-    public bool rollRight;
-
-    // Radius from circel around center point in which the 
-    // ship will not change position
-    float minRadius;
-    public float maxRadius;
-
-    void Start()
+	void Start () 
     {
-        this.objectTransform = this.GetComponent<ObjectTransformer>();
-        // Init speeds in case no manual initailisation
-        if (maxSpeed == 0)
-        {
-            maxSpeed = 300;
-        }
-        // just always override currentspeed to be 0
+        transformer = gameObject.GetComponent<ObjectTransformer>();
+        fullRotation = new Vector3(0, 0, 0);
+
+        // Remember the camera position in the editor.
+        baseCameraPosition = Camera.transform.localPosition;
+        baseCameraRotation = Camera.transform.localRotation;
+
         currentSpeed = 0;
+        screenCenter = new Vector3(Screen.width / 2, Screen.height / 2);
 
-        // initialise speed staged and fill with speeds
-        speedStages = new float[6];
-        for (int i = 0; i < speedStages.Length; i++)
-        {
-            speedStages[i] = (maxSpeed / 5) * i;
-        }
+        smoothingGhostMouse = Mouse.ScreenPosition;
+	}
+	
+	void Update () 
+    {
+        HandleToggleInput();
+        HandleMouseOrientation();
+        HandleKeyboardOrientation();
+        HandleKeyboardTranslation();
+	}
 
-        maxSpeed = 0;
-        // initialisation of private variables
-        incrSpeed = 0.005f;
-        rollSpeed = 1000;
+    void OnGUI()
+    {
+        return;
+        // Print settings info
+        string smoothingOnText;
+        if (SmoothRotation) 
+            smoothingOnText = "on";
+        else 
+            smoothingOnText = "off";
 
-        mouseFollowSpeed = 30f;
+        float currentLine = 0;
 
-        // Init key press variables
-        forward = false;
-        backward = false;
-        rollLeft = false;
-        rollRight = false;
+        if (SmoothRotation)
+            GUI.color = Color.green;
+        else
+            GUI.color = Color.red;
 
-        // Init radii
-        // TODO: Make radius a ratio of screensize?
-        minRadius = 10;
-        maxRadius = 400;
+        GUI.Label(new Rect(5, 5 + currentLine++ * 20, 400, 200), new GUIContent("Mouse smoothing is " + smoothingOnText + "\n"
+                                                                              + "Press 'T' to toggle"));
+        currentLine++;
 
-        rotationx = 0;
-        rotationy = 0;
-        currentRotation = new Vector3(0, 0, 0);
+        GUI.Label(new Rect(5, 5 + currentLine++ * 20, 400, 200), new GUIContent("Press M to toggle mouse." + "\n"
+                                                                              + "(Don't use ESC!)" + "\n" 
+                                                                              + "Then use the slider to change smoothing." + "\n"
+                                                                              + "Higher values mean less smoothing."));
+        currentLine += 3;
 
-        mousex = 0;
-        mousey = 0;
+        SmoothingFactor = GUI.HorizontalSlider(new Rect(5, 5 + currentLine * 20, 250, 20), SmoothingFactor, 0, 15);
+        GUI.Label(new Rect(270, 5 + currentLine++ * 20, 400, 200), new GUIContent(SmoothingFactor.ToString()));
+
+        GUI.color = Color.white;
+
+        string cameraOffsetText;
+        if (UseCameraOffset)
+            cameraOffsetText = "on";
+        else
+            cameraOffsetText = "off";
+
+        if (UseCameraOffset)
+            GUI.color = Color.green;
+        else
+            GUI.color = Color.red;
+
+        GUI.Label(new Rect(5, 5 + currentLine++ * 20, 400, 200), new GUIContent("Camera offset is " + cameraOffsetText + "\n"
+                                                                              + "Press 'O' to toggle"));
+
+        // Print control info
+        GUI.color = Color.green;
+        GUI.Label(new Rect(Screen.width - 200, 5, 200, 200), new GUIContent("Use mouse to steer." + "\n"
+                                                                          + "Use A/D to roll." + "\n"
+                                                                          + "Use W/S to accelerate/decelerate."));
+
+        GUI.color = Color.white;
     }
 
-    void Update()
+    void HandleToggleInput()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+            SmoothRotation = !SmoothRotation;
 
-        //if (!this.networkView.isMine)
-        //	return;
+        if (Input.GetKeyDown(KeyCode.O))
+            UseCameraOffset = !UseCameraOffset;
 
-        GameObject obj = GameObject.Find("Global");
-
-        if (obj != null)
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if (!GlobalSettings.HasFocus)
-                return;
-        }
-
-        HandleMouse();
-        HandleKeypress();
-        HandleMotion();
-    }
-
-    float prevx = 0;
-    float prevy = 0;
-
-
-    void HandleMouse()
-    {
-
-        float[] p = CalculateMousePosition();
-
-        float rotationx =  p[0] * mouseFollowSpeed * Time.deltaTime;
-        float rotationy =  p[1] * mouseFollowSpeed * Time.deltaTime;
-
-        this.MouseRotation = new Vector2(rotationx, rotationy);
-
-        currentRotation = this.objectTransform.Rotation;
-
-        this.objectTransform.Rotation = new Vector3(rotationx, -rotationy, currentRotation.z);
-    }
-
-    // Returns the position of the mouse, bounded my minRadius and maxRadius
-    public float[] CalculateMousePosition()
-    {
-        float mousex = Input.mousePosition.x;
-        float mousey = Input.mousePosition.y;
-
-        // Calculate the Euclidian distance between mid of screen to mouse position
-        float dx = mousex - (Screen.width / 2);
-        float dy = mousey - (Screen.height / 2);
-        float length = Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dy, 2));
-
-        float[] p = new float[2];
-
-        // In case the mouse position falls into min and max rad,
-        // keep the position with respects to screen center
-        if (length > minRadius && length < maxRadius)
-        {
-            p[0] = dx;
-            p[1] = dy;
-        }
-
-        // In case the mouse position falls beyond
-        // max radius, find the closes point on the circle with
-        // maxradius
-        if (length > maxRadius)
-        {
-            p[0] = maxRadius * (dx / length);
-            p[1] = maxRadius * (dy / length);
-        }
-
-        return p;
-
-    }
-
-    // Checks which keys have been pressed and set
-    // the appropriate boolean value
-    void HandleKeypress()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            forward = true;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            backward = true;
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            rollLeft = true;
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            rollLeft = false;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            rollRight = true;
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            rollRight = false;
+            Screen.lockCursor = !Screen.lockCursor;
         }
     }
 
-    // Handle motions
-    void HandleMotion()
+    private void HandleMouseOrientation()
     {
+        // Get screen position of the mouse
+        Vector2 mousePos = Mouse.ScreenPosition;
 
-
-        if (currentSpeed < maxSpeed)
-        {
-            // Acceleration depends on the current speed of the ship
-            currentSpeed += ((maxSpeed - currentSpeed) * incrSpeed);
-        }
-        if (currentSpeed > maxSpeed)
-        {
-            currentSpeed -= ((currentSpeed - maxSpeed) * incrSpeed);
-            // Check if current speed does not get negative
-            if (currentSpeed < 0)
-            {
-                currentSpeed = 0;
-            }
-        }
-
-        this.objectTransform.TranslationDirection = Vector3.forward;
-        this.objectTransform.TranslationSpeed = this.currentSpeed;
-
-        // Make the spaceship move forward
-        if (forward)
-        {
-            if (currentSpeedStage < speedStages.Length - 1)
-            {
-                currentSpeedStage++;
-                maxSpeed = speedStages[currentSpeedStage];
-            }
-            forward = false;
-        }
-        if (backward)
-        {
-
-            if (currentSpeedStage > 0)
-            {
-                currentSpeedStage--;
-                maxSpeed = speedStages[currentSpeedStage];
-            }
-            backward = false;
-        }
-
-        Vector3 currentRotation = this.objectTransform.Rotation;
-
-        // Make the roll movement
-        // In case the player wants to roll left
-        // make the roll go faster if not yet on limit
-        if (rollLeft)
-        {
-            if (currentRotation.z < 500)
-            {
-                currentRotation.z += incrSpeed * rollSpeed * Time.deltaTime;
-            }
-        }
-
-        // In case the player wants to roll right
-        // make the roll go faster if not yet on limit
-        else if (rollRight)
-        {
-
-            if (currentRotation.z > -500)
-            {
-                currentRotation.z += incrSpeed * -rollSpeed * Time.deltaTime;
-            }
-        }
+        // Use the current mouse position to rotate if we don't want smoothing.
+        if (!SmoothRotation)
+            HandleMouseOrientation_Aux(mousePos);
+        // Use a ghost mouse that follows the actual mouse otherwise.
         else
         {
-            // In case passively rolling, roll out
-            if (currentRotation.z > 0)
-            {
+            Vector2 desiredGhostDirection = mousePos - smoothingGhostMouse;
+            Vector2 step = desiredGhostDirection * SmoothingFactor * Time.deltaTime;
 
-                currentRotation.z += incrSpeed * -rollSpeed * Time.deltaTime;
-                if (currentRotation.z < 0)
-                {
-                    currentRotation.z = 0;
-                }
+            if (step.magnitude > desiredGhostDirection.magnitude)
+                smoothingGhostMouse = mousePos;
+            else
+                smoothingGhostMouse += step;
 
-            }
-            else if (currentRotation.z < 0)
-            {
-                currentRotation.z += incrSpeed * rollSpeed * Time.deltaTime;
+            HandleMouseOrientation_Aux(smoothingGhostMouse);
+        }
+    }
 
-                if (currentRotation.z > 0)
-                {
-                    currentRotation.z = 0;
-                }
-            }
+    private void HandleMouseOrientation_Aux(Vector2 mousePos)
+    {
+        // Calculate the difference of the mouse with the screen center
+        Vector2 difference = mousePos - screenCenter;
+
+        // Calculate how far the mouse is from the center in percentages.
+        // This is to maintain invariance with different resolutions.
+        float xDistanceScreenPercentage = difference.x / screenCenter.x;
+        float yDistanceScreenPercentage = difference.y / screenCenter.y;
+
+        // Rotate proportional to the distance with the screen center.
+        //transform.Rotate(Vector3.up, xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
+        //transform.Rotate(Vector3.right, yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
+        transformer.Rotation = new Vector3(xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime, 
+                                           yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime,
+                                           transformer.Rotation.z);
+
+        // Reset the camera to its original position.
+        Camera.transform.localPosition = baseCameraPosition;
+        Camera.transform.localRotation = baseCameraRotation;
+
+        // Check if we want the camera to offset when rotating.
+        if (UseCameraOffset)
+        {   
+            // Calculate how far the camera should offset.
+            float xCameraOffset = xDistanceScreenPercentage * XCameraOffsetTweak;
+            float yCameraOffset = yDistanceScreenPercentage * YCameraOffsetTweak;
+            float zCameraOffset = MaxSpeedZOffset * currentSpeed / MaxSpeed;
+
+            Vector3 translation = new Vector3(
+                                              xCameraOffset,
+                                              -yCameraOffset,
+                                              -zCameraOffset);
+
+            // Apply the offset.
+            Camera.transform.Translate(translation);
+        }
+    }
+
+    private void HandleKeyboardOrientation()
+    {
+        float rollRotation = 0;
+
+        // Add the roll from both left and right to apply them at the same time.
+        if (Input.GetKey(KeyCode.D))
+            rollRotation -= KeyboardRollSpeed * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.A))
+            rollRotation += KeyboardRollSpeed * Time.deltaTime;
+
+        // Apply the roll.
+        //transform.Rotate(Vector3.forward, rollRotation);
+
+        transformer.Rotation = new Vector3(transformer.Rotation.x,
+                                           transformer.Rotation.y,
+                                           rollRotation);
+    }
+    
+    private void HandleKeyboardTranslation()
+    {
+        // Change the speed according to input.
+        if (Input.GetKey(KeyCode.W))
+        {
+            currentSpeed += Acceleration * Time.deltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0, MaxSpeed);
+        }
+        
+        if (Input.GetKey(KeyCode.S))
+        {
+            currentSpeed -= Acceleration * Time.deltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0, MaxSpeed);
         }
 
-        this.objectTransform.Rotation = currentRotation;
-
-
+        // Translate forwards with the current speed.
+        //transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+        transformer.Translation = Vector3.forward * currentSpeed * Time.deltaTime;
     }
 }

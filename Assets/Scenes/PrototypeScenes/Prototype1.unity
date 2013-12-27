@@ -918,6 +918,7 @@ GameObject:
   - 114: {fileID: 914993111}
   - 114: {fileID: 914993112}
   - 114: {fileID: 914993113}
+  - 114: {fileID: 914993114}
   m_Layer: 9
   m_Name: Mothership_Red
   m_TagString: Mothership
@@ -1059,6 +1060,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa7700d84f1349e46a0d136727d1569b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &914993114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: 1abf41b51d5bec741bf43aff3e162e7c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1038144225}
+  m_GameObject: {fileID: 914993104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c3dfd466987d146b984402a33b55fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &936086578
@@ -1972,6 +1985,7 @@ GameObject:
   - 114: {fileID: 1967197642}
   - 114: {fileID: 1967197643}
   - 114: {fileID: 1967197644}
+  - 114: {fileID: 1967197645}
   - 23: {fileID: 1967197636}
   m_Layer: 12
   m_Name: Mothership_Red
@@ -2135,6 +2149,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa7700d84f1349e46a0d136727d1569b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1967197645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: 1abf41b51d5bec741bf43aff3e162e7c,
+    type: 2}
+  m_PrefabInternal: {fileID: 626615579}
+  m_GameObject: {fileID: 1967197634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c3dfd466987d146b984402a33b55fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1997393348

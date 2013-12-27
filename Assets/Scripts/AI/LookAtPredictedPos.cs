@@ -16,7 +16,7 @@ public class LookAtPredictedPos : MonoBehaviour
 	void Update () 
 	{
 		Vector3 targetPos = PredictPosition.Predict(ShipPosition.position
-		                                            , ShipControl.currentSpeed * ShipPosition.forward
+		                                            , ShipControl.CurrentSpeed * ShipPosition.forward
 		                                            , GunPosition.position
 		                                            , Shooter.ProjectileSpeed);
 		GunPosition.LookAt(targetPos);

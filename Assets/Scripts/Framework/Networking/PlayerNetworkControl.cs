@@ -22,7 +22,6 @@ public class PlayerNetworkControl : MonoBehaviour {
 		{
 			this.GetComponentInChildren<Camera>().enabled = false;
 			this.GetComponentInChildren<AudioListener>().enabled = false;
-			this.GetComponentInChildren<ShipOrientation>().enabled = false;			
 			this.GetComponent<ShipControl>().enabled = false;
 		}
 	}

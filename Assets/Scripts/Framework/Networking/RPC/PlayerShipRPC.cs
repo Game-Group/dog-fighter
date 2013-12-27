@@ -68,7 +68,7 @@ public class PlayerShipRPC : RPCHolder {
             //playerShip.GetComponentInChildren<AudioListener>().enabled = false;
             //playerShip.GetComponentInChildren<ShipOrientation>().enabled = false;			
             //playerShip.GetComponent<ShipControl>().enabled = false;
-            playerShip.GetComponent<JoeyControl>().enabled = false;
+            playerShip.GetComponent<ShipControl>().enabled = false;
             playerShip.GetComponent<SoftwareMouse>().enabled = false;
             playerShip.GetComponent<HUD>().enabled = false;
             playerShip.GetComponent<PlayerHealthControl>().DrawHealthInfo = false;

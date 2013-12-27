@@ -61,17 +61,17 @@ public class TurretBehaviour : MonoBehaviour {
 
             // Check the predicted position given the current flying velocity 
             Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Object.transform.forward,
+                                    shipData.CurrentSpeed * Object.transform.forward,
                                     top.position,
                                     shootL.ProjectileSpeed);
 
             Vector3 targetPosL = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Object.transform.forward,
+                                    shipData.CurrentSpeed * Object.transform.forward,
                                     muzzleLeft.position,
                                     shootL.ProjectileSpeed);
             
             Vector3 targetPosR = PredictPosition.Predict(Object.transform.position,
-                                    shipData.currentSpeed * Object.transform.forward,
+                                    shipData.CurrentSpeed * Object.transform.forward,
                                     muzzleRight.position,
                                     shootR.ProjectileSpeed);
 
