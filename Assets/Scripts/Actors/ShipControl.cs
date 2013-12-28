@@ -162,8 +162,8 @@ public class ShipControl : MonoBehaviour
         // Rotate proportional to the distance with the screen center.
         //transform.Rotate(Vector3.up, xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
         //transform.Rotate(Vector3.right, yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
-        transformer.Rotation = new Vector3(xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime, 
-                                           yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime,
+        transformer.Rotation = new Vector3(xDistanceScreenPercentage * MouseRotationSpeed, 
+                                           yDistanceScreenPercentage * MouseRotationSpeed,
                                            transformer.Rotation.z);
 
         // Reset the camera to its original position.
@@ -194,10 +194,10 @@ public class ShipControl : MonoBehaviour
 
         // Add the roll from both left and right to apply them at the same time.
         if (Input.GetKey(KeyCode.D))
-            rollRotation -= KeyboardRollSpeed * Time.deltaTime;
+            rollRotation -= KeyboardRollSpeed;
 
         if (Input.GetKey(KeyCode.A))
-            rollRotation += KeyboardRollSpeed * Time.deltaTime;
+            rollRotation += KeyboardRollSpeed;
 
         // Apply the roll.
         //transform.Rotate(Vector3.forward, rollRotation);
@@ -224,6 +224,6 @@ public class ShipControl : MonoBehaviour
 
         // Translate forwards with the current speed.
         //transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
-        transformer.Translation = Vector3.forward * currentSpeed * Time.deltaTime;
+        transformer.Translation = Vector3.forward * currentSpeed;
     }
 }

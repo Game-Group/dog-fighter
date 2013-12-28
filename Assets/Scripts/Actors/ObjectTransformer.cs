@@ -66,10 +66,10 @@ public class ObjectTransformer : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () {
 		
-		this.transform.Translate(this.Translation);
-		this.transform.Rotate(0, this.Rotation.x, 0, Space.Self);
-		this.transform.Rotate(this.Rotation.y, 0, 0, Space.Self);
-        this.transform.Rotate(0, 0, this.Rotation.z, Space.Self);
+		this.transform.Translate(this.Translation * Time.deltaTime);
+		this.transform.Rotate(0, this.Rotation.x * Time.deltaTime, 0, Space.Self);
+		this.transform.Rotate(this.Rotation.y * Time.deltaTime, 0, 0, Space.Self);
+        this.transform.Rotate(0, 0, this.Rotation.z * Time.deltaTime, Space.Self);
 	}
 	
 	private void recalculateTranslation()
