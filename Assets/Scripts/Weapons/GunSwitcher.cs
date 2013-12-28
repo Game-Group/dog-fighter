@@ -31,7 +31,7 @@ public class GunSwitcher : MonoBehaviour
 
 		if (Network.peerType != NetworkPeerType.Disconnected)
 		{
-				networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
+			networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
 			if (networkControl.ThisPlayer == this.GetComponent<ObjectSync>().Owner)
 				this.HumanControlledGuns = true;
 			else 
@@ -46,7 +46,13 @@ public class GunSwitcher : MonoBehaviour
         //    this.previousLayers.Add(-1);
 	}
 
-	void Update () 
+    public void LayerChanged()
+    {
+        for (int i = 0; i < CurrentGuns.Length; i++)
+            CurrentGuns[i].layer = gameObject.layer;
+    }
+
+    void Update() 
 	{
         for (int i = 0; i < this.Hardpoints.Length; i++)
         {

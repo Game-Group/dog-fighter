@@ -97,15 +97,19 @@ public class DroneSpawn : MonoBehaviour {
                     {
                         droneInstance.layer = 8;
                     }
-                    else{
+                    else
+                    {
                         droneInstance.layer = 11;
                     }
+                    
+                    // Propagate layer
+                    PropagateLayer.PropagateLayerToChildren(droneInstance);
+
+                    droneInstance.GetComponent<GunSwitcher>().LayerChanged();
+
 			        DroneBehaviour behav = droneInstance.GetComponent<DroneBehaviour>();
 			        behav.target = destination[i];
                 }
             }
-
-
     }
-
 }
