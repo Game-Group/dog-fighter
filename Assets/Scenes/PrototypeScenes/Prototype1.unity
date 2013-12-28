@@ -917,10 +917,11 @@ GameObject:
   - 114: {fileID: 914993110}
   - 114: {fileID: 914993111}
   - 114: {fileID: 914993112}
-  - 114: {fileID: 914993113}
   - 114: {fileID: 914993114}
+  - 114: {fileID: 914993113}
+  - 114: {fileID: 914993115}
   m_Layer: 9
-  m_Name: Mothership_Red
+  m_Name: Mothership
   m_TagString: Mothership
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1059,7 +1060,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 914993104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7700d84f1349e46a0d136727d1569b, type: 3}
+  m_Script: {fileID: 11500000, guid: 679bd30de9f44f0488da27ec9fd0b8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &914993114
@@ -1074,6 +1075,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c3dfd466987d146b984402a33b55fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &914993115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 1abf41b51d5bec741bf43aff3e162e7c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1038144225}
+  m_GameObject: {fileID: 914993104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e192e1c9539144f4582b54f8ba29e6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team1Materials:
+  - {fileID: 2100000, guid: 53d3cc9f0893b8c48a1c9cf6eface30b, type: 2}
+  - {fileID: 2100000, guid: 3f9753d5488ad6746be4ed28d7162c13, type: 2}
+  team2Materials:
+  - {fileID: 2100000, guid: a84aa211c94ab7046a28e35c75127fc5, type: 2}
+  - {fileID: 2100000, guid: d09742f689159314dbb93203ac159ae9, type: 2}
 --- !u!1 &936086578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,11 +2003,11 @@ GameObject:
   - 114: {fileID: 1967197637}
   - 114: {fileID: 1967197642}
   - 114: {fileID: 1967197643}
-  - 114: {fileID: 1967197644}
   - 114: {fileID: 1967197645}
-  - 23: {fileID: 1967197636}
+  - 114: {fileID: 1967197644}
+  - 114: {fileID: 1967197636}
   m_Layer: 12
-  m_Name: Mothership_Red
+  m_Name: Mothership
   m_TagString: Mothership
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,27 +2027,24 @@ Transform:
   - {fileID: 1586319925}
   - {fileID: 1443314934}
   m_Father: {fileID: 0}
---- !u!23 &1967197636
-Renderer:
+--- !u!114 &1967197636
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400012, guid: 1abf41b51d5bec741bf43aff3e162e7c,
+    type: 2}
+  m_PrefabInternal: {fileID: 626615579}
   m_GameObject: {fileID: 1967197634}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e192e1c9539144f4582b54f8ba29e6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team1Materials:
+  - {fileID: 2100000, guid: 53d3cc9f0893b8c48a1c9cf6eface30b, type: 2}
+  - {fileID: 2100000, guid: 3f9753d5488ad6746be4ed28d7162c13, type: 2}
+  team2Materials:
+  - {fileID: 2100000, guid: a84aa211c94ab7046a28e35c75127fc5, type: 2}
+  - {fileID: 2100000, guid: d09742f689159314dbb93203ac159ae9, type: 2}
 --- !u!114 &1967197637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2148,7 +2164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1967197634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7700d84f1349e46a0d136727d1569b, type: 3}
+  m_Script: {fileID: 11500000, guid: 679bd30de9f44f0488da27ec9fd0b8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1967197645

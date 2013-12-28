@@ -48,6 +48,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   - 136: {fileID: 13600000}
+  - 114: {fileID: 11400012}
   m_Layer: 11
   m_Name: AIDrone
   m_TagString: Npc
@@ -337,6 +338,7 @@ MonoBehaviour:
   ShowCrosshair: 0
   NextGun: 0
   PreviousGun: 0
+  Crosshair: {fileID: 0}
   CurrentGuns: []
 --- !u!114 &11400002
 MonoBehaviour:
@@ -407,6 +409,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2137977fc88147e4abcf5871dfc0cf85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e192e1c9539144f4582b54f8ba29e6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team1Materials:
+  - {fileID: 2100000, guid: 53d3cc9f0893b8c48a1c9cf6eface30b, type: 2}
+  - {fileID: 2100000, guid: 3f9753d5488ad6746be4ed28d7162c13, type: 2}
+  team2Materials:
+  - {fileID: 2100000, guid: a84aa211c94ab7046a28e35c75127fc5, type: 2}
+  - {fileID: 2100000, guid: d09742f689159314dbb93203ac159ae9, type: 2}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
