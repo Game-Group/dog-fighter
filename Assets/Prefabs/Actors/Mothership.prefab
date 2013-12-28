@@ -631,7 +631,7 @@ MonoBehaviour:
   HealthPerSecond: 0
   ShieldsPerSecond: 0
   ShieldRechargeDelay: 10
-  ShieldImpactPrefab: {fileID: 100000, guid: 5493aa2a445c04d4a820cfd1490cf459, type: 2}
+  ShieldImpactPrefab: {fileID: 100000, guid: 7b7ca61d9e3b1a943b9001ffe1e105ca, type: 2}
   ShieldImpactScale: 30
   ExplosionGraphic: {fileID: 100000, guid: 809320482fb694b6e8149a226202b86a, type: 2}
   ExplosionSound: {fileID: 8300000, guid: 1792989a5a33779428d2dbe9a9430605, type: 3}

@@ -214,7 +214,7 @@ AudioListener:
     type: 2}
   m_PrefabInternal: {fileID: 1275597240}
   m_GameObject: {fileID: 1176221151}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1001 &1275597240
 Prefab:
   m_ObjectHideFlags: 0
