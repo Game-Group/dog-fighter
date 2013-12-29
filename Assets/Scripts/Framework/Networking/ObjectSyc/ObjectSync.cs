@@ -9,6 +9,7 @@ public class ObjectSync : NetworkObject
 	public Player Owner { get; private set; }
 	public int GlobalID { get; private set; }
 	public bool IsIDAssigned { get; private set; }
+    public bool IsDisposed { get; private set; }
 
     public bool IsOwner
     {
@@ -57,6 +58,8 @@ public class ObjectSync : NetworkObject
 			if (Network.isServer)
 				base.GUIDGenerator.RecycleID(this.GlobalID);
 		}
+
+        this.IsDisposed = true;
 
 		base.Dispose();
 	}

@@ -1,8 +1,9 @@
 ﻿public enum ObjectSyncType
 {
-    Undefined = -1,
+    Undefined = 0,
 
-    PlayerShip = 0,
-    PlayerSpawnPoint = 1,
-    Mothership = 2,
+    PlayerShip = 1,
+    PlayerSpawnPoint = 2,
+    Mothership = 3,
+    Drone = 4,
 }
