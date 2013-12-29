@@ -8,7 +8,6 @@ public class ThirdPersonCrosshair : MonoBehaviour
 {
     public Camera Camera;
 
-	public Transform RayTransform;
 	public float MaxDistance; 
 
 	public Texture2D CrosshairTexture;
