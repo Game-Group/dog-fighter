@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class DroneSpawn : MonoBehaviour {
-
-
+    
     // TODO: Add mid level checkpoints (easy)
     // TODO: Only spawn in case enough creeps died. (hard)
     public Transform[] spawn_locations;
@@ -78,7 +77,19 @@ public class DroneSpawn : MonoBehaviour {
         }
         // Start the spawn calls in startTime seconds
         InvokeRepeating("SpawnDrones", startTime, repeatTime);
-       
+
+        ///
+        /// Network Code Below
+        ///
+        if (!GlobalSettings.SinglePlayer)
+        {
+            this.networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
+            this.guidGenerator = this.networkControl.GetComponent<GUIDGenerator>();
+            this.ownObjectSync = this.GetComponent<ObjectSync>();
+        }
+        ///
+        /// End Network Code
+        ///
     }
 
     // Spawn drones from each start location to each destination location
@@ -112,4 +123,27 @@ public class DroneSpawn : MonoBehaviour {
                 }
             }
     }
+
+    #region Network Code
+
+    private NetworkControl networkControl;
+    private GUIDGenerator guidGenerator;
+    private ObjectSync ownObjectSync;
+
+    private void networkSyncDroneSpawn(GameObject droneInstance)
+    {
+        if (GlobalSettings.SinglePlayer)
+            return;
+
+        if (Network.peerType != NetworkPeerType.Server)
+            throw new UnityException("Function may only be used by the server.");
+
+        int id = this.guidGenerator.GenerateID();
+
+        ObjectSync objSync = droneInstance.GetComponent<ObjectSync>();
+
+        objSync.AssignID(ownObjectSync.Owner, id);
+        objSync.Type = ObjectSyncType.Drone;
+    }
+    #endregion
 }

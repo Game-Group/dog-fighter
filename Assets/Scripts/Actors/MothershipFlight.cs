@@ -16,10 +16,10 @@ public class MothershipFlight : MonoBehaviour {
 		float circumference = radius * Mathf.PI * 2;
 		angularVelocity = (speed / circumference) * 360;
 
-        //this.objTransformer = this.GetComponent<ObjectTransformer>();
-        //this.objTransformer.TranslationDirection = Vector3.forward;
-        //this.objTransformer.TranslationSpeed = this.speed;
-        //this.objTransformer.Rotation = new Vector3(0, angularVelocity * Time.deltaTime, 0);
+        this.objTransformer = this.GetComponent<ObjectTransformer>();
+        this.objTransformer.TranslationDirection = Vector3.forward;
+        this.objTransformer.TranslationSpeed = this.speed;
+        this.objTransformer.Rotation = new Vector3(0, angularVelocity, 0);
 	}
 	
 	// Update is called once per frame
