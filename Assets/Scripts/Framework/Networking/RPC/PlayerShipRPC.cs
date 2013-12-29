@@ -65,6 +65,7 @@ public class PlayerShipRPC : RPCHolder {
 		else
 		{
             playerShip.GetComponentInChildren<Camera>().enabled = false;
+            playerShip.GetComponentInChildren<AudioListener>().enabled = false;
             //playerShip.GetComponentInChildren<AudioListener>().enabled = false;
             //playerShip.GetComponentInChildren<ShipOrientation>().enabled = false;			
             playerShip.GetComponent<ShipControl>().enabled = false;

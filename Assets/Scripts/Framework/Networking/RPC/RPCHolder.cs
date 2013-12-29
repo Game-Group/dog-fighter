@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 public class RPCHolder : NetworkObject 
 {
@@ -24,10 +26,15 @@ public class RPCHolder : NetworkObject
 		this.ObjectTables.AddPlayerObject(player, objectID, obj);
 	}
 
+    [MethodImpl(MethodImplOptions.NoInlining)]
 	protected void CheckServer()
 	{
-		if (Network.peerType != NetworkPeerType.Server)
-			throw new UnityException("Only the server may use this function.");
+        if (Network.peerType != NetworkPeerType.Server)
+        {
+            string callerName = new StackFrame(1, true).GetMethod().Name;
+
+            throw new UnityException("Only the server may use this function: " + callerName);
+        }
 	}
 
 

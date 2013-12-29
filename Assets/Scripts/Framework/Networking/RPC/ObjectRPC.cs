@@ -5,6 +5,7 @@ public class ObjectRPC : RPCHolder
 {
 	public GameObject PlayerSpawnPointPrefab;
     public GameObject MothershipPrefab;
+    public GameObject AIDronePrefab;
 
     #region Calls
 
@@ -54,6 +55,25 @@ public class ObjectRPC : RPCHolder
         channel.networkView.RPC("CreateMothershipRPC", target, owner.ID, objectID, layer);
     }
 
+    public static void CreateDrone(Player owner, int objectID, Vector3 position, int layer)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("CreateDroneRPC", RPCMode.Others, owner.ID, objectID, position, layer);
+    }
+    public static void CreateDrone(NetworkPlayer target, Player owner, int objectID, Vector3 position, int layer)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("CreateDroneRPC", target, owner.ID, objectID, position, layer);
+    }
+    public static void DroneShoot(Player owner, int objectID, bool shoot)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("DroneShootRPC", RPCMode.Others, owner.ID, objectID, shoot);
+    }
+
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
 	{
 		channel.CheckServer();
@@ -81,7 +101,7 @@ public class ObjectRPC : RPCHolder
 
         Debug.Log("Sending KillObjectRPC.");
 
-        channel.networkView.RPC("KillObjectRPC", RPCMode.Others, objectOwner.ID, objectID);
+        channel.networkView.RPC("KillObjectRPC", RPCMode.All, objectOwner.ID, objectID);
     }
     /// <summary>
     /// Send an RPC to all clients to respawn a certain object. May only be used by the server.
@@ -185,8 +205,30 @@ public class ObjectRPC : RPCHolder
         GameObject motherShip = (GameObject)GameObject.Instantiate(this.MothershipPrefab);
         motherShip.GetComponent<DroneSpawn>().enabled = false;
 
-        base.AddToObjectTables(motherShip, owner, objectID);
         TeamHelper.IterativeLayerAssignment(motherShip.transform, layer);
+
+        base.AddToObjectTables(motherShip, owner, objectID);
+    }
+
+    [RPC]
+    private void CreateDroneRPC(NetworkViewID owner, int objectID, Vector3 position, int layer)
+    {
+        GameObject drone = (GameObject)GameObject.Instantiate(this.AIDronePrefab, position, Quaternion.identity);
+        //ObjectSync objSync = drone.GetComponent<ObjectSync>();
+        drone.GetComponent<HealthControl>().DrawHealthInfo = false;
+        //drone.GetComponent<DroneBehaviour>().enabled = false;
+        drone.GetComponent<NpcListUpdater>().enabled = false;
+
+        TeamHelper.IterativeLayerAssignment(drone.transform, layer);
+
+        base.AddToObjectTables(drone, owner, objectID);
+    }
+
+    [RPC]
+    private void DroneShootRPC(NetworkViewID owner, int objectID, bool shoot)
+    {
+        GameObject drone = base.GetObject(owner, objectID);
+        drone.GetComponent<DroneBehaviour>().KeepShooting = shoot;
     }
 
 	[RPC]
@@ -207,6 +249,14 @@ public class ObjectRPC : RPCHolder
         //Debug.Log("KillObjectRPC received.");
 
         GameObject obj = base.GetObject(objectOwner, objectID);
+
+        if (Network.peerType == NetworkPeerType.Server)
+        {
+            ObjectSync objSync = obj.GetComponent<ObjectSync>();
+
+            if (objSync != null)
+                objSync.Dispose();
+        }
         HealthControl healthControl = obj.GetComponent<HealthControl>();
         healthControl.Die();
     }

@@ -99,8 +99,10 @@ public class HealthControl : MonoBehaviour
         {
             // Notify others that the object should start 'dying'.
             if (!GlobalSettings.SinglePlayer)
+                // Die() will be called using RPCs on both the client and server.
                 ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
-            Die();
+            else
+                Die();
         }
     }
 
@@ -126,6 +128,11 @@ public class HealthControl : MonoBehaviour
 
     public virtual void Die()
     {
+        //ObjectSync objSync = this.GetComponent<ObjectSync>();
+
+        //if (objSync != null)
+        //    objSync.Dispose();
+
         Destroy(gameObject);
     }
 

@@ -45,6 +45,7 @@ MonoBehaviour:
   PlayerSpawnPointPrefab: {fileID: 100004, guid: 12a26cc6368372b4aa5c312e9351545f,
     type: 2}
   MothershipPrefab: {fileID: 100012, guid: 1abf41b51d5bec741bf43aff3e162e7c, type: 2}
+  AIDronePrefab: {fileID: 100004, guid: dfef6e9d32b95064392288cd2758b6c0, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

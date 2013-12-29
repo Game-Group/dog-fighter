@@ -91,8 +91,8 @@ public class NetworkPrototypeLevel : LevelCreator
            this.MothershipPrefab, team2MothershipPos, Quaternion.identity
            );
 
-        team1Mothership.GetComponent<DroneSpawn>().enabled = false;
-        team2Mothership.GetComponent<DroneSpawn>().enabled = false;
+        //team1Mothership.GetComponent<DroneSpawn>().enabled = false;
+        //team2Mothership.GetComponent<DroneSpawn>().enabled = false;
 
         // Assign teams to the motherships.
         TeamHelper.IterativeLayerAssignment(team1Mothership.transform, (int)Layers.Team1Mothership);

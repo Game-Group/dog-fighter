@@ -14,6 +14,9 @@ public class MovingObjectSync : DestroyableObjectSync
 	{
         base.SyncFunction();
 
+        if (!base.IsIDAssigned)
+            throw new UnityException("ID not assigned.");
+
 		if (Network.isServer)
 		{
 			Vector3 pos = this.transform.position;

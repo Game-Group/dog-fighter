@@ -39,15 +39,29 @@ public class DroneBehaviour : MonoBehaviour
         // Add the prevent collision code 
         pc = this.gameObject.AddComponent<PreventCollision>();
         pc.setActor(this.transform);
+
+        ///
+        /// Network Code
+        ///
+
+        this.objectSync = this.GetComponent<ObjectSync>();
+
+        ///
+        /// End Network Code
+        ///
     }
 
     void Update()
     {
-        // Retrieve gun scripts for shooting purposes
-        // TODO: replace to main when possible
-        MoveDrone();
-    }
-    
+        if (Network.peerType == NetworkPeerType.Server || GlobalSettings.SinglePlayer)
+        {
+            // Retrieve gun scripts for shooting purposes
+            // TODO: replace to main when possible
+            MoveDrone();
+        }
+        else
+            this.clientBehaviourUpdate();
+    }    
     
     void GetGunScript()
     {
@@ -121,6 +135,8 @@ public class DroneBehaviour : MonoBehaviour
     // Go back to original target and state
     void OnTriggerLeave(Collider Object)
     {
+        if (Network.peerType == NetworkPeerType.Client && !GlobalSettings.SinglePlayer)
+            return;
 
         // In case object no longer exists or target leaves
         // go back to main target
@@ -133,6 +149,9 @@ public class DroneBehaviour : MonoBehaviour
 
     void OnTriggerStay(Collider Object)
     {
+        if (Network.peerType == NetworkPeerType.Client && !GlobalSettings.SinglePlayer)
+            return;
+
         ///////////////
         // ROADBLOCK //
         ///////////////
@@ -145,6 +164,8 @@ public class DroneBehaviour : MonoBehaviour
         // End ROADBLOCK //
         ///////////////////
 
+        bool startedShooting = false; // Network Code Variable
+
         // Check to make sure if the object getting this close is the object we 
         // are targeting
         if (Object.transform == target.transform)
@@ -152,6 +173,8 @@ public class DroneBehaviour : MonoBehaviour
             // In case we are in shoot radius, shoot shoot shoot.
             if ((transform.position - Object.transform.position).magnitude < shootRadius)
             {
+                startedShooting = true;
+
                 if (first)
                 {
                     GetGunScript();
@@ -171,10 +194,33 @@ public class DroneBehaviour : MonoBehaviour
             // we want to fight opponent
             OnTriggerEnter(Object);
         }
+
+        ///
+        /// Network Code
+        ///
+        if (Network.peerType == NetworkPeerType.Server)
+        {
+            if (startedShooting && !this.KeepShooting)
+            {
+                this.KeepShooting = true;
+                ObjectRPC.DroneShoot(this.objectSync.Owner, this.objectSync.GlobalID, true);
+            }
+            else if (!startedShooting && this.KeepShooting)
+            {
+                this.KeepShooting = false;
+                ObjectRPC.DroneShoot(this.objectSync.Owner, this.objectSync.GlobalID, false);
+            }
+        }
+        ///
+        /// End Network Code
+        ///
     }
 
     void OnTriggerEnter(Collider Object)
     {
+        if (Network.peerType == NetworkPeerType.Client && !GlobalSettings.SinglePlayer)
+            return;
+
         //  TODO change in some important condition like:
         //  - enough health
         //  - not state defending
@@ -255,5 +301,30 @@ public class DroneBehaviour : MonoBehaviour
         prevTarget = target;
         target = newTarget;
     }
+
+    #region Network Code
+    public bool ClientBehaviour { get; set; }
+    public bool KeepShooting { get; set; }
+
+    private ObjectSync objectSync;
+
+    private void clientBehaviourUpdate()
+    {
+        if (this.KeepShooting)
+        {
+            if (this.first)
+            {
+                this.GetGunScript();
+                this.first = false;
+            }
+
+            foreach (Shooter s in this.gunScripts)
+            {
+                // Do not yet shoot
+                s.Shoot();
+            }
+        }
+    }
+    #endregion
 
 }

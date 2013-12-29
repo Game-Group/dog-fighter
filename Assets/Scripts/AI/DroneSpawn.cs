@@ -86,6 +86,7 @@ public class DroneSpawn : MonoBehaviour {
             this.networkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();
             this.guidGenerator = this.networkControl.GetComponent<GUIDGenerator>();
             this.ownObjectSync = this.GetComponent<ObjectSync>();
+			this.objectTables = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
         }
         ///
         /// End Network Code
@@ -120,6 +121,8 @@ public class DroneSpawn : MonoBehaviour {
 
 			        DroneBehaviour behav = droneInstance.GetComponent<DroneBehaviour>();
 			        behav.target = destination[i];
+
+                    this.networkSyncDroneSpawn(droneInstance);
                 }
             }
     }
@@ -129,6 +132,7 @@ public class DroneSpawn : MonoBehaviour {
     private NetworkControl networkControl;
     private GUIDGenerator guidGenerator;
     private ObjectSync ownObjectSync;
+    private PlayerObjectTable objectTables;
 
     private void networkSyncDroneSpawn(GameObject droneInstance)
     {
@@ -138,12 +142,20 @@ public class DroneSpawn : MonoBehaviour {
         if (Network.peerType != NetworkPeerType.Server)
             throw new UnityException("Function may only be used by the server.");
 
+        //Debug.Log("Spawned and network sycned a drone.");
+
         int id = this.guidGenerator.GenerateID();
 
         ObjectSync objSync = droneInstance.GetComponent<ObjectSync>();
 
+        //Debug.Log(ownObjectSync.Owner == null);
+
         objSync.AssignID(ownObjectSync.Owner, id);
         objSync.Type = ObjectSyncType.Drone;
+
+        this.objectTables.AddPlayerObject(objSync.Owner, id, droneInstance);
+
+        ObjectRPC.CreateDrone(this.networkControl.ThisPlayer, id, droneInstance.transform.position, droneInstance.layer);
     }
     #endregion
 }
