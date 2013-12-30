@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  transformer: {fileID: 11400016}
   speed: 200
   followRadius: 200
   shootRadius: 200

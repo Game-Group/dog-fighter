@@ -552,7 +552,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 2000000}
-  RayTransform: {fileID: 400002}
   MaxDistance: 1500
   CrosshairTexture: {fileID: 2800000, guid: 031b19d1f4a4bee469d41e1601915d1b, type: 3}
   Mouse: {fileID: 11400000}
@@ -577,6 +576,10 @@ MonoBehaviour:
   HullTexture: {fileID: 2800000, guid: 1e701984a21d78c45a3193498fba6a0d, type: 3}
   ShieldTexture: {fileID: 2800000, guid: 26955574906652344b1a4327169f63b2, type: 3}
   HostileNpcTexture: {fileID: 2800000, guid: 9b663070bd110454e9e7f69a3407fec5, type: 3}
+  PredictedPositionTexture: {fileID: 2800000, guid: 0118b2dc242c43149935ce7369766670,
+    type: 3}
+  Mouse: {fileID: 11400000}
+  GunSwitcher: {fileID: 11400014}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

@@ -6,6 +6,8 @@ public class DroneBehaviour : MonoBehaviour
     public Transform target;
     private Transform prevTarget;
 
+    public ObjectTransformer transformer;
+
     public float speed;
     public float followRadius;
     public float shootRadius;
@@ -94,10 +96,13 @@ public class DroneBehaviour : MonoBehaviour
             {
                 // Move the drone to the viewed direction
                 transform.position += transform.forward * speed * Time.deltaTime;
+                transformer.TranslationSpeed = speed;
+                transformer.TranslationDirection = transform.forward;
             }
             // Do we want the bot to rotate or just hang in the air
             else
             {
+                transformer.TranslationSpeed = 0;
                 //transform.RotateAround(target.position, target.up, 30 * Time.deltaTime);
             }
         }
@@ -127,7 +132,8 @@ public class DroneBehaviour : MonoBehaviour
 
             // Move the drone to the viewed direction
             transform.position += transform.forward * speed * Time.deltaTime;
-
+            transformer.TranslationSpeed = speed;
+            transformer.TranslationDirection = transform.forward;
         }
 
     }

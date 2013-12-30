@@ -16,6 +16,11 @@ public class HUD : MonoBehaviour
     public Texture2D ShieldTexture;
 
     public Texture2D HostileNpcTexture;
+    public Texture2D PredictedPositionTexture;
+
+    public SoftwareMouse Mouse;
+
+    public GunSwitcher GunSwitcher;
 
     private int team;
 
@@ -26,33 +31,40 @@ public class HUD : MonoBehaviour
 
     void OnGUI()
     {
-        // Draw health info
         if (HealthControl.DrawHealthInfo)
-        {
-            Color hullColor = Color.Lerp(Color.red, Color.green, HealthControl.CurrentHealth / HealthControl.MaxHealth);
+            DrawHealthInfo();
 
-            GUI.color = hullColor;
-            GUI.Label(
-                new Rect(StatusTexture_Left, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent(HullTexture));
+        DrawNpcMarkers();
+    }
 
-            Color shieldColor = Color.white;
-            shieldColor.a = HealthControl.CurrentShields / HealthControl.MaxShields;
+    private void DrawHealthInfo()
+    {
+        Color hullColor = Color.Lerp(Color.red, Color.green, HealthControl.CurrentHealth / HealthControl.MaxHealth);
 
-            GUI.color = shieldColor;
-            GUI.Label(
-                 new Rect(StatusTexture_Left, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-                 new GUIContent(ShieldTexture));
+        GUI.color = hullColor;
+        GUI.Label(
+            new Rect(StatusTexture_Left, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
+            new GUIContent(HullTexture));
 
-            GUI.color = Color.white;
-            GUI.Label(
-                    new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-                    new GUIContent("Hull: " + HealthControl.CurrentHealth + "/" + HealthControl.MaxHealth));
-            GUI.Label(
-                    new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top + 20, StatusTexture_Width, StatusTexture_Height),
-                    new GUIContent("Shields: " + HealthControl.CurrentShields + "/" + HealthControl.MaxShields));
-        }
+        Color shieldColor = Color.white;
+        shieldColor.a = HealthControl.CurrentShields / HealthControl.MaxShields;
 
+        GUI.color = shieldColor;
+        GUI.Label(
+             new Rect(StatusTexture_Left, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
+             new GUIContent(ShieldTexture));
+
+        GUI.color = Color.white;
+        GUI.Label(
+                new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
+                new GUIContent("Hull: " + HealthControl.CurrentHealth + "/" + HealthControl.MaxHealth));
+        GUI.Label(
+                new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top + 20, StatusTexture_Width, StatusTexture_Height),
+                new GUIContent("Shields: " + HealthControl.CurrentShields + "/" + HealthControl.MaxShields));
+    }
+
+    private void DrawNpcMarkers()
+    {
         // Draw npc markers
         IList<GameObject> npcs;
 
@@ -61,27 +73,77 @@ public class HUD : MonoBehaviour
             npcs = GlobalSettings.Team2Npcs;
         else npcs = GlobalSettings.Team1Npcs;
 
+        if (npcs.Count == 0)
+            return;
+
+        GameObject closestToCursor = null;
+        float closestDistance = float.MaxValue;
+
         for (int i = 0; i < npcs.Count; i++)
         {
-            Vector3 screenPosition = Camera.WorldToScreenPoint(npcs[i].transform.position);
+            Vector3 screenPosition3D = Camera.WorldToScreenPoint(npcs[i].transform.position);
+            screenPosition3D = ClampToScreen(screenPosition3D);
 
-            screenPosition.x = Mathf.Clamp(screenPosition.x, 0, Screen.width);
-            screenPosition.y = Mathf.Clamp(screenPosition.y, 0, Screen.height);
+            DrawNpcMarker(screenPosition3D);
 
-            if (screenPosition.z < 0)
+            Vector2 screenPosition2D = new Vector2(screenPosition3D.x, screenPosition3D.y);
+            float distanceToMouse = (screenPosition2D - Mouse.ScreenPosition).magnitude;
+
+            if (distanceToMouse < closestDistance)
             {
-                if (screenPosition.x > Screen.width / 2)
-                    screenPosition.x = 0;
-                else screenPosition.x = Screen.width;
+                closestDistance = distanceToMouse;
+                closestToCursor = npcs[i];
             }
-            else
-                screenPosition.y = Screen.height - screenPosition.y;
-
-            GUI.Label(new Rect(screenPosition.x - HostileNpcTexture.width / 2f,
-                               screenPosition.y - HostileNpcTexture.height / 2f,
-                               HostileNpcTexture.width,
-                               HostileNpcTexture.height),
-                      new GUIContent(HostileNpcTexture));
         }
+
+        DrawPredictionMarker(closestToCursor);
+    }
+
+    private void DrawNpcMarker(Vector3 screenPosition3D)
+    {
+        GUI.Label(new Rect(screenPosition3D.x - HostileNpcTexture.width / 2f,
+                           screenPosition3D.y - HostileNpcTexture.height / 2f,
+                           HostileNpcTexture.width,
+                           HostileNpcTexture.height),
+                  new GUIContent(HostileNpcTexture));
+    }
+
+    private void DrawPredictionMarker(GameObject npc)
+    {
+        ObjectTransformer transformer = npc.GetComponent<ObjectTransformer>();
+
+        Shooter shooter = GunSwitcher.CurrentGuns[0].GetComponent<Shooter>();
+        ProjectileController controller = shooter.Projectile.gameObject.GetComponent<ProjectileController>();
+
+        Vector3 predictedPosition = PredictPosition.Predict(npc.transform.position, 
+                                                            transformer.TranslationDirection * transformer.TranslationSpeed, 
+                                                            GunSwitcher.CurrentGuns[0].transform.position, 
+                                                            controller.FlyControl.DesiredSpeed);
+
+        Vector3 predictedScreenPosition = Camera.WorldToScreenPoint(predictedPosition);
+        predictedScreenPosition = ClampToScreen(predictedScreenPosition);
+
+        GUI.Label(new Rect(predictedScreenPosition.x - PredictedPositionTexture.width / 2f,
+                   predictedScreenPosition.y - PredictedPositionTexture.height / 2f,
+                   PredictedPositionTexture.width,
+                   PredictedPositionTexture.height),
+          new GUIContent(PredictedPositionTexture));
+    }
+
+    private Vector3 ClampToScreen(Vector3 point)
+    {
+        point.x = Mathf.Clamp(point.x, 0, Screen.width);
+        point.y = Mathf.Clamp(point.y, 0, Screen.height);
+
+        if (point.z < 0)
+        {
+            if (point.x > Screen.width / 2)
+                point.x = 0;
+            else point.x = Screen.width;
+        }
+        else
+            point.y = Screen.height - point.y;
+
+        return point;
     }
 }
