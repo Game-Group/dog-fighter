@@ -108,9 +108,6 @@ public class GunSwitcher : MonoBehaviour
 			shooter.Owner = owner;
 		}
 
-		if (!ShowCrosshair)
-			newGun.GetComponent<ThirdPersonCrosshair>().enabled = false;
-
         if (!HumanControlledGuns)
             newGun.GetComponent<Shooter>().HumanControlled = false;
         else
