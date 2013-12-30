@@ -116,7 +116,7 @@ public class HUD : MonoBehaviour
         ProjectileController controller = shooter.Projectile.gameObject.GetComponent<ProjectileController>();
 
         Vector3 predictedPosition = PredictPosition.Predict(npc.transform.position, 
-                                                            transformer.TranslationDirection * transformer.TranslationSpeed, 
+                                                            transformer.WorldTranslationDirection * transformer.TranslationSpeed, 
                                                             GunSwitcher.CurrentGuns[0].transform.position, 
                                                             controller.FlyControl.DesiredSpeed);
 

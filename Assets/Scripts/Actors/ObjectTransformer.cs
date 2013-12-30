@@ -58,6 +58,14 @@ public class ObjectTransformer : MonoBehaviour {
 			this.rotation = value;
 		}
 	}
+
+    /// <summary>
+    /// Gets the translation direction in world coordinates.
+    /// </summary>
+    public Vector3 WorldTranslationDirection
+    {
+        get { return transform.localToWorldMatrix * translationDirection; }
+    }
 	
 	// Use this for initialization
 	protected virtual void Start () {
@@ -65,7 +73,6 @@ public class ObjectTransformer : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-		
 		this.transform.Translate(this.Translation * Time.deltaTime);
 		this.transform.Rotate(0, this.Rotation.x * Time.deltaTime, 0, Space.Self);
 		this.transform.Rotate(this.Rotation.y * Time.deltaTime, 0, 0, Space.Self);

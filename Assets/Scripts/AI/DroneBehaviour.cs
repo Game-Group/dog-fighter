@@ -95,9 +95,9 @@ public class DroneBehaviour : MonoBehaviour
             if ((target.position - transform.position).magnitude > 50)
             {
                 // Move the drone to the viewed direction
-                transform.position += transform.forward * speed * Time.deltaTime;
+                //transform.position += transform.forward * speed * Time.deltaTime;
                 transformer.TranslationSpeed = speed;
-                transformer.TranslationDirection = transform.forward;
+                transformer.TranslationDirection = Vector3.forward;
             }
             // Do we want the bot to rotate or just hang in the air
             else
@@ -131,9 +131,9 @@ public class DroneBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime);
 
             // Move the drone to the viewed direction
-            transform.position += transform.forward * speed * Time.deltaTime;
+            //transform.position += transform.forward * speed * Time.deltaTime;
             transformer.TranslationSpeed = speed;
-            transformer.TranslationDirection = transform.forward;
+            transformer.TranslationDirection = Vector3.forward;
         }
 
     }
