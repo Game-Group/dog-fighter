@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/ScenePickMenu.unity
   - enabled: 1
     path: Assets/Scenes/TestScenes/reworked_Controls.unity
+  - enabled: 1
+    path: Assets/Scenes/Menus/ClientServerMenu.unity

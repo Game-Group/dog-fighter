@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
             )
         {
             GlobalSettings.SinglePlayer = false;
-            Application.LoadLevel("ScenePickMenu");
+            Application.LoadLevel("ClientServerMenu");
         }
 
 
