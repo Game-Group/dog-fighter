@@ -42,22 +42,30 @@ public class ObjectSync : NetworkObject
 			throw new UnityException("IDs have already been assigned.");
 	}
 
-	public virtual void NetworkDestroy()
-	{
-		base.ObjectTables.RemovePlayerObject(this.Owner, this.GlobalID);
-	}
+    //public virtual void NetworkDestroy()
+    //{
+    //    base.ObjectTables.RemovePlayerObject(this.Owner, this.GlobalID);
+    //}
 
 	public override void Dispose()
 	{
+        if (this.IsDisposed)
+            throw new UnityException("Object has already been disposed.");
+
+        //Debug.Log(base.ObjectTables == null);
+        base.ObjectTables.RemovePlayerObject(this.Owner, this.GlobalID);
+
 		base.NetworkControl.SyncTimeEvent -= this.SyncFunction;
 
 		if (this.IsIDAssigned)
 		{
-			this.Owner = null;
+			//this.Owner = null;
 
 			if (Network.isServer)
 				base.GUIDGenerator.RecycleID(this.GlobalID);
 		}
+
+        //Debug.Log("Diposed");
 
         this.IsDisposed = true;
 

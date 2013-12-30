@@ -39,14 +39,19 @@ public class NetworkPrototypeLevel : LevelCreator
                     }
 
                     break;
+                case ObjectSyncType.Drone:
+                    ObjectRPC.CreateDrone(newPlayer.NetworkPlayerInfo, objSync.Owner, objSync.GlobalID, obj.transform.position, obj.layer);
+                    break;
             }
         }
 
         // Sync the objects that belong to other players.
 		foreach (Player p in base.Players.Values)
 		{
+            // Skip all objects for the server player (already synced) and the new player (empty).
             if (!(p.ID == base.NetworkControl.LocalViewID || p.ID == newPlayer.ID))
             {
+                // Sync player ships and player spawnpoints
                 PlayerObjects playerObjects = base.ObjectTables.PlayerObjects[p];
 
                 GameObject playerSpawnPoint = base.ObjectTables.GetPlayerObject(p, playerObjects.PlayerSpawnPointID);
@@ -77,6 +82,11 @@ public class NetworkPrototypeLevel : LevelCreator
     /// </summary>
 	private void createServerSideObjects()
 	{
+        Player server = new Player(base.NetworkControl.LocalViewID, Network.player);
+        base.NetworkControl.Players.Add(server.ID, server);
+        base.ObjectTables.AddPlayerTable(server);
+        Debug.Log("Created server player: " + server.ID);
+
         Player serverPlayer = base.NetworkControl.ThisPlayer;
 
         // Initialize the starting positions of the motherships.

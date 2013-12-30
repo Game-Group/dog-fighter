@@ -68,13 +68,22 @@ public class PlayerObjectTable : NetworkObject
 
 	public void RemovePlayerObject(Player player, int objID)
 	{
-		ObjectTable table;
-		
-		if (this.objectTables.TryGetValue(player.ID, out table))
-			table.RemoveObject(objID);
-		else
-			throw new UnityException("Table for given player does not exist.");
+		ObjectTable table;       
+
+        if (this.objectTables.TryGetValue(player.ID, out table))
+            table.RemoveObject(objID);
+        else
+        {
+            throw new UnityException("Table for given player does not exist: " + player.ID);
+        }
 	}
+
+    protected override void Awake()
+    {
+        this.name = GlobalSettings.PlayerObjectTableName;
+
+        base.Awake();
+    }
 
 	private IDictionary<NetworkViewID, ObjectTable> objectTables;
 }

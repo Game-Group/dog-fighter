@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class GlobalSettings : MonoBehaviour 
 {
+    public const string NetworkControlName = "NetworkControl";
+    public const string RPCChannelName = "RPCChannel";
+    public const string MatchControlName = "MatchControl";
+    public const string PlayerObjectTableName = "PlayerObjectTable";
+
 	public static bool SinglePlayer = false;
 	
 	public static bool HasFocus { get; private set;}

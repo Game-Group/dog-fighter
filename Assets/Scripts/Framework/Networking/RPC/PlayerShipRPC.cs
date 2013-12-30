@@ -118,7 +118,7 @@ public class PlayerShipRPC : RPCHolder {
 		get
 		{
 			if (channel_ == null)
-				channel_ = GameObject.Find(NetworkControl.RPCChannelObject).GetComponent<PlayerShipRPC>();
+                channel_ = GameObject.Find(GlobalSettings.RPCChannelName).GetComponent<PlayerShipRPC>();
 			return channel_;
 		}
 	}

@@ -5,8 +5,6 @@ using System;
 
 public class NetworkControl : MonoBehaviour 
 {
-	public const string RPCChannelObject = "RPCChannel";
-
 	public int ServerPort = 6500;
 	public string ServerIP = "127.0.0.1";
 
@@ -29,8 +27,6 @@ public class NetworkControl : MonoBehaviour
 	public string LocalIP { get; set; }
 	public NetworkViewID LocalViewID { get; set; }
 
-	//public IList<NetworkView> NetworkViews { get; private set; }
-
 	public GameObject ServerControl;
 	public GameObject ClientControl;
 
@@ -42,9 +38,14 @@ public class NetworkControl : MonoBehaviour
 			return this.Players[this.LocalViewID];
 		}
 	}
+
+    private void Awake()
+    {
+        this.name = GlobalSettings.NetworkControlName;
+    }
 	
 	// Use this for initialization
-	public void Start () 
+	private void Start () 
 	{
 		this.SyncRate = 15;
 
@@ -64,7 +65,7 @@ public class NetworkControl : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	public void Update () 
+	private void Update () 
 	{
 		if (!GlobalSettings.HasFocus)
 			return;
@@ -84,7 +85,7 @@ public class NetworkControl : MonoBehaviour
 		}
 	}
 
-	public void LateUpdate()
+	private void LateUpdate()
 	{
         //Debug.Log("Late update!");
 

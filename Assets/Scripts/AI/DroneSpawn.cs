@@ -142,7 +142,7 @@ public class DroneSpawn : MonoBehaviour {
         if (Network.peerType != NetworkPeerType.Server)
             throw new UnityException("Function may only be used by the server.");
 
-        //Debug.Log("Spawned and network sycned a drone.");
+        //Debug.Log("Spawned and network sycned a drone:");
 
         int id = this.guidGenerator.GenerateID();
 

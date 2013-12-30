@@ -25,10 +25,14 @@ public class PlayerBoundaryTrigger : MonoBehaviour {
 		if (outside) {
 			curOutsideTime += Time.deltaTime;
 			//Check for death
-			if (curOutsideTime > maxOutsideTime) {
-				healthControl.Die();
-				outside = false;
-			}
+			if (curOutsideTime > maxOutsideTime)
+            {
+                ObjectSync objSync = this.GetComponent<ObjectSync>();
+                ObjectRPC.KillObject(objSync.Owner, objSync.GlobalID);
+                Debug.Log("Out of boundary call.");
+                    //healthControl.Die();
+                outside = false;
+            }
 		}
 	}
 	

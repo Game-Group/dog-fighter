@@ -104,10 +104,10 @@ public class HealthControl : MonoBehaviour
             // Notify others that the object should start 'dying'.
             if (!GlobalSettings.SinglePlayer)
             {
-                // Die() will be called using RPCs on both the client and server.
-                if (this.objSync.IsDisposed)
-                    throw new UnityException("ObjectSync has already been disposed.");
                 ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
+                // Die() will be called using RPCs on both the client and server.
+                //if (this.objSync.IsDisposed)
+                //    throw new UnityException("ObjectSync has already been disposed.");
             }
             else
                 Die();
@@ -138,10 +138,11 @@ public class HealthControl : MonoBehaviour
     {
         if (this.IsDead)
             return;
-        //ObjectSync objSync = this.GetComponent<ObjectSync>();
 
-        //if (objSync != null)
-        //    objSync.Dispose();
+        ObjectSync objSync = this.GetComponent<ObjectSync>();
+
+        if (objSync != null)
+            objSync.Dispose();
 
         this.IsDead = true;
 

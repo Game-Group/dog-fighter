@@ -99,7 +99,7 @@ public class ObjectRPC : RPCHolder
     {
         channel.CheckServer();
 
-        Debug.Log("Sending KillObjectRPC.");
+        //Debug.Log("Sending KillObjectRPC.");
 
         channel.networkView.RPC("KillObjectRPC", RPCMode.All, objectOwner.ID, objectID);
     }
@@ -113,7 +113,7 @@ public class ObjectRPC : RPCHolder
     {
         channel.CheckServer();
 
-        Debug.Log("Sending RespawnObjectRPC.");
+        //Debug.Log("Sending RespawnObjectRPC.");
 
         channel.networkView.RPC("RespawnObjectRPC", RPCMode.Others, spawnPointOwner.ID, spawnPointID);
     }
@@ -234,7 +234,7 @@ public class ObjectRPC : RPCHolder
 	[RPC]
 	private void SetObjectHealthRPC(NetworkViewID objectOwner, int objectID, float health, float shields)
 	{
-        Debug.Log("SetObjectHealthRPC received.");
+        //Debug.Log("SetObjectHealthRPC received.");
 
 		GameObject obj = base.GetObject(objectOwner, objectID);
 		HealthControl healthControl = obj.GetComponent<HealthControl>();
@@ -250,13 +250,13 @@ public class ObjectRPC : RPCHolder
 
         GameObject obj = base.GetObject(objectOwner, objectID);
 
-        if (Network.peerType == NetworkPeerType.Server)
-        {
-            ObjectSync objSync = obj.GetComponent<ObjectSync>();
+        //if (Network.peerType == NetworkPeerType.Server)
+        //{
+        //    ObjectSync objSync = obj.GetComponent<ObjectSync>();
 
-            if (objSync != null)
-                objSync.Dispose();
-        }
+        //    if (objSync != null)
+        //        objSync.Dispose();
+        //}
         HealthControl healthControl = obj.GetComponent<HealthControl>();
         healthControl.Die();
     }
@@ -283,7 +283,7 @@ public class ObjectRPC : RPCHolder
 		get
 		{
 			if (channel_ == null)
-				channel_ = GameObject.Find(NetworkControl.RPCChannelObject).GetComponent<ObjectRPC>();
+                channel_ = GameObject.Find(GlobalSettings.RPCChannelName).GetComponent<ObjectRPC>();
 			return channel_;
 		}
 	}

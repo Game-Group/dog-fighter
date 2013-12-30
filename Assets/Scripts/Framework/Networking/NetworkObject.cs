@@ -1,18 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class NetworkObject : MonoBehaviour {
-
+public class NetworkObject : MonoBehaviour 
+{
 	public virtual void Dispose()
-	{
-		this.NetworkControl = null;
-		
+	{	
 	}
 
-	protected PlayerObjectTable ObjectTables { get; private set; }
-	protected NetworkControl NetworkControl { get; private set; }
-	protected GUIDGenerator GUIDGenerator { get; private set; }
-	protected GameObject RPCChannel { get; private set; }
+    protected PlayerObjectTable ObjectTables
+    {
+        get
+        {
+            if (this.objectTable == null)
+                this.objectTable = GameObject.Find(GlobalSettings.PlayerObjectTableName).GetComponent<PlayerObjectTable>();
+            return this.objectTable;
+        }
+    }
+    protected NetworkControl NetworkControl
+    {
+        get
+        {
+            if (this.networkControl == null)
+                this.networkControl = GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>();
+            return this.networkControl;
+        }
+    }
+    protected GUIDGenerator GUIDGenerator
+    {
+        get
+        {
+            if (this.guidGenerator == null)
+                this.guidGenerator = this.NetworkControl.GetComponent<GUIDGenerator>();
+            return this.guidGenerator;
+        }
+    }
+    protected GameObject RPCChannel
+    {
+        get
+        {
+            if (this.rpcChannel == null)
+                this.rpcChannel = (GameObject)GameObject.Find(GlobalSettings.RPCChannelName);
+            return this.rpcChannel;
+        }
+    }
 
 	protected IDictionary<NetworkViewID, Player> Players 
 	{
@@ -40,16 +70,25 @@ public class NetworkObject : MonoBehaviour {
         return this.ObjectTables.GetPlayerObject(player, playerShipID);
     }
 
-	// Use this for initialization
-	protected virtual void Start () {
+    protected virtual void Awake()
+    {
+        
+    }
 
-		if (!GlobalSettings.SinglePlayer)
-		{
-			this.ObjectTables = GameObject.Find("PlayerObjectTable").GetComponent<PlayerObjectTable>();
-			this.NetworkControl = GameObject.Find("NetworkControl").GetComponent<NetworkControl>();		
-			this.GUIDGenerator = this.NetworkControl.GetComponent<GUIDGenerator>();
-			this.RPCChannel = (GameObject)GameObject.Find(NetworkControl.RPCChannelObject);
-		}
+	// Use this for initialization
+	protected virtual void Start () 
+    {
+        //if (!GlobalSettings.SinglePlayer)
+        //{
+        //    Debug.Log("Finding important objects in NetworkObject");
+        //    this.ObjectTables = GameObject.Find(GlobalSettings.PlayerObjectTableName).GetComponent<PlayerObjectTable>();
+        //    this.NetworkControl = GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>();
+        //    this.GUIDGenerator = this.NetworkControl.GetComponent<GUIDGenerator>();
+        //    this.RPCChannel = (GameObject)GameObject.Find(GlobalSettings.RPCChannelName);
+
+        //    if (this.ObjectTables == null || this.NetworkControl == null || this.GUIDGenerator == null || this.RPCChannel == null)
+        //        throw new UnityException("Some object was not found");
+        //}	
 	}
 
 	protected virtual void Update()
@@ -58,8 +97,14 @@ public class NetworkObject : MonoBehaviour {
 
 	protected virtual void OnNetworkInstantiate(NetworkMessageInfo info)
 	{
-//		Debug.Log ("On Network Intantiate!");
-		
-		this.Start();
+        //Debug.Log("On Network Intantiate!");
+
+        this.Awake();
+		//this.Start();
 	}
+
+    private PlayerObjectTable objectTable;
+    private NetworkControl networkControl;
+    private GUIDGenerator guidGenerator;
+    private GameObject rpcChannel;
 }

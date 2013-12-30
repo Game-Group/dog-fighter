@@ -35,7 +35,8 @@ public class MothershipHealthControl : HealthControl
 
     public void OnDestroy()
     {
-        Application.LoadLevel("MainMenu");
+        if (GlobalSettings.SinglePlayer)
+            Application.LoadLevel("MainMenu");
     }
 
     void OnGUI()

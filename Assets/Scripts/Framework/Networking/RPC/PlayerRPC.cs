@@ -48,7 +48,7 @@ public class PlayerRPC : RPCHolder {
 		get
 		{
 			if (channel_ == null)
-				channel_ = GameObject.Find(NetworkControl.RPCChannelObject).GetComponent<PlayerRPC>();
+                channel_ = GameObject.Find(GlobalSettings.RPCChannelName).GetComponent<PlayerRPC>();
 			return channel_;
 		}
 	}
