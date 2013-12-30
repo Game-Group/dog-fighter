@@ -141,7 +141,7 @@ public class HealthControl : MonoBehaviour
 
         ObjectSync objSync = this.GetComponent<ObjectSync>();
 
-        if (objSync != null)
+        if (objSync != null && !GlobalSettings.SinglePlayer)
             objSync.Dispose();
 
         this.IsDead = true;
