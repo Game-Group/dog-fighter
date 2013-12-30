@@ -5,17 +5,17 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/Menus/ClientServerMenu.unity
+  - enabled: 1
     path: Assets/Scenes/PrototypeScenes/Prototype0.unity
   - enabled: 1
     path: Assets/Scenes/TestScenes/network_test.unity
-  - enabled: 1
-    path: Assets/Scenes/Menus/MainMenu.unity
   - enabled: 1
     path: Assets/Scenes/PrototypeScenes/Prototype1.unity
   - enabled: 1
     path: Assets/Scenes/Menus/ScenePickMenu.unity
   - enabled: 1
     path: Assets/Scenes/TestScenes/reworked_Controls.unity
-  - enabled: 1
-    path: Assets/Scenes/Menus/ClientServerMenu.unity

@@ -29,6 +29,12 @@ public class MothershipHealthControl : HealthControl
             AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
         }
 
+        if (!GlobalSettings.SinglePlayer)
+        {
+            MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
+            matchControl.ObjectDestroyed(this.gameObject);
+        }
+
         Destroy(gameObject, 5);
         dead = true;
     }

@@ -13,6 +13,10 @@ public class GlobalSettings : MonoBehaviour
 	
 	public static bool HasFocus { get; private set;}
 
+    public static bool IsServer = false;
+    public static int ServerPort = 6500;
+    public static string ServerIP = "127.0.0.1";
+
     public static IList<GameObject> Team1Npcs;
     public static IList<GameObject> Team2Npcs;
 	

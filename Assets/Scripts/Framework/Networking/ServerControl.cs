@@ -20,7 +20,7 @@ public class ServerControl : NetworkObject
 
 		this.name = "ServerControl";
 
-		Network.InitializeServer(10, base.NetworkControl.ServerPort, false);
+		Network.InitializeServer(10, GlobalSettings.ServerPort, false);
 	}
 
 	private bool firstPlayerJoined;
@@ -62,9 +62,23 @@ public class ServerControl : NetworkObject
         this.firstPlayerJoined = true;
 	}
 
-    private void OnPlayerDisconnected()
+    private void OnPlayerDisconnected(NetworkPlayer player)
     {
-        throw new UnityException("Player disconnected!");
+        Player disconnectedPlayer = null;
+
+        foreach (Player p in base.Players.Values)
+            if (p.NetworkPlayerInfo == player)
+            {
+                disconnectedPlayer = p;
+                break;
+            }
+
+        Debug.Log("Team " + TeamHelper.GetTeamNumber((int)disconnectedPlayer.Team) + " has been disconnected!");
+
+        MatchResult result = disconnectedPlayer.Team == Layers.Team1Actor ? MatchResult.Team2Win : MatchResult.Team1Win;
+
+        MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
+        matchControl.EndMatch(result);
 
     }
 
@@ -78,6 +92,9 @@ public class ServerControl : NetworkObject
         PlayerObjects objs = base.ObjectTables.PlayerObjects[player];
         GameObject playerShip = base.ObjectTables.GetPlayerObject(player, objs.PlayerShipID);
         playerShip.layer = (int)layer;
+
+        // TODO: Player team is NOT synced for clients at the moment.
+        player.Team = layer;
 
         Debug.Log("Assigned layer: " + layer);
 

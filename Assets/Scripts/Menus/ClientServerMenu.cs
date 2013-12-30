@@ -93,11 +93,20 @@ public class ClientServerMenu : MonoBehaviour
 
     private void StartAsClient(string ipAdress)
     {
+        Debug.Log(ipAdress);
 
+        if (ipAdress != "")
+            GlobalSettings.ServerIP = ipAdress;
+
+        GlobalSettings.IsServer = false;
+
+        Application.LoadLevel("network_test");
     }
 
     private void StartAsServer()
     {
+        GlobalSettings.IsServer = true;
 
+        Application.LoadLevel("network_test");
     }
 }

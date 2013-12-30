@@ -36,6 +36,16 @@ public class RPCHolder : NetworkObject
             throw new UnityException("Only the server may use this function: " + callerName);
         }
 	}
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    protected void CheckClient()
+    {
+        if (Network.peerType != NetworkPeerType.Client)
+        {
+            string callerName = new StackFrame(1, true).GetMethod().Name;
+
+            throw new UnityException("Only the server may use this function: " + callerName);
+        }
+    }
 
 
 }

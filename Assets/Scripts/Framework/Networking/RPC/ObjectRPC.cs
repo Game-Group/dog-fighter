@@ -41,11 +41,17 @@ public class ObjectRPC : RPCHolder
 
         channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, objectID, position, orientation);
     }
-    public static void ObjectVelocity(Player player, int objectID, Vector3 transform, Vector3 rotation)
+    public static void ObjectVelocityClient(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
-        //Debug.Log("Sending player ship velocity.");
+        channel.CheckClient();
 
         channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, objectID, transform, rotation);
+    }
+    public static void ObjectVelocityServer(Player player, int objectID, Vector3 transform, Vector3 rotation)
+    {
+        channel.CheckServer();
+
+        channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Others, player.ID, objectID, transform, rotation);
     }
 
     public static void CreateMothership(NetworkPlayer target, Player owner, int objectID, int layer)
@@ -71,7 +77,16 @@ public class ObjectRPC : RPCHolder
     {
         channel.CheckServer();
 
-        channel.networkView.RPC("DroneShootRPC", RPCMode.Others, owner.ID, objectID, shoot);
+        try
+        {
+            channel.networkView.RPC("DroneShootRPC", RPCMode.Others, owner.ID, objectID, shoot);
+        }
+        catch (UnityException)
+        {
+            // This catch is meant only for when players disconnect and RPCs are lost.
+            // Doing a catch like this is a bit risky.
+            Debug.Log("DroneShootRPC failed to send.");
+        }
     }
 
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
@@ -204,6 +219,8 @@ public class ObjectRPC : RPCHolder
 
         GameObject motherShip = (GameObject)GameObject.Instantiate(this.MothershipPrefab);
         motherShip.GetComponent<DroneSpawn>().enabled = false;
+        //motherShip.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;
+
 
         TeamHelper.IterativeLayerAssignment(motherShip.transform, layer);
 
@@ -218,6 +235,7 @@ public class ObjectRPC : RPCHolder
         drone.GetComponent<HealthControl>().DrawHealthInfo = false;
         //drone.GetComponent<DroneBehaviour>().enabled = false;
         drone.GetComponent<NpcListUpdater>().enabled = false;
+        //drone.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;
 
         TeamHelper.IterativeLayerAssignment(drone.transform, layer);
 

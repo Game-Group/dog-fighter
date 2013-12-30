@@ -5,9 +5,6 @@ using System;
 
 public class NetworkControl : MonoBehaviour 
 {
-	public int ServerPort = 6500;
-	public string ServerIP = "127.0.0.1";
-
 	public int SyncRate
 	{
 		get { return this.syncRate; }
@@ -56,12 +53,21 @@ public class NetworkControl : MonoBehaviour
 		this.LocalIP = 
 			bytes[0].ToString() + "." + bytes[1].ToString() + "." + bytes[2].ToString() + "." + bytes[3].ToString();
 
-//		this.NetworkViews = new List<NetworkView>(10);
-//
-//		this.AddNewNetworkView(Network.AllocateViewID());
-//		this.AddNewNetworkView(Network.AllocateViewID());
-
 		this.Players = new Dictionary<NetworkViewID, Player>(10);
+
+        if (Network.peerType == NetworkPeerType.Disconnected)
+        {
+            if (GlobalSettings.IsServer)
+            {
+                Debug.Log("Initializing as server.");
+                GameObject.Instantiate(this.ServerControl);
+            }
+            else
+            {
+                Debug.Log("Connecting");
+                GameObject.Instantiate(this.ClientControl);
+            }
+        }
 	}
 	
 	// Update is called once per frame

@@ -18,9 +18,9 @@ public class ClientControl : NetworkObject
 
 		this.name = "ClientControl";
 
-		Debug.Log("Connecting");
+        //Debug.Log("Connecting");
 
-		Network.Connect(base.NetworkControl.ServerIP, base.NetworkControl.ServerPort);
+		Network.Connect(GlobalSettings.ServerIP, GlobalSettings.ServerPort);
 	}
 	
 	// Update is called once per frame
@@ -35,7 +35,11 @@ public class ClientControl : NetworkObject
 
     private void OnDisconnectedFromServer()
     {
-        throw new UnityException("Disconnected from server!");
+        //throw new UnityException("Disconnected from server!");
+        Debug.Log("Disconnected from server!");
+
+        MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
+        matchControl.EndMatch(MatchResult.Disconnected);
     }
 
 	private void OnFailedToConnect(NetworkConnectionError error) 
