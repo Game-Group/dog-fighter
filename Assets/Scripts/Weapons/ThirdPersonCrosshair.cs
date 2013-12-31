@@ -17,8 +17,15 @@ public class ThirdPersonCrosshair : MonoBehaviour
     [HideInInspector]
     public Vector3 ThreeDimensionalCrosshair;
 
+    public bool HumanControlled { get; set; }
+
     private Vector2 crosshairPosition;
 	private int layerMask;
+
+    void Awake()
+    {
+        this.HumanControlled = true;
+    }
 
 	void Start()
 	{       
@@ -41,6 +48,9 @@ public class ThirdPersonCrosshair : MonoBehaviour
 	
 	void Update () 
 	{
+        if (!this.HumanControlled)
+            return;
+
 		RaycastHit hitInfo;
 
 		// Fire a ray, and check for collisions.

@@ -42,9 +42,21 @@ public class PlayerShipRPC : RPCHolder {
 		else
 			mode = RPCMode.Others;
 
-		channel.networkView.RPC ("FireWeaponRPC", RPCMode.Server, player.ID, fire);
+		channel.networkView.RPC ("FireWeaponRPC", mode, player.ID, fire);
 		
 	}
+
+    public static void FiringDirection(Player player, Vector3 direction)
+    {
+        RPCMode mode;
+
+        if (Network.isClient)
+            mode = RPCMode.Server;
+        else
+            mode = RPCMode.Others;
+
+        channel.networkView.RPC("FiringDirectionRPC", mode, direction);
+    }
 	#endregion
 
 	#region RPC Definitions
@@ -110,6 +122,18 @@ public class PlayerShipRPC : RPCHolder {
 		if (Network.isServer)
 			FireWeapon(base.Players[playerID], fire);
 	}
+
+    [RPC]
+    private void FiringDirectionRPC(NetworkViewID playerID, Vector3 direction)
+    {
+        GameObject playerShip = base.GetPlayerShip(playerID);
+
+        GunSwitcher gunSwitcher = playerShip.GetComponent<GunSwitcher>();
+        gunSwitcher.AssignCrossHairPosition(direction);
+
+        if (Network.isServer)
+            FiringDirection(base.Players[playerID], direction);
+    }
 	#endregion
 
 	#region Singleton

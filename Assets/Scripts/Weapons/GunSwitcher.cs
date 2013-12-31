@@ -46,6 +46,16 @@ public class GunSwitcher : MonoBehaviour
         //    this.previousLayers.Add(-1);
 	}
 
+    public void AssignCrossHairPosition(Vector3 crossHairPosition)
+    {
+        foreach (GameObject gun in this.Guns)
+        {
+            AimAtTarget aimAtTarget = gun.GetComponent<AimAtTarget>();
+            if (aimAtTarget != null)
+                aimAtTarget.Crosshair.ThreeDimensionalCrosshair = crossHairPosition;
+        }
+    }
+
     public void LayerChanged()
     {
         for (int i = 0; i < CurrentGuns.Length; i++)
@@ -108,10 +118,16 @@ public class GunSwitcher : MonoBehaviour
 			shooter.Owner = owner;
 		}
 
+        AimAtTarget aimAtTarget = newGun.GetComponent<AimAtTarget>();
+        aimAtTarget.GunSwitcher = this;
+
         if (!HumanControlledGuns)
+        {
             newGun.GetComponent<Shooter>().HumanControlled = false;
+            aimAtTarget.HumanControlled = false;
+        }
         else
-            newGun.GetComponent<AimAtTarget>().Crosshair = Crosshair;        
+            aimAtTarget.Crosshair = Crosshair;        
 
 		CurrentGuns[gunToReplaceIndex] = newGun;
 	}
