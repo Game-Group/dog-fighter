@@ -162,8 +162,8 @@ public class ShipControl : MonoBehaviour
         // Rotate proportional to the distance with the screen center.
         //transform.Rotate(Vector3.up, xDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
         //transform.Rotate(Vector3.right, yDistanceScreenPercentage * MouseRotationSpeed * Time.deltaTime);
-        transformer.Rotation = new Vector3(xDistanceScreenPercentage * MouseRotationSpeed, 
-                                           yDistanceScreenPercentage * MouseRotationSpeed,
+        transformer.Rotation = new Vector3(yDistanceScreenPercentage * MouseRotationSpeed,
+                                           xDistanceScreenPercentage * MouseRotationSpeed,
                                            transformer.Rotation.z);
 
         // Reset the camera to its original position.
