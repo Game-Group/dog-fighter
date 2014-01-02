@@ -9,13 +9,15 @@ public class AimAtTarget : MonoBehaviour
     public float MaxTurnAngle;
 
     public GunSwitcher GunSwitcher { get; set; }
+
     public bool HumanControlled
     {
         get { return this.humanControlled; }
         set
         {
             this.humanControlled = value;
-            this.Crosshair.HumanControlled = value;
+            if (this.Crosshair != null)
+                this.Crosshair.HumanControlled = value;
         }
     }
 
