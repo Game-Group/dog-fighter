@@ -14,9 +14,9 @@ public class DroneBehaviour : MonoBehaviour
     public Transform[] gun;
     Shooter gunL;
     private Shooter[] gunScripts;
-    
-    enum Behaviours{Patrol, Chase, Defend, GoTo}
-    Behaviours currentState;
+
+    public enum Behaviours { Patrol, Chase, Defend, GoTo }
+    public Behaviours currentState;
     Behaviours prevState;
 
     PreventCollision pc;
@@ -31,7 +31,7 @@ public class DroneBehaviour : MonoBehaviour
         SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
         //followRadius;
         c.radius = 100;
-        desiredDistance = 50;
+        desiredDistance = 100;
         c.isTrigger = true;
 
         currentState = Behaviours.GoTo;
@@ -39,7 +39,7 @@ public class DroneBehaviour : MonoBehaviour
         // initialize gunScripts array
         gunScripts = new Shooter[gun.Length];
         first = true;
-        
+
         // Add the prevent collision code 
         pc = this.gameObject.AddComponent<PreventCollision>();
         pc.setActor(this.transform);
@@ -62,20 +62,71 @@ public class DroneBehaviour : MonoBehaviour
             // Retrieve gun scripts for shooting purposes
             // TODO: replace to main when possible
             MoveDrone();
+            Shoot();
         }
         else
             this.clientBehaviourUpdate();
-    }    
-    
+
+    }
+
     void GetGunScript()
     {
-        for(int i = 0; i < gun.Length; i ++)
+        for (int i = 0; i < gun.Length; i++)
         {
             foreach (Transform child in gun[i])
             {
                 gunScripts[i] = child.GetComponent<Shooter>();
             }
         }
+
+    }
+
+    void Shoot()
+    {
+        ///////////////
+        // ROADBLOCK //
+        ///////////////
+        if (target == null || target.transform == null)
+        {
+            OnTriggerLeave(null);
+        }
+        bool startedShooting = false;
+        // In case we are in shoot radius, shoot shoot shoot.
+        if ((transform.position - target.transform.position).magnitude < shootRadius)
+        {
+            startedShooting = true;
+
+            if (first)
+            {
+                GetGunScript();
+                first = false;
+            }
+
+            foreach (Shooter s in gunScripts)
+            {
+                // Do not yet shoot
+                s.Shoot();
+            }
+        }
+        ///
+        /// Network Code
+        ///
+        if (Network.peerType == NetworkPeerType.Server)
+        {
+            if (startedShooting && !this.KeepShooting)
+            {
+                this.KeepShooting = true;
+                ObjectRPC.DroneShoot(this.objectSync.Owner, this.objectSync.GlobalID, true);
+            }
+            else if (!startedShooting && this.KeepShooting)
+            {
+                this.KeepShooting = false;
+                ObjectRPC.DroneShoot(this.objectSync.Owner, this.objectSync.GlobalID, false);
+            }
+        }
+        ///
+        /// End Network Code
+        ///
 
     }
 
@@ -172,56 +223,24 @@ public class DroneBehaviour : MonoBehaviour
         // End ROADBLOCK //
         ///////////////////
 
-        bool startedShooting = false; // Network Code Variable
 
         // Check to make sure if the object getting this close is the object we 
         // are targeting
         if (Object.transform == target.transform)
         {
-            // In case we are in shoot radius, shoot shoot shoot.
-            if ((transform.position - Object.transform.position).magnitude < shootRadius)
-            {
-                startedShooting = true;
 
-                if (first)
-                {
-                    GetGunScript();
-                    first = false;
-                }
-
-                foreach (Shooter s in gunScripts)
-                {
-                    // Do not yet shoot
-                    s.Shoot();
-                }
-            }
         }
         else
         {
             // If we are not in chasing mode check if 
             // we want to fight opponent
-            OnTriggerEnter(Object);
+            if (currentState != Behaviours.Chase)
+            {
+                OnTriggerEnter(Object);
+            }
         }
 
-        ///
-        /// Network Code
-        ///
-        if (Network.peerType == NetworkPeerType.Server)
-        {
-            if (startedShooting && !this.KeepShooting)
-            {
-                this.KeepShooting = true;
-                ObjectRPC.DroneShoot(this.objectSync.Owner, this.objectSync.GlobalID, true);
-            }
-            else if (!startedShooting && this.KeepShooting)
-            {
-                this.KeepShooting = false;
-                ObjectRPC.DroneShoot(this.objectSync.Owner, this.objectSync.GlobalID, false);
-            }
-        }
-        ///
-        /// End Network Code
-        ///
+
     }
 
     void OnTriggerEnter(Collider Object)
@@ -248,12 +267,12 @@ public class DroneBehaviour : MonoBehaviour
             if (Object.transform.tag == "Mothership")
             {
                 desiredDistance = 500;
-                shootRadius = 600;
+                shootRadius = 900;
             }
             else
             {
-                desiredDistance = 50;
-                shootRadius = 100;
+                desiredDistance = 100;
+                shootRadius = 200;
             }
         }
 

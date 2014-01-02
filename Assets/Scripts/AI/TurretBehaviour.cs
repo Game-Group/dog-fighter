@@ -50,33 +50,43 @@ public class TurretBehaviour : MonoBehaviour {
        
     }
 
+
     void OnTriggerStay(Collider Object)
     {
 
-        shipData = Object.GetComponent<ShipControl>();
 
         // Checking for the player tag is only for no crashing
-        if (Object.tag == "Player" && Object.gameObject.layer != this.gameObject.layer)
+      if (isOpponent(Object))
         {
-
+            float speed = 0;
+            if (Object.gameObject.tag == "Npc")
+            {
+                DroneBehaviour d = Object.GetComponent<DroneBehaviour>();
+                speed = d.speed;
+            }
+            else if(Object.gameObject.tag == "Player")
+            {
+                ShipControl s = Object.GetComponent<ShipControl>();
+                speed = s.CurrentSpeed;
+            }
             // Check the predicted position given the current flying velocity 
             Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
-                                    shipData.CurrentSpeed * Object.transform.forward,
+                                    speed * Object.transform.forward,
                                     top.position,
                                     shootL.ProjectileSpeed);
 
             Vector3 targetPosL = PredictPosition.Predict(Object.transform.position,
-                                    shipData.CurrentSpeed * Object.transform.forward,
+                                    speed * Object.transform.forward,
                                     muzzleLeft.position,
                                     shootL.ProjectileSpeed);
             
             Vector3 targetPosR = PredictPosition.Predict(Object.transform.position,
-                                    shipData.CurrentSpeed * Object.transform.forward,
+                                    speed * Object.transform.forward,
                                     muzzleRight.position,
                                     shootR.ProjectileSpeed);
 
             // TODO: Only get random target sometimes
-            targetPosM = GetRandomTarget(targetPosM, 1);
+            targetPosM = targetPosM;//GetRandomTarget(targetPosM, 1);
             //targetPosL = GetRandomTarget(targetPosL, 1);
             //targetPosR = GetRandomTarget(targetPosR, 1);
            
@@ -94,11 +104,11 @@ public class TurretBehaviour : MonoBehaviour {
 
             float angle = getXrotation(muzzleLeft.position, targetPosL);
 
-            muzzleLeft.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+            muzzleLeft.localEulerAngles = new Vector3(angle * Mathf.Rad2Deg, -90, 0);
 
             angle = getXrotation(muzzleRight.position, targetPosR);
   
-            muzzleRight.localEulerAngles = new Vector3(-angle * Mathf.Rad2Deg, -90, 0);
+            muzzleRight.localEulerAngles = new Vector3(angle * Mathf.Rad2Deg, -90, 0);
             
             float diff = (Object.transform.position - top.position).magnitude;
             // Only shoot in case of in shoot radius
@@ -110,6 +120,21 @@ public class TurretBehaviour : MonoBehaviour {
             }
         }
     }
+
+ bool isOpponent(Collider Object)
+    {
+
+        // Drone attacks players, Npcs, and mothership of the opposing team
+        if ((Object.gameObject.tag == "Player" || Object.gameObject.tag == "Npc" || Object.gameObject.tag == "Mothership") &&
+            (checkTeam(Object.gameObject) != checkTeam(this.gameObject)))
+        {
+
+            return true;
+        }
+
+        return false;
+    }
+
     float getXrotation(Vector3 startPos, Vector3 targetPos)
     {
 
@@ -142,6 +167,23 @@ public class TurretBehaviour : MonoBehaviour {
         // Create a new target.
         return targetPos + randomRadius * directionFromCenter.normalized;
 
+    }
+ // Returns the team of a game object
+    int checkTeam(GameObject o)
+    {
+        string l = o.layer.ToString();
+        switch (l)
+        {
+            case "8":
+            case "9":
+            case "10":
+                return 1;
+            case "11":
+            case "12":
+            case "13":
+                return 2;
+        }
+        return 0;
     }
     
 }
