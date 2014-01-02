@@ -20,6 +20,7 @@ public class DroneBehaviour : MonoBehaviour
     Behaviours prevState;
 
     PreventCollision pc;
+    double desiredDistance;
 
     // Ugly bool to see if we already have set the Shooter array
     bool first;
@@ -30,6 +31,7 @@ public class DroneBehaviour : MonoBehaviour
         SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
         //followRadius;
         c.radius = 100;
+        desiredDistance = 50;
         c.isTrigger = true;
 
         currentState = Behaviours.GoTo;
@@ -92,7 +94,7 @@ public class DroneBehaviour : MonoBehaviour
             // Apply rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 8);
 
-            if ((target.position - transform.position).magnitude > 50)
+            if ((target.position - transform.position).magnitude > desiredDistance)
             {
                 // Move the drone to the viewed direction
                 //transform.position += transform.forward * speed * Time.deltaTime;
@@ -243,6 +245,16 @@ public class DroneBehaviour : MonoBehaviour
             target = Object.transform;
 
             currentState = Behaviours.Chase;
+            if (Object.transform.tag == "Mothership")
+            {
+                desiredDistance = 500;
+                shootRadius = 600;
+            }
+            else
+            {
+                desiredDistance = 50;
+                shootRadius = 100;
+            }
         }
 
     }

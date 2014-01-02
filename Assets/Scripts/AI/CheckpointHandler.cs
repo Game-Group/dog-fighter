@@ -16,11 +16,14 @@ public class CheckpointHandler : MonoBehaviour {
             GameObject p = ships[0];
             if (TeamHelper.IsSameTeam(int.Parse(p.layer.ToString()), int.Parse(Obj.gameObject.layer.ToString())))
             {
-                s.target = ships[1].transform;
+                Transform newTarget = ships[1].transform.FindChild("DroneDestination");
+                s.target = newTarget;
             }
             else
             {
-                s.target = ships[0].transform;
+
+                Transform newTarget = ships[0].transform.FindChild("DroneDestination");
+                s.target = newTarget;
             }
         }
     }
