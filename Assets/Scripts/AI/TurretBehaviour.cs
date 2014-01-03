@@ -84,7 +84,7 @@ public class TurretBehaviour : MonoBehaviour {
                                     shootR.ProjectileSpeed);
 
             // TODO: Only get random target sometimes
-            targetPosM = targetPosM;//GetRandomTarget(targetPosM, 1);
+            targetPosM = GetRandomTarget(targetPosM, 1);
             //targetPosL = GetRandomTarget(targetPosL, 1);
             //targetPosR = GetRandomTarget(targetPosR, 1);
            

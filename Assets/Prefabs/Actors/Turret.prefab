@@ -446,7 +446,7 @@ MonoBehaviour:
   muzzleRight: {fileID: 400018}
   gunRight: {fileID: 400014}
   gunLeft: {fileID: 400012}
-  shootDistance: 400
+  shootDistance: 650
   followRadius: 400
 --- !u!135 &13500000
 SphereCollider:
