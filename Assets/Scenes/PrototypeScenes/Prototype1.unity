@@ -501,7 +501,7 @@ MonoBehaviour:
   muzzleRight: {fileID: 856661217}
   gunRight: {fileID: 972499432}
   gunLeft: {fileID: 195784090}
-  shootDistance: 400
+  shootDistance: 650
   followRadius: 400
 --- !u!1 &316127463
 GameObject:
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   muzzleRight: {fileID: 1179664442}
   gunRight: {fileID: 1744810322}
   gunLeft: {fileID: 1466710053}
-  shootDistance: 400
+  shootDistance: 650
   followRadius: 400
 --- !u!1 &579787770
 GameObject:
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   muzzleRight: {fileID: 1636176797}
   gunRight: {fileID: 1027234457}
   gunLeft: {fileID: 1525528428}
-  shootDistance: 400
+  shootDistance: 650
   followRadius: 400
 --- !u!1 &817281448
 GameObject:
@@ -2362,7 +2362,7 @@ MonoBehaviour:
   muzzleRight: {fileID: 1709264693}
   gunRight: {fileID: 2000840132}
   gunLeft: {fileID: 124981843}
-  shootDistance: 400
+  shootDistance: 650
   followRadius: 400
 --- !u!1 &1082232791
 GameObject:
@@ -2687,7 +2687,7 @@ GameObject:
   - 4: {fileID: 1407037294}
   - 114: {fileID: 1407037293}
   - 135: {fileID: 1407037292}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: DroneCheckpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3458,7 +3458,7 @@ MonoBehaviour:
   muzzleRight: {fileID: 1588229491}
   gunRight: {fileID: 1531269880}
   gunLeft: {fileID: 930004869}
-  shootDistance: 400
+  shootDistance: 650
   followRadius: 400
 --- !u!1 &1617706394
 GameObject:

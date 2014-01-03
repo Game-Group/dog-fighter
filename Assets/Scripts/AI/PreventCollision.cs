@@ -23,6 +23,7 @@ public class PreventCollision : MonoBehaviour {
         layerMask |= (1 << 11);
         layerMask |= (1 << 12);
         layerMask |= (1 << 13);
+        layerMask |= (1 << 17);
         layerMask = ~layerMask;
         if (Physics.Raycast(origin, direction, out hitInfo, distance, layerMask))
         {
