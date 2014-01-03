@@ -30,7 +30,7 @@ public class DroneBehaviour : MonoBehaviour
         // Radius in which drone follows the player for attacking
         SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
         //followRadius;
-        c.radius = 100;
+        c.radius = 400;
         desiredDistance = 100;
         c.isTrigger = true;
 
@@ -256,21 +256,39 @@ public class DroneBehaviour : MonoBehaviour
         if (isOpponent(Object))
         {
             // TODO Only chase if this object is closer than current target
-            if (currentState != Behaviours.Chase)
-            {
-                prevTarget = target;
-                prevState = currentState;
-            }
-            target = Object.transform;
 
-            currentState = Behaviours.Chase;
+            // In csse the mothership is the new target
+            // set the desired distance to mothership and
+            // the radius in which to begin shooting
             if (Object.transform.tag == "Mothership")
             {
-                desiredDistance = 500;
+
+                if (currentState != Behaviours.Chase)
+                {
+                    prevTarget = target;
+                    prevState = currentState;
+                }
+                target = Object.transform;
+
+                currentState = Behaviours.Chase;
+                desiredDistance = 700;
                 shootRadius = 900;
             }
-            else
+            // If the new target is not the mothership, make sure it
+            // is close enough to start responding to it
+
+            else if ((Object.transform.position - transform.position).magnitude < 250)
             {
+
+                if (currentState != Behaviours.Chase)
+                {
+                    prevTarget = target;
+                    prevState = currentState;
+                }
+                target = Object.transform;
+
+                currentState = Behaviours.Chase;
+                // check if the distance to the opponent is close enoug
                 desiredDistance = 100;
                 shootRadius = 200;
             }
