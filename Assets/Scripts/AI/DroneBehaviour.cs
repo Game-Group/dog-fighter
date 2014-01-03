@@ -278,7 +278,7 @@ public class DroneBehaviour : MonoBehaviour
             // If the new target is not the mothership, make sure it
             // is close enough to start responding to it
 
-            else if ((Object.transform.position - transform.position).magnitude < 800)
+            else if ((Object.transform.position - transform.position).magnitude < 300)
             {
 
                 if (currentState != Behaviours.Chase)
