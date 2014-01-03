@@ -18,6 +18,8 @@ ModelImporter:
     100024: RThruster
     100026: RThrusterBox
     100028: Wing
+    100030: Empty
+    100032: PlayerShip
     400000: Ball
     400002: Body
     400004: Core
@@ -33,6 +35,8 @@ ModelImporter:
     400024: RThruster
     400026: RThrusterBox
     400028: Wing
+    400030: Empty
+    400032: PlayerShip
     2300000: Ball
     2300002: Body
     2300004: Frame
