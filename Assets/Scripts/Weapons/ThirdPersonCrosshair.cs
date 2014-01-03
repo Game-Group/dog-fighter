@@ -10,7 +10,10 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
 	public float MaxDistance; 
 
-	public Texture2D CrosshairTexture;
+    [HideInInspector]
+    public float CurrentDistance;
+
+	//public Texture2D CrosshairTexture;
 
     public SoftwareMouse Mouse;
 
@@ -19,7 +22,7 @@ public class ThirdPersonCrosshair : MonoBehaviour
 
     public bool HumanControlled { get; set; }
 
-    private Vector2 crosshairPosition;
+    //private Vector2 crosshairPosition;
 	private int layerMask;
 
     void Awake()
@@ -28,7 +31,9 @@ public class ThirdPersonCrosshair : MonoBehaviour
     }
 
 	void Start()
-	{       
+	{
+        CurrentDistance = MaxDistance;
+
         int teamNumber = TeamHelper.GetTeamNumber(gameObject.layer);
 
         int teamXActorMask;
@@ -43,8 +48,13 @@ public class ThirdPersonCrosshair : MonoBehaviour
         layerMask = ~(teamXActorMask | projectileMask);
 
         ThreeDimensionalCrosshair = new Vector3(0, 0, 0);
-        crosshairPosition = new Vector2(0, 0);
+        //crosshairPosition = new Vector2(0, 0);
 	}
+
+    public void ResetDistance()
+    {
+        CurrentDistance = MaxDistance;
+    }
 	
 	void Update () 
 	{
@@ -59,29 +69,29 @@ public class ThirdPersonCrosshair : MonoBehaviour
         Ray ray = Camera.ScreenPointToRay(screenPosRayPreparation);
 
         //if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
-        if (Physics.Raycast(ray, out hitInfo, MaxDistance, layerMask))
+        if (Physics.Raycast(ray, out hitInfo, CurrentDistance, layerMask))
         {
-            //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.red);
+            //Debug.DrawRay(ray.origin, ray.direction * CurrentDistance, Color.red);
             ThreeDimensionalCrosshair = hitInfo.point;
         }
         else
         {
-            ThreeDimensionalCrosshair = ray.origin + ray.direction * MaxDistance;
-            //Debug.DrawRay(RayTransform.position, RayTransform.forward * MaxDistance, Color.green);
+            ThreeDimensionalCrosshair = ray.origin + ray.direction * CurrentDistance;
+            //Debug.DrawRay(ray.origin, ray.direction * CurrentDistance, Color.green);
         }
 
 		// Obtain the position of the 3D crosshair in 2D.
-        Vector3 screenPosition = Camera.WorldToScreenPoint(ThreeDimensionalCrosshair);
+        /*Vector3 screenPosition = Camera.WorldToScreenPoint(ThreeDimensionalCrosshair);
 
         crosshairPosition.x = screenPosition.x;
-        crosshairPosition.y = Screen.height - screenPosition.y;
+        crosshairPosition.y = Screen.height - screenPosition.y;*/
 	}
 
-    void OnGUI()
+    /*void OnGUI()
     {
         GUI.Label(new Rect(crosshairPosition.x - CrosshairTexture.width / 2f,
                            crosshairPosition.y - CrosshairTexture.height / 2f,
                            CrosshairTexture.width, CrosshairTexture.height), 
                   new GUIContent(CrosshairTexture));
-    }
+    }*/
 }

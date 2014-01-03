@@ -8,7 +8,6 @@ for explanation by a smart person.
 
 public static class PredictPosition 
 {
-	static int counter = 0;
 	public static Vector3 Predict(Vector3 targetPosition, Vector3 targetVelocity, Vector3 gunPosition, float projectileSpeed)
 	{
 		float a = (targetVelocity.x * targetVelocity.x) 

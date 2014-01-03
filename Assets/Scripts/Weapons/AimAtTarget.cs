@@ -45,7 +45,8 @@ public class AimAtTarget : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(initialRotation, transform.localRotation, MaxTurnAngle / angle);
         }
 
-        this.playerShipSync.CrosshairPosition = Crosshair.ThreeDimensionalCrosshair;
+        if (!GlobalSettings.SinglePlayer)
+            this.playerShipSync.CrosshairPosition = Crosshair.ThreeDimensionalCrosshair;
 	}
 
     private bool humanControlled;

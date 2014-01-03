@@ -94,41 +94,40 @@ public class GunSwitcher : MonoBehaviour
 			assignNewGun(Hardpoints[i], index, i);
 	}
 
-	private void assignNewGun(Transform hardpoint, int newGunIndex, int gunToReplaceIndex)
-	{
-		// Store some properties of the current gun.
-		GameObject gunToReplace = CurrentGuns[gunToReplaceIndex];
+    private void assignNewGun(Transform hardpoint, int newGunIndex, int gunToReplaceIndex)
+    {
+        // Store some properties of the current gun.
+        GameObject gunToReplace = CurrentGuns[gunToReplaceIndex];
 
-		Destroy(gunToReplace);
+        Destroy(gunToReplace);
 
-		// Create the new gun, and assign the stored properties to it.
-		GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], hardpoint.position, hardpoint.rotation);
+        // Create the new gun, and assign the stored properties to it.
+        GameObject newGun = (GameObject)Instantiate(Guns[newGunIndex], hardpoint.position, hardpoint.rotation);
 
-		// Make sure the new gun IS scaled with the hardpoint
-		Vector3 initialScale = newGun.transform.localScale;
-		newGun.transform.parent = hardpoint;
-		newGun.transform.localScale = initialScale;
+        // Make sure the new gun IS scaled with the hardpoint
+        Vector3 initialScale = newGun.transform.localScale;
+        newGun.transform.parent = hardpoint;
+        newGun.transform.localScale = initialScale;
 
-		newGun.layer = hardpoint.gameObject.layer;
+        newGun.layer = hardpoint.gameObject.layer;
 
-		if (Network.peerType != NetworkPeerType.Disconnected)
-		{
-			Player owner = this.GetComponent<ObjectSync>().Owner;
-			Shooter shooter = newGun.GetComponent<Shooter>();
-			shooter.Owner = owner;
-		}
+        if (Network.peerType != NetworkPeerType.Disconnected)
+        {
+            Player owner = this.GetComponent<ObjectSync>().Owner;
+            Shooter shooter = newGun.GetComponent<Shooter>();
+            shooter.Owner = owner;
+        }
 
         AimAtTarget aimAtTarget = newGun.GetComponent<AimAtTarget>();
         aimAtTarget.GunSwitcher = this;
 
-        if (!HumanControlledGuns)
-        {
-            newGun.GetComponent<Shooter>().HumanControlled = false;
-            aimAtTarget.HumanControlled = false;
-        }
-        else
-            aimAtTarget.Crosshair = Crosshair;        
 
-		CurrentGuns[gunToReplaceIndex] = newGun;
-	}
+        newGun.GetComponent<Shooter>().HumanControlled = HumanControlledGuns;
+        aimAtTarget.HumanControlled = HumanControlledGuns;
+
+        if (HumanControlledGuns)
+            aimAtTarget.Crosshair = Crosshair;
+
+        CurrentGuns[gunToReplaceIndex] = newGun;
+    }
 }

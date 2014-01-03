@@ -25,7 +25,7 @@ public class PlayerHealthControl : HealthControl
 	{
         if (Network.peerType != NetworkPeerType.Server)
         {
-            GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
+            Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity);
             AudioSource.PlayClipAtPoint(ExplosionSound, gameObject.transform.position);
         }
 

@@ -31,13 +31,11 @@ public class ShipControl : MonoBehaviour
 
     private Vector2 smoothingGhostMouse;
 
-    private Vector3 fullRotation;
     private ObjectTransformer transformer;
 
 	void Start () 
     {
         transformer = gameObject.GetComponent<ObjectTransformer>();
-        fullRotation = new Vector3(0, 0, 0);
 
         // Remember the camera position in the editor.
         baseCameraPosition = Camera.transform.localPosition;

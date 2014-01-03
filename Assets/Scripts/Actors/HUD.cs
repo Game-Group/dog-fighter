@@ -21,12 +21,14 @@ public class HUD : MonoBehaviour
     public SoftwareMouse Mouse;
 
     public GunSwitcher GunSwitcher;
+    private ThirdPersonCrosshair Crosshair;
 
     private int team;
 
     void Start()
     {
         team = TeamHelper.GetTeamNumber(gameObject.layer);
+        this.Crosshair = GunSwitcher.Crosshair;
     }
 
     void OnGUI()
@@ -74,7 +76,10 @@ public class HUD : MonoBehaviour
         else npcs = GlobalSettings.Team1Npcs;
 
         if (npcs.Count == 0)
+        {
+            Crosshair.ResetDistance();
             return;
+        }
 
         GameObject closestToCursor = null;
         float closestDistance = float.MaxValue;
@@ -119,6 +124,8 @@ public class HUD : MonoBehaviour
                                                             transformer.WorldTranslationDirection * transformer.TranslationSpeed, 
                                                             GunSwitcher.CurrentGuns[0].transform.position, 
                                                             controller.FlyControl.DesiredSpeed);
+
+        Crosshair.CurrentDistance = (predictedPosition - Camera.transform.position).magnitude;
 
         Vector3 predictedScreenPosition = Camera.WorldToScreenPoint(predictedPosition);
         predictedScreenPosition = ClampToScreen(predictedScreenPosition);
