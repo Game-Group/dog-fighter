@@ -11,7 +11,7 @@ public class TurretBehaviour : MonoBehaviour {
     public Transform gunRight;
     public Transform gunLeft;
     // The radius
-    public float shootRadius;
+    public float shootDistance;
     public float followRadius;
 
     Shooter shootL;
@@ -24,10 +24,7 @@ public class TurretBehaviour : MonoBehaviour {
         SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
         collider.radius = followRadius;
 
-        if (collider.radius < shootRadius)
-        {
-            shootRadius = collider.radius;
-        }
+        
 	}
 	
 	void Update () {
@@ -69,6 +66,7 @@ public class TurretBehaviour : MonoBehaviour {
                 ShipControl s = Object.GetComponent<ShipControl>();
                 speed = s.CurrentSpeed;
             }
+            //Debug.Log(speed);
             // Check the predicted position given the current flying velocity 
             Vector3 targetPosM = PredictPosition.Predict(Object.transform.position,
                                     speed * Object.transform.forward,
@@ -112,7 +110,7 @@ public class TurretBehaviour : MonoBehaviour {
             
             float diff = (Object.transform.position - top.position).magnitude;
             // Only shoot in case of in shoot radius
-            if(diff < shootRadius)
+            if(diff < shootDistance)
             {
                    shootL.Shoot();
                    shootR.Shoot();

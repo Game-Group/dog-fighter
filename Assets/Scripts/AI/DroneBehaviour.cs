@@ -30,7 +30,7 @@ public class DroneBehaviour : MonoBehaviour
         // Radius in which drone follows the player for attacking
         SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
         //followRadius;
-        c.radius = 400;
+        c.radius = 500;
         desiredDistance = 100;
         c.isTrigger = true;
 
@@ -147,6 +147,7 @@ public class DroneBehaviour : MonoBehaviour
 
             if ((target.position - transform.position).magnitude > desiredDistance)
             {
+                speed = 200;
                 // Move the drone to the viewed direction
                 //transform.position += transform.forward * speed * Time.deltaTime;
                 transformer.TranslationSpeed = speed;
@@ -155,6 +156,7 @@ public class DroneBehaviour : MonoBehaviour
             // Do we want the bot to rotate or just hang in the air
             else
             {
+                speed = 0;
                 transformer.TranslationSpeed = 0;
                 //transform.RotateAround(target.position, target.up, 30 * Time.deltaTime);
             }
