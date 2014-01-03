@@ -58,8 +58,8 @@ public class TurretBehaviour : MonoBehaviour {
             float speed = 0;
             if (Object.gameObject.tag == "Npc")
             {
-                DroneBehaviour d = Object.GetComponent<DroneBehaviour>();
-                speed = d.speed;
+                ObjectTransformer d = Object.GetComponent<ObjectTransformer>();
+                speed = d.TranslationSpeed;
             }
             else if(Object.gameObject.tag == "Player")
             {
