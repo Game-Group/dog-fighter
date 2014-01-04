@@ -11,6 +11,8 @@ public class DroneBehaviour : MonoBehaviour
     public float speed;
     public float followRadius;
     public float shootRadius;
+    public DroneTriggerBehaviour TriggerBehaviour;
+
     public Transform[] gun;
     Shooter gunL;
     private Shooter[] gunScripts;
@@ -28,12 +30,7 @@ public class DroneBehaviour : MonoBehaviour
     void Start()
     {
         // Radius in which drone follows the player for attacking
-        SphereCollider c = this.gameObject.AddComponent<SphereCollider>();
-        //followRadius;
-        c.radius = 500;
         desiredDistance = 100;
-        c.isTrigger = true;
-
         currentState = Behaviours.GoTo;
 
         // initialize gunScripts array
@@ -88,7 +85,7 @@ public class DroneBehaviour : MonoBehaviour
         ///////////////
         if (target == null || target.transform == null)
         {
-            OnTriggerLeave(null);
+            TriggerLeave(null);
         }
         bool startedShooting = false;
         // In case we are in shoot radius, shoot shoot shoot.
@@ -167,7 +164,7 @@ public class DroneBehaviour : MonoBehaviour
             ///////////////
             if (target == null || target.transform == null)
             {
-                OnTriggerLeave(null);
+                TriggerLeave(null);
             }
             if (target == null || target.transform == null)
             {
@@ -193,7 +190,7 @@ public class DroneBehaviour : MonoBehaviour
     }
 
     // Go back to original target and state
-    void OnTriggerLeave(Collider Object)
+    public void TriggerLeave(Collider Object)
     {
         if (Network.peerType == NetworkPeerType.Client && !GlobalSettings.SinglePlayer)
             return;
@@ -207,7 +204,7 @@ public class DroneBehaviour : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider Object)
+    public void TriggerStay(Collider Object)
     {
         if (Network.peerType == NetworkPeerType.Client && !GlobalSettings.SinglePlayer)
             return;
@@ -217,7 +214,7 @@ public class DroneBehaviour : MonoBehaviour
         ///////////////
         if (Object == null || Object.transform == null || target == null || target.transform == null)
         {
-            OnTriggerLeave(null);
+            TriggerLeave(null);
             return;
         }
         ///////////////////
@@ -237,14 +234,14 @@ public class DroneBehaviour : MonoBehaviour
             // we want to fight opponent
             if (currentState != Behaviours.Chase)
             {
-                OnTriggerEnter(Object);
+                TriggerEnter(Object);
             }
         }
 
 
     }
 
-    void OnTriggerEnter(Collider Object)
+    public void TriggerEnter(Collider Object)
     {
         if (Network.peerType == NetworkPeerType.Client && !GlobalSettings.SinglePlayer)
             return;
@@ -337,7 +334,7 @@ public class DroneBehaviour : MonoBehaviour
         ///////////////
         if (target == null || target.transform == null)
         {
-            OnTriggerLeave(null);
+            TriggerLeave(null);
             return false;
         }
         ///////////////////

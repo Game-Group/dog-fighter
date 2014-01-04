@@ -13,7 +13,7 @@ public class PreventCollision : MonoBehaviour {
     Vector3 shootRay(Vector3 origin, Vector3 direction, float distance)
     {
         RaycastHit hitInfo;
-        Debug.DrawLine(origin, direction + origin, Color.green);
+        //Debug.DrawLine(origin, direction + origin, Color.green);
 
 
         //int layerMask = 1 << 8;
@@ -29,8 +29,8 @@ public class PreventCollision : MonoBehaviour {
         {
             if (hitInfo.transform != drone)
             {
-                Debug.DrawLine(origin, hitInfo.point, Color.red);
-                Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
+                //Debug.DrawLine(origin, hitInfo.point, Color.red);
+                //Debug.DrawLine(hitInfo.point, hitInfo.normal, Color.blue);
                 return hitInfo.normal * 20;
             }
         }
