@@ -5,6 +5,7 @@ public class DroneBehaviour : MonoBehaviour
 {
     public Transform target;
     private Transform prevTarget;
+    private Transform spawnPosition;
 
     public ObjectTransformer transformer;
 
@@ -20,6 +21,7 @@ public class DroneBehaviour : MonoBehaviour
     public enum Behaviours { Patrol, Chase, Defend, GoTo }
     public Behaviours currentState;
     Behaviours prevState;
+
 
     PreventCollision pc;
     double desiredDistance;
@@ -40,6 +42,9 @@ public class DroneBehaviour : MonoBehaviour
         // Add the prevent collision code 
         pc = this.gameObject.AddComponent<PreventCollision>();
         pc.setActor(this.transform);
+
+        // Spawn positon is transform at creation
+        spawnPosition = this.transform;
 
         ///
         /// Network Code
@@ -78,6 +83,7 @@ public class DroneBehaviour : MonoBehaviour
 
     }
 
+    // Makes the drone shoot
     void Shoot()
     {
         ///////////////
@@ -199,9 +205,19 @@ public class DroneBehaviour : MonoBehaviour
         // go back to main target
         if (Object == null || Object.transform == target)
         {
-            target = prevTarget;
-            currentState = prevState;
+            // If our previous target is no longer available return ro spawn position
+            if (prevTarget == null)
+            {
+                target = spawnPosition;
+                currentState = prevState;
+            }
+            else
+            {   
+                target = prevTarget;
+                currentState = prevState;
+            }
         }
+
     }
 
     public void TriggerStay(Collider Object)
@@ -220,18 +236,22 @@ public class DroneBehaviour : MonoBehaviour
         ///////////////////
         // End ROADBLOCK //
         ///////////////////
-
-
+       
         // Check to make sure if the object getting this close is the object we 
         // are targeting
         if (Object.transform == target.transform)
         {
-
+            // In case our target is not the mothership and it is no longer in the chase range
+            if ((Object.transform.position - transform.position).magnitude > 700 && Object.transform.tag != "Mothership")
+            {
+                TriggerLeave(null);
+            }
+          
         }
         else
         {
             // If we are not in chasing mode check if 
-            // we want to fight opponent
+            // we want to target opponent (if it is closer than current target)
             if (currentState != Behaviours.Chase)
             {
                 TriggerEnter(Object);
