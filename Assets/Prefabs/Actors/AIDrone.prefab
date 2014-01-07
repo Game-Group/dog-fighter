@@ -382,7 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   transformer: {fileID: 11400016}
-  speed: 200
+  speed: 100
   followRadius: 200
   shootRadius: 200
   TriggerBehaviour: {fileID: 0}
@@ -400,10 +400,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e255d87db2a56488a6d100d8c6d508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 50
-  MaxShields: 50
+  MaxHealth: 25
+  MaxShields: 60
   HealthPerSecond: 0
-  ShieldsPerSecond: 10
+  ShieldsPerSecond: 0
   ShieldRechargeDelay: 5
   ShieldImpactPrefab: {fileID: 100000, guid: 5493aa2a445c04d4a820cfd1490cf459, type: 2}
   ShieldImpactScale: 1

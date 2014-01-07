@@ -149,7 +149,7 @@ public class HealthControl : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Heal(float hullHealing, float shieldHealing, bool ignoreShieldDelay = true)
+    public void Heal(float hullHealing, float shieldHealing, bool ignoreShieldDelay = false)
     {
         health = Mathf.Min(health + hullHealing, MaxHealth);
         if (ignoreShieldDelay || currentShieldDelay <= 0)

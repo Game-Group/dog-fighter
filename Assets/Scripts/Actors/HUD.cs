@@ -59,10 +59,10 @@ public class HUD : MonoBehaviour
         GUI.color = Color.white;
         GUI.Label(
                 new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent("Hull: " + HealthControl.CurrentHealth + "/" + HealthControl.MaxHealth));
+			new GUIContent("Hull: " + Mathf.Round(HealthControl.CurrentHealth) + "/" + HealthControl.MaxHealth));
         GUI.Label(
                 new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top + 20, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent("Shields: " + HealthControl.CurrentShields + "/" + HealthControl.MaxShields));
+			new GUIContent("Shields: " + Mathf.Round(HealthControl.CurrentShields) + "/" + HealthControl.MaxShields));
     }
 
     private void DrawNpcMarkers()
