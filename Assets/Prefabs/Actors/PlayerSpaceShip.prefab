@@ -1184,9 +1184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f16d2d3ccad2af45944281a61ae3d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1000
-  MaxShields: 100
-  HealthPerSecond: 100
+  MaxHealth: 100
+  MaxShields: 150
+  HealthPerSecond: 1
   ShieldsPerSecond: 10
   ShieldRechargeDelay: 3
   ShieldImpactPrefab: {fileID: 100000, guid: 5493aa2a445c04d4a820cfd1490cf459, type: 2}
@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 2000000}
   MaxDistance: 1500
-  CrosshairTexture: {fileID: 2800000, guid: 031b19d1f4a4bee469d41e1601915d1b, type: 3}
+  CurrentDistance: 0
   Mouse: {fileID: 11400000}
   ThreeDimensionalCrosshair: {x: 0, y: 0, z: 0}
 --- !u!114 &11400018

@@ -59,10 +59,10 @@ public class HUD : MonoBehaviour
         GUI.color = Color.white;
         GUI.Label(
                 new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent("Hull: " + HealthControl.CurrentHealth + "/" + HealthControl.MaxHealth));
+			new GUIContent("Hull: " + Mathf.Round(HealthControl.CurrentHealth) + "/" + HealthControl.MaxHealth));
         GUI.Label(
                 new Rect(StatusTexture_Left + StatusTexture_Width + 10, StatusTexture_Top + 20, StatusTexture_Width, StatusTexture_Height),
-                new GUIContent("Shields: " + HealthControl.CurrentShields + "/" + HealthControl.MaxShields));
+			new GUIContent("Shields: " + Mathf.Round(HealthControl.CurrentShields) + "/" + HealthControl.MaxShields));
     }
 
     private void DrawNpcMarkers()
@@ -101,7 +101,7 @@ public class HUD : MonoBehaviour
             }
         }
 
-        DrawPredictionMarker(closestToCursor);
+        CreatePredictionMarker(closestToCursor);
     }
 
     private void DrawNpcMarker(Vector3 screenPosition3D)
@@ -113,7 +113,7 @@ public class HUD : MonoBehaviour
                   new GUIContent(HostileNpcTexture));
     }
 
-    private void DrawPredictionMarker(GameObject npc)
+    private void CreatePredictionMarker(GameObject npc)
     {
         ObjectTransformer transformer = npc.GetComponent<ObjectTransformer>();
 
@@ -125,10 +125,12 @@ public class HUD : MonoBehaviour
                                                             GunSwitcher.CurrentGuns[0].transform.position, 
                                                             controller.FlyControl.DesiredSpeed);
 
-        Crosshair.CurrentDistance = (predictedPosition - Camera.transform.position).magnitude;
-
         Vector3 predictedScreenPosition = Camera.WorldToScreenPoint(predictedPosition);
         predictedScreenPosition = ClampToScreen(predictedScreenPosition);
+
+        //if (predictedScreenPosition.z < 0)
+          //  Crosshair.ResetDistance();
+        //else Crosshair.CurrentDistance = predictedScreenPosition.z;
 
         GUI.Label(new Rect(predictedScreenPosition.x - PredictedPositionTexture.width / 2f,
                    predictedScreenPosition.y - PredictedPositionTexture.height / 2f,

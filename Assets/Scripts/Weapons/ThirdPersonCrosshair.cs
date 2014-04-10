@@ -43,7 +43,7 @@ public class ThirdPersonCrosshair : MonoBehaviour
         }
         else teamXActorMask = 1 << 11;
 
-        int projectileMask = (1 << 10) | (1 << 13);
+        int projectileMask = (1 << 10) | (1 << 13) | (1 << 2);
 
         layerMask = ~(teamXActorMask | projectileMask);
 
@@ -71,7 +71,7 @@ public class ThirdPersonCrosshair : MonoBehaviour
         //if (Physics.Raycast(RayTransform.position, RayTransform.forward, out hitInfo, MaxDistance, layerMask))
         if (Physics.Raycast(ray, out hitInfo, CurrentDistance, layerMask))
         {
-            //Debug.DrawRay(ray.origin, ray.direction * CurrentDistance, Color.red);
+            //Debug.DrawRay(ray.origin, ray.direction * hitInfo.distance, Color.red);
             ThreeDimensionalCrosshair = hitInfo.point;
         }
         else

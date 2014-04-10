@@ -65,8 +65,8 @@ public class MothershipHealthControl : HealthControl
                                Screen.height * 0.1f,
                                200,
                                40),
-                      new GUIContent("Mothership team " + team + " health: " + health + "\n"
-                                   + "Mothership team " + team + " shields: " + shieldStrength));
+			          new GUIContent("Mothership team " + team + " health: " + Mathf.Round(health) + "\n"
+                                   + "Mothership team " + team + " shields: " + Mathf.Round(shieldStrength)));
         }
         else
         {
@@ -74,8 +74,8 @@ public class MothershipHealthControl : HealthControl
                                Screen.height * 0.1f + 50,
                                200,
                                40),
-                      new GUIContent("Mothership team " + team + " health: " + health + "\n"
-                                   + "Mothership team " + team + " shields: " + shieldStrength));
+			          new GUIContent("Mothership team " + team + " health: " + Mathf.Round(health) + "\n"
+			               + "Mothership team " + team + " shields: " + Mathf.Round(shieldStrength)));
         }
     }
 }
