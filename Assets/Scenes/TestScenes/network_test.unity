@@ -256,8 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a30bc9fad32544e8a05a86ae869832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ServerPort: 6500
-  ServerIP: 127.0.0.1
   ServerControl: {fileID: 100000, guid: 61b0b1b169fd2bd4a978e428a037c433, type: 2}
   ClientControl: {fileID: 100000, guid: c329e8da29a4c914d95f3f7760193511, type: 2}
 --- !u!1 &1693338137

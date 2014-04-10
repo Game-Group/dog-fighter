@@ -112,6 +112,9 @@ public class NetworkPrototypeLevel : LevelCreator
         int team1MothershipID = base.GUIDGenerator.GenerateID();
         int team2MothershipID = base.GUIDGenerator.GenerateID();
 
+        //Debug.Log("Team 1: " + team1MothershipID);
+        //Debug.Log("Team 2: " + team2MothershipID);
+
         // Assign some values.
         ObjectSync team1MSObjSync = team1Mothership.GetComponent<ObjectSync>();
         team1MSObjSync.Type = ObjectSyncType.Mothership;

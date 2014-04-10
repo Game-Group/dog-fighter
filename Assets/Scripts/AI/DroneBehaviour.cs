@@ -90,6 +90,10 @@ public class DroneBehaviour : MonoBehaviour
         {
             OnTriggerLeave(null);
         }
+        if (target == null || target.transform == null)
+        {
+            return;
+        }
         bool startedShooting = false;
         // In case we are in shoot radius, shoot shoot shoot.
         if ((transform.position - target.transform.position).magnitude < shootRadius)

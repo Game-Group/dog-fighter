@@ -22,6 +22,8 @@ public class MothershipHealthControl : HealthControl
         if (dead)
             return;
 
+        this.health = 0;
+
         if (Network.peerType != NetworkPeerType.Server)
         {
             GameObject explinst = Instantiate(ExplosionGraphic, gameObject.transform.position, Quaternion.identity) as GameObject;
@@ -35,8 +37,15 @@ public class MothershipHealthControl : HealthControl
             matchControl.ObjectDestroyed(this.gameObject);
         }
 
-        Destroy(gameObject, 5);
+        ObjectSync objSync = this.GetComponent<ObjectSync>();
+
+        if (objSync != null && !GlobalSettings.SinglePlayer)
+            objSync.Dispose();
+
         dead = true;
+        base.IsDead = true;
+
+        Destroy(gameObject, 5);
     }
 
     public void OnDestroy()

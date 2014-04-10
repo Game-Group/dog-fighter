@@ -4,7 +4,7 @@ using System.Collections;
 public class HealthControl : MonoBehaviour
 {
     public bool DrawHealthInfo { get; set; }
-    public bool IsDead { get; private set; }
+    public bool IsDead { get; set; }
 
     public float MaxHealth;
     public float MaxShields;
@@ -104,7 +104,8 @@ public class HealthControl : MonoBehaviour
             // Notify others that the object should start 'dying'.
             if (!GlobalSettings.SinglePlayer)
             {
-                ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
+                if (!this.IsDead)
+                    ObjectRPC.KillObject(this.objSync.Owner, this.objSync.GlobalID);
                 // Die() will be called using RPCs on both the client and server.
                 //if (this.objSync.IsDisposed)
                 //    throw new UnityException("ObjectSync has already been disposed.");
@@ -138,6 +139,8 @@ public class HealthControl : MonoBehaviour
     {
         if (this.IsDead)
             return;
+
+        this.health = 0;
 
         ObjectSync objSync = this.GetComponent<ObjectSync>();
 

@@ -57,6 +57,8 @@ public class ObjectSync : NetworkObject
 
 		base.NetworkControl.SyncTimeEvent -= this.SyncFunction;
 
+        //Debug.Log("ObjectSync disposed: ID = " + this.GlobalID);
+
 		if (this.IsIDAssigned)
 		{
 			//this.Owner = null;
