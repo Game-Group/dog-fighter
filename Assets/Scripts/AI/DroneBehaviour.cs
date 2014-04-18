@@ -141,7 +141,7 @@ public class DroneBehaviour : MonoBehaviour
     // Does the actual moving of the drone
     void MoveDrone()
     {
-        Quaternion rot;
+        Quaternion rot = Quaternion.identity;
         Vector3 direction;
 
         // In case we are in shooting range keep looking at the opponent
@@ -187,7 +187,8 @@ public class DroneBehaviour : MonoBehaviour
             // Recalculates the path to get to the target
             direction = pc.RecalculatePath(target);
             // Rotation needed to look at direction
-            rot = Quaternion.LookRotation(direction);
+            if (direction != Vector3.zero)
+                rot = Quaternion.LookRotation(direction);
             // Apply rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime);
 

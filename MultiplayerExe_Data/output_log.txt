@@ -13,7 +13,7 @@ Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\A
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.083 seconds
+- Completed reload, in  0.109 seconds
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -34,67 +34,27 @@ Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\A
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.085 seconds
+- Completed reload, in  0.082 seconds
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 0.417084 ms
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 203.
-Total: 0.942403 ms (FindLiveObjects: 0.015850 ms CreateObjectMapping: 0.047097 ms MarkObjects: 0.189295 ms  DeleteObjects: 0.006340 ms)
-
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-UnloadTime: 0.902552 ms
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 584.
-Total: 1.393453 ms (FindLiveObjects: 0.036228 ms CreateObjectMapping: 0.026718 ms MarkObjects: 0.434293 ms  DeleteObjects: 0.009962 ms)
-
-Connecting
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Connected to server.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player spawn point RPC received.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player ship RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.dll (this message is harmless)
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.Core.dll (this message is harmless)
-UnloadTime: 0.369987 ms
+UnloadTime: 0.355043 ms
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 203.
-Total: 0.730011 ms (FindLiveObjects: 0.010868 ms CreateObjectMapping: 0.016302 ms MarkObjects: 0.160765 ms  DeleteObjects: 0.004981 ms)
+Total: 0.773033 ms (FindLiveObjects: 0.011774 ms CreateObjectMapping: 0.017661 ms MarkObjects: 0.166652 ms  DeleteObjects: 0.005434 ms)
 
 
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-UnloadTime: 0.454672 ms
+UnloadTime: 0.365005 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 584.
-Total: 0.978632 ms (FindLiveObjects: 0.030794 ms CreateObjectMapping: 0.019473 ms MarkObjects: 0.373610 ms  DeleteObjects: 0.009057 ms)
+Total: 0.956895 ms (FindLiveObjects: 0.051173 ms CreateObjectMapping: 0.029888 ms MarkObjects: 0.325607 ms  DeleteObjects: 0.007698 ms)
 
 Connecting
  
@@ -112,15 +72,55 @@ New player joined RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-New playerew player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlajoined RPC receiyee!
+Create player spawn point RPC received.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-rGenerated/UnityEngineDebug.cpp Line: 53)
+Create player ship RPC received!
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+UnloadTime: 0.350967 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 203.
+Total: 0.764429 ms (FindLiveObjects: 0.010868 ms CreateObjectMapping: 0.016302 ms MarkObjects: 0.171181 ms  DeleteObjects: 0.004981 ms)
+
+
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+UnloadTime: 0.443350 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 584.
+Total: 0.931987 ms (FindLiveObjects: 0.052531 ms CreateObjectMapping: 0.028983 ms MarkObjects: 0.330588 ms  DeleteObjects: 0.007245 ms)
+
+Connecting
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Connected to server.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+New player joined RPC received!
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityNngineDebug.cpp Line: 5p3)
+e
+r joined RPC received!
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
 Create player spawn point RPC received.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+New player joined RPC received!
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+New player joined RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
@@ -144,27 +144,19 @@ Create player ship RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-The server has disconnected from the client. Most likeTy eh  server has shut down.
+Disconnected from server!
  
-(Filename: onnece: 740ro
-m
- the client. Most likely the server has shut down.
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Ending match.
  
-(Filename:  Line: 740)
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Disconnected from servDris
-co
-nnected from eenvarm
- : C:/BuildAgent/work
-(d3d49558e4d408f4/artifacts/Stan: C:nePlayerGenerated/UnityEn/inuildAgent/work/d3d49
-
-8e4d408f4/artifacts/StandalonePlayerGnding ed/Unit
-yE
-ngineDemug.Cpp Line: 53)
-
-ork/d3d49558e4d408f4/Ertifng maStand
+Disconnected from server!
  
-(Filename: C:/Bted/UnitlyAgegi/work/d3d49 Line: 03)8
-f
-4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Ending match.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 

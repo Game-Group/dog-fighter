@@ -5,6 +5,9 @@ using System;
 
 public class NetworkControl : MonoBehaviour 
 {
+    /// <summary>
+    /// The amount of times the SyncTimeEvent is called each second.
+    /// </summary>
 	public int SyncRate
 	{
 		get { return this.syncRate; }
@@ -44,7 +47,7 @@ public class NetworkControl : MonoBehaviour
 	// Use this for initialization
 	private void Start () 
 	{
-		this.SyncRate = 15;
+		this.SyncRate = 20;
 
 		// Find the local IP Address.
 		IPAddress localAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];

@@ -21,6 +21,25 @@ public class AimAtTarget : MonoBehaviour
         }
     }
 
+    public void UpdateFiringDirection(Vector3 direction)
+    {
+        this.Crosshair.ThreeDimensionalCrosshair = direction;
+
+        this.UpdateFiringDirection();
+    }
+
+    private void UpdateFiringDirection()
+    {
+        transform.LookAt(Crosshair.ThreeDimensionalCrosshair);
+
+        float angle = Quaternion.Angle(initialRotation, transform.localRotation);
+
+        if (angle > MaxTurnAngle)
+        {
+            transform.localRotation = Quaternion.Slerp(initialRotation, transform.localRotation, MaxTurnAngle / angle);
+        }
+    }
+
     private Quaternion initialRotation;
 
 	void Start () 
@@ -36,14 +55,7 @@ public class AimAtTarget : MonoBehaviour
         if (Crosshair == null)
             return;
 
-        transform.LookAt(Crosshair.ThreeDimensionalCrosshair);
-
-        float angle = Quaternion.Angle(initialRotation, transform.localRotation);
-
-        if (angle > MaxTurnAngle)
-        {
-            transform.localRotation = Quaternion.Slerp(initialRotation, transform.localRotation, MaxTurnAngle / angle);
-        }
+        this.UpdateFiringDirection();       
 
         if (!GlobalSettings.SinglePlayer)
         {

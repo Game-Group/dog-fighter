@@ -53,7 +53,7 @@ public class GunSwitcher : MonoBehaviour
             AimAtTarget aimAtTarget = gun.GetComponent<AimAtTarget>();
             if (aimAtTarget != null)
             {
-                aimAtTarget.Crosshair.ThreeDimensionalCrosshair = crossHairPosition;
+                aimAtTarget.UpdateFiringDirection(crossHairPosition);
             }
         }
     }

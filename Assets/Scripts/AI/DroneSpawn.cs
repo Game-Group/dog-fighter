@@ -96,8 +96,6 @@ public class DroneSpawn : MonoBehaviour {
     // Spawn drones from each start location to each destination location
     void SpawnDrones()
     {
-        return;
-
         //FIXME: This is an ugly fix for not spawning on each other
         Vector3 space = new Vector3(0, 0, 70);
         for (int j = 0; j < drones_per_location; j++)
