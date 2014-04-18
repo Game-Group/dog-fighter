@@ -54,16 +54,21 @@ public class NetworkPrototypeLevel : LevelCreator
                 // Sync player ships and player spawnpoints
                 PlayerObjects playerObjects = base.ObjectTables.PlayerObjects[p];
 
-                GameObject playerSpawnPoint = base.ObjectTables.GetPlayerObject(p, playerObjects.PlayerSpawnPointID);
+                GameObject spawnPoint = base.GetObject(p, playerObjects.PlayerSpawnPointID);
 
                 ObjectRPC.CreatePlayerSpawnpoint(
-                    newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerSpawnPointID, playerSpawnPoint.transform.position
-                    );
+                    newPlayer.NetworkPlayerInfo
+                    , p
+                    , playerObjects.PlayerSpawnPointID
+                    , spawnPoint.transform.position);
 
                 GameObject playerShip = base.GetObject(p, playerObjects.PlayerShipID);
 
                 PlayerShipRPC.CreatePlayerShip(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID);
                 ObjectRPC.SetObjectLayer(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID, (Layers)playerShip.layer);
+
+
+                
             }
 		}
 
@@ -71,10 +76,11 @@ public class NetworkPrototypeLevel : LevelCreator
 		int spawnPointID = base.GUIDGenerator.GenerateID();
 		int playerShipID = base.GUIDGenerator.GenerateID();
 		Vector3 spawnPointPos = Vector3.zero;
-		ObjectRPC.CreatePlayerSpawnpoint(newPlayer, spawnPointID, spawnPointPos);
-		PlayerShipRPC.CreatePlayerShip(newPlayer, playerShipID);		
-		PlayerShipRPC.SpawnPlayerShip(newPlayer, spawnPointID, playerShipID);	                              
 
+        // The order in which the following RPCs are send is critical!
+		ObjectRPC.CreatePlayerSpawnpoint(newPlayer, spawnPointID, spawnPointPos);
+        PlayerShipRPC.CreatePlayerShip(newPlayer, playerShipID);
+		PlayerShipRPC.SpawnPlayerShip(newPlayer, spawnPointID, playerShipID);
 	}
 
     /// <summary>

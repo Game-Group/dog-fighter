@@ -3,9 +3,12 @@ using System.Collections;
 
 public enum Layers
 {
-    // Do not change existing names and numbers through refractoring only!
-    // These definitions are associated with the layers in Unity.
-    // Changes to existing values must be changed in both places.    
+    ////////////////
+    /// Warning! ///
+    ////////////////
+    /// Do not change existing names and numbers through refractoring only!
+    /// These definitions are associated with the layers in Unity.
+    /// Changes to existing values must be changed in both places.    
 
     Team1Actor = 8,
     Team1Mothership = 9,

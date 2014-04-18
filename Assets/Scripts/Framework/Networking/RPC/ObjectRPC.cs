@@ -202,12 +202,13 @@ public class ObjectRPC : RPCHolder
 	[RPC]
 	private void CreatePlayerSpawnpointRPC(NetworkViewID owner, int objectID, Vector3 position, NetworkMessageInfo info)
 	{		
-//		Debug.Log("Create player spawn point RPC received.");
+		Debug.Log("Create player spawn point RPC received.");
 
 		GameObject spawnPoint = (GameObject)GameObject.Instantiate(this.PlayerSpawnPointPrefab, position, Quaternion.identity);
         ObjectSync spawnPointSync = spawnPoint.GetComponent<ObjectSync>();
         spawnPointSync.Type = ObjectSyncType.PlayerSpawnPoint;
-
+        spawnPoint.layer = (int)base.NetworkControl.Players[owner].Team;       
+        
         base.ObjectTables.PlayerObjects[base.Players[owner]].PlayerSpawnPointID = objectID;
 		base.AddToObjectTables(spawnPoint, owner, objectID);
 	}

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerHealthControl : HealthControl 
 {
-
 	public PlayerRespawner RespawnPoint;
 	public float RespawnDelay;
 
@@ -12,13 +11,16 @@ public class PlayerHealthControl : HealthControl
 
     protected override void Initialize()
     {
-        PlayerRespawner[] respawnpoints = FindObjectsOfType<PlayerRespawner>();
-        foreach (PlayerRespawner spawner in respawnpoints)
-            if (spawner.gameObject.layer == gameObject.layer)
-            {
-                RespawnPoint = spawner;
-                break;
-            }
+        if (!GlobalSettings.SinglePlayer)
+        {
+            PlayerRespawner[] respawnpoints = FindObjectsOfType<PlayerRespawner>();
+            foreach (PlayerRespawner spawner in respawnpoints)
+                if (spawner.gameObject.layer == gameObject.layer)
+                {
+                    RespawnPoint = spawner;
+                    break;
+                }
+        }
     }
 
 	public override void Die()

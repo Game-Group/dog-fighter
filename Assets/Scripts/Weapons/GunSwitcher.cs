@@ -48,11 +48,13 @@ public class GunSwitcher : MonoBehaviour
 
     public void AssignCrossHairPosition(Vector3 crossHairPosition)
     {
-        foreach (GameObject gun in this.Guns)
+        foreach (GameObject gun in this.CurrentGuns)
         {
             AimAtTarget aimAtTarget = gun.GetComponent<AimAtTarget>();
             if (aimAtTarget != null)
+            {
                 aimAtTarget.Crosshair.ThreeDimensionalCrosshair = crossHairPosition;
+            }
         }
     }
 
@@ -121,12 +123,11 @@ public class GunSwitcher : MonoBehaviour
         AimAtTarget aimAtTarget = newGun.GetComponent<AimAtTarget>();
         aimAtTarget.GunSwitcher = this;
 
-
         newGun.GetComponent<Shooter>().HumanControlled = HumanControlledGuns;
         aimAtTarget.HumanControlled = HumanControlledGuns;
 
-        if (HumanControlledGuns)
-            aimAtTarget.Crosshair = Crosshair;
+        //if (HumanControlledGuns)
+        aimAtTarget.Crosshair = Crosshair;
 
         CurrentGuns[gunToReplaceIndex] = newGun;
     }

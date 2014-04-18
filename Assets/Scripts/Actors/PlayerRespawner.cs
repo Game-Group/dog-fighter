@@ -35,6 +35,11 @@ public class PlayerRespawner : MonoBehaviour
 		SpawnAtStart = null;
 	}
 
+    public void AttachPlayer(GameObject obj)
+    {
+        this.attachedPlayer = obj;
+    }
+
 	public void Respawn(GameObject obj)
 	{
 		this.attachedPlayer = obj;

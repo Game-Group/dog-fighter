@@ -96,36 +96,39 @@ public class DroneSpawn : MonoBehaviour {
     // Spawn drones from each start location to each destination location
     void SpawnDrones()
     {
-            //FIXME: This is an ugly fix for not spawning on each other
-            Vector3 space = new Vector3(0, 0 , 70);
-            for (int j = 0; j < drones_per_location; j ++)
+        return;
+
+        //FIXME: This is an ugly fix for not spawning on each other
+        Vector3 space = new Vector3(0, 0, 70);
+        for (int j = 0; j < drones_per_location; j++)
+        {
+
+            for (int i = 0; i < spawn_locations.Length; i++)
             {
-                
-                for (int i = 0; i < spawn_locations.Length; i++)
+                GameObject droneInstance = (GameObject)Instantiate(drone, spawn_locations[i].position + (space * j), spawn_locations[i].rotation);
+                droneInstance.tag = "Npc";
+                if (TeamHelper.IsSameTeam(gameObject.layer, 8))
                 {
-                    GameObject droneInstance = (GameObject)Instantiate(drone, spawn_locations[i].position  + (space * j), spawn_locations[i].rotation);
-                    droneInstance.tag = "Npc";
-                    if(TeamHelper.IsSameTeam(gameObject.layer, 8))
-                    {
-                        droneInstance.layer = 8;
-                    }
-                    else
-                    {
-                        droneInstance.layer = 11;
-                    }
-                    
-                    // Propagate layer
-                    PropagateLayer.PropagateLayerToChildren(droneInstance);
-
-                    droneInstance.GetComponent<GunSwitcher>().LayerChanged();
-
-			        DroneBehaviour behav = droneInstance.GetComponent<DroneBehaviour>();
-			        behav.target = destination[i];
-
-                    this.networkSyncDroneSpawn(droneInstance);
+                    droneInstance.layer = 8;
                 }
+                else
+                {
+                    droneInstance.layer = 11;
+                }
+
+                // Propagate layer
+                PropagateLayer.PropagateLayerToChildren(droneInstance);
+
+                droneInstance.GetComponent<GunSwitcher>().LayerChanged();
+
+                DroneBehaviour behav = droneInstance.GetComponent<DroneBehaviour>();
+                behav.target = destination[i];
+
+                this.networkSyncDroneSpawn(droneInstance);
             }
+        }
     }
+    
 
     #region Network Code
 

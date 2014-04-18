@@ -46,7 +46,9 @@ public class AimAtTarget : MonoBehaviour
         }
 
         if (!GlobalSettings.SinglePlayer)
+        {
             this.playerShipSync.CrosshairPosition = Crosshair.ThreeDimensionalCrosshair;
+        }
 	}
 
     private bool humanControlled;

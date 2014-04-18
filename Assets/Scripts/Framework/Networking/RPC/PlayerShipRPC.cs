@@ -55,7 +55,7 @@ public class PlayerShipRPC : RPCHolder {
         else
             mode = RPCMode.Others;
 
-        channel.networkView.RPC("FiringDirectionRPC", mode, direction);
+        channel.networkView.RPC("FiringDirectionRPC", mode, player.ID, direction);
     }
 	#endregion
 
@@ -63,23 +63,25 @@ public class PlayerShipRPC : RPCHolder {
 	[RPC]
 	private void CreatePlayerShipRPC(NetworkViewID playerID, int objectID, NetworkMessageInfo info)
 	{
-//		Debug.Log("Create player ship RPC received!");
+		Debug.Log("Create player ship RPC received!");
 
 		Player owner = base.NetworkControl.Players[playerID];
 		
+        // Create the player ship.
 		GameObject playerShip = (GameObject)GameObject.Instantiate(this.PlayerPrefab);
 		
 		if (base.NetworkControl.LocalViewID == playerID)
 		{
+            // Set variables for when this ship is controlled by the client receiving the RPC.
 			base.ObjectTables.ThisPlayerObjects.PlayerShipID = objectID;
 			playerShip.GetComponentInChildren<Camera>().enabled = true;
 		}
 		else
 		{
+            // Disable components that mostly has to do with interface and controls for when the
+            // ship is controlled by another player.
             playerShip.GetComponentInChildren<Camera>().enabled = false;
-            playerShip.GetComponentInChildren<AudioListener>().enabled = false;
-            //playerShip.GetComponentInChildren<AudioListener>().enabled = false;
-            //playerShip.GetComponentInChildren<ShipOrientation>().enabled = false;			
+            playerShip.GetComponentInChildren<AudioListener>().enabled = false;		
             playerShip.GetComponent<ShipControl>().enabled = false;
             playerShip.GetComponent<SoftwareMouse>().enabled = false;
             playerShip.GetComponent<HUD>().enabled = false;
@@ -87,9 +89,18 @@ public class PlayerShipRPC : RPCHolder {
             playerShip.GetComponentInChildren<ThirdPersonCrosshair>().enabled = false;
         }
 
+        // Set object type.
         ObjectSync objSync = playerShip.GetComponent<ObjectSync>();
         objSync.Type = ObjectSyncType.PlayerShip;
 
+        // Set spawn point reference.
+        Player player = this.NetworkControl.Players[playerID];
+        int spawnPointID = this.ObjectTables.PlayerObjects[player].PlayerSpawnPointID;
+        GameObject spawnPoint = this.ObjectTables.GetPlayerObject(player, spawnPointID);
+        playerShip.GetComponent<PlayerHealthControl>().RespawnPoint = spawnPoint.GetComponent<PlayerRespawner>();
+        spawnPoint.GetComponent<PlayerRespawner>().AttachPlayer(playerShip);
+
+        // Add to global object tables.
 		base.ObjectTables.PlayerObjects[owner].PlayerShipID = objectID;
 		base.AddToObjectTables(playerShip, playerID, objectID);
 	}
