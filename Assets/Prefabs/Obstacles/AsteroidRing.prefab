@@ -112,7 +112,7 @@ MonoBehaviour:
   maxOffset: 1000
   minAsteroidSize: 15
   maxAsteroidSize: 100
-  templateAsteroid: {fileID: 100002}
+  templateAsteroid: {fileID: 100004, guid: 72cb26f9ca55b2c41a731db3008b403d, type: 2}
   outerRadius: 3000
 --- !u!1001 &100100000
 Prefab:

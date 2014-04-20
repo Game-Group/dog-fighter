@@ -13,263 +13,51 @@ Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\A
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
 Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.081 seconds
-desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
-<RI> Initializing input.
-<RI> Input initialized.
-Initialize engine version: 4.3.0f4 (e01000627d60)
-GfxDevice: creating device client; threaded=1
-Direct3D:
-    Version:  Direct3D 9.0c [nvumdshim.dll 9.18.13.3221]
-    Renderer: Intel(R) HD Graphics
-    Vendor:   Intel
-    VRAM:     880 MB (via DXGI)
-    Caps:     Shader=30 DepthRT=1 NativeDepth=0 NativeShadow=1 DF16=0 INTZ=0 RAWZ=0 NULL=0 RESZ=0 SlowINTZ=0
-Begin MonoManager ReloadAssembly
-Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
-Loading F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.098 seconds
+- Completed reload, in  0.093 seconds
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.dll (this message is harmless)
 Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.Core.dll (this message is harmless)
-UnloadTime: 0.398515 ms
+UnloadTime: 0.533015 ms
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 195.
-Total: 0.644871 ms (FindLiveObjects: 0.013585 ms CreateObjectMapping: 0.014038 ms MarkObjects: 0.150349 ms  DeleteObjects: 0.004981 ms)
+Total: 1.429222 ms (FindLiveObjects: 0.023548 ms CreateObjectMapping: 0.033511 ms MarkObjects: 0.273526 ms  DeleteObjects: 0.009962 ms)
 
-UnloadTime: 0.362287 ms
+UnloadTime: 0.937870 ms
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 204.
-Total: 0.905717 ms (FindLiveObjects: 0.009962 ms CreateObjectMapping: 0.014491 ms MarkObjects: 0.163029 ms  DeleteObjects: 0.004981 ms)
+Total: 0.778464 ms (FindLiveObjects: 0.012227 ms CreateObjectMapping: 0.017208 ms MarkObjects: 0.180237 ms  DeleteObjects: 0.004981 ms)
 
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-UnloadTime: 0.504032 ms
+UnloadTime: 0.514447 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 586.
-Total: 1.329593 ms (FindLiveObjects: 0.051625 ms CreateObjectMapping: 0.027171 ms MarkObjects: 0.419800 ms  DeleteObjects: 0.009510 ms)
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 604.
+Total: 1.072370 ms (FindLiveObjects: 0.066117 ms CreateObjectMapping: 0.023095 ms MarkObjects: 0.392175 ms  DeleteObjects: 0.007698 ms)
 
-Connecting
+Initializing as server.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.dll (this message is harmless)
-Platform assembly: F:\HobbyProject\Git\dog-fighter\MultiplayerExe_Data\Managed\System.Core.dll (this message is harmless)
-UnloadTime: 0.319265 ms
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 195.
-Total: 0.953268 ms (FindLiveObjects: 0.020378 ms CreateObjectMapping: 0.020831 ms MarkObjects: 0.189295 ms  DeleteObjects: 0.006792 ms)
-
-Connected to server.
+Created server player: AllocatedID: 1
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-New player joined RPC received!
+A new player has joined.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-New player joined RPC received!
+Current number of players: 1
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Create player spawn point RPC received.
+Sending new player joined.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-Create player ship RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-UnloadTime: 0.651211 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 204.
-Total: 0.614982 ms (FindLiveObjects: 0.009962 ms CreateObjectMapping: 0.014038 ms MarkObjects: 0.148537 ms  DeleteObjects: 0.004528 ms)
-
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-UnloadTime: 0.465539 ms
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 586.
-Total: 1.330952 ms (FindLiveObjects: 0.062494 ms CreateObjectMapping: 0.030341 ms MarkObjects: 0.461916 ms  DeleteObjects: 0.009510 ms)
-
-Connecting
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Connected to server.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player spawn point RPC received.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player spaCn point RPC rrceivedpl
-ay
-er ship RPC reBuildAge
- 
-(Filendame: C:/4dB08uiladtAgecns/Swandklon3Play558e4drated4UnittEnganeDe/SgtcandLanl:o53)P
-l
-ayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player ship RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player spawn point RPC received.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player ship RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Returning to menu.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifaRte/StaninndalonePlay
- rG
-enerated/UnityEnginlDebug.cpnt/work/d3d)
-
-58e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Couldn't send RPC function '__RPCNetworkDestroy'
-
- 
-(Filename:  Line: 2458)
-
-View ID AllocatedID: 1 not fCund dn't send RPC function '__RPCNetworkDestroy
-'
-
- 
-(Fiame:  Line: 1676)
-
-Couldn't lerfome:  mLti Net:or2458)tr
-o
-y becaView ID Alloork view 'AllocatedID: 1' could not be located.
- 
-(Filename:  Line: 2458)
-
-The server has disconnected froy the client. Most likely the server has
- s
-huitename:  
-Li
-ne: 1676)
-
- LCouldn't p
-e
-rform remote Network.Destroy because the network view 'AllocatedID: 1' could not be located.
- 
-(Filename:  Line: 2458)
-
-Disconnected from server!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artofacts/S
-ta
-ndaloneme: C:/Buildatedn//wortyk/d3ne9De8budg.cf4/artifects5Sta
-d
-lonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-RPCChannel destroyed.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Disconnected from server!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-UnloadTime: 10.623618 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 105 unused Assets to reduce memory usage. Loaded Objects now: 590.
-Total: 1.458205 ms (FindLiveObjects: 0.026718 ms CreateObjectMapping: 0.038945 ms MarkObjects: 0.370891 ms  DeleteObjects: 0.512636 ms)
-
-UnloadTime: 10.428888 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 105 unused Assets to reduce memory usage. Loaded Objects now: 585.
-Total: 1.747129 ms (FindLiveObjects: 0.037134 ms CreateObjectMapping: 0.055248 ms MarkObjects: 0.502673 ms  DeleteObjects: 0.658004 ms)
-
-UnloadTime: 0.384024 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 585.
-Total: 0.867677 ms (FindLiveObjects: 0.024001 ms CreateObjectMapping: 0.020378 ms MarkObjects: 0.396251 ms  DeleteObjects: 0.006340 ms)
-
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-UnloadTime: 0.567885 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 597.
-Total: 1.079615 ms (FindLiveObjects: 0.049814 ms CreateObjectMapping: 0.030794 ms MarkObjects: 0.493163 ms  DeleteObjects: 0.009510 ms)
-
-Connecting
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Connected to server.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-New player joined RPC received!
+Sending new player joined.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
@@ -285,135 +73,47 @@ Create player ship RPC received!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-UnloadTime: 0.380401 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 585.
-Total: 0.884886 ms (FindLiveObjects: 0.044833 ms CreateObjectMapping: 0.021737 ms MarkObjects: 0.398968 ms  DeleteObjects: 0.006340 ms)
-
-
+Assigned layer: Team1Actor
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-UnloadTime: 0.482294 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+Couldn't send RPC function 'ObjectPositionRPC'
 
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 597.
-Total: 1.079615 ms (FindLiveObjects: 0.028530 ms CreateObjectMapping: 0.021737 ms MarkObjects: 0.383118 ms  DeleteObjects: 0.005887 ms)
-
-Connecting
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 2458)
 
-Connected to server.
+Couldn't send RPC function 'ObjectPositionRPC'
+
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 2458)
 
-New player jNinew  RPC received!
+Couldn't send RPC function 'ObjectPositionRPC'
+
  
-(Filename: 
-C:
-/Filename:t/C:/Bud3d49558e4d408f4/artifacts08f4/artifacts/StandalonePlayerGenerated/Un.cppngLine: ug.c
+(Filename:  Line: 2458)
 
- Line: 53)
+Couldn't send RPC function 'ObjectPositionRPC'
 
-New plareate player spawneived!
  
-( received.
-le
-(me: C:/BuildAgent/work/d3drk/d3d49558e4d408f4/acts/StandalonealonePGeneraened/Und/UnityEnginnDebug.g.cppine: 53)
+(Filename:  Line: 2458)
 
+Couldn't send RPC function 'ObjectPositionRPC'
 
-
-New player joined RPC receCreate
  
-(Filenshe: C:C receivent/
-wo
-rk/d3name: Ce/Bd40dAgent/work/d3d49558e4nePlayerGetifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 2458)
 
-nerated/UnityEngineDebug.cpp Line: 53)
+Couldn't send RPC function 'ObjectPositionRPC'
 
-Create player spawn point RPC received.
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 2458)
 
-Create player ship RPC received!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player spawn point RPC received.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Create player ship RPC received!
+Team 1 has been disconnected!
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
 Ending match.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Returning to menu.
- 
-(Filename: C:/BuildAgent/woeturning to menu.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngrk/d3d49558e4d40Lf4/artifacts/Sta
-n
-daloneCouldn't erated/UnityEngioeDebugn '__RPne: twork
-D
-estroy'
-
- 
-dFiln't send RnP:  function '__RPCNetworkDestroy'
-
- 
-(Filename:  Line: 2458)
-
-View ID AllocatedID: 1 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Couldn't perform remote Network.Destroy because the network view 'AllocatedID: 1' could not be located.
- 
-(Filename:  Line: 2458)
-
-The server has disconnected from the client. Most likely the server has shut down.
- 
-(Filename:  Line: 740)
-
-Disconnected from server!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d204f4/)rtifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Ending match.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/Uni
-t
-yEngineDebug.cpp Line: 53)
-
-View ID AllocatedID: 1 not found during lookup. Strange behaviour may oRcur
- 
-(Filename:  Line: 1676)
-
-Couldn't perform remote Network.Destroy because the network view 'AllocatedID: 1' could not be located.
- 
-(Filename:  Line: 2458)
-
-The server has disconnected from the client. Most likely the server has shut down.C
-ha
-nnel destroyed.
- 
-(File
-n
-ame: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGDniscondecUtityEngineDebrum serveri
- 
-(F5ile
-n
-ame: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
 Ending match.
  
@@ -423,15 +123,8 @@ RPCChannel destroyed.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-UnloadTime: 4.229702 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 98 unused Assets to reduce memory usage. Loaded Objects now: 585.
-Uotnll 1.64im42  s4.573422 eOb
-jects: 0.024454 ms CreateObjectMapping: 0.037587 ms MarkObjects: 0.403950 ms  DeleteObjects: 0.485917 ms)
-
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 98 unused Assets to reduce memory usage. Loaded Objects now: 585.
-Total: 1.938689 ms (FindLiveObjects: 0.034417 ms CreateObjectMapping: 0.053437 ms MarkObjects: 0.517164 ms  DeleteObjects: 0.654834 ms)
+NullReferenceException: Object reference not set to an instance of an object
+  at RPCChannel.OnDestroy () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 

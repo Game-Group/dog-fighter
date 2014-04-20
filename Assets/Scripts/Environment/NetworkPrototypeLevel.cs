@@ -9,6 +9,8 @@ public class NetworkPrototypeLevel : LevelCreator
 
 	public override void CreateLevel ()
 	{
+        base.CreateLevel();
+
 		if (Network.peerType == NetworkPeerType.Server)
 			this.createServerSideObjects();
 	}
@@ -68,9 +70,6 @@ public class NetworkPrototypeLevel : LevelCreator
 
                 PlayerShipRPC.CreatePlayerShip(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID);
                 ObjectRPC.SetObjectLayer(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID, (Layers)playerShip.layer);
-
-
-                
             }
 		}
 

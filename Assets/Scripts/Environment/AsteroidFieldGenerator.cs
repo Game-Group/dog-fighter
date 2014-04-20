@@ -4,7 +4,7 @@ using System.Collections;
 /* Generates a certain amount of asteroids within a bounded area.
  * The position, rotation and size of each asteroid is randomized.
  */
-public class AsteroidFieldGenerator : MonoBehaviour {
+public class AsteroidFieldGenerator : NetworkObject {
 	//Amount of asteroids generated
 	public int amount = 20;
 	//Determine the max distance from the center that an astoid can be
@@ -19,11 +19,43 @@ public class AsteroidFieldGenerator : MonoBehaviour {
 	private int asteroidCount = 0;
 
 	// Use this for initialization
-	void Start () {
-		for (int numAsteroids = 0; numAsteroids < amount; numAsteroids ++) {
+	void Start () 
+    {
+        if (!GlobalSettings.SinglePlayer)
+        {
+            if (Network.peerType == NetworkPeerType.Client)
+                return;
+        }
+
+		for (int numAsteroids = 0; numAsteroids < amount; numAsteroids ++) 
+        {
 			CreateRandomAsteroid();
 		}
 	}
+
+    public void CreateAsteroid(Vector3 position, Vector3 localScale, string name, Player owner, int id)
+    {
+        GameObject asteroid = (GameObject)GameObject.Instantiate(templateAsteroid, position, Random.rotation);
+        asteroid.SetActive(true);
+        asteroid.transform.localScale = localScale;
+        asteroid.transform.name = name;
+
+        if (!GlobalSettings.SinglePlayer)
+        {
+            if (Network.peerType == NetworkPeerType.Server)
+            {
+                ObjectSync objSync = asteroid.GetComponent<ObjectSync>();
+                objSync.Type = ObjectSyncType.Asteroid;
+                objSync.AssignID(owner, id);
+
+                ObjectRPC.CreateAsteroid(owner, id, position, localScale, name);
+            }
+
+            base.ObjectTables.AddPlayerObject(owner, id, asteroid);
+        }
+
+        asteroidCount++;
+    }
 
 	//Creates one randomized asteroid within the bounds
 	void CreateRandomAsteroid () {
@@ -31,16 +63,19 @@ public class AsteroidFieldGenerator : MonoBehaviour {
 		//Make sure that everything scales well
 		position.Scale(transform.localScale);
 
-		//Instantiate new Asteroid
-		GameObject asteroid = (GameObject) GameObject.Instantiate(templateAsteroid, position, Random.rotation);
-		//Scale the asteroid randomly
-		asteroid.transform.localScale *= Random.Range(minAsteroidSize, maxAsteroidSize);
+        Vector3 localScale = new Vector3(1, 1, 1) * Random.Range(minAsteroidSize, maxAsteroidSize);
 
-		//Make sure it is active, in case the template is hidden/inactive
-		asteroid.SetActive(true);
-		asteroid.transform.parent = templateAsteroid.transform.parent;
-		asteroid.transform.name = "asteroid" + asteroidCount;
-		asteroidCount ++;
+        string name = "asteroid" + asteroidCount;
+
+        if (!GlobalSettings.SinglePlayer)
+        {
+            Player serverPlayer = base.NetworkControl.ThisPlayer;
+            int id = base.GUIDGenerator.GenerateID();
+
+            this.CreateAsteroid(position, localScale, name, serverPlayer, id);
+        }
+        else
+            this.CreateAsteroid(position, localScale, name, null, 0);
 	}
 
 	//Returns a random vector3 position within the bounds

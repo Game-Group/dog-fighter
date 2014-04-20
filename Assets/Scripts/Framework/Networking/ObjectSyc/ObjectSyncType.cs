@@ -6,4 +6,5 @@
     PlayerSpawnPoint = 2,
     Mothership = 3,
     Drone = 4,
+    Asteroid = 5,
 }

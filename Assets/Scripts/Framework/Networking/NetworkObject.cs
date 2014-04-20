@@ -78,17 +78,6 @@ public class NetworkObject : MonoBehaviour
 	// Use this for initialization
 	protected virtual void Start () 
     {
-        //if (!GlobalSettings.SinglePlayer)
-        //{
-        //    Debug.Log("Finding important objects in NetworkObject");
-        //    this.ObjectTables = GameObject.Find(GlobalSettings.PlayerObjectTableName).GetComponent<PlayerObjectTable>();
-        //    this.NetworkControl = GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>();
-        //    this.GUIDGenerator = this.NetworkControl.GetComponent<GUIDGenerator>();
-        //    this.RPCChannel = (GameObject)GameObject.Find(GlobalSettings.RPCChannelName);
-
-        //    if (this.ObjectTables == null || this.NetworkControl == null || this.GUIDGenerator == null || this.RPCChannel == null)
-        //        throw new UnityException("Some object was not found");
-        //}	
 	}
 
 	protected virtual void Update()
@@ -97,10 +86,7 @@ public class NetworkObject : MonoBehaviour
 
 	protected virtual void OnNetworkInstantiate(NetworkMessageInfo info)
 	{
-        //Debug.Log("On Network Intantiate!");
-
         this.Awake();
-		//this.Start();
 	}
 
     private PlayerObjectTable objectTable;

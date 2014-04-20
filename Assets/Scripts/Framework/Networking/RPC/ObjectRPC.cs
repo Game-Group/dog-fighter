@@ -6,6 +6,7 @@ public class ObjectRPC : RPCHolder
 	public GameObject PlayerSpawnPointPrefab;
     public GameObject MothershipPrefab;
     public GameObject AIDronePrefab;
+    public GameObject AsteroidRing;
 
     #region Calls
 
@@ -128,9 +129,14 @@ public class ObjectRPC : RPCHolder
     {
         Channel.CheckServer();
 
-        //Debug.Log("Sending RespawnObjectRPC.");
-
         Channel.networkView.RPC("RespawnObjectRPC", RPCMode.Others, spawnPointOwner.ID, spawnPointID);
+    }
+
+    public static void CreateAsteroid(Player owner, int id, Vector3 position, Vector3 scale, string name)
+    {
+        Channel.CheckServer();
+
+        Channel.networkView.RPC("CreateAsteroidRPC", RPCMode.Others, owner.ID, id, position, scale, name);
     }
 
     #endregion
@@ -163,6 +169,7 @@ public class ObjectRPC : RPCHolder
 		    case 0:
                     NetworkPrototypeLevel npl = new NetworkPrototypeLevel();
                     npl.MothershipPrefab = this.MothershipPrefab;
+                    npl.AsteroidRing = this.AsteroidRing;
                     creator = npl;
 			        break;
 		}
@@ -295,5 +302,34 @@ public class ObjectRPC : RPCHolder
 
         respawner.Respawn();
     }
+
+    [RPC]
+    private void CreateAsteroidRPC(NetworkViewID objectOwner, int objectID, Vector3 position, Vector3 localScale, string name)
+    {
+        this.AsteroidRingGenerator.CreateAsteroid(position, localScale, name, base.Players[objectOwner], objectID); 
+    }
+
+    protected ClientControl ClientControl
+    {
+        get
+        {
+            if (this.clientControl == null)
+                this.clientControl = GameObject.Find(GlobalSettings.ClientControlName).GetComponent<ClientControl>();
+            return this.clientControl;
+        }
+    }
+
+    protected AsteroidRingGenerator AsteroidRingGenerator
+    {
+        get
+        {
+            if (this.asteroidRingGenerator == null)
+                this.asteroidRingGenerator = GameObject.Find(LevelCreator.AsteroidRingName).GetComponent<AsteroidRingGenerator>();
+            return this.asteroidRingGenerator;
+        }
+    }
+
+    private ClientControl clientControl;
+    private AsteroidRingGenerator asteroidRingGenerator;
     #endregion
 }
