@@ -11,6 +11,12 @@ public class ClientControl : NetworkObject
 		this.CurrentLevel.CreateLevel();
 	}
 
+    public void Shutdown()
+    {
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
+    }
+
 	// Use this for initialization
 	protected override void Start () {
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class NetworkPrototypeLevel : LevelCreator 
 {
+    public const int LevelID = 1;
+
     public GameObject MothershipPrefab;
 
 	public override void CreateLevel ()

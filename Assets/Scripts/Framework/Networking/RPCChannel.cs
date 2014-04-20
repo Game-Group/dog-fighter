@@ -10,6 +10,16 @@ public class RPCChannel : NetworkObject
         base.Awake();
     }
 
+    protected void OnDestroy()
+    {
+        UnityEngine.Debug.Log("RPCChannel destroyed.");
+
+        GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>().Shutdown();
+
+        MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
+        matchControl.ReturnToMenu();
+    }
+
 	// Use this for initialization
 	protected override void Start () 
 	{

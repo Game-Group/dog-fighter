@@ -39,6 +39,19 @@ public class NetworkControl : MonoBehaviour
 		}
 	}
 
+    public void Shutdown()
+    {
+        Network.isMessageQueueRunning = false;
+
+        foreach (NetworkViewID id in this.Players.Keys)
+            Network.RemoveRPCs(id);
+
+        if (Network.peerType == NetworkPeerType.Server)
+            GameObject.Find(GlobalSettings.ServerControlName).GetComponent<ServerControl>().Shutdown();
+        else if (Network.peerType == NetworkPeerType.Client)
+            GameObject.Find(GlobalSettings.ClientControlName).GetComponent<ClientControl>().Shutdown();
+    }
+
     private void Awake()
     {
         this.name = GlobalSettings.NetworkControlName;
@@ -71,6 +84,8 @@ public class NetworkControl : MonoBehaviour
                 GameObject.Instantiate(this.ClientControl);
             }
         }
+
+        Network.isMessageQueueRunning = true;
 	}
 	
 	// Update is called once per frame
@@ -96,31 +111,18 @@ public class NetworkControl : MonoBehaviour
 
 	private void LateUpdate()
 	{
-        //Debug.Log("Late update!");
-
 		if (Network.peerType == NetworkPeerType.Disconnected)
 			return;
-
-        //Debug.Log("Past check.");
 
 		this.elapsedTime += Time.deltaTime;
 
 		if (this.elapsedTime > this.timeForOneSync)
 		{
-            if (this.SyncTimeEvent != null)
-            {
-                //Debug.Log("Sync moment!");
+            if (this.SyncTimeEvent != null && Network.isMessageQueueRunning)
                 this.SyncTimeEvent.Invoke();
-            }
 
 			this.elapsedTime = 0;
-
-			// Make sure the elapsed time is lower than the timeForOneSync.
-//			while (this.elapsedTime > this.timeForOneSync)
-//				this.elapsedTime -= this.timeForOneSync;
 		}
-
-//		Debug.Log("Late update exit.");
 	}
 
 	private float elapsedTime;

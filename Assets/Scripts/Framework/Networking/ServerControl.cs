@@ -13,6 +13,15 @@ public class ServerControl : NetworkObject
 		this.CurrentLevel.CreateLevel();		
 	}
 
+    public void Shutdown()
+    {
+        foreach (NetworkPlayer p in Network.connections)
+            Network.CloseConnection(p, true);
+
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
+    }
+
 	// Use this for initialization
 	protected override void Start ()
 	{

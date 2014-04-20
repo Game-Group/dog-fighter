@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class GlobalSettings : MonoBehaviour 
 {
     public const string NetworkControlName = "NetworkControl";
+    public const string ServerControlName = "ServerControl";
+    public const string ClientControlName = "ClientControl";
     public const string RPCChannelName = "RPCChannel";
     public const string MatchControlName = "MatchControl";
     public const string PlayerObjectTableName = "PlayerObjectTable";
@@ -27,6 +29,8 @@ public class GlobalSettings : MonoBehaviour
         Team2Npcs = new List<GameObject>();
 
         DontDestroyOnLoad(this);
+
+        Application.LoadLevel("MainMenu");
 	}
 
     public static void AddNpc(GameObject npc)

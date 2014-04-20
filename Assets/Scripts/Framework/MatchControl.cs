@@ -19,8 +19,32 @@ public class MatchControl : MonoBehaviour
     {
         Debug.Log("Ending match.");
 
-        this.countDown = true;
-        this.result = result;
+        if (Network.peerType == NetworkPeerType.Server)
+        {
+            MatchRPC.EndMatch(result);
+            this.countDown = true;
+            this.result = result;
+        }
+        else if (result == MatchResult.Disconnected)
+        {
+            this.countDown = true;
+            this.result = result;
+        }
+    }
+
+    public void MatchFinished()
+    {
+        Debug.Log("Returning to menu.");
+        
+        if (Network.peerType == NetworkPeerType.Server)
+            MatchRPC.EndMatchDefinite();
+
+        Network.Destroy(GameObject.Find(GlobalSettings.RPCChannelName));
+    }
+
+    public void ReturnToMenu()
+    {
+        this.loadLevel = true;
     }
 
     public void ObjectDestroyed(GameObject obj)
@@ -47,6 +71,7 @@ public class MatchControl : MonoBehaviour
 	// Use this for initialization
 	protected virtual void Start () 
     {
+        this.waitTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -54,17 +79,23 @@ public class MatchControl : MonoBehaviour
     {
         if (this.countDown)
         {
-            this.gameEndDelay += Time.deltaTime;
+            this.waitTime += Time.deltaTime;
 
             if (this.waitTime >= this.gameEndDelay)
+            {
                 this.MatchFinished();
+                this.countDown = false;
+            }
         }
 	}
 
-    protected void MatchFinished()
+    protected virtual void LateUpdate()
     {
-        Application.LoadLevel("MainMenu");
+        if (this.loadLevel)
+            Application.LoadLevel("MainMenu");
     }
+
+
 
     protected virtual void OnGuid()
     {
@@ -86,4 +117,5 @@ public class MatchControl : MonoBehaviour
     private float gameEndDelay;
     private float waitTime;
     private MatchResult result;
+    private bool loadLevel;
 }

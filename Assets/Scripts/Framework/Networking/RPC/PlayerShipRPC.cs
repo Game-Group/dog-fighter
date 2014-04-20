@@ -11,26 +11,26 @@ public class PlayerShipRPC : RPCHolder {
 	{
 //		Debug.Log("Sending create player ship.");
 
-		channel.networkView.RPC("CreatePlayerShipRPC", channel.RPCMode, player.ID, objectID);
+		Channel.networkView.RPC("CreatePlayerShipRPC", RPCMode.All, player.ID, objectID);
 	}
 
 	public static void CreatePlayerShip(NetworkPlayer target, Player player, int objectID)
 	{
-		channel.networkView.RPC("CreatePlayerShipRPC", target, player.ID, objectID);
+		Channel.networkView.RPC("CreatePlayerShipRPC", target, player.ID, objectID);
 	}
 
 	public static void SpawnPlayerShip(Player player, int spawnPointID, int playerShipID)
 	{
 //		Debug.Log ("Sending spawn player RPC");
 
-		channel.networkView.RPC("SpawnPlayerShipRPC", RPCMode.All, player.ID, spawnPointID, playerShipID);
+		Channel.networkView.RPC("SpawnPlayerShipRPC", RPCMode.All, player.ID, spawnPointID, playerShipID);
 		
 	}
 	public static void SpawnPlayerShip(NetworkPlayer target, Player player, int spawnPointID, int playerShipID)
 	{
 //		Debug.Log ("Sending spawn player RPC");
 
-		channel.networkView.RPC("SpawnPlayerShipRPC", target, player.ID, spawnPointID, playerShipID);			
+		Channel.networkView.RPC("SpawnPlayerShipRPC", target, player.ID, spawnPointID, playerShipID);			
 	}
 
 	public static void FireWeapon(Player player, bool fire) 
@@ -42,7 +42,7 @@ public class PlayerShipRPC : RPCHolder {
 		else
 			mode = RPCMode.Others;
 
-		channel.networkView.RPC ("FireWeaponRPC", mode, player.ID, fire);
+		Channel.networkView.RPC ("FireWeaponRPC", mode, player.ID, fire);
 		
 	}
 
@@ -55,7 +55,7 @@ public class PlayerShipRPC : RPCHolder {
         else
             mode = RPCMode.Others;
 
-        channel.networkView.RPC("FiringDirectionRPC", mode, player.ID, direction);
+        Channel.networkView.RPC("FiringDirectionRPC", mode, player.ID, direction);
     }
 	#endregion
 
@@ -145,19 +145,5 @@ public class PlayerShipRPC : RPCHolder {
         if (Network.isServer)
             FiringDirection(base.Players[playerID], direction);
     }
-	#endregion
-
-	#region Singleton
-	private static PlayerShipRPC channel
-	{
-		get
-		{
-			if (channel_ == null)
-                channel_ = GameObject.Find(GlobalSettings.RPCChannelName).GetComponent<PlayerShipRPC>();
-			return channel_;
-		}
-	}
-
-	private static PlayerShipRPC channel_;
 	#endregion
 }

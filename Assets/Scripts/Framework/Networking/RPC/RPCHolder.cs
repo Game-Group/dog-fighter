@@ -27,7 +27,7 @@ public class RPCHolder : NetworkObject
 	}
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-	protected void CheckServer()
+	public void CheckServer()
 	{
         if (Network.peerType != NetworkPeerType.Server)
         {
@@ -37,7 +37,7 @@ public class RPCHolder : NetworkObject
         }
 	}
     [MethodImpl(MethodImplOptions.NoInlining)]
-    protected void CheckClient()
+    public void CheckClient()
     {
         if (Network.peerType != NetworkPeerType.Client)
         {
@@ -47,5 +47,19 @@ public class RPCHolder : NetworkObject
         }
     }
 
+   
 
+    public static PlayerRPC Channel
+    {
+        get
+        {
+            if (channel_ == null)
+                channel_ = GameObject.Find(GlobalSettings.RPCChannelName).GetComponent<PlayerRPC>();
+            return channel_;
+        }
+    }
+
+    private static PlayerRPC channel_;
+
+    private bool destroyed;
 }

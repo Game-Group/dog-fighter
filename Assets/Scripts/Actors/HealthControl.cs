@@ -51,7 +51,8 @@ public class HealthControl : MonoBehaviour
     {
         currentShieldDelay = Mathf.Max(currentShieldDelay - Time.deltaTime, 0);
 
-        Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
+        if (!this.IsDead)
+            Heal(HealthPerSecond * Time.deltaTime, ShieldsPerSecond * Time.deltaTime);
     }
 
     public float CurrentHealth
@@ -119,10 +120,10 @@ public class HealthControl : MonoBehaviour
     {
         if (shieldStrength > 0)
         {
-            GameObject shieldPrefabInstance = (GameObject)Instantiate(ShieldImpactPrefab, transform.position, transform.rotation);
-            shieldPrefabInstance.transform.LookAt(impactPoint);
-            shieldPrefabInstance.transform.parent = transform;
-            shieldPrefabInstance.transform.localScale *= ShieldImpactScale;
+            //GameObject shieldPrefabInstance = (GameObject)Instantiate(ShieldImpactPrefab, transform.position, transform.rotation);
+            //shieldPrefabInstance.transform.LookAt(impactPoint);
+            //shieldPrefabInstance.transform.parent = transform;
+            //shieldPrefabInstance.transform.localScale *= ShieldImpactScale;
         }
 
         TakeDamage(hullDamage, shieldDamage);
@@ -141,6 +142,7 @@ public class HealthControl : MonoBehaviour
             return;
 
         this.health = 0;
+        this.shieldStrength = 0;
 
         ObjectSync objSync = this.GetComponent<ObjectSync>();
 
