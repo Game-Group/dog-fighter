@@ -9,10 +9,10 @@ public class NetworkPrototypeLevel : LevelCreator
 
 	public override void CreateLevel ()
 	{
-        base.CreateLevel();
-
 		if (Network.peerType == NetworkPeerType.Server)
 			this.createServerSideObjects();
+
+        base.CreateLevel();
 	}
 
 	public override void SyncNewPlayer(Player newPlayer)
@@ -22,6 +22,7 @@ public class NetworkPrototypeLevel : LevelCreator
         // Sync the objects that are not associated with any player.
         ObjectTable serverTable = base.ObjectTables.GetPlayerTable(base.NetworkControl.ThisPlayer);
         ICollection<GameObject> serverObjects = serverTable.GetAllObjects();
+        Debug.Log("Objects: " + serverObjects.Count);
 
         foreach (GameObject obj in serverObjects)
         {
@@ -32,7 +33,7 @@ public class NetworkPrototypeLevel : LevelCreator
                 case ObjectSyncType.Mothership:
                     ObjectRPC.CreateMothership(newPlayer.NetworkPlayerInfo, objSync.Owner, objSync.GlobalID, obj.layer);
 
-                    // Temporary
+                    // Temporary mothership positions.
                     if (obj.layer == (int)Layers.Team1Mothership)
                     {
                         ObjectRPC.ObjectPosition(objSync.Owner, objSync.GlobalID, new Vector3(1000, 0, 0), Vector3.zero);
@@ -46,6 +47,10 @@ public class NetworkPrototypeLevel : LevelCreator
                 case ObjectSyncType.Drone:
                     ObjectRPC.CreateDrone(newPlayer.NetworkPlayerInfo, objSync.Owner, objSync.GlobalID, obj.transform.position, obj.layer);
                     break;
+                case ObjectSyncType.Asteroid:
+                    ObjectRPC.CreateAsteroid(newPlayer.NetworkPlayerInfo, objSync.Owner, objSync.GlobalID, obj.transform.position, obj.transform.localScale, obj.name);
+                    break;
+
             }
         }
 

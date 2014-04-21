@@ -19,7 +19,7 @@ public class AsteroidFieldGenerator : NetworkObject {
 	private int asteroidCount = 0;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
     {
         if (!GlobalSettings.SinglePlayer)
         {
@@ -39,6 +39,7 @@ public class AsteroidFieldGenerator : NetworkObject {
         asteroid.SetActive(true);
         asteroid.transform.localScale = localScale;
         asteroid.transform.name = name;
+        asteroid.transform.parent = this.transform;
 
         if (!GlobalSettings.SinglePlayer)
         {
@@ -47,8 +48,6 @@ public class AsteroidFieldGenerator : NetworkObject {
                 ObjectSync objSync = asteroid.GetComponent<ObjectSync>();
                 objSync.Type = ObjectSyncType.Asteroid;
                 objSync.AssignID(owner, id);
-
-                ObjectRPC.CreateAsteroid(owner, id, position, localScale, name);
             }
 
             base.ObjectTables.AddPlayerObject(owner, id, asteroid);

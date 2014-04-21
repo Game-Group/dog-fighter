@@ -5,11 +5,17 @@ public class MatchRPC : RPCHolder
 {
     public static void EndMatch(MatchResult result)
     {
+        if (StopSend())
+            return;
+
         Channel.networkView.RPC("EndMatchRPC", RPCMode.Others, (int)result);
     }
 
     public static void EndMatchDefinite()
     {
+        if (StopSend())
+            return;
+
         Channel.networkView.RPC("EndMatchDefiniteRPC", RPCMode.Others);
     }
 

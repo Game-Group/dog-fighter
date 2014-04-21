@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Net;
 using System;
+using System.Threading;
 
 public class NetworkControl : MonoBehaviour 
 {
@@ -23,6 +24,7 @@ public class NetworkControl : MonoBehaviour
 		}
 	}
 	public event Action SyncTimeEvent;
+    public bool StopAll { get; set; }
 
 	public string LocalIP { get; set; }
 	public NetworkViewID LocalViewID { get; set; }
@@ -48,7 +50,7 @@ public class NetworkControl : MonoBehaviour
 
         if (Network.peerType == NetworkPeerType.Server)
             GameObject.Find(GlobalSettings.ServerControlName).GetComponent<ServerControl>().Shutdown();
-        else if (Network.peerType == NetworkPeerType.Client)
+        else if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Disconnected)
             GameObject.Find(GlobalSettings.ClientControlName).GetComponent<ClientControl>().Shutdown();
     }
 
@@ -113,6 +115,9 @@ public class NetworkControl : MonoBehaviour
 	{
 		if (Network.peerType == NetworkPeerType.Disconnected)
 			return;
+
+        if (StopAll)
+            return;
 
 		this.elapsedTime += Time.deltaTime;
 

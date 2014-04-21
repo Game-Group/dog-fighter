@@ -13,8 +13,13 @@ public class ClientControl : NetworkObject
 
     public void Shutdown()
     {
+        Debug.Log("Disconnecting from server.");
+        foreach (NetworkPlayer id in Network.connections)
+            Network.CloseConnection(id, false);
         Network.Disconnect();
         MasterServer.UnregisterHost();
+
+        GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>().ReturnToMenu();
     }
 
 	// Use this for initialization

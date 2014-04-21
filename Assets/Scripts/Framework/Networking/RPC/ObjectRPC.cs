@@ -12,18 +12,27 @@ public class ObjectRPC : RPCHolder
 
     public static void SetObjectTag(Player objectOwner, int objectID, string tag)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("SetObjectTagRPC", RPCMode.All, objectOwner.ID, objectID, tag);
     }
     public static void SetObjectLayer(Player objectOwner, int objectID, Layers layer)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("SetObjectLayerRPC", RPCMode.All, objectOwner.ID, objectID, (int)layer);
     }
     public static void SetObjectLayer(NetworkPlayer target, Player objectOwner, int objectID, Layers layer)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("SetObjectLayerRPC", target, objectOwner.ID, objectID, (int)layer);
@@ -31,25 +40,46 @@ public class ObjectRPC : RPCHolder
 
     public static void LoadLevel(int levelID)
 	{
+        if (StopSend())
+            return;
+
 		Channel.CheckServer();
 
 		Channel.networkView.RPC("LoadLevelRPC", RPCMode.All, levelID);
 	}
+    public static void LoadLevel(NetworkPlayer target, int levelID)
+    {
+        if (StopSend())
+            return;
+
+        Channel.CheckServer();
+
+        Channel.networkView.RPC("LoadLevelRPC", target, levelID);
+    }
 
     public static void ObjectPosition(Player player, int objectID, Vector3 position, Vector3 orientation)
     {
+        if (StopSend())
+            return;
+
         //Debug.Log ("Sending player ship position.");
 
         Channel.networkView.RPC("ObjectPositionRPC", RPCMode.Others, player.ID, objectID, position, orientation);
     }
     public static void ObjectVelocityClient(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckClient();
 
         Channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Server, player.ID, objectID, transform, rotation);
     }
     public static void ObjectVelocityServer(Player player, int objectID, Vector3 transform, Vector3 rotation)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("ObjectVelocityRPC", RPCMode.Others, player.ID, objectID, transform, rotation);
@@ -57,6 +87,9 @@ public class ObjectRPC : RPCHolder
 
     public static void CreateMothership(NetworkPlayer target, Player owner, int objectID, int layer)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("CreateMothershipRPC", target, owner.ID, objectID, layer);
@@ -64,18 +97,27 @@ public class ObjectRPC : RPCHolder
 
     public static void CreateDrone(Player owner, int objectID, Vector3 position, int layer)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("CreateDroneRPC", RPCMode.Others, owner.ID, objectID, position, layer);
     }
     public static void CreateDrone(NetworkPlayer target, Player owner, int objectID, Vector3 position, int layer)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("CreateDroneRPC", target, owner.ID, objectID, position, layer);
     }
     public static void DroneShoot(Player owner, int objectID, bool shoot)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         try
@@ -92,12 +134,18 @@ public class ObjectRPC : RPCHolder
 
 	public static void CreatePlayerSpawnpoint(Player owner, int objectID, Vector3 position)
 	{
+        if (StopSend())
+            return;
+
 		Channel.CheckServer();
 
 		Channel.networkView.RPC("CreatePlayerSpawnpointRPC", RPCMode.All, owner.ID, objectID, position);
 	}
 	public static void CreatePlayerSpawnpoint(NetworkPlayer target, Player owner, int objectID, Vector3 position)
 	{
+        if (StopSend())
+            return;
+
 		Channel.CheckServer();		
 		
 		Channel.networkView.RPC("CreatePlayerSpawnpointRPC", target, owner.ID, objectID, position);
@@ -105,6 +153,9 @@ public class ObjectRPC : RPCHolder
 
 	public static void SetObjectHealth(Player objectOwner, int objectID, float health, float shields)
 	{
+        if (StopSend())
+            return;
+
 		Channel.CheckServer();
 
         //Debug.Log("Sending SetObjectHealthRPC");
@@ -113,6 +164,9 @@ public class ObjectRPC : RPCHolder
 	}
     public static void KillObject(Player objectOwner, int objectID)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         //Debug.Log("Sending KillObjectRPC.");
@@ -127,16 +181,22 @@ public class ObjectRPC : RPCHolder
     /// <param name="spawnPointID">The ID of the spawnpoint.</param>
     public static void RespawnObject(Player spawnPointOwner, int spawnPointID)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
         Channel.networkView.RPC("RespawnObjectRPC", RPCMode.Others, spawnPointOwner.ID, spawnPointID);
     }
 
-    public static void CreateAsteroid(Player owner, int id, Vector3 position, Vector3 scale, string name)
+    public static void CreateAsteroid(NetworkPlayer target, Player owner, int id, Vector3 position, Vector3 scale, string name)
     {
+        if (StopSend())
+            return;
+
         Channel.CheckServer();
 
-        Channel.networkView.RPC("CreateAsteroidRPC", RPCMode.Others, owner.ID, id, position, scale, name);
+        Channel.networkView.RPC("CreateAsteroidRPC", target, owner.ID, id, position, scale, name);
     }
 
     #endregion

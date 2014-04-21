@@ -47,7 +47,10 @@ public class RPCHolder : NetworkObject
         }
     }
 
-   
+    public static bool StopSend()
+    {
+        return NetworkControlStatic.StopAll;
+    }
 
     public static PlayerRPC Channel
     {
@@ -59,7 +62,18 @@ public class RPCHolder : NetworkObject
         }
     }
 
+    public static NetworkControl NetworkControlStatic
+    {
+        get
+        {
+            if (networkControl_ == null)
+                networkControl_ = GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>();
+            return networkControl_;
+        }
+    }
+
     private static PlayerRPC channel_;
+    private static NetworkControl networkControl_;
 
     private bool destroyed;
 }

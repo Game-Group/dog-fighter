@@ -15,11 +15,16 @@ public class ServerControl : NetworkObject
 
     public void Shutdown()
     {
+        this.shuttingDown = true;
+
         foreach (NetworkPlayer p in Network.connections)
             Network.CloseConnection(p, true);
 
         Network.Disconnect();
         MasterServer.UnregisterHost();
+
+        MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
+        matchControl.ReturnToMenu();
     }
 
 	// Use this for initialization
@@ -32,8 +37,30 @@ public class ServerControl : NetworkObject
 		Network.InitializeServer(10, GlobalSettings.ServerPort, false);
 	}
 
+    protected override void Update()
+    {
+        base.Update();
+
+        //if (this.shuttingDown)
+        //{
+        //    Debug.Log("Connections: " + Network.connections.Length);
+        //    if (Network.connections.Length == 0)
+        //    {
+        //        foreach (NetworkPlayer p in Network.connections)
+        //            Network.CloseConnection(p, true);
+
+        //        Network.Disconnect();
+        //        MasterServer.UnregisterHost();
+
+        //        MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
+        //        matchControl.ReturnToMenu();
+        //    }
+        //}
+    }
+
 	private bool firstPlayerJoined;
     private bool firstTeamAssigned;
+    private bool shuttingDown;
 
 	private void OnServerInitialized()
 	{
@@ -44,9 +71,11 @@ public class ServerControl : NetworkObject
 	private void OnPlayerConnected(NetworkPlayer networkPlayer)
 	{
         if (!this.firstPlayerJoined)
-		{			
-			ObjectRPC.LoadLevel(0);
-		}
+        {
+            ObjectRPC.LoadLevel(0);
+        }
+        else
+            ObjectRPC.LoadLevel(networkPlayer, 0);
 
 		Debug.Log("A new player has joined.");
 		Debug.Log("Current number of players: " + base.Players.Count);

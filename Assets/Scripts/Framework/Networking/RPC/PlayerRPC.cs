@@ -5,6 +5,9 @@ public class PlayerRPC : RPCHolder {
 
 	public static void NewPlayerJoined(NetworkPlayer networkPlayer, NetworkViewID id)
 	{
+        if (StopSend())
+            return;
+
 		Debug.Log("Sending new player joined.");
 
 		Channel.networkView.RPC("NewPlayerJoinedRPC", RPCMode.All, networkPlayer, id);
@@ -12,6 +15,9 @@ public class PlayerRPC : RPCHolder {
 
 	public static void NewPlayerJoined(NetworkPlayer target, NetworkPlayer networkPlayer, NetworkViewID id)
 	{
+        if (StopSend())
+            return;
+
 		Debug.Log("Sending new player joined.");
 		
 		Channel.networkView.RPC("NewPlayerJoinedRPC", target, networkPlayer, id);
@@ -20,6 +26,9 @@ public class PlayerRPC : RPCHolder {
 	[RPC]
 	private void NewPlayerJoinedRPC(NetworkPlayer networkPlayer, NetworkViewID id, NetworkMessageInfo info)
 	{
+        if (StopSend())
+            return;
+
 		Debug.Log("New player joined RPC received!");
 		
 		Player player = new Player(id, networkPlayer);

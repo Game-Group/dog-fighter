@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class RPCChannel : NetworkObject 
 {
@@ -14,10 +15,14 @@ public class RPCChannel : NetworkObject
     {
         UnityEngine.Debug.Log("RPCChannel destroyed.");
 
-        GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>().Shutdown();
-
-        MatchControl matchControl = GameObject.Find(GlobalSettings.MatchControlName).GetComponent<MatchControl>();
-        matchControl.ReturnToMenu();
+        try
+        {
+            GameObject.Find(GlobalSettings.NetworkControlName).GetComponent<NetworkControl>().Shutdown();
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("NullReferenceException processing OnDestroy() of RPCChannel. Has the game been terminated by user?");
+        }
     }
 
 	// Use this for initialization

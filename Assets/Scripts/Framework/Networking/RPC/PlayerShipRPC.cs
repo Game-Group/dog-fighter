@@ -9,6 +9,9 @@ public class PlayerShipRPC : RPCHolder {
 	#region Call Functions
 	public static void CreatePlayerShip(Player player, int objectID)
 	{
+        if (StopSend())
+            return;
+
 //		Debug.Log("Sending create player ship.");
 
 		Channel.networkView.RPC("CreatePlayerShipRPC", RPCMode.All, player.ID, objectID);
@@ -16,11 +19,17 @@ public class PlayerShipRPC : RPCHolder {
 
 	public static void CreatePlayerShip(NetworkPlayer target, Player player, int objectID)
 	{
+        if (StopSend())
+            return;
+
 		Channel.networkView.RPC("CreatePlayerShipRPC", target, player.ID, objectID);
 	}
 
 	public static void SpawnPlayerShip(Player player, int spawnPointID, int playerShipID)
 	{
+        if (StopSend())
+            return;
+
 //		Debug.Log ("Sending spawn player RPC");
 
 		Channel.networkView.RPC("SpawnPlayerShipRPC", RPCMode.All, player.ID, spawnPointID, playerShipID);
@@ -28,6 +37,9 @@ public class PlayerShipRPC : RPCHolder {
 	}
 	public static void SpawnPlayerShip(NetworkPlayer target, Player player, int spawnPointID, int playerShipID)
 	{
+        if (StopSend())
+            return;
+
 //		Debug.Log ("Sending spawn player RPC");
 
 		Channel.networkView.RPC("SpawnPlayerShipRPC", target, player.ID, spawnPointID, playerShipID);			
@@ -35,6 +47,9 @@ public class PlayerShipRPC : RPCHolder {
 
 	public static void FireWeapon(Player player, bool fire) 
 	{
+        if (StopSend())
+            return;
+
 		RPCMode mode;
 
 		if (Network.isClient)
@@ -48,6 +63,9 @@ public class PlayerShipRPC : RPCHolder {
 
     public static void FiringDirection(Player player, Vector3 direction)
     {
+        if (StopSend())
+            return;
+
         RPCMode mode;
 
         if (Network.isClient)
