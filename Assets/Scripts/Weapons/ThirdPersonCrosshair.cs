@@ -43,7 +43,7 @@ public class ThirdPersonCrosshair : MonoBehaviour
         }
         else teamXActorMask = 1 << 11;
 
-        int projectileMask = (1 << 10) | (1 << 13) | (1 << 2);
+        int projectileMask = (1 << 10) | (1 << 13) | (1 << 2) | (1 << 3);
 
         layerMask = ~(teamXActorMask | projectileMask);
 
