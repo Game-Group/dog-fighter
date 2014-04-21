@@ -116,6 +116,8 @@ public class DroneSpawn : MonoBehaviour {
 
                 // Propagate layer
                 PropagateLayer.PropagateLayerToChildren(droneInstance);
+                GameObject triggerObject = droneInstance.transform.FindChild("Trigger").gameObject;
+                triggerObject.layer = 3;
 
                 droneInstance.GetComponent<GunSwitcher>().LayerChanged();
 

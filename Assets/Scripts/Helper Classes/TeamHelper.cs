@@ -29,6 +29,9 @@ public static class TeamHelper
 		string layer1Name = LayerMask.LayerToName(layer1);
 		string layer2Name = LayerMask.LayerToName(layer2);
 
+        if (layer1Name.Length < 5 || layer2Name.Length < 5)
+            return false;
+
 		string layer1Team = layer1Name.Substring(0, 5);
 		string layer2Team = layer2Name.Substring(0, 5);
 
