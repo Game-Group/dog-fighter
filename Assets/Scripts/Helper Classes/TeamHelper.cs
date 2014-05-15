@@ -87,13 +87,18 @@ public static class TeamHelper
 		return "Invalid";
 	}
 
-    public static void IterativeLayerAssignment(Transform obj, int layer)
+    public static void PropagateLayer(GameObject obj, int layer, int ignoreLayer = 2)
     {
-        obj.gameObject.layer = layer;
+        if (obj.layer != ignoreLayer)
+            obj.layer = layer;
 
-        for (int i = 0; i < obj.transform.childCount; i++)
+        int childCount = obj.transform.childCount;        
+
+        for (int i = 0; i < childCount; i++)
         {
-            IterativeLayerAssignment(obj.transform.GetChild(i), layer);
+            GameObject child = obj.transform.GetChild(i).gameObject;
+            
+            PropagateLayer(child, layer);
         }
     }
 }

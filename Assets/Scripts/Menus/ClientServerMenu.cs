@@ -100,13 +100,13 @@ public class ClientServerMenu : MonoBehaviour
 
         GlobalSettings.IsServer = false;
 
-        Application.LoadLevel("network_test");
+        Application.LoadLevel("MultiplayerPrototype1");
     }
 
     private void StartAsServer()
     {
         GlobalSettings.IsServer = true;
 
-        Application.LoadLevel("network_test");
+        Application.LoadLevel("MultiplayerPrototype1");
     }
 }

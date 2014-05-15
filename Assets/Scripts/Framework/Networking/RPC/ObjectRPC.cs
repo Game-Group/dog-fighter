@@ -216,7 +216,7 @@ public class ObjectRPC : RPCHolder
         GameObject obj = base.GetObject(owner, objectID);
         obj.name = "Player_" + layer;
         obj.layer = layer;
-        TeamHelper.IterativeLayerAssignment(obj.transform, layer);
+        TeamHelper.PropagateLayer(obj, layer);
     }
 
     [RPC]
@@ -227,11 +227,11 @@ public class ObjectRPC : RPCHolder
 		switch (levelID)
 		{
 		    case 0:
-                    NetworkPrototypeLevel npl = new NetworkPrototypeLevel();
-                    npl.MothershipPrefab = this.MothershipPrefab;
-                    npl.AsteroidRing = this.AsteroidRing;
-                    creator = npl;
-			        break;
+                MultiplayerPrototype1Level npl = this.gameObject.AddComponent<MultiplayerPrototype1Level>();
+                npl.MothershipPrefab = this.MothershipPrefab;
+                npl.AsteroidRing = this.AsteroidRing;
+                creator = npl;
+			    break;
 		}
 
 		if (Network.peerType == NetworkPeerType.Server)
@@ -290,7 +290,7 @@ public class ObjectRPC : RPCHolder
         //motherShip.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;
 
 
-        TeamHelper.IterativeLayerAssignment(motherShip.transform, layer);
+        TeamHelper.PropagateLayer(motherShip, layer);
 
         base.AddToObjectTables(motherShip, owner, objectID);
     }
@@ -305,7 +305,7 @@ public class ObjectRPC : RPCHolder
         drone.GetComponent<NpcListUpdater>().enabled = false;
         //drone.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;
 
-        TeamHelper.IterativeLayerAssignment(drone.transform, layer);
+        TeamHelper.PropagateLayer(drone, layer);
 
         base.AddToObjectTables(drone, owner, objectID);
     }

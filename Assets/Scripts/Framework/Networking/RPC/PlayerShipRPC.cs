@@ -155,6 +155,10 @@ public class PlayerShipRPC : RPCHolder {
     [RPC]
     private void FiringDirectionRPC(NetworkViewID playerID, Vector3 direction)
     {
+        // Ignore own shooting direction RPCs echoed by server to all players.
+        if (base.NetworkControl.ThisPlayer.ID == playerID)
+            return;
+
         GameObject playerShip = base.GetPlayerShip(playerID);
 
         GunSwitcher gunSwitcher = playerShip.GetComponent<GunSwitcher>();

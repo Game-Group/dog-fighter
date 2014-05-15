@@ -115,7 +115,7 @@ public class DroneSpawn : MonoBehaviour {
                 }
 
                 // Propagate layer
-                PropagateLayer.PropagateLayerToChildren(droneInstance);
+                TeamHelper.PropagateLayer(droneInstance, droneInstance.layer);
                 GameObject triggerObject = droneInstance.transform.FindChild("Trigger").gameObject;
                 triggerObject.layer = 3;
 

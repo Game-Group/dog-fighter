@@ -8,7 +8,19 @@ public enum Layers
     ////////////////
     /// Do not change existing names and numbers through refractoring only!
     /// These definitions are associated with the layers in Unity.
-    /// Changes to existing values must be changed in both places.    
+    /// Changes to existing values must be changed in both places. 
+
+    ///////////////////////
+    /// Built in layers ///
+    ///////////////////////
+    Default = 0,
+    TransparentFX = 1,
+    IgnoreRayCast = 2,
+    Water = 4,
+
+    /////////////////////
+    /// Custom layers ///
+    /////////////////////
 
     Team1Actor = 8,
     Team1Mothership = 9,
@@ -19,14 +31,4 @@ public enum Layers
     Obstacles = 14,
     Scenery = 15,
     Boundary = 16,
-
-    //public const string Team1Actor      = "Team1Actor";
-    //public const string Team1Mothership = "Team1Mothership";
-    //public const string Team1Projectile = "Team1Projectile";
-    //public const string Team2Actor      = "Team2Actor";
-    //public const string Team2Mothership = "Team2Mothership";
-    //public const string Team2Projectile = "Team2Projectile";
-    //public const string Obstacles       = "Obstacles";
-    //public const string Scenery         = "Scenery";
-    //public const string Boundary        = "Boundary";
 }

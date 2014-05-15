@@ -657,10 +657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e02f874d63c9bc46881abb7a16b720c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
-  MaxShields: 1
+  MaxHealth: 8000
+  MaxShields: 3000
   HealthPerSecond: 0
-  ShieldsPerSecond: 250
+  ShieldsPerSecond: 100
   ShieldRechargeDelay: 0
   ShieldImpactPrefab: {fileID: 100000, guid: 7b7ca61d9e3b1a943b9001ffe1e105ca, type: 2}
   ShieldImpactScale: 30
