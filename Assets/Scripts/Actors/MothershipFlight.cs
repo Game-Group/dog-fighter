@@ -19,11 +19,17 @@ public class MothershipFlight : MonoBehaviour {
         this.objTransformer = this.GetComponent<ObjectTransformer>();
         this.objTransformer.TranslationDirection = Vector3.forward;
         this.objTransformer.TranslationSpeed = this.speed;
-        this.objTransformer.Rotation = new Vector3(0, angularVelocity, 0);
+
+        if (this.gameObject.layer == (int)Layers.Team1Actor)
+            this.objTransformer.Rotation = new Vector3(0, -angularVelocity, 0);
+        else if (this.gameObject.layer == (int)Layers.Team2Actor)
+            this.objTransformer.Rotation = new Vector3(0, angularVelocity, 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+       
 
         //transform.Translate(/*transform.forward*/Vector3.forward * speed * Time.deltaTime);
         //transform.Rotate(new Vector3(0, angularVelocity * Time.deltaTime, 0));

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class PlayerRespawner : MonoBehaviour 
 {
@@ -40,15 +41,29 @@ public class PlayerRespawner : MonoBehaviour
         this.attachedPlayer = obj;
     }
 
-	public void Respawn(GameObject obj)
+    public void Respawn()
+    {
+        this.waitingForRespawn = false;
+
+        this.resetTransform();
+
+        DisableRespawnCamera();
+
+        attachedPlayer.SetActive(true);
+    }
+
+	public void NetworkSpawn(GameObject obj)
 	{
 		this.attachedPlayer = obj;
 		this.attachedPlayer.transform.position = gameObject.transform.position;
-		this.attachedPlayer.transform.rotation = gameObject.transform.rotation;
+
+        this.resetTransform();
 		
 		DisableRespawnCamera();
 		attachedPlayer.SetActive(true);		
 	}
+
+
 
 	public void DisableAndWaitForSpawn(float timeBeforeRespawn)
 	{
@@ -66,7 +81,7 @@ public class PlayerRespawner : MonoBehaviour
 
 	private void ActivateRespawnCamera(Transform lookat)
 	{
-		DeathText.text = deathTexts[Random.Range(0, deathTexts.Length)];
+		DeathText.text = deathTexts[UnityEngine.Random.Range(0, deathTexts.Length)];
 
 		RespawnCameraGO.transform.position = lookat.position;
 		RespawnCameraGO.transform.Translate(respawnCameraLookatDistance, 0, 0);
@@ -82,23 +97,38 @@ public class PlayerRespawner : MonoBehaviour
 		DeathText.gameObject.SetActive(false);
 	}
 
-	public void Respawn()
-	{
-        this.waitingForRespawn = false;
+    private void Spawn(GameObject obj)
+    {
+        attachedPlayer = (GameObject)Instantiate(obj, gameObject.transform.position, gameObject.transform.rotation);
 
-		attachedPlayer.transform.position = gameObject.transform.position;
-		attachedPlayer.transform.rotation = gameObject.transform.rotation;
+        this.resetTransform();
 
-		DisableRespawnCamera();
+        DisableRespawnCamera();
+    }
 
-		attachedPlayer.SetActive(true);
-	}
+    private void resetTransform()
+    {
+        this.attachedPlayer.transform.position = this.gameObject.transform.position;
 
-	private void Spawn(GameObject obj)
-	{
-		attachedPlayer = (GameObject)Instantiate(obj, gameObject.transform.position, gameObject.transform.rotation);
-		DisableRespawnCamera();
-	}
+        if (!GlobalSettings.SinglePlayer)
+        {
+            GameObject mothership = null;
+            if (this.attachedPlayer.gameObject.layer == (int)Layers.Team1Actor)
+                mothership = GameObject.Find(GlobalSettings.Team2MothershipName);
+            else if (this.attachedPlayer.gameObject.layer == (int)Layers.Team2Actor)
+                mothership = GameObject.Find(GlobalSettings.Team1MothershipName);
+            else
+                throw new Exception("Attached player ship of spawn point has invalid layer!");
+
+            this.attachedPlayer.transform.LookAt(mothership.transform);
+        }
+
+        ObjectTransformer transformer = this.attachedPlayer.GetComponent<ObjectTransformer>();
+        transformer.Translation = Vector3.zero;
+
+        ShipControl shipControl = this.attachedPlayer.GetComponent<ShipControl>();
+        shipControl.CurrentSpeed = 0;
+    }
 	
 	void Update () 
 	{

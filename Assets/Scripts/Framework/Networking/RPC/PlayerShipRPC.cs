@@ -12,7 +12,7 @@ public class PlayerShipRPC : RPCHolder {
         if (StopSend())
             return;
 
-//		Debug.Log("Sending create player ship.");
+        //Debug.Log("Sending create player ship.");
 
 		Channel.networkView.RPC("CreatePlayerShipRPC", RPCMode.All, player.ID, objectID);
 	}
@@ -30,7 +30,7 @@ public class PlayerShipRPC : RPCHolder {
         if (StopSend())
             return;
 
-//		Debug.Log ("Sending spawn player RPC");
+        //Debug.Log("Sending spawn player RPC");
 
 		Channel.networkView.RPC("SpawnPlayerShipRPC", RPCMode.All, player.ID, spawnPointID, playerShipID);
 		
@@ -40,7 +40,7 @@ public class PlayerShipRPC : RPCHolder {
         if (StopSend())
             return;
 
-//		Debug.Log ("Sending spawn player RPC");
+        //Debug.Log("Sending spawn player RPC");
 
 		Channel.networkView.RPC("SpawnPlayerShipRPC", target, player.ID, spawnPointID, playerShipID);			
 	}
@@ -87,6 +87,7 @@ public class PlayerShipRPC : RPCHolder {
 		
         // Create the player ship.
 		GameObject playerShip = (GameObject)GameObject.Instantiate(this.PlayerPrefab);
+        TeamHelper.PropagateLayer(playerShip, (int)owner.Team);
 		
 		if (base.NetworkControl.LocalViewID == playerID)
 		{
@@ -132,7 +133,7 @@ public class PlayerShipRPC : RPCHolder {
 		GameObject spawnPoint = base.ObjectTables.GetPlayerObject(player, spawnPointID);
 		GameObject playerShip = base.ObjectTables.GetPlayerObject(player, playerShipID);
 
-		spawnPoint.GetComponent<PlayerRespawner>().Respawn(playerShip);
+		spawnPoint.GetComponent<PlayerRespawner>().NetworkSpawn(playerShip);
 	}
 
 	[RPC]

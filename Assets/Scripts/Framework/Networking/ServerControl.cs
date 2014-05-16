@@ -90,14 +90,19 @@ public class ServerControl : NetworkObject
 
 		// Notice everyone that the new player has joined.
 		PlayerRPC.NewPlayerJoined(networkPlayer, viewID);
-
-        // Sync the existing game world with the new player.
+        
         Player newPlayer = base.Players[viewID];
-        this.CurrentLevel.SyncNewPlayer(newPlayer);
+
+        // Tell the new player the teams of all the other players.
+        foreach (Player p in base.Players.Values)
+            if (!(p.ID == base.NetworkControl.LocalViewID || p.ID == newPlayer.ID))
+                PlayerRPC.SetPlayerTeam(newPlayer.NetworkPlayerInfo, p.ID, (int)p.Team);
 
         this.assignTeam(newPlayer);
 
-        this.firstPlayerJoined = true;
+        // Sync the existing game world with the new player.
+        this.CurrentLevel.SyncNewPlayer(newPlayer);
+
 	}
 
     private void OnPlayerDisconnected(NetworkPlayer player)
@@ -127,15 +132,11 @@ public class ServerControl : NetworkObject
         if (this.firstPlayerJoined)
             layer = Layers.Team2Actor;
 
-        PlayerObjects objs = base.ObjectTables.PlayerObjects[player];
-        GameObject playerShip = base.ObjectTables.GetPlayerObject(player, objs.PlayerShipID);
-        playerShip.layer = (int)layer;
-
-        // TODO: Player team is NOT synced for clients at the moment.
+        this.firstPlayerJoined = true;
         player.Team = layer;
 
         Debug.Log("Assigned layer: " + layer);
 
-        ObjectRPC.SetObjectLayer(player, objs.PlayerShipID, layer);
+        PlayerRPC.SetPlayerTeam(player.ID, (int)player.Team);
     }
 }

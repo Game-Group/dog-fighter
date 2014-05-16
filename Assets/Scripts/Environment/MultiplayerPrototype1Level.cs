@@ -22,7 +22,7 @@ public class MultiplayerPrototype1Level : LevelCreator
         // Sync the objects that are not associated with any player.
         ObjectTable serverTable = base.ObjectTables.GetPlayerTable(base.NetworkControl.ThisPlayer);
         ICollection<GameObject> serverObjects = serverTable.GetAllObjects();
-        Debug.Log("Objects: " + serverObjects.Count);
+        Debug.Log("Number of server objects: " + serverObjects.Count);
 
         foreach (GameObject obj in serverObjects)
         {
@@ -74,16 +74,18 @@ public class MultiplayerPrototype1Level : LevelCreator
                 GameObject playerShip = base.GetObject(p, playerObjects.PlayerShipID);
 
                 PlayerShipRPC.CreatePlayerShip(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID);
-                ObjectRPC.SetObjectLayer(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID, (Layers)playerShip.layer);
+                //ObjectRPC.SetObjectLayer(newPlayer.NetworkPlayerInfo, p, playerObjects.PlayerShipID, (Layers)playerShip.layer);
             }
 		}
 
         // Create the objects for the new player.
 		int spawnPointID = base.GUIDGenerator.GenerateID();
-		int playerShipID = base.GUIDGenerator.GenerateID();
-		Vector3 spawnPointPos = Vector3.zero;
+		int playerShipID = base.GUIDGenerator.GenerateID();       
 
-        // The order in which the following RPCs are send is critical!
+        GameObject mothership = base.GetMothership(newPlayer.Team);
+        Vector3 spawnPointPos = mothership.transform.position + new Vector3(0, 500, 0);
+
+        // The order in which the following RPCs are sent is critical!
 		ObjectRPC.CreatePlayerSpawnpoint(newPlayer, spawnPointID, spawnPointPos);
         PlayerShipRPC.CreatePlayerShip(newPlayer, playerShipID);
 		PlayerShipRPC.SpawnPlayerShip(newPlayer, spawnPointID, playerShipID);
@@ -102,8 +104,8 @@ public class MultiplayerPrototype1Level : LevelCreator
         Player serverPlayer = base.NetworkControl.ThisPlayer;
 
         // Initialize the starting positions of the motherships.
-        Vector3 team1MothershipPos = new Vector3(1000, 0, 0);
-        Vector3 team2MothershipPos = new Vector3(-1000, 0, 0);
+        Vector3 team1MothershipPos = new Vector3(2000, 0, 0);
+        Vector3 team2MothershipPos = new Vector3(-2000, 0, 0);
 
         // Initialize te motherships.
         GameObject team1Mothership = (GameObject)GameObject.Instantiate(
@@ -113,30 +115,15 @@ public class MultiplayerPrototype1Level : LevelCreator
            this.MothershipPrefab, team2MothershipPos, Quaternion.identity
            );
 
-        //team1Mothership.GetComponent<DroneSpawn>().enabled = false;
-        //team2Mothership.GetComponent<DroneSpawn>().enabled = false;
-
         // Assign teams to the motherships.
-
-        Debug.Log(team1Mothership.layer);
-        Debug.Log(team2Mothership.layer);
-
         TeamHelper.PropagateLayer(team1Mothership, (int)Layers.Team1Mothership);
-
-        Debug.Log(team1Mothership.layer);
-        Debug.Log(team2Mothership.layer);
-
         TeamHelper.PropagateLayer(team2Mothership, (int)Layers.Team2Mothership);
-
-        Debug.Log(team1Mothership.layer);
-        Debug.Log(team2Mothership.layer);
+        team1Mothership.name = "Team1Mothership";
+        team2Mothership.name = "Team2Mothership";
 
         // Generate object IDs for the motherships.
         int team1MothershipID = base.GUIDGenerator.GenerateID();
         int team2MothershipID = base.GUIDGenerator.GenerateID();
-
-        //Debug.Log("Team 1: " + team1MothershipID);
-        //Debug.Log("Team 2: " + team2MothershipID);
 
         // Assign some values.
         ObjectSync team1MSObjSync = team1Mothership.GetComponent<ObjectSync>();
@@ -153,9 +140,5 @@ public class MultiplayerPrototype1Level : LevelCreator
 
         base.ObjectTables.AddPlayerObject(serverPlayer, team1MothershipID, team1Mothership);
         base.ObjectTables.AddPlayerObject(serverPlayer, team2MothershipID, team2Mothership);
-
-        //int spawnPointID = base.GUIDGenerator.GenerateID();
-        //Vector3 spawnPointPos = Vector3.zero;
-        //ObjectRPC.CreatePlayerSpawnpoint(server, spawnPointID, spawnPointPos);
 	}
 }

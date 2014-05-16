@@ -22,7 +22,12 @@ public class ShipControl : MonoBehaviour
     public bool UseCameraOffset;
 
     [HideInInspector]
-    public float CurrentSpeed { get { return currentSpeed; } }
+    public float CurrentSpeed
+    {
+        get { return currentSpeed; }
+        set { this.currentSpeed = value; }
+    }   
+
 
     private Vector2 screenCenter;
     private float currentSpeed;

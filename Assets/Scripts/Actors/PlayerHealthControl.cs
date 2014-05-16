@@ -21,6 +21,8 @@ public class PlayerHealthControl : HealthControl
                     break;
                 }
         }
+        else
+            this.RespawnPoint = GameObject.Find("Spawnpoint_Player1").GetComponent<PlayerRespawner>();
     }
 
 	public override void Die()

@@ -271,10 +271,15 @@ public class ObjectRPC : RPCHolder
 	{		
 		Debug.Log("Create player spawn point RPC received.");
 
+        Player player = base.NetworkControl.Players[owner];
+
 		GameObject spawnPoint = (GameObject)GameObject.Instantiate(this.PlayerSpawnPointPrefab, position, Quaternion.identity);
         ObjectSync spawnPointSync = spawnPoint.GetComponent<ObjectSync>();
         spawnPointSync.Type = ObjectSyncType.PlayerSpawnPoint;
-        spawnPoint.layer = (int)base.NetworkControl.Players[owner].Team;       
+        spawnPoint.layer = (int)player.Team;
+
+        GameObject mothership = base.GetMothership(player.Team);
+        spawnPoint.transform.parent = mothership.transform;
         
         base.ObjectTables.PlayerObjects[base.Players[owner]].PlayerSpawnPointID = objectID;
 		base.AddToObjectTables(spawnPoint, owner, objectID);
@@ -287,10 +292,14 @@ public class ObjectRPC : RPCHolder
 
         GameObject motherShip = (GameObject)GameObject.Instantiate(this.MothershipPrefab);
         motherShip.GetComponent<DroneSpawn>().enabled = false;
-        //motherShip.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;
-
+        //motherShip.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;  
 
         TeamHelper.PropagateLayer(motherShip, layer);
+
+        if (motherShip.layer == (int)Layers.Team1Mothership)
+            motherShip.name = "Team1Mothership";
+        else if (motherShip.layer == (int)Layers.Team2Mothership)
+            motherShip.name = "Team2Mothership";
 
         base.AddToObjectTables(motherShip, owner, objectID);
     }
@@ -302,7 +311,7 @@ public class ObjectRPC : RPCHolder
         //ObjectSync objSync = drone.GetComponent<ObjectSync>();
         drone.GetComponent<HealthControl>().DrawHealthInfo = false;
         //drone.GetComponent<DroneBehaviour>().enabled = false;
-        drone.GetComponent<NpcListUpdater>().enabled = false;
+        //drone.GetComponent<NpcListUpdater>().enabled = false;
         //drone.GetComponent<MovingObjectSync>().SuppressVelocitySync = true;
 
         TeamHelper.PropagateLayer(drone, layer);

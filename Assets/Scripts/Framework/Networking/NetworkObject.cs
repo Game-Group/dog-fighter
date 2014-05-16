@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class NetworkObject : MonoBehaviour 
 {
@@ -68,6 +69,20 @@ public class NetworkObject : MonoBehaviour
         int playerShipID = this.ObjectTables.PlayerObjects[player].PlayerShipID;
 
         return this.ObjectTables.GetPlayerObject(player, playerShipID);
+    }
+
+    protected GameObject GetMothership(Layers team)
+    {
+        GameObject mothership = null;
+
+        if (team == Layers.Team1Actor)
+            mothership = GameObject.Find("Team1Mothership");
+        else if (team == Layers.Team2Actor)
+            mothership = GameObject.Find("Team2Mothership");
+        else
+            throw new ArgumentException("Given layer is invalid: " + team.ToString());
+
+        return mothership;
     }
 
     protected virtual void Awake()

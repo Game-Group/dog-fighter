@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272bb0f535d2d54479c7fb04708c47cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 500
+  amount: 200
   maxOffset: 1000
   minAsteroidSize: 15
   maxAsteroidSize: 100

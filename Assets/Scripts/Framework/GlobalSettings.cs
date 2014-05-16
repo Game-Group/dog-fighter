@@ -11,6 +11,9 @@ public class GlobalSettings : MonoBehaviour
     public const string MatchControlName = "MatchControl";
     public const string PlayerObjectTableName = "PlayerObjectTable";
 
+    public const string Team1MothershipName = "Team1Mothership";
+    public const string Team2MothershipName = "Team2Mothership";
+
 	public static bool SinglePlayer = false;
 	
 	public static bool HasFocus { get; private set;}

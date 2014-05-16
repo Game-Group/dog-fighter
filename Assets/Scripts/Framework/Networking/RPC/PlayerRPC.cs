@@ -23,6 +23,20 @@ public class PlayerRPC : RPCHolder {
 		Channel.networkView.RPC("NewPlayerJoinedRPC", target, networkPlayer, id);
 	}
 
+    public static void SetPlayerTeam(NetworkViewID playerID, int layer)
+    {
+        if (StopSend())
+            return;        
+
+        Channel.networkView.RPC("SetPlayerTeamRPC", RPCMode.Others, playerID, layer);
+    }
+
+    public static void SetPlayerTeam(NetworkPlayer target, NetworkViewID playerID, int layer)
+    {
+        Channel.networkView.RPC("SetPlayerTeamRPC", target, playerID, layer);
+
+    }
+
 	[RPC]
 	private void NewPlayerJoinedRPC(NetworkPlayer networkPlayer, NetworkViewID id, NetworkMessageInfo info)
 	{
@@ -45,4 +59,15 @@ public class PlayerRPC : RPCHolder {
 
 		}
 	}
+
+    [RPC]
+    private void SetPlayerTeamRPC(NetworkViewID playerID, int layer, NetworkMessageInfo info)
+    {
+        ///
+        /// This RPC is only used to set the player team before all the player objects are created.
+        /// This function does not propagate the team change to all existing player objects.
+        ///
+
+        base.Players[playerID].Team = (Layers)layer;
+    }
 }
